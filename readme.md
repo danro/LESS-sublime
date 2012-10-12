@@ -84,4 +84,4 @@ Some snippets to use in your favorite `.tmTheme` file.
   </dict>
 </dict>
 ```
-[Copied from my Sublime theme](https://github.com/danro/dotfiles/blob/master/sublime/colors/DanroST2.tmTheme)
+[Copied from my Sublime theme](https://github.com/danro/refined-theme/blob/master/Color%20Schemes/Danro.tmTheme)
