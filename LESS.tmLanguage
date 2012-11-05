@@ -86,6 +86,42 @@
 		</dict>
 		<dict>
 			<key>begin</key>
+			<string>url\((\')</string>
+			<key>contentName</key>
+			<string>variable.parameter.url</string>
+			<key>end</key>
+			<string>(\')\)</string>
+			<key>name</key>
+			<string>support.function.any-method.builtin.css</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter.url</string>
+				</dict>
+			</dict>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>url\((\")</string>
+				<key>contentName</key>
+				<string>variable.parameter.url</string>
+				<key>end</key>
+				<string>(\")\)</string>
+			<key>name</key>
+			<string>support.function.any-method.builtin.css</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter.url</string>
+				</dict>
+			</dict>
+		</dict>
+		<dict>
+			<key>begin</key>
 			<string>url\(</string>
 				<key>contentName</key>
 				<string>variable.parameter.url</string>
@@ -144,7 +180,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(:+)\b(after|before|disabled|empty|enabled|first-child|first-letter|first-line|first-of-type|invalid|last-of-type|last-child|only-child|only-of-type|selection|target|valid|required|nth-child)\b</string>
+			<string>(:+)\b(not|after|before|disabled|empty|enabled|first-child|first-letter|first-line|first-of-type|invalid|last-of-type|last-child|only-child|only-of-type|selection|target|valid|required|nth-child)\b</string>
 			<key>name</key>
 			<string>entity.other.attribute-name.pseudo-element.css</string>
 		</dict>
@@ -247,11 +283,11 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\s*\b(hyphens|backface-visibility|text-overflow|animation-delay|animation-direction|animation-duration|animation-fill-mode|animation-iteration-count|animation-name|animation-play-state|animation-timing-function|animation|appearance|azimuth|background-attachment|background-color|background-clip|background-image|background-origin|background-position|background-repeat|background-size|background|behavior|border-bottom-color|border-bottom-style|border-bottom-width|border-bottom-left-radius|border-bottom-right-radius|border-bottom|border-collapse|border-color|border-left-color|border-left-style|border-left-width|border-left|border-right-color|border-right-style|border-right-width|border-right|border-spacing|border-style|border-top-color|border-top-style|border-top-width|border-top-left-radius|border-top-right-radius|border-top|border-width|border-radius|border-box|border|box-align|box-shadow|box-sizing|bottom|caption-side|clear|clip|color-stop|color|column-count|column-gap|columns|content-box|content|counter-increment|counter-reset|cue-after|cue-before|cue|cursor|direction|display|elevation|empty-cells|float|font-family|font-size-adjust|font-size|font-stretch|font-style|font-variant|font-weight|font|height|left|letter-spacing|line-height|list-style-image|list-style-position|list-style-type|list-style|margin-bottom|margin-left|margin-right|margin-top|marker-offset|margin|marks|max-height|max-width|min-device-pixel-ratio|min-height|min-width|opacity|orientation|orphans|outline-offset|outline-color|outline-style|outline-width|outline|overflow(-[xy])?|padding-bottom|padding-left|padding-right|padding-top|padding-box|padding|page-break-after|page-break-before|page-break-inside|page|pause-after|pause-before|pause|perspective-origin|perspective-origin-x|perspective-origin-y|perspective|pitch-range|pitch|play-during|position|quotes|resize|richness|right|size|speak-header|speak-numeral|speak-punctuation|speech-rate|speak|stress|table-layout|text-align|text-decoration|text-indent|text-shadow|text-transform|top|transform-origin|transform-origin-x|transform-origin-y|transform-origin-z|transform-style|transform|transition-delay|transition-duration|transition-property|transition-timing-function|transition|unicode-bidi|vertical-align|visibility|voice-family|volume|white-space|widows|width|word-spacing|word-wrap|z-index|zoom|filter|word-break|user-select|text-rendering)\s*(?:)</string>
+			<string>\s*\b(hyphens|backface-visibility|text-overflow|animation-delay|animation-direction|animation-duration|animation-fill-mode|animation-iteration-count|animation-name|animation-play-state|animation-timing-function|animation|appearance|azimuth|background-attachment|background-color|background-clip|background-image|background-origin|background-position|background-repeat|background-size|background|behavior|border-bottom-color|border-bottom-style|border-bottom-width|border-bottom-left-radius|border-bottom-right-radius|border-bottom|border-collapse|border-color|border-left-color|border-left-style|border-left-width|border-left|border-right-color|border-right-style|border-right-width|border-right|border-spacing|border-style|border-top-color|border-top-style|border-top-width|border-top-left-radius|border-top-right-radius|border-top|border-width|border-image|border-radius-topleft|border-radius-bottomleft|border-radius-topright|border-radius-bottomright|border-radius|border-box|border|box-align|box-shadow|box-sizing|bottom|caption-side|clear|clip|color-stop|color|column-count|column-gap|columns|content-box|content|counter-increment|counter-reset|cue-after|cue-before|cue|cursor|direction|display|elevation|empty-cells|float|font-family|font-size-adjust|font-size|font-stretch|font-style|font-variant|font-weight|font|height|left|letter-spacing|line-height|list-style-image|list-style-position|list-style-type|list-style|margin-bottom|margin-left|margin-right|margin-top|marker-offset|margin|marks|max-height|max-width|min-device-pixel-ratio|min-height|min-width|opacity|orientation|orphans|outline-offset|outline-color|outline-style|outline-width|outline|overflow(-[xy])?|padding-bottom|padding-left|padding-right|padding-top|padding-box|padding|page-break-after|page-break-before|page-break-inside|page|pause-after|pause-before|pause|perspective-origin|perspective-origin-x|perspective-origin-y|perspective|pitch-range|pitch|play-during|position|quotes|resize|richness|right|size|speak-header|speak-numeral|speak-punctuation|speech-rate|speak|stress|table-layout|text-align|text-decoration|text-indent|text-shadow|text-transform|top|transform-origin|transform-origin-x|transform-origin-y|transform-origin-z|transform-style|transform|transition-delay|transition-duration|transition-property|transition-timing-function|transition|unicode-bidi|vertical-align|visibility|voice-family|volume|white-space|widows|width|word-spacing|word-wrap|z-index|zoom|filter|word-break|user-select|text-rendering)\s*(?:)</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\s*\b(grab|grabbing|antialiased|absolute|all-scroll|all|always|auto|baseline|below|bidi-override|block|bold|bolder|border-box|both|bottom|break-all|break-word|capitalize|center|char|circle|col-resize|collapse|content-box|crosshair|dashed|decimal|default|disabled|disc|distribute-all-lines|distribute-letter|distribute-space|distribute|dotted|double|e-resize|ease-in-out|ease-in|ease-out|ease|ellipsis|fixed|groove|hand|help|hidden|horizontal|ideograph-alpha|ideograph-numeric|ideograph-parenthesis|ideograph-space|inactive|inherit|inline-block|inline|inset|inside|inter-ideograph|inter-word|italic|justify|keep-all|landscape|left|lighter|line-edge|line-through|line|linear-gradient|linear|list-item|loose|lower-alpha|lower-roman|lowercase|lr-tb|ltr|medium|middle|move|n-resize|ne-resize|newspaper|no-drop|no-repeat|cover|contain|nw-resize|none|normal|not-allowed|nowrap|oblique|outset|outside|overline|padding-box|pointer-events|pointer|portrait|pre-wrap|progress|relative|repeat-x|repeat-y|repeat|right|ridge|rotate|row-resize|rtl|s-resize|scroll|se-resize|separate|small-caps|solid|square|static|strict|super|sw-resize|table-footer-group|table-header-group|tb-rl|text-bottom|text-top|text|thick|thin|top|transparent|underline|upper-alpha|upper-roman|uppercase|vertical-ideographic|vertical-text|vertical|visible|w-resize|wait|whitespace|initial|radial|bicubic|textfield)\b</string>
+			<string>\s*\b(grab|grabbing|antialiased|absolute|all-scroll|all|always|auto|baseline|below|bidi-override|block|bold|bolder|border-box|both|bottom|break-all|break-word|capitalize|center|char|circle|col-resize|collapse|content-box|crosshair|dashed|decimal|default|disabled|disc|distribute-all-lines|distribute-letter|distribute-space|distribute|dotted|double|e-resize|ease-in-out|ease-in|ease-out|ease|ellipsis|fixed|groove|hand|help|hidden|horizontal|ideograph-alpha|ideograph-numeric|ideograph-parenthesis|ideograph-space|inactive|inherit|inline-block|inline|inset|inside|inter-ideograph|inter-word|italic|justify|keep-all|landscape|left|lighter|line-edge|line-through|line|linear-gradient|linear|list-item|loose|lower-alpha|lower-roman|lowercase|lr-tb|ltr|medium|middle|move|n-resize|ne-resize|newspaper|no-drop|no-repeat|cover|contain|nw-resize|none|normal|not-allowed|nowrap|oblique|outset|outside|overline|padding-box|pointer-events|pointer|portrait|pre-wrap|progress|relative|repeat-x|repeat-y|repeat|right|ridge|rotate|row-resize|rtl|s-resize|scroll|se-resize|separate|small-caps|solid|square|static|strict|super|sw-resize|table-footer-group|table-header-group|tb-rl|text-bottom|text-top|text|thick|thin|top|transparent|underline|upper-alpha|upper-roman|uppercase|vertical-ideographic|vertical-text|vertical|visible|w-resize|wait|whitespace|initial|radial|bicubic|textfield|table-cell)\b</string>
 			<key>name</key>
 			<string>support.constant.property-value.css</string>
 		</dict>
@@ -271,7 +307,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(blur|color|saturate|desaturate|lighten|darken|grayscale|fade|fadein|fadeout|spin|mix|hue|saturation|lightness|alpha|round|ceil|floor|percentage|translate|rotate|scale|skew|matrix|matrix3d|translate3d|translateX|translateY|translateZ|scale3d|scaleX|scaleY|scaleZ|rotate3d|rotateX|rotateY|rotateZ|perspective)\b</string>
+			<string>\b(blur|color|saturate|desaturate|lighten|darken|grayscale|fade|fadein|fadeout|spin|mix|hue|saturation|lightness|alpha|round|ceil|floor|percentage|translate|rotate|scale|skew|skewX|skewY|matrix|matrix3d|translate3d|translateX|translateY|translateZ|scale3d|scaleX|scaleY|scaleZ|rotate3d|rotateX|rotateY|rotateZ|perspective)\b</string>
 			<key>name</key>
 			<string>support.function.any-method.builtin.less</string>
 		</dict>
@@ -327,7 +363,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\$|%|&amp;|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|&lt;=|&gt;=|&lt;&lt;=|&gt;&gt;=|&gt;&gt;&gt;=|&lt;&gt;|&lt;|&gt;|!|&amp;&amp;|\|\||\?\:|\*=|(?&lt;!\()/=|%=|\+=|\-=|&amp;=|\^=|\/|and\b</string>
+			<string>\!important|$|%|&amp;|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|&lt;=|&gt;=|&lt;&lt;=|&gt;&gt;=|&gt;&gt;&gt;=|&lt;&gt;|&lt;|&gt;|!|&amp;&amp;|\|\||\?\:|\*=|(?&lt;!\()/=|%=|\+=|\-=|&amp;=|\^=|\/|and|when\b</string>
 			<key>name</key>
 			<string>keyword.operator.less</string>
 		</dict>
