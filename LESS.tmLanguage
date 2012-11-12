@@ -363,9 +363,15 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\!important|$|%|&amp;|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|&lt;=|&gt;=|&lt;&lt;=|&gt;&gt;=|&gt;&gt;&gt;=|&lt;&gt;|&lt;|&gt;|!|&amp;&amp;|\|\||\?\:|\*=|(?&lt;!\()/=|%=|\+=|\-=|&amp;=|\^=|\/|and|when\b</string>
+			<string>(?>@[a-zA-Z0-9_-][\w-]*+)(?!:)</string>
 			<key>name</key>
-			<string>keyword.operator.less</string>
+			<string>variable.other.less</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>@[a-zA-Z0-9_-][\w-]*</string>
+			<key>name</key>
+			<string>variable.declaration.less</string>
 		</dict>
 		<dict>
 			<key>match</key>
