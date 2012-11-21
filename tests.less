@@ -1,0 +1,227 @@
+
+/* LESS syntax coloring tests */
+
+// --------------------------------------------------
+// Functions
+
+rgb(200, 200, 200);
+rgba(200, 200, 200, 0.5);
+hsl(50%, 45%, 90%);
+hsla(50%, 45%, 90%, 50%);
+
+saturate(@color, 10%);
+desaturate(@color, 10%);
+lighten(@color, 10%);
+darken(@color, 10%);
+greyscale(@color, 10%);
+
+fadein(@color, 10%);     
+fadeout(@color, 10%);    
+fade(@color, 50%);
+
+spin(@color, 10);
+mix(@color1, @color2, @weight);
+contrast(@color1, @darkcolor, @lightcolor);
+
+argb(@color);
+hue(@color);
+saturation(@color);
+lightness(@color);
+red(@color);
+green(@color);
+blue(@color);
+alpha(@color);
+luma(@color);
+@new: hsl(hue(@old), 45%, 90%);
+@color: green;
+
+round(1.67);
+ceil(2.4);
+floor(2.6);
+percentage(0.5);
+
+// --------------------------------------------------
+// Strings / Interpolation
+
+@base-url: "http://assets.fnord.com";
+background-image: url("@{base-url}/images/bg.png");
+
+.class {
+  filter: ~"ms:alwaysHasItsOwnSyntax.For.Stuff()";
+}
+
+@name: blocked;
+.@{name} {
+    color: black;
+}
+
+@str: "hello";
+@var: ~`"@{str}".toUpperCase() + '!'`;
+@color: color(`window.colors.baseColor`);
+@darkcolor: darken(@color, 10%);
+
+.svg-url-test {
+	border-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0,0 24,26"><filter id="dropshadow" height="150%" width="150%"><feGaussianBlur in="SourceAlpha" stdDeviation="2"></feGaussianBlur><feOffset dx="0" dy="1" result="offsetblur"></feOffset><feMerge><feMergeNode></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter><polygon fill="hsl(0, 0%, 100%)" filter="url(#dropshadow)" points="12,3 2,13 12,23 22,13"></polygon></svg>') 30.76923% 29.16667% repeat;
+	border-width: 0 0 8px;
+	border-style: solid;
+}
+
+// --------------------------------------------------
+// Imports
+@import "library";
+@import "typo.css";
+
+// --------------------------------------------------
+// Variables
+
+@nice-blue: #5B83AD;
+@light-blue: @nice-blue + #111;
+
+#header { color: @light-blue; }
+
+// --------------------------------------------------
+// Nesting
+
+body {
+	.navigation {
+		color: red;
+	}
+}
+
+#header {
+	color: black;
+
+	.navigation {
+		font-size: 12px;
+	}
+	.logo {
+		width: 300px;
+	}
+}
+
+.clearfix {
+	display: block;
+	zoom: 1;
+
+	&:after {
+		content: " ";
+		display: block;
+		font-size: 0;
+		height: 0;
+		clear: both;
+		visibility: hidden;
+	}
+}
+
+.child, .sibling {
+    .parent & {
+        color: black;
+    }
+    & + & {
+        color: red;
+    }
+}
+
+// --------------------------------------------------
+// Mixins
+
+.bordered {
+	border-top: dotted 1px black;
+	border-bottom: solid 2px black;
+}
+
+#menu a {
+	color: #111;
+	.bordered;
+}
+
+.post a {
+	color: red;
+	.bordered;
+}
+
+.box-shadow (@x: 0, @y: 0, @blur: 1px, @color: #000) {
+  box-shadow: @arguments;
+  -moz-box-shadow: @arguments;
+  -webkit-box-shadow: @arguments;
+}
+.box-shadow(2px, 5px);
+
+.mixin (dark, @color) {
+  color: darken(@color, 10%);
+}
+.mixin (light, @color) {
+  color: lighten(@color, 10%);
+}
+.mixin (@_, @color) {
+  display: block;
+}
+
+.mixin (@a) when (lightness(@a) >= 50%) {
+  background-color: black;
+}
+.mixin (@a) when (lightness(@a) < 50%) {
+  background-color: white;
+}
+.mixin (@a) {
+  color: @a;
+}
+
+.mixin (@a, @b: 0) when (isnumber(@b)) { ... }
+.mixin (@a, @b: black) when (iscolor(@b)) { ... }
+
+// --------------------------------------------------
+// Operations
+
+@base: 5%;
+@filler: @base * 2;
+@other: @base + @filler;
+
+color: #888 / 4;
+background-color: @base-color + #111;
+height: 100% / 2 + @filler;
+
+// --------------------------------------------------
+// Namespaces & Accessors
+
+#bundle {
+	.button {
+		display: block;
+		border: 1px solid black;
+		background-color: grey;
+		&:hover { background-color: magenta }
+	}
+	.tab { }
+	.citation { }
+}
+
+#header a {
+	color: orange;
+	#bundle > .button;
+}
+
+#defaults {
+	@width: 960px;
+	@color: black;
+}
+
+.article { color: #294366; }
+
+.comment {
+	width: #defaults[@width];
+	color: .article['color']; 
+}
+
+.btn-small [class^="icon-"],
+.btn-small [class*=" icon-"] {
+  margin-top: 0;
+}
+
+// --------------------------------------------------
+// Media queries
+
+@media (min-width: 768px) and (max-width: 979px) {
+  #grid > .core(@gridColumnWidth768, @gridGutterWidth768);
+  border-width: 0 0 8px;
+  border-style: solid;
+}

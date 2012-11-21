@@ -61,6 +61,23 @@
 			</array>
 		</dict>
 		<dict>
+			<key>begin</key>
+			<string>`</string>
+			<key>end</key>
+			<string>`</string>
+			<key>name</key>
+			<string>string.quoted.single.css markup.raw</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\\.</string>
+					<key>name</key>
+					<string>constant.character.escaped.css</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
 			<key>captures</key>
 			<dict>
 				<key>1</key>
@@ -214,7 +231,7 @@
 				<key>3</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.separator.operator.css</string>
+					<string>punctuation.separator.operator.css keyword.operator.less</string>
 				</dict>
 				<key>4</key>
 				<dict>
@@ -293,7 +310,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(\b(?i:arial|century|comic|courier|garamond|georgia|helvetica|impact|lucida|symbol|system|tahoma|times|trebuchet|utopia|verdana|webdings|sans-serif|serif|monospace)\b)</string>
+			<string>(\b(?i:arial|century|comic|courier|garamond|georgia|helvetica|impact|lucida|symbol|system|tahoma|times|trebuchet|utopia|verdana|webdings|sans-serif|serif|monospace|monaco|menlo|consolas)\b)</string>
 			<key>name</key>
 			<string>support.constant.font-name.css</string>
 		</dict>
@@ -301,13 +318,21 @@
 			<key>comment</key>
 			<string>http://www.w3.org/TR/CSS21/syndata.html#value-def-color</string>
 			<key>match</key>
-			<string>\b(aqua|black|blue|fuchsia|gray|green|lime|maroon|navy|olive|orange|purple|red|silver|teal|white|yellow)\b</string>
+			<string>\b(aqua|black|blue|fuchsia|gray|green|lime|maroon|navy|olive|orange|purple|red|silver|teal|white|yellow)(?!\()\b</string>
 			<key>name</key>
 			<string>support.constant.color.w3c-standard-color-name.css</string>
 		</dict>
 		<dict>
+			<key>comment</key>
+			<string>Moar colors.. this is about colors after all.</string>
 			<key>match</key>
-			<string>\b(blur|color|saturate|desaturate|lighten|darken|grayscale|fade|fadein|fadeout|spin|mix|hue|saturation|lightness|alpha|round|ceil|floor|percentage|translate|rotate|scale|skew|skewX|skewY|matrix|matrix3d|translate3d|translateX|translateY|translateZ|scale3d|scaleX|scaleY|scaleZ|rotate3d|rotateX|rotateY|rotateZ|perspective)\b</string>
+			<string>\b(indianred|lightcoral|salmon|darksalmon|lightsalmon|crimson|red|firebrick|darkred|pink|lightpink|hotpink|deeppink|mediumvioletred|palevioletred|lightsalmon|coral|tomato|orangered|darkorange|orange|gold|yellow|lightyellow|lemonchiffon|lightgoldenrodyellow|papayawhip|moccasin|peachpuff|palegoldenrod|khaki|darkkhaki|lavender|thistle|plum|violet|orchid|fuchsia|magenta|mediumorchid|mediumpurple|blueviolet|darkviolet|darkorchid|darkmagenta|purple|indigo|slateblue|darkslateblue|mediumslateblue|greenyellow|chartreuse|lawngreen|lime|limegreen|palegreen|lightgreen|mediumspringgreen|springgreen|mediumseagreen|seagreen|forestgreen|green|darkgreen|yellowgreen|olivedrab|olive|darkolivegreen|mediumaquamarine|darkseagreen|lightseagreen|darkcyan|teal|aqua|cyan|lightcyan|paleturquoise|aquamarine|turquoise|mediumturquoise|darkturquoise|cadetblue|steelblue|lightsteelblue|powderblue|lightblue|skyblue|lightskyblue|deepskyblue|dodgerblue|cornflowerblue|mediumslateblue|royalblue|blue|mediumblue|darkblue|navy|midnightblue|cornsilk|blanchedalmond|bisque|navajowhite|wheat|burlywood|tan|rosybrown|sandybrown|goldenrod|darkgoldenrod|peru|chocolate|saddlebrown|sienna|brown|maroon|white|snow|honeydew|mintcream|azure|aliceblue|ghostwhite|whitesmoke|seashell|beige|oldlace|floralwhite|ivory|antiquewhite|linen|lavenderblush|mistyrose|gainsboro|lightgrey|silver|darkgray|gray|dimgray|lightslategray|slategray|darkslategray|black|grey)(?!\()\b</string>
+			<key>name</key>
+			<string>support.constant.color.extra</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\b(argb|blur|color|saturate|desaturate|lighten|darken|grayscale|fade|fadein|fadeout|spin|mix|hue|saturation|lightness|alpha|round|ceil|floor|percentage|translate|rotate|scale|skew|skewX|skewY|matrix|matrix3d|translate3d|translateX|translateY|translateZ|scale3d|scaleX|scaleY|scaleZ|rotate3d|rotateX|rotateY|rotateZ|perspective|greyscale|iscolor|isnumber|isstring|iskeyword|isurl|ispixel|ispercentage|isem|contrast|red|green|blue|luma)\b</string>
 			<key>name</key>
 			<string>support.function.any-method.builtin.less</string>
 		</dict>
@@ -369,7 +394,13 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\!important|$|%|&amp;|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|&lt;=|&gt;=|&lt;&lt;=|&gt;&gt;=|&gt;&gt;&gt;=|&lt;&gt;|&lt;|&gt;|!|&amp;&amp;|\|\||\?\:|\*=|(?&lt;!\()/=|%=|\+=|\-=|&amp;=|\^=|\/|and|when\b</string>
+			<string>@{[a-zA-Z0-9_-][\w-]*}</string>
+			<key>name</key>
+			<string>variable.interpolation.less</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>!important|$|%|&amp;|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|&lt;=|&gt;=|&lt;&lt;=|&gt;&gt;=|&gt;&gt;&gt;=|&lt;&gt;|&lt;|&gt;|!|&amp;&amp;|\|\||\?\:|(?&lt;!\()/=|%=|\+=|\-=|&amp;=|when\b</string>
 			<key>name</key>
 			<string>keyword.operator.less</string>
 		</dict>
