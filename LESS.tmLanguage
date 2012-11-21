@@ -105,7 +105,7 @@
 			<key>begin</key>
 			<string>url\((\')</string>
 			<key>contentName</key>
-			<string>variable.parameter.url</string>
+			<string>string.quoted.variable.parameter.url</string>
 			<key>end</key>
 			<string>(\')\)</string>
 			<key>name</key>
@@ -115,7 +115,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>variable.parameter.url</string>
+					<string>string.quoted.variable.parameter.url</string>
 				</dict>
 			</dict>
 		</dict>
@@ -123,7 +123,7 @@
 			<key>begin</key>
 			<string>url\((\")</string>
 				<key>contentName</key>
-				<string>variable.parameter.url</string>
+				<string>string.quoted.variable.parameter.url</string>
 				<key>end</key>
 				<string>(\")\)</string>
 			<key>name</key>
@@ -133,7 +133,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>variable.parameter.url</string>
+					<string>string.quoted.variable.parameter.url</string>
 				</dict>
 			</dict>
 		</dict>
@@ -141,7 +141,7 @@
 			<key>begin</key>
 			<string>url\(</string>
 				<key>contentName</key>
-				<string>variable.parameter.url</string>
+				<string>string.quoted.variable.parameter.url</string>
 				<key>end</key>
 				<string>\)</string>
 			<key>name</key>
