@@ -103,49 +103,110 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>url\((\')</string>
+			<string>(url)(\()(\')</string>
 			<key>contentName</key>
 			<string>string.quoted.variable.parameter.url</string>
 			<key>end</key>
-			<string>(\')\)</string>
-			<key>name</key>
-			<string>support.function.any-method.builtin.css</string>
-			<key>captures</key>
+			<string>(\')(\))</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.any-method.builtin.css</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>meta.brace.round.js</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>string.quoted.variable.parameter.url</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
 				<dict>
 					<key>name</key>
 					<string>string.quoted.variable.parameter.url</string>
 				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>meta.brace.round.js</string>
+				</dict>
 			</dict>
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>url\((\")</string>
-				<key>contentName</key>
-				<string>string.quoted.variable.parameter.url</string>
-				<key>end</key>
-				<string>(\")\)</string>
-			<key>name</key>
-			<string>support.function.any-method.builtin.css</string>
-			<key>captures</key>
+			<string>(url)(\()(\")</string>
+			<key>contentName</key>
+			<string>string.quoted.variable.parameter.url</string>
+			<key>end</key>
+			<string>(\")(\))</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.any-method.builtin.css</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>meta.brace.round.js</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>string.quoted.variable.parameter.url</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
 			<dict>
 				<key>1</key>
 				<dict>
 					<key>name</key>
 					<string>string.quoted.variable.parameter.url</string>
 				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>meta.brace.round.js</string>
+				</dict>
 			</dict>
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>url\(</string>
-				<key>contentName</key>
-				<string>string.quoted.variable.parameter.url</string>
-				<key>end</key>
-				<string>\)</string>
-			<key>name</key>
-			<string>support.function.any-method.builtin.css</string>
+			<string>(url)(\()</string>
+			<key>contentName</key>
+			<string>string.quoted.variable.parameter.url</string>
+			<key>end</key>
+			<string>(\))</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.any-method.builtin.css</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>meta.brace.round.js</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>meta.brace.round.js</string>
+				</dict>
+			</dict>
 		</dict>
 		<dict>
 			<key>match</key>
