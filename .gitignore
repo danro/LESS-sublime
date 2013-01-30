@@ -23,21 +23,9 @@ nbproject
 *.sublime-workspace
 .tm_properties
 
-# Dreamweaver added files
-_notes
-dwsync.xml
-
-# Komodo
-*.komodoproject
-.komodotools
-
 # Folders to ignore
 .hg
 .svn
 .CVS
 .idea
-_assets
-tags
-intermediate
-publish
-dist
+.sass-cache
