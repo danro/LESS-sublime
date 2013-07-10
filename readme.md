@@ -1,4 +1,4 @@
-# LESS syntax package for Sublime Text 2
+# LESS syntax for Sublime Text
 
 Provides syntax highlighting for `.less` files + support for comment-toggle commands.
 
