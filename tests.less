@@ -2,47 +2,111 @@
 /* LESS syntax coloring tests */
 
 // --------------------------------------------------
-// Functions
+// LESS functions
 
-rgb(200, 200, 200);
-rgba(200, 200, 200, 0.5);
-hsl(50%, 45%, 90%);
-hsla(50%, 45%, 90%, 50%);
+escape(@string);               // URL encodes a string
+e(@string);                    // escape string content
+%(@string, values...);         // formats a string
 
-saturate(@color, 10%);
-desaturate(@color, 10%);
-lighten(@color, 10%);
-darken(@color, 10%);
-greyscale(@color, 10%);
+unit(@dimension, [@unit: ""]); // remove or change the unit of a dimension
+color(@string);                // parses a string to a color
+data-uri([mimetype,] url);       // * inlines a resource and falls back to url()
 
-fadein(@color, 10%);     
-fadeout(@color, 10%);    
-fade(@color, 50%);
+ceil(@number);                 // rounds up to an integer
+floor(@number);                // rounds down to an integer
+percentage(@number);           // converts to a %, e.g. 0.5 -> 50%
+round(number, [places: 0]);    // rounds a number to a number of places
+sqrt(number);                  // * calculates square root of a number
+abs(number);                   // * absolute value of a number
+sin(number);                   // * sine function
+asin(number);                  // * arcsine - inverse of sine function
+cos(number);                   // * cosine function
+acos(number);                  // * arccosine - inverse of cosine function
+tan(number);                   // * tangent function
+atan(number);                  // * arctangent - inverse of tangent function
+pi();                          // * returns pi
+pow(@base, @exponent);     // * first argument raised to the power of the second argument
+mod(number, number);       // * first argument modulus second argument
 
-spin(@color, 10);
-mix(@color1, @color2, @weight);
-contrast(@color1, @darkcolor, @lightcolor);
+convert(number, units);    // * converts between number types
+unit(number, units);       // *changes number units without converting it
+color(string);             // converts string or escaped value into color
 
-argb(@color);
-hue(@color);
-saturation(@color);
-lightness(@color);
-red(@color);
-green(@color);
-blue(@color);
-alpha(@color);
-luma(@color);
-@new: hsl(hue(@old), 45%, 90%);
-@color: green;
+rgb(@r, @g, @b);                             // converts to a color
+rgba(@r, @g, @b, @a);                        // converts to a color
+argb(@color);                                // creates a #AARRGGBB
+hsl(@hue, @saturation, @lightness);          // creates a color
+hsla(@hue, @saturation, @lightness, @alpha); // creates a color
+hsv(@hue, @saturation, @value);              // creates a color
+hsva(@hue, @saturation, @value, @alpha);     // creates a color
 
-round(1.67);
-ceil(2.4);
-floor(2.6);
-percentage(0.5);
+hue(@color);           // returns the `hue` channel of @color in the HSL space
+saturation(@color);    // returns the `saturation` channel of @color in the HSL space
+lightness(@color);     // returns the 'lightness' channel of @color in the HSL space
+hsvhue(@color);        // * returns the `hue` channel of @color in the HSV space
+hsvsaturation(@color); // * returns the `saturation` channel of @color in the HSV space
+hsvvalue(@color);      // * returns the 'value' channel of @color in the HSV space
+red(@color);           // returns the 'red' channel of @color
+green(@color);         // returns the 'green' channel of @color
+blue(@color);          // returns the 'blue' channel of @color
+alpha(@color);         // returns the 'alpha' channel of @color
+luma(@color);          // returns the 'luma' value (perceptual brightness) of @color
+
+saturate(@color, 10%);                  // return a color 10% points *more* saturated
+desaturate(@color, 10%);                // return a color 10% points *less* saturated
+lighten(@color, 10%);                   // return a color 10% points *lighter*
+darken(@color, 10%);                    // return a color 10% points *darker*
+fadein(@color, 10%);                    // return a color 10% points *less* transparent
+fadeout(@color, 10%);                   // return a color 10% points *more* transparent
+fade(@color, 50%);                      // return @color with 50% transparency
+spin(@color, 10);                       // return a color with a 10 degree larger in hue
+mix(@color1, @color2, [@weight: 50%]);  // return a mix of @color1 and @color2
+greyscale(@color);                      // returns a grey, 100% desaturated color
+contrast(@color1, [@darkcolor: black], [@lightcolor: white], [@threshold: 43%]); 
+                                        // return @darkcolor if @color1 is > 43% luma
+                                        // otherwise return @lightcolor, see notes
+
+multiply(@color1, @color2);
+screen(@color1, @color2);
+overlay(@color1, @color2);
+softlight(@color1, @color2);
+hardlight(@color1, @color2);
+difference(@color1, @color2);
+exclusion(@color1, @color2);
+average(@color1, @color2);
+negation(@color1, @color2);
+
+iscolor(@colorOrAnything);              // returns true if passed a color, including keyword colors
+isnumber(@numberOrAnything);            // returns true if a number of any unit
+isstring(@stringOrAnything);            // returns true if it is passed a string
+iskeyword(@keywordOrAnything);          // returns true if it is passed keyword
+isurl(@urlOrAnything);                  // returns true if it is a string and a url
+ispixel(@pixelOrAnything);              // returns true if it is a number and a px
+ispercentage(@percentageOrAnything);    // returns true if it is a number and a %
+isem(@emOrAnything);                    // returns true if it is a number and an em
+isunit(@numberOrAnything, "rem");       // * returns if a parameter is a number and is in a particular unit
+
+// * These functions are only available in the 1.4.0 beta
+
+// --------------------------------------------------
+// Built-in + vendor functions
 
 background: url("/images/some/place/nice.jpg");
 background: url('/images/some/place/nice.jpg');
 background: url(/images/some/place/nice.jpg);
+
+rgba(255, 255, 255, 0.5);
+linear-gradient(0deg, blue, green 40%, red);
+matrix(1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
+translate(12px, 50%);
+
+-webkit-linear-gradient(0deg, blue, green 40%, red)
+-webkit-gradient();
+-webkit-radial-gradient();
+-webkit-interpolation-mode();
+-webkit-search-decoration();
+-moz-search-cancel-button();
+-webkit-farts();
 
 // --------------------------------------------------
 // Strings / Interpolation
@@ -54,8 +118,8 @@ background-image: url("@{base-url}/images/bg.png");
   filter: ~"ms:alwaysHasItsOwnSyntax.For.Stuff()";
 }
 
-@name: blocked;
-.@{name} {
+@name: '-black';
+.selector@{name} {
     color: black;
 }
 
@@ -146,6 +210,9 @@ body {
 }
 .box-shadow(2px, 5px);
 
+.mixin (one, two, 'three', @four) {
+  color: darken(@color, 10%);
+}
 .mixin (dark, @color) {
   color: darken(@color, 10%);
 }
@@ -246,4 +313,30 @@ height: 100% / 2 + @filler;
   src: url('/fonts/helv-neue-bold.eot?#iefix') format('embedded-opentype'),
   url('/fonts/helv-neue-bold.woff') format('woff'),
   url('/fonts/helv-neue-bold.ttf') format('truetype');
+}
+
+// --------------------------------------------------
+// Pseudo elements
+
+li:nth-child(4n - 7) {  /* or 4n+1 */
+    color: green;
+}
+
+li:nth-child(-n + 5) {  /* or 4n+1 */
+    color: green;
+}
+
+::selection {
+  background: @text-select-background;
+  color: @text-select-color;
+}
+::-moz-selection {
+  background: @text-select-background;
+  color: @text-select-color;
+}
+
+.main:hover {
+  .sub:active {
+    @stuff;
+  }
 }
