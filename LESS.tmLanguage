@@ -216,15 +216,15 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(%|abs|acos|alpha|argb|asin|atan|average|blue|ceil|color|color|contrast|convert|cos|darken|data-uri|desaturate|difference|e|escape|exclusion|fade|fadein|fadeout|floor|green|greyscale|hardlight|hsl|hsla|hsv|hsva|hsvhue|hsvsaturation|hsvvalue|hue|iscolor|isem|iskeyword|isnumber|ispercentage|ispixel|isstring|isunit|isurl|lighten|lightness|luma|mix|mod|multiply|negation|overlay|percentage|pi|pow|red|rgb|rgba|round|saturate|saturation|screen|sin|softlight|spin|sqrt|tan|unit|unit)(?=\()</string>
-			<key>name</key>
-			<string>support.function.less</string>
-		</dict>
-		<dict>
-			<key>match</key>
 			<string>(-(webkit|moz|khtml|o|ms|icab)-.*)(?=\()</string>
 			<key>name</key>
 			<string>support.function.any-method.vendor.css</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>([%a-zA-Z\-\_]*)(?=\()</string>
+			<key>name</key>
+			<string>support.function.less</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -414,18 +414,6 @@
 			<string>\b(indianred|lightcoral|salmon|darksalmon|lightsalmon|crimson|red|firebrick|darkred|pink|lightpink|hotpink|deeppink|mediumvioletred|palevioletred|lightsalmon|coral|tomato|orangered|darkorange|orange|gold|yellow|lightyellow|lemonchiffon|lightgoldenrodyellow|papayawhip|moccasin|peachpuff|palegoldenrod|khaki|darkkhaki|lavender|thistle|plum|violet|orchid|fuchsia|magenta|mediumorchid|mediumpurple|blueviolet|darkviolet|darkorchid|darkmagenta|purple|indigo|slateblue|darkslateblue|mediumslateblue|greenyellow|chartreuse|lawngreen|lime|limegreen|palegreen|lightgreen|mediumspringgreen|springgreen|mediumseagreen|seagreen|forestgreen|green|darkgreen|yellowgreen|olivedrab|olive|darkolivegreen|mediumaquamarine|darkseagreen|lightseagreen|darkcyan|teal|aqua|cyan|lightcyan|paleturquoise|aquamarine|turquoise|mediumturquoise|darkturquoise|cadetblue|steelblue|lightsteelblue|powderblue|lightblue|skyblue|lightskyblue|deepskyblue|dodgerblue|cornflowerblue|mediumslateblue|royalblue|blue|mediumblue|darkblue|navy|midnightblue|cornsilk|blanchedalmond|bisque|navajowhite|wheat|burlywood|tan|rosybrown|sandybrown|goldenrod|darkgoldenrod|peru|chocolate|saddlebrown|sienna|brown|maroon|white|snow|honeydew|mintcream|azure|aliceblue|ghostwhite|whitesmoke|seashell|beige|oldlace|floralwhite|ivory|antiquewhite|linen|lavenderblush|mistyrose|gainsboro|lightgrey|silver|darkgray|gray|dimgray|lightslategray|slategray|darkslategray|black|grey)(?!\()\b</string>
 			<key>name</key>
 			<string>support.constant.color.extra</string>
-		</dict>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>support.function.less</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>(\.[a-zA-Z0-9_-]+)\s*(;|\()</string>
 		</dict>
 		<dict>
 			<key>begin</key>
