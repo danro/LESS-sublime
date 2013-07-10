@@ -63,6 +63,17 @@ Some snippets to use in your favorite `.tmTheme` file.
 </dict>
 <dict>
   <key>name</key>
+  <string>less.variable</string>
+  <key>scope</key>
+  <string>variable.declaration.less</string>
+  <key>settings</key>
+  <dict>
+    <key>foreground</key>
+    <string>#FEB55A</string>
+  </dict>
+</dict>
+<dict>
+  <key>name</key>
   <string>css.element</string>
   <key>scope</key>
   <string>keyword.control.html.elements</string>
