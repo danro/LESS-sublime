@@ -256,13 +256,13 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>((-|\+)\s*)?[0-9]+(\.[0-9]+)?</string>
+			<string>((-|\+)*)?[0-9]+(\.[0-9]+)?</string>
 			<key>name</key>
 			<string>constant.numeric.css</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(?&lt;=[\d]|-)n</string>
+			<string>(?&lt;=[\d]|-|\+)n</string>
 			<key>name</key>
 			<string>constant.numeric.css</string>
 		</dict>
