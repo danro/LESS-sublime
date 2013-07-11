@@ -282,7 +282,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(:+)(not|after|before|disabled|empty|enabled|first-child|first-letter|first-line|first-of-type|invalid|last-of-type|last-child|only-child|only-of-type|selection|(?:-moz-)selection|target|valid|required|nth-child)</string>
+			<string>(:+)(not|after|before|disabled|empty|enabled|first-child|first-letter|first-line|first-of-type|invalid|last-of-type|last-child|only-child|only-of-type|selection|(?:-moz-)selection|target|valid|required|nth-child|extend)</string>
 			<key>name</key>
 			<string>entity.other.attribute-name.pseudo-element.css</string>
 		</dict>
