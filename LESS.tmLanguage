@@ -103,6 +103,35 @@
 		</dict>
 		<dict>
 			<key>begin</key>
+			<string>(~)(")</string>
+			<key>contentName</key>
+			<string>string.quoted.double.css markup.raw</string>
+			<key>end</key>
+			<string>(")</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.less</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>string.quoted.double.css markup.raw</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>string.quoted.double.css markup.raw</string>
+				</dict>
+			</dict>
+		</dict>
+		<dict>
+			<key>begin</key>
 			<string>(url)(\()(\')</string>
 			<key>contentName</key>
 			<string>string.quoted.variable.parameter.url</string>
@@ -213,12 +242,6 @@
 			<string>(rgb|rgba|hsl|hsla|url|format|src|cubic-bezier|linear-gradient|gradient|radial-gradient|interpolation-mode|search-decoration|search-cancel-button|blur|grayscale|matrix|matrix3d|perspective|rotate|rotate3d|rotateX|rotateY|rotateZ|scale|scale3d|scaleX|scaleY|scaleZ|skew|skewX|skewY|translate|translate3d|translateX|translateY|translateZ|color-stop|from|to)(?=\()</string>
 			<key>name</key>
 			<string>support.function.any-method.builtin.css</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>(-(webkit|moz|khtml|o|ms|icab)-.*)(?=\()</string>
-			<key>name</key>
-			<string>support.function.any-method.vendor.css</string>
 		</dict>
 		<dict>
 			<key>match</key>

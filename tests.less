@@ -120,6 +120,19 @@ background-image: url("@{base-url}/images/bg.png");
   filter: ~"ms:alwaysHasItsOwnSyntax.For.Stuff()";
 }
 
+-moz-transform: ~"@{op}(@{val})";
+
+img.testOK {
+    -ms-filter: ~"progid:DXImageTransform.Microsoft.AlphaImageLoader";
+    /* syntax color ok... */
+}
+
+img.testKO {
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(...)";
+    -ms-filter: ~"progid:DXImageTransform.Microsoft.AlphaImageLoader(...)";
+    /* syntax color ok... */
+}
+
 @name: '-black';
 .selector@{name} {
     color: black;
