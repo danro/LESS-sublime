@@ -92,7 +92,7 @@ isunit(@numberOrAnything, "rem");       // * returns if a parameter is a number 
 
 background: url("/images/some/place/nice.jpg");
 background: url('/images/some/place/nice.jpg');
-background: url(/images/some/place/nice.jpg);
+background: url(images/some/place/nice.jpg);
 
 rgba(255, 255, 255, 0.5);
 linear-gradient(0deg, blue, green 40%, red);
@@ -101,6 +101,7 @@ translate(12px, 50%);
 
 .transformer {
   transform: translateX(10px) rotate(10deg) translateY(5px);
+  -webkit-transform: translate3d(@x, @y, @z);
 }
 
 -webkit-linear-gradient(0deg, blue, green 40%, red);
@@ -111,7 +112,7 @@ translate(12px, 50%);
 -moz-search-cancel-button();
 -webkit-farts();
 
-customFunction();
+customFunction(blah);
 
 // --------------------------------------------------
 // Strings / Interpolation
@@ -250,6 +251,10 @@ body {
 }
 .mixin (@a) {
   color: @a;
+}
+
+.selector {
+  background: .mixin(dark);
 }
 
 .mixin (@a, @b: 0) when (isnumber(@b)) { ... }

@@ -33,6 +33,10 @@
 		</dict>
 		<dict>
 			<key>include</key>
+			<string>#less-declarations</string>
+		</dict>
+		<dict>
+			<key>include</key>
 			<string>#less-variables</string>
 		</dict>
 		<dict>
@@ -188,17 +192,35 @@
 			<key>name</key>
 			<string>meta.at-rule.css</string>
 		</dict>
+		<key>less-declarations</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>(?&gt;@[a-zA-Z0-9_-][\w-]*+)(?!:)</string>
+					<key>name</key>
+					<string>variable.other.less</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>@[a-zA-Z0-9_-][\w-]*</string>
+					<key>name</key>
+					<string>variable.declaration.less</string>
+				</dict>
+			</array>
+		</dict>
 		<key>less-functions</key>
 		<dict>
 			<key>match</key>
-			<string>([%a-zA-Z\-\_]*)(?=\()</string>
+			<string>([%a-zA-Z\-\_\d]*)(?=\()</string>
 			<key>name</key>
 			<string>support.function.less</string>
 		</dict>
 		<key>less-operators</key>
 		<dict>
 			<key>match</key>
-			<string>!important|$|%|&amp;|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|&lt;=|&gt;=|&lt;&lt;=|&gt;&gt;=|&gt;&gt;&gt;=|&lt;&gt;|&lt;|&gt;|!|&amp;&amp;|\|\||\?\:|(?&lt;!\()/=|%=|\+=|\-=|&amp;=|when\b|and\b|not\b</string>
+			<string>/|!important|$|%|&amp;|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|&lt;=|&gt;=|&lt;&lt;=|&gt;&gt;=|&gt;&gt;&gt;=|&lt;&gt;|&lt;|&gt;|!|&amp;&amp;|\|\||\?\:|(?&lt;!\()/=|%=|\+=|\-=|&amp;=|when\b|and\b|not\b</string>
 			<key>name</key>
 			<string>keyword.operator.less</string>
 		</dict>
@@ -214,11 +236,7 @@
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#property-names</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#less-operators</string>
+					<string>#color-values</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -234,10 +252,6 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#color-values</string>
-				</dict>
-				<dict>
-					<key>include</key>
 					<string>#string-double</string>
 				</dict>
 				<dict>
@@ -245,10 +259,18 @@
 					<string>#string-single</string>
 				</dict>
 				<dict>
+					<key>include</key>
+					<string>#less-variables</string>
+				</dict>
+				<dict>
 					<key>match</key>
-					<string>@[a-zA-Z0-9_-][\w-]*</string>
+					<string>[\/\.a-zA-Z0-9_\-]*</string>
 					<key>name</key>
-					<string>variable.other.less</string>
+					<string>variable.parameter.misc.css</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#less-operators</string>
 				</dict>
 			</array>
 		</dict>
@@ -258,15 +280,9 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>(?&gt;@[a-zA-Z0-9_-][\w-]*+)(?!:)</string>
-					<key>name</key>
-					<string>variable.other.less</string>
-				</dict>
-				<dict>
-					<key>match</key>
 					<string>@[a-zA-Z0-9_-][\w-]*</string>
 					<key>name</key>
-					<string>variable.declaration.less</string>
+					<string>variable.other.less</string>
 				</dict>
 				<dict>
 					<key>match</key>
@@ -360,7 +376,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?x)(?:-|\+)?(?:(?:[0-9]+(?:\.[0-9]+)?)|(?:\.[0-9]+))((?:px|pt|ch|cm|mm|in|r?em|ex|pc|deg|g?rad|dpi|dpcm|s)\b|%)?</string>
+					<string>(?x)(?:-|\+)?(?:(?:[0-9]+(?:\.[0-9]+)?)|(?:\.[0-9]+))((?:px|pt|ch|cm|mm|in|r?em|ex|pc|deg|g?rad|dpi|dpcm|ms|s)\b|%)?</string>
 					<key>name</key>
 					<string>constant.numeric.css</string>
 				</dict>
@@ -401,8 +417,16 @@
 					<string>#less-functions</string>
 				</dict>
 				<dict>
+					<key>include</key>
+					<string>#selector</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#less-parameters</string>
+				</dict>
+				<dict>
 					<key>match</key>
-					<string>\b(absolute|all(-scroll)?|always|armenian|auto|avoid|baseline|below|bidi-override|block|bold|bolder|both|bottom|break-all|break-word|capitalize|center|char|circle|cjk-ideographic|col-resize|collapse|crosshair|dashed|decimal-leading-zero|decimal|default|disabled|disc|distribute-all-lines|distribute-letter|distribute-space|distribute|dotted|double|e-resize|ellipsis|fixed|geometricPrecision|georgian|groove|hand|hebrew|help|hidden|hiragana-iroha|hiragana|horizontal|ideograph-alpha|ideograph-numeric|ideograph-parenthesis|ideograph-space|inactive|inherit|inline-block|inline|inset|inside|inter-ideograph|inter-word|italic|justify|katakana-iroha|katakana|keep-all|left|lighter|line-edge|line-through|line|list-item|loose|lower-alpha|lower-greek|lower-latin|lower-roman|lowercase|lr-tb|ltr|medium|middle|move|n-resize|ne-resize|newspaper|no-drop|no-repeat|nw-resize|none|normal|not-allowed|nowrap|oblique|optimize(Legibility|Quality|Speed)|outset|outside|overline|pointer|pre(-(wrap|line))?|progress|relative|repeat-x|repeat-y|repeat|right|ridge|row-resize|rtl|s-resize|scroll|se-resize|separate|small-caps|solid|square|static|strict|sub|super|sw-resize|table-footer-group|table-header-group|tb-rl|text-bottom|text-top|text|thick|thin|top|transparent|underline|upper-alpha|upper-latin|upper-roman|uppercase|vertical(-(ideographic|text))?|visible(Painted|Fill|Stroke)?|w-resize|wait|whitespace|zero|smaller|larger|((xx?-)?(small|large))|painted|fill|stroke)\b</string>
+					<string>\b(absolute|all(-scroll)?|always|armenian|auto|avoid|baseline|below|bidi-override|block|bold|bolder|both|bottom|break-all|break-word|capitalize|center|char|circle|cjk-ideographic|col-resize|collapse|crosshair|dashed|decimal-leading-zero|decimal|default|disabled|disc|distribute-all-lines|distribute-letter|distribute-space|distribute|dotted|double|e-resize|ellipsis|fixed|geometricPrecision|georgian|groove|hand|hebrew|help|hidden|hiragana-iroha|hiragana|horizontal|ideograph-alpha|ideograph-numeric|ideograph-parenthesis|ideograph-space|inactive|inherit|inline-block|inline|inset|inside|inter-ideograph|inter-word|italic|justify|katakana-iroha|katakana|keep-all|left|lighter|line-edge|line-through|line|list-item|loose|lower-alpha|lower-greek|lower-latin|lower-roman|lowercase|lr-tb|ltr|medium|middle|move|n-resize|ne-resize|newspaper|no-drop|no-repeat|nw-resize|none|normal|not-allowed|nowrap|oblique|optimize(Legibility|Quality|Speed)|outset|outside|overline|pointer|pre(-(wrap|line))?|progress|relative|repeat-x|repeat-y|repeat|right|ridge|row-resize|rtl|s-resize|scroll|se-resize|separate|small-caps|solid|square|static|strict|sub|super|sw-resize|table-footer-group|table-header-group|table|tb-rl|text-bottom|text-top|text|thick|thin|top|transparent|underline|upper-alpha|upper-latin|upper-roman|uppercase|vertical(-(ideographic|text))?|visible(Painted|Fill|Stroke)?|w-resize|wait|whitespace|zero|smaller|larger|((xx?-)?(small|large))|painted|fill|stroke)\b</string>
 					<key>name</key>
 					<string>support.constant.property-value.css</string>
 				</dict>

@@ -19,7 +19,7 @@
           "name" : "constant.other.color.rgb-value.css"
         },
         {
-          "match" : "(?x)(?:-|\\+)?(?:(?:[0-9]+(?:\\.[0-9]+)?)|(?:\\.[0-9]+))((?:px|pt|ch|cm|mm|in|r?em|ex|pc|deg|g?rad|dpi|dpcm|s)\\b|%)?",
+          "match" : "(?x)(?:-|\\+)?(?:(?:[0-9]+(?:\\.[0-9]+)?)|(?:\\.[0-9]+))((?:px|pt|ch|cm|mm|in|r?em|ex|pc|deg|g?rad|dpi|dpcm|ms|s)\\b|%)?",
           "captures" : {
             "1" : {
               "name" : "keyword.other.unit.css"
@@ -52,7 +52,13 @@
           "include" : "#less-functions"
         },
         {
-          "match" : "\\b(absolute|all(-scroll)?|always|armenian|auto|avoid|baseline|below|bidi-override|block|bold|bolder|both|bottom|break-all|break-word|capitalize|center|char|circle|cjk-ideographic|col-resize|collapse|crosshair|dashed|decimal-leading-zero|decimal|default|disabled|disc|distribute-all-lines|distribute-letter|distribute-space|distribute|dotted|double|e-resize|ellipsis|fixed|geometricPrecision|georgian|groove|hand|hebrew|help|hidden|hiragana-iroha|hiragana|horizontal|ideograph-alpha|ideograph-numeric|ideograph-parenthesis|ideograph-space|inactive|inherit|inline-block|inline|inset|inside|inter-ideograph|inter-word|italic|justify|katakana-iroha|katakana|keep-all|left|lighter|line-edge|line-through|line|list-item|loose|lower-alpha|lower-greek|lower-latin|lower-roman|lowercase|lr-tb|ltr|medium|middle|move|n-resize|ne-resize|newspaper|no-drop|no-repeat|nw-resize|none|normal|not-allowed|nowrap|oblique|optimize(Legibility|Quality|Speed)|outset|outside|overline|pointer|pre(-(wrap|line))?|progress|relative|repeat-x|repeat-y|repeat|right|ridge|row-resize|rtl|s-resize|scroll|se-resize|separate|small-caps|solid|square|static|strict|sub|super|sw-resize|table-footer-group|table-header-group|tb-rl|text-bottom|text-top|text|thick|thin|top|transparent|underline|upper-alpha|upper-latin|upper-roman|uppercase|vertical(-(ideographic|text))?|visible(Painted|Fill|Stroke)?|w-resize|wait|whitespace|zero|smaller|larger|((xx?-)?(small|large))|painted|fill|stroke)\\b",
+          "include" : "#selector"
+        },
+        {
+          "include" : "#less-parameters"
+        },
+        {
+          "match" : "\\b(absolute|all(-scroll)?|always|armenian|auto|avoid|baseline|below|bidi-override|block|bold|bolder|both|bottom|break-all|break-word|capitalize|center|char|circle|cjk-ideographic|col-resize|collapse|crosshair|dashed|decimal-leading-zero|decimal|default|disabled|disc|distribute-all-lines|distribute-letter|distribute-space|distribute|dotted|double|e-resize|ellipsis|fixed|geometricPrecision|georgian|groove|hand|hebrew|help|hidden|hiragana-iroha|hiragana|horizontal|ideograph-alpha|ideograph-numeric|ideograph-parenthesis|ideograph-space|inactive|inherit|inline-block|inline|inset|inside|inter-ideograph|inter-word|italic|justify|katakana-iroha|katakana|keep-all|left|lighter|line-edge|line-through|line|list-item|loose|lower-alpha|lower-greek|lower-latin|lower-roman|lowercase|lr-tb|ltr|medium|middle|move|n-resize|ne-resize|newspaper|no-drop|no-repeat|nw-resize|none|normal|not-allowed|nowrap|oblique|optimize(Legibility|Quality|Speed)|outset|outside|overline|pointer|pre(-(wrap|line))?|progress|relative|repeat-x|repeat-y|repeat|right|ridge|row-resize|rtl|s-resize|scroll|se-resize|separate|small-caps|solid|square|static|strict|sub|super|sw-resize|table-footer-group|table-header-group|table|tb-rl|text-bottom|text-top|text|thick|thin|top|transparent|underline|upper-alpha|upper-latin|upper-roman|uppercase|vertical(-(ideographic|text))?|visible(Painted|Fill|Stroke)?|w-resize|wait|whitespace|zero|smaller|larger|((xx?-)?(small|large))|painted|fill|stroke)\\b",
           "name" : "support.constant.property-value.css"
         },
         {
@@ -94,8 +100,8 @@
           }
         },
         {
-          "end" : "(\\))",
           "begin" : "(format|local|url|attr|counter|counters)\\s*(\\()",
+          "end" : "(\\))",
           "beginCaptures" : {
             "1" : {
               "name" : "support.function.misc.css"
@@ -413,12 +419,8 @@
     "less-variables" : {
       "patterns" : [
         {
-          "match" : "(?>@[a-zA-Z0-9_-][\\w-]*+)(?!:)",
-          "name" : "variable.other.less"
-        },
-        {
           "match" : "@[a-zA-Z0-9_-][\\w-]*",
-          "name" : "variable.declaration.less"
+          "name" : "variable.other.less"
         },
         {
           "match" : "@{[a-zA-Z0-9_-][\\w-]*}",
@@ -461,12 +463,24 @@
         }
       ]
     },
+    "less-declarations" : {
+      "patterns" : [
+        {
+          "match" : "(?>@[a-zA-Z0-9_-][\\w-]*+)(?!:)",
+          "name" : "variable.other.less"
+        },
+        {
+          "match" : "@[a-zA-Z0-9_-][\\w-]*",
+          "name" : "variable.declaration.less"
+        }
+      ]
+    },
     "less-operators" : {
-      "match" : "!important|$|%|&|\\*|\\-\\-|\\-|\\+\\+|\\+|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\\|\\||\\?\\:|(?<!\\()\/=|%=|\\+=|\\-=|&=|when\\b|and\\b|not\\b",
+      "match" : "\/|!important|$|%|&|\\*|\\-\\-|\\-|\\+\\+|\\+|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\\|\\||\\?\\:|(?<!\\()\/=|%=|\\+=|\\-=|&=|when\\b|and\\b|not\\b",
       "name" : "keyword.operator.less"
     },
     "less-functions" : {
-      "match" : "([%a-zA-Z\\-\\_]*)(?=\\()",
+      "match" : "([%a-zA-Z\\-\\_\\d]*)(?=\\()",
       "name" : "support.function.less"
     },
     "less-at-rules" : {
@@ -486,10 +500,7 @@
       "end" : "\\)",
       "patterns": [
         {
-          "include" : "#property-names"
-        },
-        {
-          "include" : "#less-operators"
+          "include" : "#color-values"
         },
         {
           "include" : "#less-parameters"
@@ -501,17 +512,20 @@
           "include" : "#numeric-values"
         },
         {
-          "include" : "#color-values"
-        },
-        {
           "include" : "#string-double"
         },
         {
           "include" : "#string-single"
         },
         {
-          "match" : "@[a-zA-Z0-9_-][\\w-]*",
-          "name" : "variable.other.less"
+          "include" : "#less-variables"
+        },
+        {
+          "match" : "[\\/\\.a-zA-Z0-9_\\-]*",
+          "name" : "variable.parameter.misc.css"
+        },
+        {
+          "include" : "#less-operators"
         }
       ],
       "name" : "parameter.less"
@@ -527,6 +541,9 @@
     },
     {
       "include" : "#less-at-rules"
+    },
+    {
+      "include" : "#less-declarations"
     },
     {
       "include" : "#less-variables"

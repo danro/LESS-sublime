@@ -4,12 +4,12 @@ import sublime, sublime_plugin
 import re
 
 
-common = {  "color": ["rgb($1)", "rgba($1)", "hsl($1)", "hsla($1)", "transparent"],
-            "uri": ["url($1)"],
-            "border-style": ["none", "hidden", "dotted", "dashed", "solid", "double", "groove", "ridge", "inset", "outset"],
-            "border-width": ["thin", "medium", "thick"],
-            "shape": ["rect($1)"],
-            "generic-family": ["serif", "sans-serif", "cursive", "fantasy", "monospace"] }
+common = {
+"color": ["transparent"],
+"border-style": ["none", "hidden", "dotted", "dashed", "solid", "double", "groove", "ridge", "inset", "outset"],
+"border-width": ["thin", "medium", "thick"],
+"generic-family": ["serif", "sans-serif", "cursive", "fantasy", "monospace"]
+}
 
 css_data = """
 "background-attachment"=scroll | fixed | inherit
@@ -69,6 +69,8 @@ css_data = """
 "outline-width"=<border-width> | inherit
 "outline"=<color> | <border-style> | <border-width> | inherit
 "overflow"=visible | hidden | scroll | auto | inherit
+"overflow-x"=visible | hidden | scroll | auto | inherit
+"overflow-y"=visible | hidden | scroll | auto | inherit
 "padding-top" "padding-right" "padding-bottom" "padding-left"=<padding-width> | inherit
 "padding"=<padding-width> | inherit
 "page-break-after"=auto | always | avoid | left | right | inherit
@@ -176,12 +178,13 @@ class LESSCompletions(sublime_plugin.EventListener):
                         if add_semi_colon:
                             snippet += ";"
 
-                        if snippet.find("$1") != -1:
-                            desc = desc.replace("$1", "")
+                        # if snippet.find("$1") != -1:
+                        #     desc = desc.replace("$1", "")
 
                         l.append((desc, snippet))
 
                     # return (l, sublime.INHIBIT_WORD_COMPLETIONS)
+                    print(l)
                     return l
 
             return None
