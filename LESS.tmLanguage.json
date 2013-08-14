@@ -415,14 +415,38 @@
           "name" : "variable.interpolation.less"
         },
         {
-          "end" : "`",
           "begin" : "`",
-          "patterns" : [
-            {
-              "match" : "\\\\.",
-              "name" : "constant.character.escaped.css"
+          "end" : "`",
+          "name" : "markup.raw"
+        },
+        {
+          "begin" : "(~)`",
+          "end" : "`",
+          "beginCaptures" : {
+            "1" : {
+              "name" : "keyword.operator.less"
             }
-          ],
+          },
+          "name" : "markup.raw"
+        },
+        {
+          "begin" : "(~)\"",
+          "end" : "\"",
+          "beginCaptures" : {
+            "1" : {
+              "name" : "keyword.operator.less"
+            }
+          },
+          "name" : "string.quoted.double.css markup.raw"
+        },
+        {
+          "begin" : "(~)'",
+          "end" : "'",
+          "beginCaptures" : {
+            "1" : {
+              "name" : "keyword.operator.less"
+            }
+          },
           "name" : "string.quoted.single.css markup.raw"
         }
       ]

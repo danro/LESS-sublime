@@ -220,16 +220,55 @@
 					<key>end</key>
 					<string>`</string>
 					<key>name</key>
-					<string>string.quoted.single.css markup.raw</string>
-					<key>patterns</key>
-					<array>
+					<string>markup.raw</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(~)`</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
 						<dict>
-							<key>match</key>
-							<string>\\.</string>
 							<key>name</key>
-							<string>constant.character.escaped.css</string>
+							<string>keyword.operator.less</string>
 						</dict>
-					</array>
+					</dict>
+					<key>end</key>
+					<string>`</string>
+					<key>name</key>
+					<string>markup.raw</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(~)"</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.less</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>"</string>
+					<key>name</key>
+					<string>string.quoted.double.css markup.raw</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(~)'</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.less</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>'</string>
+					<key>name</key>
+					<string>string.quoted.single.css markup.raw</string>
 				</dict>
 			</array>
 		</dict>
