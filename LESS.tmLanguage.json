@@ -46,10 +46,16 @@
           "include" : "#less-variables"
         },
         {
+          "include" : "#less-functions"
+        },
+        {
           "include" : "#less-operators"
         },
         {
-          "include" : "#less-functions"
+          "include" : "#color-values"
+        },
+        {
+          "include" : "#numeric-values"
         },
         {
           "include" : "#selector"
@@ -64,12 +70,6 @@
         {
           "match" : "(\\b(?i:arial|century|comic|courier|garamond|georgia|helvetica|impact|lucida|symbol|system|tahoma|times|trebuchet|utopia|verdana|webdings|sans-serif|serif|monospace)\\b)",
           "name" : "support.constant.font-name.css"
-        },
-        {
-          "include" : "#numeric-values"
-        },
-        {
-          "include" : "#color-values"
         },
         {
           "include" : "#string-double"

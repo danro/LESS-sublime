@@ -410,11 +410,19 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#less-functions</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#less-operators</string>
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#less-functions</string>
+					<string>#color-values</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#numeric-values</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -435,14 +443,6 @@
 					<string>(\b(?i:arial|century|comic|courier|garamond|georgia|helvetica|impact|lucida|symbol|system|tahoma|times|trebuchet|utopia|verdana|webdings|sans-serif|serif|monospace)\b)</string>
 					<key>name</key>
 					<string>support.constant.font-name.css</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#numeric-values</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#color-values</string>
 				</dict>
 				<dict>
 					<key>include</key>
