@@ -212,10 +212,27 @@
 		</dict>
 		<key>less-functions</key>
 		<dict>
-			<key>match</key>
-			<string>([%a-zA-Z\-\_\d]*)(?=\()</string>
-			<key>name</key>
-			<string>support.function.less</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>([%a-zA-Z\-\_\d]*)(?=\()</string>
+					<key>name</key>
+					<string>support.function.less</string>
+				</dict>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>entity.other.attribute-name.class.css entity.other.less.mixin</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>(\.(?![0-9])[a-zA-Z0-9_-]+(?=\())</string>
+				</dict>
+			</array>
 		</dict>
 		<key>less-operators</key>
 		<dict>

@@ -480,8 +480,20 @@
       "name" : "keyword.operator.less"
     },
     "less-functions" : {
-      "match" : "([%a-zA-Z\\-\\_\\d]*)(?=\\()",
-      "name" : "support.function.less"
+      "patterns": [
+        {
+          "match" : "([%a-zA-Z\\-\\_\\d]*)(?=\\()",
+          "name" : "support.function.less"
+          },
+        {
+          "match" : "(\\.(?![0-9])[a-zA-Z0-9_-]+(?=\\())",
+          "captures" : {
+            "1" : {
+              "name" : "entity.other.attribute-name.class.css entity.other.less.mixin"
+            }
+          }
+        }
+      ]
     },
     "less-at-rules" : {
       "match" : "^\\s*((@)(charset|import|namespace|media|page|font-face|keyframes|supports|document)\\b)",
