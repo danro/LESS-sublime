@@ -407,8 +407,16 @@
     "less-variables" : {
       "patterns" : [
         {
-          "match" : "@[a-zA-Z0-9_-][\\w-]*",
+          "match" : "(?>@[a-zA-Z0-9_-][\\w-]*+)(?!:)",
           "name" : "variable.other.less"
+        },
+        {
+          "match" : "@[a-zA-Z0-9_-][\\w-]*",
+          "name" : "variable.declaration.less"
+        },
+        {
+          "match" : "@{[a-zA-Z0-9_-][\\w-]*}",
+          "name" : "variable.interpolation.less"
         },
         {
           "match" : "@{[a-zA-Z0-9_-][\\w-]*}",
