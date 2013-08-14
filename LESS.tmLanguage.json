@@ -425,10 +425,6 @@
           "name" : "variable.interpolation.less"
         },
         {
-          "match" : "@{[a-zA-Z0-9_-][\\w-]*}",
-          "name" : "variable.interpolation.less"
-        },
-        {
           "begin" : "`",
           "end" : "`",
           "name" : "markup.raw"
@@ -499,9 +495,6 @@
           "include" : "#less-parameters"
         },
         {
-          "include" : "#less-variables"
-        },
-        {
           "include" : "#less-functions"
         },
         {
@@ -515,6 +508,10 @@
         },
         {
           "include" : "#string-single"
+        },
+        {
+          "match" : "@[a-zA-Z0-9_-][\\w-]*",
+          "name" : "variable.other.less"
         }
       ],
       "name" : "parameter.less"

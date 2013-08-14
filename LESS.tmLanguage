@@ -226,10 +226,6 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#less-variables</string>
-				</dict>
-				<dict>
-					<key>include</key>
 					<string>#less-functions</string>
 				</dict>
 				<dict>
@@ -248,6 +244,12 @@
 					<key>include</key>
 					<string>#string-single</string>
 				</dict>
+				<dict>
+					<key>match</key>
+					<string>@[a-zA-Z0-9_-][\w-]*</string>
+					<key>name</key>
+					<string>variable.other.less</string>
+				</dict>
 			</array>
 		</dict>
 		<key>less-variables</key>
@@ -265,12 +267,6 @@
 					<string>@[a-zA-Z0-9_-][\w-]*</string>
 					<key>name</key>
 					<string>variable.declaration.less</string>
-				</dict>
-				<dict>
-					<key>match</key>
-					<string>@{[a-zA-Z0-9_-][\w-]*}</string>
-					<key>name</key>
-					<string>variable.interpolation.less</string>
 				</dict>
 				<dict>
 					<key>match</key>
