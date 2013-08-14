@@ -29,10 +29,24 @@
         }
       ]
     },
+    "property-names" : {
+      "begin" : "(?<![-a-z])(?=[-a-z])",
+      "end" : "$|(?![-a-z])",
+      "patterns" : [
+       {
+         "match" : "\\b(word)\\b",
+         "name" : "support.type.property-name.css"
+       }
+     ],
+     "name" : "support.type.property-name.css"
+    },
     "property-values" : {
       "patterns" : [
         {
           "include" : "#less-variables"
+        },
+        {
+          "include" : "#less-operators"
         },
         {
           "include" : "#less-functions"
@@ -351,15 +365,7 @@
           "include" : "#selector"
         },
         {
-          "end" : "$|(?![-a-z])",
-          "begin" : "(?<![-a-z])(?=[-a-z])",
-          "patterns" : [
-            {
-              "match" : "\\b(word)\\b",
-              "name" : "support.type.property-name.css"
-            }
-          ],
-          "name" : "support.type.property-name.css"
+          "include" : "#property-names"
         },
         {
           "begin" : "(:)\\s*",
@@ -460,7 +466,7 @@
       ]
     },
     "less-operators" : {
-      "match" : "$|%|&|\\*|\\-\\-|\\-|\\+\\+|\\+|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\\|\\||\\?\\:|(?<!\\()\/=|%=|\\+=|\\-=|&=|when\\b|and\\b|not\\b",
+      "match" : "!important|$|%|&|\\*|\\-\\-|\\-|\\+\\+|\\+|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\\|\\||\\?\\:|(?<!\\()\/=|%=|\\+=|\\-=|&=|when\\b|and\\b|not\\b",
       "name" : "keyword.operator.less"
     },
     "less-functions" : {
@@ -478,6 +484,40 @@
         }
       },
       "name" : "meta.at-rule.css"
+    },
+    "less-parameters" : {
+      "begin" : "\\(",
+      "end" : "\\)",
+      "patterns": [
+        {
+          "include" : "#property-names"
+        },
+        {
+          "include" : "#less-operators"
+        },
+        {
+          "include" : "#less-parameters"
+        },
+        {
+          "include" : "#less-variables"
+        },
+        {
+          "include" : "#less-functions"
+        },
+        {
+          "include" : "#numeric-values"
+        },
+        {
+          "include" : "#color-values"
+        },
+        {
+          "include" : "#string-double"
+        },
+        {
+          "include" : "#string-single"
+        }
+      ],
+      "name" : "parameter.less"
     }
   },
   "uuid" : "69AA0917-B7BB-11D9-A7E2-000D93C8BE28",
@@ -511,6 +551,9 @@
     },
     {
       "include" : "#less-operators"
+    },
+    {
+      "include" : "#less-parameters"
     }
   ],
   "comment" : "LESS",

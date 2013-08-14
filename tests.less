@@ -99,7 +99,7 @@ linear-gradient(0deg, blue, green 40%, red);
 matrix(1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
 translate(12px, 50%);
 
--webkit-linear-gradient(0deg, blue, green 40%, red)
+-webkit-linear-gradient(0deg, blue, green 40%, red);
 -webkit-gradient();
 -webkit-radial-gradient();
 -webkit-interpolation-mode();
@@ -222,6 +222,7 @@ body {
   -moz-box-shadow: @arguments;
   -webkit-box-shadow: @arguments;
 }
+
 .box-shadow(2px, 5px);
 
 .mixin (one, two, 'three', @four) {
@@ -362,7 +363,7 @@ body:not(.something) {
 
 .main:hover {
   // comment
-  #something:visited {
+  #somewhere:visited {
     border: 1px solid red !important;
   }
   article:before {

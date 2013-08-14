@@ -59,6 +59,10 @@
 			<key>include</key>
 			<string>#less-operators</string>
 		</dict>
+		<dict>
+			<key>include</key>
+			<string>#less-parameters</string>
+		</dict>
 	</array>
 	<key>repository</key>
 	<dict>
@@ -194,9 +198,57 @@
 		<key>less-operators</key>
 		<dict>
 			<key>match</key>
-			<string>$|%|&amp;|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|&lt;=|&gt;=|&lt;&lt;=|&gt;&gt;=|&gt;&gt;&gt;=|&lt;&gt;|&lt;|&gt;|!|&amp;&amp;|\|\||\?\:|(?&lt;!\()/=|%=|\+=|\-=|&amp;=|when\b|and\b|not\b</string>
+			<string>!important|$|%|&amp;|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|&lt;=|&gt;=|&lt;&lt;=|&gt;&gt;=|&gt;&gt;&gt;=|&lt;&gt;|&lt;|&gt;|!|&amp;&amp;|\|\||\?\:|(?&lt;!\()/=|%=|\+=|\-=|&amp;=|when\b|and\b|not\b</string>
 			<key>name</key>
 			<string>keyword.operator.less</string>
+		</dict>
+		<key>less-parameters</key>
+		<dict>
+			<key>begin</key>
+			<string>\(</string>
+			<key>end</key>
+			<string>\)</string>
+			<key>name</key>
+			<string>parameter.less</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#property-names</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#less-operators</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#less-parameters</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#less-variables</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#less-functions</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#numeric-values</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#color-values</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#string-double</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#string-single</string>
+				</dict>
+			</array>
 		</dict>
 		<key>less-variables</key>
 		<dict>
@@ -318,6 +370,24 @@
 				</dict>
 			</array>
 		</dict>
+		<key>property-names</key>
+		<dict>
+			<key>begin</key>
+			<string>(?&lt;![-a-z])(?=[-a-z])</string>
+			<key>end</key>
+			<string>$|(?![-a-z])</string>
+			<key>name</key>
+			<string>support.type.property-name.css</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\b(word)\b</string>
+					<key>name</key>
+					<string>support.type.property-name.css</string>
+				</dict>
+			</array>
+		</dict>
 		<key>property-values</key>
 		<dict>
 			<key>patterns</key>
@@ -325,6 +395,10 @@
 				<dict>
 					<key>include</key>
 					<string>#less-variables</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#less-operators</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -463,21 +537,8 @@
 					<string>#selector</string>
 				</dict>
 				<dict>
-					<key>begin</key>
-					<string>(?&lt;![-a-z])(?=[-a-z])</string>
-					<key>end</key>
-					<string>$|(?![-a-z])</string>
-					<key>name</key>
-					<string>support.type.property-name.css</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>match</key>
-							<string>\b(word)\b</string>
-							<key>name</key>
-							<string>support.type.property-name.css</string>
-						</dict>
-					</array>
+					<key>include</key>
+					<string>#property-names</string>
 				</dict>
 				<dict>
 					<key>begin</key>
