@@ -3,7 +3,6 @@
 
 // --------------------------------------------------
 // LESS functions
-
 escape(@string);               // URL encodes a string
 e(@string);                    // escape string content
 %(@string, values...);         // formats a string
@@ -322,7 +321,8 @@ height: 100% / 2 + @filler;
 }
 
 .nested {
-  @media (min-width: 768px) and (max-width: 979px) { {
+  #grid > .core(@gridColumnWidth768, @gridGutterWidth768);
+  @media (min-width: 768px) and (max-width: 979px) {
     
   }
 }
@@ -361,10 +361,10 @@ body:not(.something) {
 
 .main:hover {
   // comment
-  #something {
+  #something:visited {
     border: 1px solid red !important;
   }
-  article {
+  article:before {
     margin-bottom: 3em;
   }
   .sub:active {
