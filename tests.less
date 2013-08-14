@@ -116,11 +116,10 @@ customFunction();
 @base-url: "http://assets.fnord.com";
 background-image: url("@{base-url}/images/bg.png");
 
-.class {
+.test-strings {
   filter: ~"ms:alwaysHasItsOwnSyntax.For.Stuff()";
+  -moz-transform: ~"@{op}(@{val})";
 }
-
--moz-transform: ~"@{op}(@{val})";
 
 img.testOK {
     -ms-filter: ~"progid:DXImageTransform.Microsoft.AlphaImageLoader";
@@ -144,9 +143,9 @@ img.testKO {
 @darkcolor: darken(@color, 10%);
 
 .svg-url-test {
-	border-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0,0 24,26"><filter id="dropshadow" height="150%" width="150%"><feGaussianBlur in="SourceAlpha" stdDeviation="2"></feGaussianBlur><feOffset dx="0" dy="1" result="offsetblur"></feOffset><feMerge><feMergeNode></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter><polygon fill="hsl(0, 0%, 100%)" filter="url(#dropshadow)" points="12,3 2,13 12,23 22,13"></polygon></svg>') 30.76923% 29.16667% repeat;
-	border-width: 0 0 8px;
-	border-style: solid;
+  border-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0,0 24,26"><filter id="dropshadow" height="150%" width="150%"><feGaussianBlur in="SourceAlpha" stdDeviation="2"></feGaussianBlur><feOffset dx="0" dy="1" result="offsetblur"></feOffset><feMerge><feMergeNode></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter><polygon fill="hsl(0, 0%, 100%)" filter="url(#dropshadow)" points="12,3 2,13 12,23 22,13"></polygon></svg>') 30.76923% 29.16667% repeat;
+  border-width: 0 0 8px;
+  border-style: solid;
 }
 
 // --------------------------------------------------
@@ -161,34 +160,34 @@ img.testKO {
 // Nesting
 
 body {
-	.navigation {
-		color: red;
-	}
+  .navigation {
+    color: red;
+  }
 }
 
 #header {
-	color: black;
+  color: black;
 
-	.navigation {
-		font-size: 12px;
-	}
-	.logo {
-		width: 300px;
-	}
+  .navigation {
+    font-size: 12px;
+  }
+  .logo {
+    width: 300px;
+  }
 }
 
 .clearfix {
-	display: block;
-	zoom: 1;
+  display: block;
+  zoom: 1;
 
-	&:after {
-		content: " ";
-		display: block;
-		font-size: 0;
-		height: 0;
-		clear: both;
-		visibility: hidden;
-	}
+  &:after {
+    content: " ";
+    display: block;
+    font-size: 0;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
 }
 
 .child, .sibling {
@@ -204,18 +203,18 @@ body {
 // Mixins
 
 .bordered {
-	border-top: dotted 1px black;
-	border-bottom: solid 2px black;
+  border-top: dotted 1px black;
+  border-bottom: solid 2px black;
 }
 
 #menu a {
-	color: #111;
-	.bordered;
+  color: #111;
+  .bordered;
 }
 
 .post a {
-	color: red;
-	.bordered;
+  color: red;
+  .bordered;
 }
 
 .box-shadow (@x: 0, @y: 0, @blur: 1px, @color: #000) {
@@ -268,31 +267,31 @@ height: 100% / 2 + @filler;
 // Namespaces & Accessors
 
 #bundle {
-	.button {
-		display: block;
-		border: 1px solid black;
-		background-color: grey;
-		&:hover { background-color: magenta }
-	}
-	.tab { }
-	.citation { }
+  .button {
+    display: block;
+    border: 1px solid black;
+    background-color: grey;
+    &:hover { background-color: magenta }
+  }
+  .tab { }
+  .citation { }
 }
 
 #header a {
-	color: orange;
-	#bundle > .button;
+  color: orange;
+  #bundle > .button;
 }
 
 #defaults {
-	@width: 960px;
-	@color: black;
+  @width: 960px;
+  @color: black;
 }
 
 .article { color: #294366; }
 
 .comment {
-	width: #defaults[@width];
-	color: .article['color']; 
+  width: #defaults[@width];
+  color: .article['color']; 
 }
 
 .btn-small [class^="icon-"],
@@ -303,15 +302,15 @@ height: 100% / 2 + @filler;
 // --------------------------------------------------
 // At-rules
 
-@charset
-@import
-@namespace
-@media
-@page
-@font-face
-@keyframes
-@supports
-@document
+@charset;
+@import;
+@namespace;
+@media;
+@page;
+@font-face;
+@keyframes;
+@supports;
+@document;
 
 @import "library";
 @import "typo.css";
@@ -320,6 +319,12 @@ height: 100% / 2 + @filler;
   #grid > .core(@gridColumnWidth768, @gridGutterWidth768);
   border-width: 0 0 8px;
   border-style: solid;
+}
+
+.nested {
+  @media (min-width: 768px) and (max-width: 979px) { {
+    
+  }
 }
 
 @font-face {
@@ -334,11 +339,11 @@ height: 100% / 2 + @filler;
 // Pseudo elements
 
 li:nth-child(4n - 7) {  /* or 4n+1 */
-    color: green;
+  color: green;
 }
 
 li:nth-child(-n + 5) {  /* or 4n+1 */
-    color: green;
+  color: green;
 }
 
 ::selection {
@@ -350,7 +355,18 @@ li:nth-child(-n + 5) {  /* or 4n+1 */
   color: @text-select-color;
 }
 
+body:not(.something) {
+  padding: 10px;
+}
+
 .main:hover {
+  // comment
+  #something {
+    border: 1px solid red !important;
+  }
+  article {
+    margin-bottom: 3em;
+  }
   .sub:active {
     @stuff;
   }

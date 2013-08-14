@@ -32,7 +32,7 @@ Some snippets to use in your favorite `.tmTheme` file.
   <key>name</key>
   <string>css.id</string>
   <key>scope</key>
-  <string>meta.selector.css entity.other.attribute-name.id</string>
+  <string>entity.other.attribute-name.id</string>
   <key>settings</key>
   <dict>
     <key>foreground</key>
