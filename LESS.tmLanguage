@@ -782,20 +782,6 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(:+)(after|before|first-letter|first-line|selection|-moz-selection)\b</string>
-					<key>name</key>
-					<string>entity.other.attribute-name.pseudo-element.css</string>
-				</dict>
-				<dict>
-					<key>captures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.entity.css</string>
-						</dict>
-					</dict>
-					<key>match</key>
 					<string>(:)((first|last)-child|(first|last|only)-of-type|empty|root|target|first|left|right)\b</string>
 					<key>name</key>
 					<string>entity.other.attribute-name.pseudo-class.css</string>
@@ -886,6 +872,20 @@
 							<string>punctuation.section.function.css</string>
 						</dict>
 					</dict>
+				</dict>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.entity.css</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>(:+)(?:-(?:webkit|moz|o)-)?([a-zA-Z0-9_-]*)\b</string>
+					<key>name</key>
+					<string>entity.other.attribute-name.pseudo-element.css</string>
 				</dict>
 				<dict>
 					<key>captures</key>

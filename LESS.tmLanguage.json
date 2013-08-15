@@ -166,15 +166,6 @@
           "name" : "entity.name.tag.wildcard.css"
         },
         {
-          "match" : "(:+)(after|before|first-letter|first-line|selection|-moz-selection)\\b",
-          "captures" : {
-            "1" : {
-              "name" : "punctuation.definition.entity.css"
-            }
-          },
-          "name" : "entity.other.attribute-name.pseudo-element.css"
-        },
-        {
           "match" : "(:)((first|last)-child|(first|last|only)-of-type|empty|root|target|first|left|right)\\b",
           "captures" : {
             "1" : {
@@ -237,6 +228,15 @@
               "name" : "punctuation.section.function.css"
             }
           }
+        },
+        {
+          "match" : "(:+)(?:-(?:webkit|moz|o)-)?([a-zA-Z0-9_-]*)\\b",
+          "captures" : {
+            "1" : {
+              "name" : "punctuation.definition.entity.css"
+            }
+          },
+          "name" : "entity.other.attribute-name.pseudo-element.css"
         },
         {
           "match" : "(:)(active|hover|link|visited|focus)\\b",
