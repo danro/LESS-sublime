@@ -67,6 +67,10 @@
 			<key>include</key>
 			<string>#less-parameters</string>
 		</dict>
+		<dict>
+			<key>include</key>
+			<string>#numeric-values</string>
+		</dict>
 	</array>
 	<key>repository</key>
 	<dict>
@@ -188,7 +192,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>^\s*((@)(charset|import|namespace|media|page|font-face|keyframes|supports|document)\b)</string>
+			<string>^\s*((@)(?:-(?:webkit|moz|o)-)?(charset|import|namespace|media|page|font-face|keyframes|supports|document)\b)</string>
 			<key>name</key>
 			<string>meta.at-rule.css</string>
 		</dict>
@@ -850,7 +854,9 @@
 					</array>
 				</dict>
 				<dict>
-					<key>captures</key>
+					<key>begin</key>
+					<string>((:)nth-(?:(?:last-)?child|(?:last-)?of-type))(\()</string>
+					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
 						<dict>
@@ -867,19 +873,19 @@
 							<key>name</key>
 							<string>punctuation.section.function.css</string>
 						</dict>
-						<key>4</key>
-						<dict>
-							<key>name</key>
-							<string>constant.numeric.css</string>
-						</dict>
-						<key>5</key>
+					</dict>
+					<key>contentName</key>
+					<string>constant.numeric.css</string>
+					<key>end</key>
+					<string>(\))</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.section.function.css</string>
 						</dict>
 					</dict>
-					<key>match</key>
-					<string>((:)nth-(?:(?:last-)?child|(?:last-)?of-type))(\()(\-?(?:.*)(?:\+\d+)?|even|odd)(\))</string>
 				</dict>
 				<dict>
 					<key>captures</key>

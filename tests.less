@@ -358,8 +358,27 @@ height: 100% / 2 + @filler;
   url('/fonts/helv-neue-bold.ttf') format('truetype');
 }
 
+@-webkit-keyframes name-your-animation {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-moz-keyframes name-your-animation {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-o-keyframes name-your-animation {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes name-your-animation {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
 // --------------------------------------------------
 // Pseudo elements
+
+a:nth-child(2) { background: darken(@grey, 5%); }
 
 li:nth-child(4n - 7) {  /* or 4n+1 */
   color: green;

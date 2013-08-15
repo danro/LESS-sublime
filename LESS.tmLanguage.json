@@ -218,22 +218,23 @@
           }
         },
         {
-          "match" : "((:)nth-(?:(?:last-)?child|(?:last-)?of-type))(\\()(\\-?(?:.*)(?:\\+\\d+)?|even|odd)(\\))",
-          "captures" : {
-            "3" : {
-              "name" : "punctuation.section.function.css"
-            },
-            "4" : {
-              "name" : "constant.numeric.css"
-            },
-            "5" : {
-              "name" : "punctuation.section.function.css"
-            },
+          "begin" : "((:)nth-(?:(?:last-)?child|(?:last-)?of-type))(\\()",
+          "end" : "(\\))",
+          "beginCaptures" : {
             "1" : {
               "name" : "entity.other.attribute-name.pseudo-class.css"
             },
             "2" : {
               "name" : "punctuation.definition.entity.css"
+            },
+            "3" : {
+              "name" : "punctuation.section.function.css"
+            }
+          },
+          "contentName" : "constant.numeric.css",
+          "endCaptures" : {
+            "1" : {
+              "name" : "punctuation.section.function.css"
             }
           }
         },
@@ -566,7 +567,7 @@
       ]
     },
     "less-at-rules" : {
-      "match" : "^\\s*((@)(charset|import|namespace|media|page|font-face|keyframes|supports|document)\\b)",
+      "match" : "^\\s*((@)(?:-(?:webkit|moz|o)-)?(charset|import|namespace|media|page|font-face|keyframes|supports|document)\\b)",
       "captures" : {
         "1" : {
           "name" : "keyword.control.at-rule.css"
@@ -650,6 +651,9 @@
     },
     {
       "include" : "#less-parameters"
+    },
+    {
+      "include" : "#numeric-values"
     }
   ],
   "comment" : "LESS",
