@@ -334,8 +334,12 @@ height: 100% / 2 + @filler;
 
 .nested {
   #grid > .core(@gridColumnWidth768, @gridGutterWidth768);
-  @media (min-width: 768px) and (max-width: 979px) {
-    
+  @media screen and (min-width: 768px) and (max-width: 979px) {
+    .styles;
+  }
+  
+  @media @breakpoint {
+    .styles;
   }
 }
 
@@ -355,7 +359,7 @@ li:nth-child(4n - 7) {  /* or 4n+1 */
 }
 
 li:nth-child(-n + 5) {  /* or 4n+1 */
-  color: green;
+  color: blue;
 }
 
 ::selection {

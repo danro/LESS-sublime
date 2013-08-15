@@ -12,6 +12,7 @@ common = {
 }
 
 css_data = """
+"-webkit-font-smoothing"=none | antialiased | subpixel-antialiased
 "background-attachment"=scroll | fixed | inherit
 "background-color"=<color> | inherit
 "background-image"=<uri> | none | inherit
