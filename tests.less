@@ -93,6 +93,7 @@ isunit(@numberOrAnything, "rem");       // * returns if a parameter is a number 
 background: url("/images/some/place/nice.jpg");
 background: url('/images/some/place/nice.jpg');
 background: url(images/some/place/nice.jpg);
+background: url(http://i.imgur.com/Da1eUqj.gif);
 
 rgba(255, 255, 255, 0.5);
 linear-gradient(0deg, blue, green 40%, red);
@@ -151,6 +152,12 @@ img.testKO {
   border-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0,0 24,26"><filter id="dropshadow" height="150%" width="150%"><feGaussianBlur in="SourceAlpha" stdDeviation="2"></feGaussianBlur><feOffset dx="0" dy="1" result="offsetblur"></feOffset><feMerge><feMergeNode></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter><polygon fill="hsl(0, 0%, 100%)" filter="url(#dropshadow)" points="12,3 2,13 12,23 22,13"></polygon></svg>') 30.76923% 29.16667% repeat;
   border-width: 0 0 8px;
   border-style: solid;
+}
+
+@font-face {
+  font-family: 'hybrid';
+  src: url(data:application/font-woff;charset=utf-8;base64,d09GRk9UVE8AABKAAAsAAAAAGvQAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABDRkYgAAABCAAAD0QAABYWvgI5ZkZGVE0AABBMAAAAGgAAABxl3Qs+R0RFRgAAEGgAAAAdAAAAIAA6AARPUy8yAAAQiAAAAEsAAABgL+jdgmNtYXAAABDUAAAAPQAAAVLgHPLNaGVhZAAAERQAAAAuAAAANglx3MloaGVhAAARRAAAACAAAAAkEBwL4WhtdHgAABFkAAAAKAAAADIjfAFibWF4cAAAEYwAAAAGAAAABgANUABuYW1lAAARlAAAAN8AAAF3TeAOdnBvc3QAABJ0AAAADAAAACAAAwAAeJxtWAtYVNUW3gdmmBFwRGQQFAdEUlOSEQEf1weSIrfUEMl8EKGR+RYJn1miaSIHCxWTq6b4zNTMyC+5pKVcU0dFCXyggi/UvKI2eBUHsFn3X+cM1L0ln/vsfc7e673+tfZIQqMRki=) format('woff'),
+  url("data:application/x-font-ttf;charset=utf-8;base64,AAEAAAANAIAAAwBQRkZUTWXdCz4AAAw4AAAAHEdERUYAPAAGAAAMGAAAACBPUy8yL8fdYgAAAVgAAABWY21hcOAe89QAAAHsAAABUmdhc3D//wADAAAMEAAAAAhnbHlmVZYD5gAAA2AAAAaYaGVhZAly3MkAAADcAAAANmhoZWEQHgviAAABFAAAACRobXR4JCYBYgAAAbAAAAA6bG9jYQfQCioAAANAAAAAIG1heHAAYAF/AAABOAAAACBuYW1lTeAOdgAACfgAAAF3cG9zdJ7/dZwAAAtwAAAAoAABAAAAAQAAs/KXr18PPPUACwIAAAAAAMG") format('truetype');
 }
 
 // --------------------------------------------------

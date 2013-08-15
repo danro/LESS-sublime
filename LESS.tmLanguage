@@ -192,6 +192,114 @@
 			<key>name</key>
 			<string>meta.at-rule.css</string>
 		</dict>
+		<key>less-data-uri</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>(url)(\()(data:)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.function.misc.css</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.function.css</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>parameter.less.data-uri markup.raw</string>
+						</dict>
+					</dict>
+					<key>contentName</key>
+					<string>parameter.less.data-uri markup.raw</string>
+					<key>end</key>
+					<string>(\))</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.function.css</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(url)(\()("data:)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.function.misc.css</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.function.css</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>parameter.less.data-uri markup.raw</string>
+						</dict>
+					</dict>
+					<key>contentName</key>
+					<string>parameter.less.data-uri markup.raw</string>
+					<key>end</key>
+					<string>(?&lt;=")(\))</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.function.css</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(url)(\()('data:)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.function.misc.css</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.function.css</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>parameter.less.data-uri markup.raw</string>
+						</dict>
+					</dict>
+					<key>contentName</key>
+					<string>parameter.less.data-uri markup.raw</string>
+					<key>end</key>
+					<string>(?&lt;=\')(\))</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.function.css</string>
+						</dict>
+					</dict>
+				</dict>
+			</array>
+		</dict>
 		<key>less-declarations</key>
 		<dict>
 			<key>patterns</key>
@@ -281,7 +389,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>[\/\.a-zA-Z0-9_\-]*</string>
+					<string>[\/\.:a-zA-Z0-9_\-]*</string>
 					<key>name</key>
 					<string>variable.parameter.misc.css</string>
 				</dict>
@@ -424,6 +532,10 @@
 				<dict>
 					<key>include</key>
 					<string>#less-variables</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#less-data-uri</string>
 				</dict>
 				<dict>
 					<key>include</key>

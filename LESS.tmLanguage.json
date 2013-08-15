@@ -46,6 +46,9 @@
           "include" : "#less-variables"
         },
         {
+          "include" : "#less-data-uri"
+        },
+        {
           "include" : "#less-functions"
         },
         {
@@ -479,6 +482,73 @@
       "match" : "\/|!important|$|%|&|\\*|\\-\\-|\\-|\\+\\+|\\+|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\\|\\||\\?\\:|(?<!\\()\/=|%=|\\+=|\\-=|&=|when\\b|and\\b|not\\b",
       "name" : "keyword.operator.less"
     },
+    "less-data-uri" : {
+      "patterns": [
+        {
+          "begin" : "(url)(\\()(data:)",
+          "end" : "(\\))",
+          "beginCaptures" : {
+            "1" : {
+              "name" : "support.function.misc.css"
+            },
+            "2" : {
+              "name" : "punctuation.section.function.css"
+            },
+            "3" : {
+              "name" : "parameter.less.data-uri markup.raw"
+            }
+          },
+          "contentName" : "parameter.less.data-uri markup.raw",
+          "endCaptures" : {
+            "1" : {
+              "name" : "punctuation.section.function.css"
+            }
+          }
+        },
+        {
+          "begin" : "(url)(\\()(\"data:)",
+          "end" : "(?<=\")(\\))",
+          "beginCaptures" : {
+            "1" : {
+              "name" : "support.function.misc.css"
+            },
+            "2" : {
+              "name" : "punctuation.section.function.css"
+            },
+            "3" : {
+              "name" : "parameter.less.data-uri markup.raw"
+            }
+          },
+          "contentName" : "parameter.less.data-uri markup.raw",
+          "endCaptures" : {
+            "1" : {
+              "name" : "punctuation.section.function.css"
+            }
+          }
+        },
+        {
+          "begin" : "(url)(\\()('data:)",
+          "end" : "(?<=\\')(\\))",
+          "beginCaptures" : {
+            "1" : {
+              "name" : "support.function.misc.css"
+            },
+            "2" : {
+              "name" : "punctuation.section.function.css"
+            },
+            "3" : {
+              "name" : "parameter.less.data-uri markup.raw"
+            }
+          },
+          "contentName" : "parameter.less.data-uri markup.raw",
+          "endCaptures" : {
+            "1" : {
+              "name" : "punctuation.section.function.css"
+            }
+          }
+        }
+      ]
+    },
     "less-functions" : {
       "patterns": [
         {
@@ -533,7 +603,7 @@
           "include" : "#less-variables"
         },
         {
-          "match" : "[\\/\\.a-zA-Z0-9_\\-]*",
+          "match" : "[\\/\\.:a-zA-Z0-9_\\-]*",
           "name" : "variable.parameter.misc.css"
         },
         {
