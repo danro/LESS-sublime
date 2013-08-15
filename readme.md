@@ -1,6 +1,15 @@
 # LESS syntax for Sublime Text
 
-Provides syntax highlighting for `.less` files + support for comment-toggle commands.
+Provides syntax highlighting for `.less` files, along with snippets and completions.
+
+## Changelog
+
+**20013-08-15**
+
+* Complete refactor based on Sublime's default CSS package.
+* Scope is now: `source.less`. Please update user snippets/binds accordingly.
+* Added CSS completions, while retaining same-file completions.
+* Added snippets for LESS and CSS functions.
 
 ## Installing
 

@@ -3,7 +3,6 @@
 import sublime, sublime_plugin
 import re
 
-
 common = {
 "color": ["transparent"],
 "border-style": ["none", "hidden", "dotted", "dashed", "solid", "double", "groove", "ridge", "inset", "outset"],
@@ -150,7 +149,7 @@ class LESSCompletions(sublime_plugin.EventListener):
     rex = None
 
     def on_query_completions(self, view, prefix, locations):
-        if not view.match_selector(locations[0], "source.less - meta.selector.css"):
+        if not view.match_selector(locations[0], "source.less"):
             return []
 
         if not self.props:
@@ -184,10 +183,16 @@ class LESSCompletions(sublime_plugin.EventListener):
 
                         l.append((desc, snippet))
 
-                    # return (l, sublime.INHIBIT_WORD_COMPLETIONS)
-                    print(l)
                     return l
 
+            return None
+        elif (
+            # Avoid completions for #selectors
+            view.match_selector(locations[0], "entity.other.attribute-name.id.css") or
+            view.match_selector(locations[0] - 1, "entity.other.attribute-name.id.css") or
+            # Avoid completions for .selectors
+            view.match_selector(locations[0], "entity.other.attribute-name.class.css") or
+            view.match_selector(locations[0] - 1, "entity.other.attribute-name.class.css")):
             return None
         else:
             add_colon = not view.match_selector(locations[0], "meta.property-name.css")
@@ -198,5 +203,4 @@ class LESSCompletions(sublime_plugin.EventListener):
                 else:
                     l.append((p, p))
 
-            # return (l, sublime.INHIBIT_WORD_COMPLETIONS)
             return l
