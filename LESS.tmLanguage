@@ -218,11 +218,11 @@
 						<key>3</key>
 						<dict>
 							<key>name</key>
-							<string>parameter.less.data-uri markup.raw</string>
+							<string>parameter.less.data-uri markup.raw comment</string>
 						</dict>
 					</dict>
 					<key>contentName</key>
-					<string>parameter.less.data-uri markup.raw</string>
+					<string>parameter.less.data-uri markup.raw comment</string>
 					<key>end</key>
 					<string>(\))</string>
 					<key>endCaptures</key>
@@ -252,11 +252,11 @@
 						<key>3</key>
 						<dict>
 							<key>name</key>
-							<string>parameter.less.data-uri markup.raw</string>
+							<string>parameter.less.data-uri markup.raw comment</string>
 						</dict>
 					</dict>
 					<key>contentName</key>
-					<string>parameter.less.data-uri markup.raw</string>
+					<string>parameter.less.data-uri markup.raw comment</string>
 					<key>end</key>
 					<string>(?&lt;=")(\))</string>
 					<key>endCaptures</key>
@@ -286,11 +286,11 @@
 						<key>3</key>
 						<dict>
 							<key>name</key>
-							<string>parameter.less.data-uri markup.raw</string>
+							<string>parameter.less.data-uri markup.raw comment</string>
 						</dict>
 					</dict>
 					<key>contentName</key>
-					<string>parameter.less.data-uri markup.raw</string>
+					<string>parameter.less.data-uri markup.raw comment</string>
 					<key>end</key>
 					<string>(?&lt;=\')(\))</string>
 					<key>endCaptures</key>
@@ -425,7 +425,7 @@
 					<key>end</key>
 					<string>`</string>
 					<key>name</key>
-					<string>markup.raw</string>
+					<string>markup.raw comment</string>
 				</dict>
 				<dict>
 					<key>begin</key>
@@ -441,7 +441,7 @@
 					<key>end</key>
 					<string>`</string>
 					<key>name</key>
-					<string>markup.raw</string>
+					<string>markup.raw comment</string>
 				</dict>
 				<dict>
 					<key>begin</key>
@@ -457,7 +457,7 @@
 					<key>end</key>
 					<string>"</string>
 					<key>name</key>
-					<string>string.quoted.double.css markup.raw</string>
+					<string>string.quoted.double.css markup.raw comment</string>
 				</dict>
 				<dict>
 					<key>begin</key>
@@ -473,7 +473,7 @@
 					<key>end</key>
 					<string>'</string>
 					<key>name</key>
-					<string>string.quoted.single.css markup.raw</string>
+					<string>string.quoted.single.css markup.raw comment</string>
 				</dict>
 			</array>
 		</dict>
