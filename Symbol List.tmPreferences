@@ -5,7 +5,7 @@
 	<key>name</key>
 	<string>Symbol List</string>
 	<key>scope</key>
-	<string>entity.other.less.mixin, entity.other.attribute-name.class.css, entity.other.attribute-name.id, keyword.control.html.elements</string>
+	<string>entity.other.attribute-name.class.css - entity.other.less.mixin, entity.other.attribute-name.id, keyword.control.html.elements, variable.declaration.less</string>
 	<key>settings</key>
 	<dict>
 		<key>showInSymbolList</key>

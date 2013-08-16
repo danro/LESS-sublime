@@ -3,7 +3,6 @@
 
 // --------------------------------------------------
 // LESS functions
-
 escape(@string);               // URL encodes a string
 e(@string);                    // escape string content
 %(@string, values...);         // formats a string
@@ -93,14 +92,20 @@ isunit(@numberOrAnything, "rem");       // * returns if a parameter is a number 
 
 background: url("/images/some/place/nice.jpg");
 background: url('/images/some/place/nice.jpg');
-background: url(/images/some/place/nice.jpg);
+background: url(images/some/place/nice.jpg);
+background: url(http://i.imgur.com/Da1eUqj.gif);
 
 rgba(255, 255, 255, 0.5);
 linear-gradient(0deg, blue, green 40%, red);
 matrix(1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
 translate(12px, 50%);
 
--webkit-linear-gradient(0deg, blue, green 40%, red)
+.transformer {
+  transform: translateX(10px) rotate(10deg) translateY(5px);
+  -webkit-transform: translate3d(@x, @y, @z);
+}
+
+-webkit-linear-gradient(0deg, blue, green 40%, red);
 -webkit-gradient();
 -webkit-radial-gradient();
 -webkit-interpolation-mode();
@@ -108,7 +113,7 @@ translate(12px, 50%);
 -moz-search-cancel-button();
 -webkit-farts();
 
-customFunction();
+customFunction(blah);
 
 // --------------------------------------------------
 // Strings / Interpolation
@@ -116,11 +121,11 @@ customFunction();
 @base-url: "http://assets.fnord.com";
 background-image: url("@{base-url}/images/bg.png");
 
-.class {
+.test-strings {
   filter: ~"ms:alwaysHasItsOwnSyntax.For.Stuff()";
+  filter: ~'ms:alwaysHasItsOwnSyntax.For.Stuff()';
+  -moz-transform: ~"@{op}(@{val})";
 }
-
--moz-transform: ~"@{op}(@{val})";
 
 img.testOK {
     -ms-filter: ~"progid:DXImageTransform.Microsoft.AlphaImageLoader";
@@ -144,15 +149,22 @@ img.testKO {
 @darkcolor: darken(@color, 10%);
 
 .svg-url-test {
-	border-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0,0 24,26"><filter id="dropshadow" height="150%" width="150%"><feGaussianBlur in="SourceAlpha" stdDeviation="2"></feGaussianBlur><feOffset dx="0" dy="1" result="offsetblur"></feOffset><feMerge><feMergeNode></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter><polygon fill="hsl(0, 0%, 100%)" filter="url(#dropshadow)" points="12,3 2,13 12,23 22,13"></polygon></svg>') 30.76923% 29.16667% repeat;
-	border-width: 0 0 8px;
-	border-style: solid;
+  border-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0,0 24,26"><filter id="dropshadow" height="150%" width="150%"><feGaussianBlur in="SourceAlpha" stdDeviation="2"></feGaussianBlur><feOffset dx="0" dy="1" result="offsetblur"></feOffset><feMerge><feMergeNode></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter><polygon fill="hsl(0, 0%, 100%)" filter="url(#dropshadow)" points="12,3 2,13 12,23 22,13"></polygon></svg>') 30.76923% 29.16667% repeat;
+  border-width: 0 0 8px;
+  border-style: solid;
+}
+
+@font-face {
+  font-family: 'hybrid';
+  src: url(data:application/font-woff;charset=utf-8;base64,d09GRk9UVE8AABKAAAsAAAAAGvQAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABDRkYgAAABCAAAD0QAABYWvgI5ZkZGVE0AABBMAAAAGgAAABxl3Qs+R0RFRgAAEGgAAAAdAAAAIAA6AARPUy8yAAAQiAAAAEsAAABgL+jdgmNtYXAAABDUAAAAPQAAAVLgHPLNaGVhZAAAERQAAAAuAAAANglx3MloaGVhAAARRAAAACAAAAAkEBwL4WhtdHgAABFkAAAAKAAAADIjfAFibWF4cAAAEYwAAAAGAAAABgANUABuYW1lAAARlAAAAN8AAAF3TeAOdnBvc3QAABJ0AAAADAAAACAAAwAAeJxtWAtYVNUW3gdmmBFwRGQQFAdEUlOSEQEf1weSIrfUEMl8EKGR+RYJn1miaSIHCxWTq6b4zNTMyC+5pKVcU0dFCXyggi/UvKI2eBUHsFn3X+cM1L0ln/vsfc7e673+tfZIQqMRki=) format('woff'),
+  url("data:application/x-font-ttf;charset=utf-8;base64,AAEAAAANAIAAAwBQRkZUTWXdCz4AAAw4AAAAHEdERUYAPAAGAAAMGAAAACBPUy8yL8fdYgAAAVgAAABWY21hcOAe89QAAAHsAAABUmdhc3D//wADAAAMEAAAAAhnbHlmVZYD5gAAA2AAAAaYaGVhZAly3MkAAADcAAAANmhoZWEQHgviAAABFAAAACRobXR4JCYBYgAAAbAAAAA6bG9jYQfQCioAAANAAAAAIG1heHAAYAF/AAABOAAAACBuYW1lTeAOdgAACfgAAAF3cG9zdJ7/dZwAAAtwAAAAoAABAAAAAQAAs/KXr18PPPUACwIAAAAAAMG") format('truetype');
 }
 
 // --------------------------------------------------
 // Variables
 
 @nice-blue: #5B83AD;
+@salmon: #FD806B;
 @light-blue: @nice-blue + #111;
 
 #header { color: @light-blue; }
@@ -161,34 +173,34 @@ img.testKO {
 // Nesting
 
 body {
-	.navigation {
-		color: red;
-	}
+  .navigation {
+    color: red;
+  }
 }
 
 #header {
-	color: black;
+  color: black;
 
-	.navigation {
-		font-size: 12px;
-	}
-	.logo {
-		width: 300px;
-	}
+  .navigation {
+    font-size: 12px;
+  }
+  .logo {
+    width: 300px;
+  }
 }
 
 .clearfix {
-	display: block;
-	zoom: 1;
+  display: block;
+  zoom: 1;
 
-	&:after {
-		content: " ";
-		display: block;
-		font-size: 0;
-		height: 0;
-		clear: both;
-		visibility: hidden;
-	}
+  &:after {
+    content: " ";
+    display: block;
+    font-size: 0;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
 }
 
 .child, .sibling {
@@ -204,18 +216,18 @@ body {
 // Mixins
 
 .bordered {
-	border-top: dotted 1px black;
-	border-bottom: solid 2px black;
+  border-top: dotted 1px black;
+  border-bottom: solid 2px black;
 }
 
 #menu a {
-	color: #111;
-	.bordered;
+  color: #111;
+  .bordered;
 }
 
 .post a {
-	color: red;
-	.bordered;
+  color: red;
+  .bordered;
 }
 
 .box-shadow (@x: 0, @y: 0, @blur: 1px, @color: #000) {
@@ -223,6 +235,7 @@ body {
   -moz-box-shadow: @arguments;
   -webkit-box-shadow: @arguments;
 }
+
 .box-shadow(2px, 5px);
 
 .mixin (one, two, 'three', @four) {
@@ -248,6 +261,10 @@ body {
   color: @a;
 }
 
+.selector {
+  background: .mixin(dark);
+}
+
 .mixin (@a, @b: 0) when (isnumber(@b)) { ... }
 .mixin (@a, @b: black) when (iscolor(@b)) { ... }
 
@@ -268,31 +285,31 @@ height: 100% / 2 + @filler;
 // Namespaces & Accessors
 
 #bundle {
-	.button {
-		display: block;
-		border: 1px solid black;
-		background-color: grey;
-		&:hover { background-color: magenta }
-	}
-	.tab { }
-	.citation { }
+  .button {
+    display: block;
+    border: 1px solid black;
+    background-color: grey;
+    &:hover { background-color: magenta }
+  }
+  .tab { }
+  .citation { }
 }
 
 #header a {
-	color: orange;
-	#bundle > .button;
+  color: orange;
+  #bundle > .button;
 }
 
 #defaults {
-	@width: 960px;
-	@color: black;
+  @width: 960px;
+  @color: black;
 }
 
 .article { color: #294366; }
 
 .comment {
-	width: #defaults[@width];
-	color: .article['color']; 
+  width: #defaults[@width];
+  color: .article['color']; 
 }
 
 .btn-small [class^="icon-"],
@@ -303,15 +320,15 @@ height: 100% / 2 + @filler;
 // --------------------------------------------------
 // At-rules
 
-@charset
-@import
-@namespace
-@media
-@page
-@font-face
-@keyframes
-@supports
-@document
+@charset;
+@import;
+@namespace;
+@media;
+@page;
+@font-face;
+@keyframes;
+@supports;
+@document;
 
 @import "library";
 @import "typo.css";
@@ -322,6 +339,17 @@ height: 100% / 2 + @filler;
   border-style: solid;
 }
 
+.nested {
+  #grid > .core(@gridColumnWidth768, @gridGutterWidth768);
+  @media screen and (min-width: 768px) and (max-width: 979px) {
+    .styles;
+  }
+  
+  @media @breakpoint {
+    .styles;
+  }
+}
+
 @font-face {
   font-family: 'HelveticaNeueLT-Bold';
   src: url('/fonts/helv-neue-bold.eot');
@@ -330,15 +358,34 @@ height: 100% / 2 + @filler;
   url('/fonts/helv-neue-bold.ttf') format('truetype');
 }
 
+@-webkit-keyframes name-your-animation {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-moz-keyframes name-your-animation {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-o-keyframes name-your-animation {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes name-your-animation {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
 // --------------------------------------------------
 // Pseudo elements
 
+a:nth-child(2) { background: darken(@grey, 5%); }
+
 li:nth-child(4n - 7) {  /* or 4n+1 */
-    color: green;
+  color: green;
 }
 
 li:nth-child(-n + 5) {  /* or 4n+1 */
-    color: green;
+  color: blue;
 }
 
 ::selection {
@@ -350,7 +397,18 @@ li:nth-child(-n + 5) {  /* or 4n+1 */
   color: @text-select-color;
 }
 
+body:not(.something) {
+  padding: 10px;
+}
+
 .main:hover {
+  // comment
+  #somewhere:visited {
+    border: 1px solid red !important;
+  }
+  article:before {
+    margin-bottom: 3em;
+  }
   .sub:active {
     @stuff;
   }
