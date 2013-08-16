@@ -433,7 +433,7 @@
         {
           "begin" : "`",
           "end" : "`",
-          "name" : "markup.raw comment"
+          "name" : "comment markup.raw"
         },
         {
           "begin" : "(~)`",
@@ -443,7 +443,7 @@
               "name" : "keyword.operator.less"
             }
           },
-          "name" : "markup.raw comment"
+          "name" : "comment markup.raw"
         },
         {
           "begin" : "(~)\"",
@@ -453,7 +453,7 @@
               "name" : "keyword.operator.less"
             }
           },
-          "name" : "string.quoted.double.css markup.raw comment"
+          "name" : "string.quoted.double.css comment markup.raw"
         },
         {
           "begin" : "(~)'",
@@ -463,7 +463,7 @@
               "name" : "keyword.operator.less"
             }
           },
-          "name" : "string.quoted.single.css markup.raw comment"
+          "name" : "string.quoted.single.css comment markup.raw"
         }
       ]
     },
@@ -496,10 +496,10 @@
               "name" : "punctuation.section.function.css"
             },
             "3" : {
-              "name" : "parameter.less.data-uri markup.raw comment"
+              "name" : "parameter.less.data-uri comment markup.raw"
             }
           },
-          "contentName" : "parameter.less.data-uri markup.raw comment",
+          "contentName" : "parameter.less.data-uri comment markup.raw",
           "endCaptures" : {
             "1" : {
               "name" : "punctuation.section.function.css"
@@ -517,10 +517,10 @@
               "name" : "punctuation.section.function.css"
             },
             "3" : {
-              "name" : "parameter.less.data-uri markup.raw comment"
+              "name" : "parameter.less.data-uri comment markup.raw"
             }
           },
-          "contentName" : "parameter.less.data-uri markup.raw comment",
+          "contentName" : "parameter.less.data-uri comment markup.raw",
           "endCaptures" : {
             "1" : {
               "name" : "punctuation.section.function.css"
@@ -538,10 +538,10 @@
               "name" : "punctuation.section.function.css"
             },
             "3" : {
-              "name" : "parameter.less.data-uri markup.raw comment"
+              "name" : "parameter.less.data-uri comment markup.raw"
             }
           },
-          "contentName" : "parameter.less.data-uri markup.raw comment",
+          "contentName" : "parameter.less.data-uri comment markup.raw",
           "endCaptures" : {
             "1" : {
               "name" : "punctuation.section.function.css"
