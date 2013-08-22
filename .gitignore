@@ -8,6 +8,7 @@
 *.swp
 *.vi
 *.cache
+*.pyc
 *~
 
 # OS or Editor folders
