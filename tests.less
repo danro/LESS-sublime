@@ -376,7 +376,7 @@ height: 100% / 2 + @filler;
 }
 
 // --------------------------------------------------
-// Pseudo elements
+// Pseudo elements / classes
 
 a:nth-child(2) { background: darken(@grey, 5%); }
 
@@ -397,6 +397,8 @@ li:nth-child(-n + 5) {  /* or 4n+1 */
   color: @text-select-color;
 }
 
+p::first-letter { color: red }
+
 body:not(.something) {
   padding: 10px;
 }
@@ -412,4 +414,12 @@ body:not(.something) {
   .sub:active {
     @stuff;
   }
+}
+
+// --------------------------------------------------
+// Issues
+
+.pseudo-elements-whitespace {
+  header {margin:10px 0 20px}
+  footer {div:before{color:red}}
 }

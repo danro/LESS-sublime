@@ -230,7 +230,7 @@
           }
         },
         {
-          "match" : "(:+)(?:-(?:webkit|moz|o)-)?([a-zA-Z0-9_-]*)\\b",
+          "match" : "(:+)(?:-(?:webkit|moz|o)-)?(after|before|first-letter|first-line|selection)\\b",
           "captures" : {
             "1" : {
               "name" : "punctuation.definition.entity.css"
