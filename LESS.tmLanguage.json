@@ -239,7 +239,7 @@
           "name" : "entity.other.attribute-name.pseudo-element.css"
         },
         {
-          "match" : "(:)(active|hover|link|visited|focus)\\b",
+          "match" : "(:+)(?:-(?:webkit|moz|o)-)?(active|hover|link|visited|focus-inner|focus)\\b",
           "captures" : {
             "1" : {
               "name" : "punctuation.definition.entity.css"
