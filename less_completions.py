@@ -187,6 +187,9 @@ class LESSCompletions(sublime_plugin.EventListener):
 
             return None
         elif (
+            # Avoid completions for @variables or @{variables}
+            view.match_selector(locations[0], "variable") or
+            view.match_selector(locations[0] - 1, "variable") or
             # Avoid completions for #selectors
             view.match_selector(locations[0], "entity.other.attribute-name.id.css") or
             view.match_selector(locations[0] - 1, "entity.other.attribute-name.id.css") or

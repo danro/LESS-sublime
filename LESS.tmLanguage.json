@@ -658,5 +658,5 @@
   ],
   "comment" : "LESS",
   "name" : "LESS",
-  "scopeName" : "source.less"
+  "scopeName" : "source.css, source.less"
 }
