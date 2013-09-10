@@ -89,7 +89,6 @@ css_data = """
 "vertical-align"=baseline | sub | super | top | text-top | middle | bottom | text-bottom | <percentage> | <length> | inherit
 "visibility"=visible | hidden | collapse | inherit
 "white-space"=normal | pre | nowrap | pre-wrap | pre-line | inherit
-"widows"=<integer> | inherit
 "width"=<length> | <percentage> | auto | inherit
 "word-spacing"=normal | <length> | inherit
 "z-index"=auto | <integer> | inherit
