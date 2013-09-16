@@ -271,6 +271,16 @@ body {
 .mixin .sub-mixin(@param);
 
 // --------------------------------------------------
+// Extensions
+
+.extend:extend(.extension, .extension all, .extension any) { }
+.extend {
+  &:extend([data="attr"], .extension any, .extension all, .selector@{name});
+}
+.extend:extend(.extension) { // inline comment
+}
+
+// --------------------------------------------------
 // Operations
 
 @base: 5%;
