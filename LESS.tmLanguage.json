@@ -175,6 +175,15 @@
           "name" : "entity.other.attribute-name.pseudo-class.css"
         },
         {
+          "match" : "(:)(extend)\\b",
+          "captures" : {
+            "1" : {
+              "name" : "punctuation.definition.entity.css"
+            }
+          },
+          "name" : "entity.other.attribute-name.pseudo-class.less"
+        },
+        {
           "match" : "(:)(checked|enabled|default|disabled|indeterminate|invalid|optional|required|valid)\\b",
           "captures" : {
             "1" : {

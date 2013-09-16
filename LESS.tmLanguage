@@ -328,7 +328,7 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>(([%a-zA-Z\-\_\d]*)|(\:extend))(?=\()</string>
+					<string>([%a-zA-Z\-\_\d]*)(?=\()</string>
 					<key>name</key>
 					<string>support.function.less</string>
 				</dict>
@@ -785,6 +785,20 @@
 					<string>(:)((first|last)-child|(first|last|only)-of-type|empty|root|target|first|left|right)\b</string>
 					<key>name</key>
 					<string>entity.other.attribute-name.pseudo-class.css</string>
+				</dict>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.entity.css</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>(:)(extend)\b</string>
+					<key>name</key>
+					<string>entity.other.attribute-name.pseudo-class.less</string>
 				</dict>
 				<dict>
 					<key>captures</key>

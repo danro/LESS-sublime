@@ -271,16 +271,6 @@ body {
 .mixin .sub-mixin(@param);
 
 // --------------------------------------------------
-// Extensions
-
-.extend:extend(.extension, .extension all, .extension any) { }
-.extend {
-  &:extend([data="attr"], .extension any, .extension all, .selector@{name});
-}
-.extend:extend(.extension) { // inline comment
-}
-
-// --------------------------------------------------
 // Operations
 
 @base: 5%;
@@ -431,11 +421,23 @@ body:not(.something) {
 // --------------------------------------------------
 // Issues
 
+
+// https://github.com/danro/LESS-sublime/issues/39
 .pseudo-elements-whitespace {
   header {margin:10px 0 20px}
   footer {div:before{color:red}}
 }
 
+// https://github.com/danro/LESS-sublime/pull/43
 #_ ._ .improved-selectors {
   color: red;
+}
+
+// https://github.com/danro/LESS-sublime/pull/41
+.selector:extend(.extension, .extension all) { } // comment
+.selector {
+  &:extend([data="attr"], .extension any, .extension all, .selector@{name});
+  // comment
+}
+.selector:extend(.extension) { // comment
 }
