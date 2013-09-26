@@ -4,7 +4,7 @@ Provides syntax highlighting for `.less` files, along with snippets and completi
 
 ## Changelog
 
-**20013-08-15**
+**2013-08-15**
 
 * Complete refactor based on Sublime's default CSS package.
 * Scope is now: `source.less`. Please update user snippets/binds accordingly.
