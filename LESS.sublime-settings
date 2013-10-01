@@ -1,0 +1,4 @@
+{
+  // Boolean setting to auto-insert a semicolon after a ":" is typed.
+  "auto_insert_semicolon": false
+}

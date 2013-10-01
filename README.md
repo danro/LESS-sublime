@@ -4,6 +4,10 @@ Provides syntax highlighting for `.less` files, along with snippets and completi
 
 ## Changelog
 
+**20013-10-01**
+
+* Added a setting to enable auto-insertion of semicolons (default: false).
+
 **20013-08-15**
 
 * Complete refactor based on Sublime's default CSS package.
@@ -31,6 +35,19 @@ The "Packages" directory is located at:
     `~/.Sublime Text 2/Packages/`
 * Windows:
     `%APPDATA%/Sublime Text 2/Packages/`
+
+## Settings
+
+Settings may be accessed through the main Sublime menu:
+
+`Preferences > Package Settings > LESS`
+
+```js
+{
+  // Boolean setting to auto-insert a semicolon after a ":" is typed.
+  "auto_insert_semicolon": false
+}
+```
 
 ## Color Scheme
 
