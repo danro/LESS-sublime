@@ -441,3 +441,12 @@ body:not(.something) {
 }
 .selector:extend(.extension) { // comment
 }
+
+//https://github.com/danro/LESS-sublime/pull/49
+.selector:only-child {
+  property: 100px;
+}
+p::first-letter {
+  color: @red; 
+  font-size: 130%; 
+}

@@ -782,7 +782,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(:)((first|last)-child|(first|last|only)-of-type|empty|root|target|first|left|right)\b</string>
+					<string>(:+)((first|last|only)-child|(first|last|only)-of-type|empty|root|target|first-letter|first-line|first|left|right|lang)\b</string>
 					<key>name</key>
 					<string>entity.other.attribute-name.pseudo-class.css</string>
 				</dict>
@@ -897,7 +897,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(:+)(?:-(?:webkit|moz|o)-)?(after|before|first-letter|first-line|selection)\b</string>
+					<string>(:+)(?:-(?:webkit|moz|o)-)?(after|before|selection)\b</string>
 					<key>name</key>
 					<string>entity.other.attribute-name.pseudo-element.css</string>
 				</dict>

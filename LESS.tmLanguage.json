@@ -166,7 +166,7 @@
           "name" : "entity.name.tag.wildcard.css"
         },
         {
-          "match" : "(:)((first|last)-child|(first|last|only)-of-type|empty|root|target|first|left|right)\\b",
+          "match" : "(:+)((first|last|only)-child|(first|last|only)-of-type|empty|root|target|first-letter|first-line|first|left|right|lang)\\b",
           "captures" : {
             "1" : {
               "name" : "punctuation.definition.entity.css"
@@ -239,7 +239,7 @@
           }
         },
         {
-          "match" : "(:+)(?:-(?:webkit|moz|o)-)?(after|before|first-letter|first-line|selection)\\b",
+          "match" : "(:+)(?:-(?:webkit|moz|o)-)?(after|before|selection)\\b",
           "captures" : {
             "1" : {
               "name" : "punctuation.definition.entity.css"
