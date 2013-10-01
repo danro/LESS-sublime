@@ -4,11 +4,11 @@ Provides syntax highlighting for `.less` files, along with snippets and completi
 
 ## Changelog
 
-**20013-10-01**
+**2013-10-01**
 
 * Added a setting to enable auto-insertion of semicolons (default: false).
 
-**20013-08-15**
+**2013-08-15**
 
 * Complete refactor based on Sublime's default CSS package.
 * Scope is now: `source.less`. Please update user snippets/binds accordingly.
