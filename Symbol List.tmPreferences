@@ -9,7 +9,13 @@
 	<key>settings</key>
 	<dict>
 		<key>showInSymbolList</key>
-		<string>1</string>
+		<integer>1</integer>
+		<key>symbolTransformation</key>
+		<string>s/(.*?)/$1/</string>
+		<key>showInIndexedSymbolList</key>
+		<integer>1</integer>
+		<key>symbolIndexTransformation</key>
+		<string>/[#.]([A-Za-z0-9_~]+)/$1/;</string>
 	</dict>
 	<key>uuid</key>
 	<string>0A0DA1FC-59DE-4FD9-9A2C-63C6811A3C39</string>
