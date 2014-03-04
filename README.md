@@ -17,7 +17,7 @@ Provides syntax highlighting for `.less` files, along with snippets and completi
 
 ## Installing
 
-**With the Package Control plugin:** The easiest way to install this package is through Package Control, which can be found at this site: [http://wbond.net/sublime_packages/package_control](http://wbond.net/sublime_packages/package_control)
+**With the Package Control plugin:** The easiest way to install this package is through Package Control, which can be found at this site: [https://sublime.wbond.net/installation](https://sublime.wbond.net/installation)
 
 Once you install Package Control, restart ST2 and bring up the Command Palette (Command+Shift+p on OS X, Control+Shift+p on Linux/Windows). Select "Package Control: Install Package", wait while Package Control fetches the latest package list, then select `LESS` when the list appears.
 
