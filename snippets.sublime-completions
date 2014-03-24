@@ -1,29 +1,29 @@
 {
   "scope": "source.less parameter, source.less meta.property-value",
-  
-  "completions": 
+
+  "completions":
   [
     // CSS common functions
-    
+
     { "trigger": "rgb(r,g,b)", "contents": "rgb(${1:255}, ${2:255}, ${3:255})" },
     { "trigger": "rgba(r,g,b,a)", "contents": "rgba(${1:255}, ${2:255}, ${3:255}, ${4:0.5})" },
     { "trigger": "hsl(h,s,l)", "contents": "hsl(${1:360}, ${2:100%}, ${3:50%})" },
     { "trigger": "hsla(h,s,l,a)", "contents": "hsla(${1:360}, ${2:100%}, ${3:50%}, ${4:0.5})" },
     { "trigger": "url()", "contents": "url($1)" },
     { "trigger": "rect(t,r,b,l)", "contents": "rect(${1:top}, ${2:right}, ${3:bottom}, ${4:left})" },
-    
+
     // LESS specific functions
-    
-    { "trigger": "encode escape(@string)", "contents": "escape(${1:@string})" },
-    { "trigger": "escape e(@string)", "contents": "e(${1:@string})" },
-    { "trigger": "format string %()", "contents": "%(${1:@string}, ${2:values...})" },
-    
-    { "trigger": "color(@string)", "contents": "color(${1:@string})" },
+
+    { "trigger": "encode escape(string)", "contents": "escape(${1:string})" },
+    { "trigger": "escape e(string)", "contents": "e(${1:string})" },
+    { "trigger": "format string %()", "contents": "%(${1:string}, ${2:values...})" },
+
+    { "trigger": "color(string)", "contents": "color(${1:string})" },
     { "trigger": "data-uri([mimetype,] url)", "contents": "data-uri(${1:[mimetype,] url})" },
-    
-    { "trigger": "ceil(@number)", "contents": "ceil(${1:@number})" },
-    { "trigger": "floor(@number)", "contents": "floor(${1:@number})" },
-    { "trigger": "percentage(@number)", "contents": "percentage(${1:@number})" },
+
+    { "trigger": "ceil(number)", "contents": "ceil(${1:number})" },
+    { "trigger": "floor(number)", "contents": "floor(${1:number})" },
+    { "trigger": "percentage(number)", "contents": "percentage(${1:number})" },
     { "trigger": "round(number, [places: 0])", "contents": "round(${1:number, [places: 0]})" },
     { "trigger": "sqrt(number)", "contents": "sqrt(${1:number})" },
     { "trigger": "abs(number)", "contents": "abs(${1:number})" },
@@ -34,57 +34,57 @@
     { "trigger": "tan(number)", "contents": "tan(${1:number})" },
     { "trigger": "atan(number)", "contents": "atan(${1:number})" },
     { "trigger": "pi()", "contents": "pi()" },
-    { "trigger": "pow(@base, @exponent)", "contents": "pow(${1:@base}, ${2:@exponent})" },
+    { "trigger": "pow(base, exponent)", "contents": "pow(${1:base}, ${2:exponent})" },
     { "trigger": "mod(number, number)", "contents": "mod(${1:number}, ${2:number})" },
-    
+
     { "trigger": "convert(number, units)", "contents": "convert(${1:number}, ${2:units})" },
     { "trigger": "unit(number, units)", "contents": "unit(${1:number}, ${2:units})" },
-    
-    { "trigger": "argb(@color)", "contents": "argb(${1:@color})" },
-    { "trigger": "hsv(@hue, @saturation, @value)", "contents": "hsv(${1:@hue}, ${2:@saturation}, ${3:@value})" },
-    { "trigger": "hsva(@hue, @saturation, @value, @alpha)", "contents": "hsva(${1:@hue}, ${2:@saturation}, ${3:@value}, ${4:@alpha})" },
-    
-    { "trigger": " hue(@color)", "contents": "hue(${1:@color})" },
-    { "trigger": " saturation(@color)", "contents": "saturation(${1:@color})" },
-    { "trigger": " lightness(@color)", "contents": "lightness(${1:@color})" },
-    { "trigger": " hsvhue(@color)", "contents": "hsvhue(${1:@color})" },
-    { "trigger": " hsvsaturation(@color)", "contents": "hsvsaturation(${1:@color})" },
-    { "trigger": " hsvvalue(@color)", "contents": "hsvvalue(${1:@color})" },
-    { "trigger": " red(@color)", "contents": "red(${1:@color})" },
-    { "trigger": " green(@color)", "contents": "green(${1:@color})" },
-    { "trigger": " blue(@color)", "contents": "blue(${1:@color})" },
-    { "trigger": " alpha(@color)", "contents": "alpha(${1:@color})" },
-    { "trigger": " luma(@color)", "contents": "luma(${1:@color})" },
-    
-    { "trigger": "saturate(@color, 10%)", "contents": "saturate(${1:@color}, ${2:10%})" },
-    { "trigger": "desaturate(@color, 10%)", "contents": "desaturate(${1:@color}, ${2:10%})" },
-    { "trigger": "lighten(@color, 10%)", "contents": "lighten(${1:@color}, ${2:10%})" },
-    { "trigger": "darken(@color, 10%)", "contents": "darken(${1:@color}, ${2:10%})" },
-    { "trigger": "fade(@color, 50%)", "contents": "fade(${1:@color}, ${2:50%})" },
-    { "trigger": " fadein(@color, 10%)", "contents": "fadein(${1:@color}, ${2:10%})" },
-    { "trigger": " fadeout(@color, 10%)", "contents": "fadeout(${1:@color}, ${2:10%})" },
-    { "trigger": "spin(@color, 10)", "contents": "spin(${1:@color}, ${2:10})" },
-    { "trigger": "mix(@color1, @color2, [@weight: 50%])", "contents": "mix(${1:@color1}, ${2:@color2}, ${3:[@weight: 50%]})" },
-    { "trigger": "greyscale(@color)", "contents": "greyscale(${1:@color})" },
-    { "trigger": "contrast(@color1, black, white, [@threshold: 43%])", "contents": "contrast(${1:@color1}, ${2:black}, ${3:white}, ${4:[@threshold: 43%]})" },
-    { "trigger": "multiply(@color1, @color2)", "contents": "multiply(${1:@color1}, ${2:@color2})" },
-    { "trigger": "screen(@color1, @color2)", "contents": "screen(${1:@color1}, ${2:@color2})" },
-    { "trigger": "overlay(@color1, @color2)", "contents": "overlay(${1:@color1}, ${2:@color2})" },
-    { "trigger": "softlight(@color1, @color2)", "contents": "softlight(${1:@color1}, ${2:@color2})" },
-    { "trigger": "hardlight(@color1, @color2)", "contents": "hardlight(${1:@color1}, ${2:@color2})" },
-    { "trigger": "difference(@color1, @color2)", "contents": "difference(${1:@color1}, ${2:@color2})" },
-    { "trigger": "exclusion(@color1, @color2)", "contents": "exclusion(${1:@color1}, ${2:@color2})" },
-    { "trigger": "average(@color1, @color2)", "contents": "average(${1:@color1}, ${2:@color2})" },
-    { "trigger": "negation(@color1, @color2)", "contents": "negation(${1:@color1}, ${2:@color2})" },
-    
-    { "trigger": "iscolor(@colorOrAnything)", "contents": "iscolor(${1:@colorOrAnything})" },
-    { "trigger": "isnumber(@numberOrAnything)", "contents": "isnumber(${1:@numberOrAnything})" },
-    { "trigger": "isstring(@stringOrAnything)", "contents": "isstring(${1:@stringOrAnything})" },
-    { "trigger": "iskeyword(@keywordOrAnything)", "contents": "iskeyword(${1:@keywordOrAnything})" },
-    { "trigger": "isurl(@urlOrAnything)", "contents": "isurl(${1:@urlOrAnything})" },
-    { "trigger": "ispixel(@pixelOrAnything)", "contents": "ispixel(${1:@pixelOrAnything})" },
-    { "trigger": "ispercentage(@percentageOrAnything)", "contents": "ispercentage(${1:@percentageOrAnything})" },
-    { "trigger": "isem(@emOrAnything)", "contents": "isem(${1:@emOrAnything})" },
-    { "trigger": "isunit(@numberOrAnything, \"rem\")", "contents": "isunit(${1:@numberOrAnything}, \"${2:rem}\")" }
+
+    { "trigger": "argb(color)", "contents": "argb(${1:color})" },
+    { "trigger": "hsv(hue, saturation, value)", "contents": "hsv(${1:hue}, ${2:saturation}, ${3:value})" },
+    { "trigger": "hsva(hue, saturation, value, alpha)", "contents": "hsva(${1:hue}, ${2:saturation}, ${3:value}, ${4:alpha})" },
+
+    { "trigger": " hue(color)", "contents": "hue(${1:color})" },
+    { "trigger": " saturation(color)", "contents": "saturation(${1:color})" },
+    { "trigger": " lightness(color)", "contents": "lightness(${1:color})" },
+    { "trigger": " hsvhue(color)", "contents": "hsvhue(${1:color})" },
+    { "trigger": " hsvsaturation(color)", "contents": "hsvsaturation(${1:color})" },
+    { "trigger": " hsvvalue(color)", "contents": "hsvvalue(${1:color})" },
+    { "trigger": " red(color)", "contents": "red(${1:color})" },
+    { "trigger": " green(color)", "contents": "green(${1:color})" },
+    { "trigger": " blue(color)", "contents": "blue(${1:color})" },
+    { "trigger": " alpha(color)", "contents": "alpha(${1:color})" },
+    { "trigger": " luma(color)", "contents": "luma(${1:color})" },
+
+    { "trigger": "saturate(color, 10%)", "contents": "saturate(${1:color}, ${2:10%})" },
+    { "trigger": "desaturate(color, 10%)", "contents": "desaturate(${1:color}, ${2:10%})" },
+    { "trigger": "lighten(color, 10%)", "contents": "lighten(${1:color}, ${2:10%})" },
+    { "trigger": "darken(color, 10%)", "contents": "darken(${1:color}, ${2:10%})" },
+    { "trigger": "fade(color, 50%)", "contents": "fade(${1:color}, ${2:50%})" },
+    { "trigger": " fadein(color, 10%)", "contents": "fadein(${1:color}, ${2:10%})" },
+    { "trigger": " fadeout(color, 10%)", "contents": "fadeout(${1:color}, ${2:10%})" },
+    { "trigger": "spin(color, 10)", "contents": "spin(${1:color}, ${2:10})" },
+    { "trigger": "mix(color1, color2, [weight: 50%])", "contents": "mix(${1:color1}, ${2:color2}, ${3:[weight: 50%]})" },
+    { "trigger": "greyscale(color)", "contents": "greyscale(${1:color})" },
+    { "trigger": "contrast(color1, black, white, [threshold: 43%])", "contents": "contrast(${1:color1}, ${2:black}, ${3:white}, ${4:[threshold: 43%]})" },
+    { "trigger": "multiply(color1, color2)", "contents": "multiply(${1:color1}, ${2:color2})" },
+    { "trigger": "screen(color1, color2)", "contents": "screen(${1:color1}, ${2:color2})" },
+    { "trigger": "overlay(color1, color2)", "contents": "overlay(${1:color1}, ${2:color2})" },
+    { "trigger": "softlight(color1, color2)", "contents": "softlight(${1:color1}, ${2:color2})" },
+    { "trigger": "hardlight(color1, color2)", "contents": "hardlight(${1:color1}, ${2:color2})" },
+    { "trigger": "difference(color1, color2)", "contents": "difference(${1:color1}, ${2:color2})" },
+    { "trigger": "exclusion(color1, color2)", "contents": "exclusion(${1:color1}, ${2:color2})" },
+    { "trigger": "average(color1, color2)", "contents": "average(${1:color1}, ${2:color2})" },
+    { "trigger": "negation(color1, color2)", "contents": "negation(${1:color1}, ${2:color2})" },
+
+    { "trigger": "iscolor(colorOrAnything)", "contents": "iscolor(${1:colorOrAnything})" },
+    { "trigger": "isnumber(numberOrAnything)", "contents": "isnumber(${1:numberOrAnything})" },
+    { "trigger": "isstring(stringOrAnything)", "contents": "isstring(${1:stringOrAnything})" },
+    { "trigger": "iskeyword(keywordOrAnything)", "contents": "iskeyword(${1:keywordOrAnything})" },
+    { "trigger": "isurl(urlOrAnything)", "contents": "isurl(${1:urlOrAnything})" },
+    { "trigger": "ispixel(pixelOrAnything)", "contents": "ispixel(${1:pixelOrAnything})" },
+    { "trigger": "ispercentage(percentageOrAnything)", "contents": "ispercentage(${1:percentageOrAnything})" },
+    { "trigger": "isem(emOrAnything)", "contents": "isem(${1:emOrAnything})" },
+    { "trigger": "isunit(numberOrAnything, \"rem\")", "contents": "isunit(${1:numberOrAnything}, \"${2:rem}\")" }
   ]
 }

@@ -61,7 +61,7 @@ fade(@color, 50%);                      // return @color with 50% transparency
 spin(@color, 10);                       // return a color with a 10 degree larger in hue
 mix(@color1, @color2, [@weight: 50%]);  // return a mix of @color1 and @color2
 greyscale(@color);                      // returns a grey, 100% desaturated color
-contrast(@color1, [@darkcolor: black], [@lightcolor: white], [@threshold: 43%]); 
+contrast(@color1, [@darkcolor: black], [@lightcolor: white], [@threshold: 43%]);
                                         // return @darkcolor if @color1 is > 43% luma
                                         // otherwise return @lightcolor, see notes
 
@@ -309,7 +309,7 @@ height: 100% / 2 + @filler;
 
 .comment {
   width: #defaults[@width];
-  color: .article['color']; 
+  color: .article['color'];
 }
 
 .btn-small [class^="icon-"],
@@ -344,7 +344,7 @@ height: 100% / 2 + @filler;
   @media screen and (min-width: 768px) and (max-width: 979px) {
     .styles;
   }
-  
+
   @media @breakpoint {
     .styles;
   }
@@ -447,8 +447,8 @@ body:not(.something) {
   property: 100px;
 }
 p::first-letter {
-  color: @red; 
-  font-size: 130%; 
+  color: @red;
+  font-size: 130%;
 }
 
 //https://github.com/danro/LESS-sublime/pull/52
