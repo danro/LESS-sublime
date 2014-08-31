@@ -388,7 +388,7 @@
         },
         {
           "begin" : "(:)\\s*",
-          "end" : "\\s*(;|(?=\\}))",
+          "end" : "\\s*(;|(?=[{}]))",
           "beginCaptures" : {
             "1" : {
               "name" : "punctuation.separator.key-value.css"
@@ -588,8 +588,8 @@
       "name" : "meta.at-rule.css"
     },
     "less-parameters" : {
-      "begin" : "\\(",
-      "end" : "\\)",
+      "begin" : "\\(|(}\\s*,)",
+      "end" : "\\)|{",
       "patterns": [
         {
           "include" : "#color-values"

@@ -238,7 +238,7 @@ body {
 
 .box-shadow(2px, 5px);
 
-.mixin(one, two, 'three', @four) {
+.mixin(one, two, 'three', @four, @{five}) {
   color: darken(@color, 10%);
 }
 .mixin(dark, @color) {
@@ -487,3 +487,38 @@ input {color:green;}
 input:before {color:green;}
 input::-webkit-input-placeholder {color:red;}
 input:-moz-placeholder {color:red;}
+
+//https://github.com/danro/LESS-sublime/issues/63
+.test-case {
+  // This is a comment
+  font-size: 10px;
+
+  .mixin-param-test(100px, {
+    // This is a comment
+
+    .inner-mixin(param, {
+      // We must go deeper
+      font-size: 10px;
+    });
+
+    font-size: 10px;
+  }, param1, @param2, @{param3}, 40px);
+}
+
+@my-ruleset: {
+  .my-selector {
+    background-color: black;
+  }
+};
+
+@my-ruleset: {
+  .my-selector {
+    @media tv {
+      background-color: black;
+    }
+  }
+};
+
+@media (orientation:portrait) {
+    @my-ruleset();
+}

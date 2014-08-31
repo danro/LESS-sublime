@@ -356,9 +356,9 @@
 		<key>less-parameters</key>
 		<dict>
 			<key>begin</key>
-			<string>\(</string>
+			<string>\(|(}\s*,)</string>
 			<key>end</key>
-			<string>\)</string>
+			<string>\)|{</string>
 			<key>name</key>
 			<string>parameter.less</string>
 			<key>patterns</key>
@@ -705,7 +705,7 @@
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>\s*(;|(?=\}))</string>
+					<string>\s*(;|(?=[{}]))</string>
 					<key>endCaptures</key>
 					<dict>
 						<key>1</key>
