@@ -342,7 +342,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(\.(?![0-9])[a-zA-Z0-9_-]+(?=\())</string>
+					<string>([\.#](?![0-9])[a-zA-Z0-9_-]+(?=\())</string>
 				</dict>
 			</array>
 		</dict>

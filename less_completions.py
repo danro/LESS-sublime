@@ -76,6 +76,7 @@ css_data = """
 "page-break-after"=auto | always | avoid | left | right | inherit
 "page-break-before"=auto | always | avoid | left | right | inherit
 "page-break-inside"=avoid | auto | inherit
+"pointer-events"=auto | none | visiblePainted | visibleFill | visibleStroke | visible | painted | fill | stroke | all | inherit
 "position"=static | relative | absolute | fixed | inherit
 "quotes"=none | inherit
 "right"=<length> | <percentage> | auto | inherit

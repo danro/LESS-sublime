@@ -238,26 +238,26 @@ body {
 
 .box-shadow(2px, 5px);
 
-.mixin (one, two, 'three', @four) {
+.mixin(one, two, 'three', @four) {
   color: darken(@color, 10%);
 }
-.mixin (dark, @color) {
+.mixin(dark, @color) {
   color: darken(@color, 10%);
 }
-.mixin (light, @color) {
+.mixin(light, @color) {
   color: lighten(@color, 10%);
 }
-.mixin (@_, @color) {
+.mixin(@_, @color) {
   display: block;
 }
 
-.mixin (@a) when (lightness(@a) >= 50%) {
+.mixin(@a) when (lightness(@a) >= 50%) {
   background-color: black;
 }
-.mixin (@a) when (lightness(@a) < 50%) {
+.mixin(@a) when (lightness(@a) < 50%) {
   background-color: white;
 }
-.mixin (@a) {
+.mixin(@a) {
   color: @a;
 }
 
@@ -265,10 +265,14 @@ body {
   background: .mixin(dark);
 }
 
-.mixin (@a, @b: 0) when (isnumber(@b)) { ... }
-.mixin (@a, @b: black) when (iscolor(@b)) { ... }
+.mixin(@a, @b: 0) when (isnumber(@b)) { ... }
+.mixin(@a, @b: black) when (iscolor(@b)) { ... }
 
 .mixin .sub-mixin(@param);
+
+#mixin() {
+  color: darken(@color, 10%);
+}
 
 // --------------------------------------------------
 // Operations
