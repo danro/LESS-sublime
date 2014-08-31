@@ -12,23 +12,41 @@ common = {
 
 css_data = """
 "-webkit-font-smoothing"=none | antialiased | subpixel-antialiased
+
+"background"=<color> | <uri> | repeat | repeat-x | repeat-y | no-repeat | scroll | fixed | left | center | right | top | bottom | inherit
 "background-attachment"=scroll | fixed | inherit
+"background-clip"=<box>
 "background-color"=<color> | inherit
 "background-image"=<uri> | none | inherit
+"background-origin"=<box>
 "background-position"=left | center | right | top | bottom | inherit
 "background-repeat"=repeat | repeat-x | repeat-y | no-repeat | inherit
-"background"=<color> | <uri> | repeat | repeat-x | repeat-y | no-repeat | scroll | fixed | left | center | right | top | bottom | inherit
+"background-size"=cover | contain | <length> | inherit
+
+"border"= <border-width> | <border-style> | <color> | inherit
 "border-collapse"=collapse | separate | inherit
 "border-color"=<color> | inherit
+"border-image"=<border-image-source> | <border-image-slice> | <border-image-width> | <border-image-width> | <border-image-outset> | <border-image-repeat>
+"border-image-outset"=<length> | <number>
+"border-image-repeat"=stretch | repeat | round | space
+"border-image-slice"=<number> | <percentage>
+"border-image-source"=none | <image>
+"border-image-width"=<length> | <percentage> | <number> | auto
+"border-radius"=<length> | <percentage>
+"border-style"=<border-style>
 "border-spacing"=inherit
 "border-style"=<border-style> | inherit
 "border-top" "border-right" "border-bottom" "border-left"=<border-width> | <border-style> | <color> | inherit
 "border-top-color" "border-right-color" "border-bottom-color" "border-left-color"=<color> | inherit
 "border-top-style" "border-right-style" "border-bottom-style" "border-left-style"=<border-style> | inherit
 "border-top-width" "border-right-width" "border-bottom-width" "border-left-width"=<border-width> | inherit
+"border-top-left-radius" "border-top-right-radius" "border-bottom-right-radius" "border-bottom-left-radius"=<length> | <percentage>
 "border-width"=<border-width> | inherit
-"border"= <border-width> | <border-style> | <color> | inherit
+
 "bottom"=<length> | <percentage> | auto | inherit
+"box-decoration-break"=slice | clone
+"box-shadow"=none | <shadow> | none
+"box-sizing"=content-box | padding-box | border-box | inherit
 "caption-side"=top | bottom | inherit
 "clear"=none | left | right | both | inherit
 "clip"=<shape> | auto | inherit
@@ -41,12 +59,14 @@ css_data = """
 "display"=inline | block | list-item | inline-block | table | inline-table | table-row-group | table-header-group | table-footer-group | table-row | table-column-group | table-column | table-cell | table-caption | none | inherit
 "empty-cells"=show | hide | inherit
 "float"=left | right | none | inherit
+
 "font-family"=<generic-family>| inherit
 "font-size"=inherit
 "font-style"=normal | italic | oblique | inherit
 "font-variant"=normal | small-caps | inherit
 "font-weight"=normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | inherit
 "font"=normal | italic | oblique | normal | small-caps | normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | normal | <generic-family> | caption | icon | menu | message-box | small-caption | status-bar | inherit
+
 "height"=<length> | <percentage> | auto | inherit
 "left"=<length> | <percentage> | auto | inherit
 "letter-spacing"=normal | <length> | inherit
@@ -93,29 +113,6 @@ css_data = """
 "width"=<length> | <percentage> | auto | inherit
 "word-spacing"=normal | <length> | inherit
 "z-index"=auto | <integer> | inherit
-
-
-"background-clip"=<box>
-"background-origin"=<box>
-"background-size"=<bg-size>
-"border"=<border-width> | <border-style> | <color>
-"border-color"=<color>
-"border-image"=<border-image-source> | <border-image-slice> | <border-image-width> | <border-image-width> | <border-image-outset> | <border-image-repeat>
-"border-image-outset"=<length> | <number>
-"border-image-repeat"=stretch | repeat | round | space
-"border-image-slice"=<number> | <percentage>
-"border-image-source"=none | <image>
-"border-image-width"=<length> | <percentage> | <number> | auto
-"border-radius"=<length> | <percentage>
-"border-style"=<border-style>
-"border-top" "border-right" "border-bottom" "border-left"=<border-width> | <border-style> | <color>
-"border-top-color" "border-right-color" "border-bottom-color" "border-left-color"=<color>
-"border-top-left-radius" "border-top-right-radius" "border-bottom-right-radius" "border-bottom-left-radius"=<length> | <percentage>
-"border-top-style" "border-right-style" "border-bottom-style" "border-left-style"=<border-style>
-"border-top-width" "border-right-width" "border-bottom-width" "border-left-width"=<border-width>
-"border-width"=<border-width>
-"box-decoration-break"=slice | clone
-"box-shadow"=none | <shadow> | none
 """
 
 def parse_css_data(data):
