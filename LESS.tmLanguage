@@ -748,7 +748,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(\.)[a-zA-Z_][a-zA-Z0-9_-]*</string>
+					<string>(\.)-?[a-zA-Z_][a-zA-Z0-9_-]*</string>
 					<key>name</key>
 					<string>entity.other.attribute-name.class.css</string>
 				</dict>
@@ -762,7 +762,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(#)[a-zA-Z_][a-zA-Z0-9_-]*</string>
+					<string>(#)-?[a-zA-Z_][a-zA-Z0-9_-]*</string>
 					<key>name</key>
 					<string>entity.other.attribute-name.id.css</string>
 				</dict>
@@ -897,7 +897,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(:+)(?:-(?:webkit|moz|o)-)?(after|before|selection)\b</string>
+					<string>(:+)(?:-(?:webkit|moz|o)-)?(after|before|selection|scrollbar|placeholder|input-placeholder)\b</string>
 					<key>name</key>
 					<string>entity.other.attribute-name.pseudo-element.css</string>
 				</dict>
