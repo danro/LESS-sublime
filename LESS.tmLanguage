@@ -1031,7 +1031,7 @@
 		</dict>
 	</dict>
 	<key>scopeName</key>
-	<string>source.less</string>
+	<string>source.less, source.css.less</string>
 	<key>uuid</key>
 	<string>69AA0917-B7BB-11D9-A7E2-000D93C8BE28</string>
 </dict>
