@@ -56,9 +56,16 @@ css_data = """
 "counter-reset"=none | inherit
 "cursor"=<uri> | auto | crosshair | default | pointer | move | e-resize | ne-resize | nw-resize | n-resize | se-resize | sw-resize | s-resize | w-resize | text | wait | help | progress | inherit
 "direction"=ltr | rtl | inherit
-"display"=inline | block | list-item | inline-block | table | inline-table | table-row-group | table-header-group | table-footer-group | table-row | table-column-group | table-column | table-cell | table-caption | none | inherit
+"display"=inline | flex | block | list-item | inline-block | inline-flex | table | inline-table | table-row-group | table-header-group | table-footer-group | table-row | table-column-group | table-column | table-cell | table-caption | none | inherit
 "empty-cells"=show | hide | inherit
 "float"=left | right | none | inherit
+"flex"=<number> | <number> | <length>
+"flex-direction"=row | row-reverse | column | column-reverse | inherit
+"flex-wrap"=nowrap | wrap | wrap-reverse | inherit
+"flex-grow"=<number> | initial | inherit
+"flex-flow"=<flex-direction> | <flex-wrap> | inherit
+"flex-basis"=<number> | auto | inherit
+"flex-shrink"=<number> | inherit
 
 "font-family"=<generic-family>| inherit
 "font-size"=inherit
