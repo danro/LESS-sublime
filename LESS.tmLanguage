@@ -646,10 +646,12 @@
 							<string>#string-double</string>
 						</dict>
 						<dict>
-							<key>match</key>
-							<string>[^'") \t]+</string>
-							<key>name</key>
-							<string>variable.parameter.misc.css</string>
+							<key>include</key>
+							<string>#color-values</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#numeric-values</string>
 						</dict>
 					</array>
 				</dict>
