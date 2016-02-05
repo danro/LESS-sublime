@@ -320,7 +320,7 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>([%a-zA-Z\-\_\d]*)(?=\()</string>
+					<string>(abs|acos|alpha|argb|asin|atan|average|blue|calc|ceil|color|contrast|convert|convert|cos|darken|data-uri|desaturate|difference|e|escape|exclusion|extract|fade|fadein|fadeout|floor|format|green|greyscale|hardlight|hsl|hsla|hsv|hsva|hsvhue|hsvsaturation|hsvvalue|hue|length|lighten|lightness|luma|max|min|mix|mod|multiply|negation|overlay|percentage|pi|pow|red|replace|round|saturate|saturation|screen|sin|softlight|spin|sqrt|tan|unit)(?=\()</string>
 					<key>name</key>
 					<string>support.function.less</string>
 				</dict>
