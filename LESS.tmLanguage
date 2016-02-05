@@ -611,7 +611,7 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>(format|local|url|attr|counter|counters)\s*(\()</string>
+					<string>(url|translate[XYZ]|translate3d|translate|skew[XY]|skew|scale[XYZ]|scale|rotate[XYZ]|rotate3d|rotate|rgba|rgb|repeating-radial-gradient|repeating-linear-gradient|rect|radial-gradient|matrix3d|matrix|local|linear-gradient|hsla|hsl|format|drop-shadow|cubic-bezier|counters|counter|blur|attr)\s*(\()</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
