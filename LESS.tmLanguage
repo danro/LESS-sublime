@@ -341,7 +341,7 @@
 		<key>less-operators</key>
 		<dict>
 			<key>match</key>
-			<string>/|!important|$|%|&amp;|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|&lt;=|&gt;=|&lt;&lt;=|&gt;&gt;=|&gt;&gt;&gt;=|&lt;&gt;|&lt;|&gt;|!|&amp;&amp;|\|\||\?\:|(?&lt;!\()/=|%=|\+=|\-=|&amp;=|when\b|and\b|not\b</string>
+			<string>/|!important|$|%|&amp;|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|&lt;=|&gt;=|&lt;&lt;=|&gt;&gt;=|&gt;&gt;&gt;=|&lt;&gt;|&lt;|&gt;|!|&amp;&amp;|\|\||\?\:|(?&lt;!\()/=|%=|\+=|\-=|&amp;=|not\b|or\b|and\b|when\b</string>
 			<key>name</key>
 			<string>keyword.operator.less</string>
 		</dict>
