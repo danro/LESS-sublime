@@ -497,7 +497,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?x)(?:-|\+)?(?:(?:[0-9]+(?:\.[0-9]+)?)|(?:\.[0-9]+))((?:px|pt|ch|cm|mm|in|r?em|ex|pc|deg|g?rad|dpi|dpcm|ms|s)\b|%)?</string>
+					<string>(?x)(?:-|\+)?(?:(?:[0-9]+(?:\.[0-9]+)?)|(?:\.[0-9]+))((?:vw|vmin|vh|turn|s|rem|rad|px|pt|pc|ms|mm|in|grad|ex|em|dppx|dpi|dpcm|deg|cm|ch)\b|%)?</string>
 					<key>name</key>
 					<string>constant.numeric.css</string>
 				</dict>
