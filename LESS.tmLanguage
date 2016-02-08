@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>comment</key>
-	<string>LESS</string>
+	<string>Less</string>
 	<key>fileTypes</key>
 	<array>
 		<string>less</string>
@@ -16,7 +16,7 @@
 	<key>keyEquivalent</key>
 	<string>^~L</string>
 	<key>name</key>
-	<string>LESS</string>
+	<string>Less</string>
 	<key>patterns</key>
 	<array>
 		<dict>
@@ -726,7 +726,7 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>\b(vkern|view|video|var|use|ul|u|tt|tspan|tref|tr|title|time|thead|th|tfoot|textPath|textarea|text|td|tbody|table(?!-)|symbol|switch|svg|sup|summary|sub|style|strong|strike|stop|span|small|set|select|section|script|samp|s|ruby|rect|radialGradient|q|pre|polyline|polygon|pattern|path|param|p|output|option|optgroup|ol|object|noscript|noframes|nav|mpath|missing-glyph|metadata|meta|menu|mask|marker|mark|map|main|link|linearGradient|line|li|legend|label|kbd|ins|input|img|image|iframe|i|html|hr|hkern|hgroup|header|head|glyphRef|glyph|g|frameset|frame|form|foreignObject|footer|font-face-uri|font-face-src|font-face-name|font-face-format|font-face|font|filter|figure|figcaption|fieldset|feTurbulence|feTile|feSpotLight|feSpecularLighting|fePointLight|feOffset|feMorphology|feMergeNode|feMerge|feImage|feGaussianBlur|feFuncR|feFuncG|feFuncB|feFuncA|feFlood|feDistantLight|feDisplacementMap|feDiffuseLighting|feConvolveMatrix|feComposite|feComponentTransfer|feColorMatrix|feBlend|embed|em|ellipse|dt|dl|div|dfn|details|desc|del|defs|dd|cursor|color-profile|colgroup|col|code|clipPath|cite|circle|center|caption|canvas|button|br|body|blockquote|big|base|b|audio|aside|article|area|applet|animateTransform|animateMotion|animateColor|animate|altGlyphItem|altGlyphDef|altGlyph|address|acronym|abbr|a|(h[1-6]))\b</string>
+					<string>\b(vkern|view|video|var|use|ul|u|tt|tspan|tref|tr|title|time|thead|th|tfoot|textPath|textarea|text|td|tbody|table(?!-)|symbol|switch|svg|sup|summary|sub|style|strong|strike|stop|span|small|set|select|section|script|samp|s|ruby|rect|radialGradient|q|pre|polyline|polygon|pattern|path|param|p|output|option|optgroup|ol|object|noscript|noframes|nav|mpath|missing-glyph|metadata|meta|menu|mask|marker|mark|map|main|link|linearGradient|line|li|legend|label|kbd|ins|input|img|image|iframe|i|html|hr|hkern|hgroup|header|head|glyphRef|glyph|g|frameset|frame|form|foreignObject|footer|font-face-uri|font-face-src|font-face-name|font-face-format|font-face|font|filter|figure|figcaption|fieldset|feTurbulence|feTile|feSpotLight|feSpecularLighting|fePointLight|feOffset|feMorphology|feMergeNode|feMerge|feImage|feGaussianBlur|feFuncR|feFuncG|feFuncB|feFuncA|feFlood|feDistantLight|feDisplacementMap|feDiffuseLighting|feConvolveMatrix|feComposite|feComponentTransfer|feColorMatrix|feBlend|embed|em|ellipse|dt|dl|div|dfn|details|desc|del|defs|dd|cursor|color-profile|colgroup|col|code|clipPath|cite|circle|center|caption|canvas|button|br|body|blockquote|big|base|b|audio|aside|article|area|applet|animateTransform|animateMotion|animateColor|animate|altGlyphItem|altGlyphDef|altGlyph|address|acronym|abbr|a|(h[1-6]))\b(?=[a-z:.,#\s\[])</string>
 					<key>name</key>
 					<string>entity.name.tag.css, keyword.control.html.elements</string>
 				</dict>
