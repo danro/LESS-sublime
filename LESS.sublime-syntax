@@ -4,6 +4,7 @@
 name: Less
 file_extensions:
   - less
+  - css.less
 scope: source.less
 contexts:
   main:
