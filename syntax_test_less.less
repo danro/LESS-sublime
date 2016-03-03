@@ -1,0 +1,82 @@
+/* SYNTAX TEST "Packages/LESS/LESS.sublime-syntax" */
+
+/* 1. Example -------------------------------- */
+
+@import "mixins";
+/* ^ source.less meta.at-rule.css keyword.control.at-rule.css */
+
+@foreground-color: #333;
+@background-color: hsl(30,100%,96%);
+
+html {
+  font-family: 'Lucida Grande', Verdana, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: @foreground-color;
+  background-color: @background-color;
+}
+
+a {
+  color: @link-color;
+  text-decoration: none;
+  &:hover {
+    color: lighten(@link-color, 5%);
+  }
+}
+
+.avatar {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+
+/* 2. Tests -------------------------------- */
+
+@import "variables";
+@import (reference) "variables";
+
+.variables {
+  @variable: 10px;
+  @another-variable: @variable;
+
+  width: @variable + @another-variable;
+  width: @variable*2;
+
+}
+
+.functions {
+  color: hue(orange);
+  color: lighten(@color, 10%);
+  color: mix(@color, #000, 25%);
+  width: max(5, 10);
+  width: unit(5, px);
+}
+
+.nested {
+  .class {}
+  &::before {}
+  & + & {}
+  .class & {}
+  @media screen {}
+}
+
+.mixin {};
+.mixin() {};
+.mixin(@default: 10px) {};
+
+.use-mixin {
+  .mixin;
+  .mixin();
+  .mixin(5px);
+}
+
+.class {}
+.extended {
+  &:extend(.class);
+  background: blue;
+}
+
+.guard() when (lightness(@a) >= 50%) {}
+.guard();
