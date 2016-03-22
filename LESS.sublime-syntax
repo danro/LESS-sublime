@@ -252,7 +252,7 @@ contexts:
       scope: entity.other.attribute-name.pseudo-element.css
       captures:
         1: punctuation.definition.entity.css
-    - match: '(?i)(\[)\s*(-?[_a-z\\][_a-z0-9\-\\]*)(?:\s*([~|^$*]?=)\s*(?:(-?[_a-z\\][_a-z0-9\-\\]*)|((?>([''"])(?:[^\\]|\\.)*?(\6)))))?\s*(\])'
+    - match: '(?i)(\[)\s*(-?[_a-z\\][_a-z0-9\-\\]*)(?:\s*([~|^$*]?=)\s*(?:(-?[_a-z\\][_a-z0-9\-\\]*)|((?>([''"])(?:[^\\]|\\.)*?(\6)))))?\s*(\]|i\])'
       scope: meta.attribute-selector.css
       captures:
         1: punctuation.definition.entity.css
@@ -262,6 +262,7 @@ contexts:
         5: string.quoted.double.attribute-value.css
         6: punctuation.definition.string.begin.css
         7: punctuation.definition.string.end.css
+        8: punctuation.definition.entity.css
   string-double:
     - match: '"'
       captures:
