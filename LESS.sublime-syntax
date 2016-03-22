@@ -259,7 +259,7 @@ contexts:
         2: entity.other.attribute-name.attribute.css
         3: punctuation.separator.operator.css
         4: string.unquoted.attribute-value.css
-        5: string.quoted.double.attribute-value.css
+        5: string.quoted.attribute-value.css
         6: punctuation.definition.string.begin.css
         7: punctuation.definition.string.end.css
         8: punctuation.definition.entity.css
