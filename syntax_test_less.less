@@ -24,7 +24,16 @@ html {
 /*                 ^ source.less meta.property-value.css variable.interpolation.less */
 }
 
-a {
+  a[data-property="text"] {
+/* ^ source.less meta.attribute-selector.css punctuation.definition.entity.css */
+/*   ^ source.less meta.attribute-selector.css entity.other.attribute-name.attribute.css */
+/*               ^ source.less meta.attribute-selector.css punctuation.separator.operator.css */
+/*                ^ source.less meta.attribute-selector.css string.quoted.double.attribute-value.css punctuation.definition.string.begin.css */
+/*                  ^ source.less meta.attribute-selector.css string.quoted.double.attribute-value.css */
+/*                     ^ source.less meta.attribute-selector.css string.quoted.double.attribute-value.css punctuation.definition.string.end.css */
+/*                      ^ source.less meta.attribute-selector.css */
+  a[value="text"] {
+/*   ^ source.less meta.attribute-selector.css entity.other.attribute-name.attribute.css */
   color: @link-color;
   text-decoration: none;
   &:hover {
