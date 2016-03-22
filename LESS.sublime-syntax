@@ -66,7 +66,7 @@ contexts:
         1: keyword.control.at-rule.css
         2: punctuation.definition.keyword.css
   less-data-uri:
-    - match: (url)(\()(data:)
+    - match: (url)(\("|\('|\()(data:)
       captures:
         1: support.function.misc.css
         2: punctuation.section.function.css
@@ -74,28 +74,6 @@ contexts:
       push:
         - meta_content_scope: parameter.less.data-uri comment markup.raw
         - match: (\))
-          captures:
-            1: punctuation.section.function.css
-          pop: true
-    - match: (url)(\()("data:)
-      captures:
-        1: support.function.misc.css
-        2: punctuation.section.function.css
-        3: parameter.less.data-uri comment markup.raw
-      push:
-        - meta_content_scope: parameter.less.data-uri comment markup.raw
-        - match: (?<=")(\))
-          captures:
-            1: punctuation.section.function.css
-          pop: true
-    - match: (url)(\()('data:)
-      captures:
-        1: support.function.misc.css
-        2: punctuation.section.function.css
-        3: parameter.less.data-uri comment markup.raw
-      push:
-        - meta_content_scope: parameter.less.data-uri comment markup.raw
-        - match: (?<=\')(\))
           captures:
             1: punctuation.section.function.css
           pop: true
