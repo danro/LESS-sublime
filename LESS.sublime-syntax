@@ -78,8 +78,6 @@ contexts:
             1: punctuation.section.function.css
           pop: true
   less-declarations:
-    - match: '(?>@[a-zA-Z0-9_-][\w-]*+)(?!:)'
-      scope: variable.other.less
     - match: '@[a-zA-Z0-9_-][\w-]*'
       scope: variable.declaration.less
   less-functions:
