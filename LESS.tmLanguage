@@ -7,7 +7,7 @@
 	<key>fileTypes</key>
 	<array>
 		<string>less</string>
-		<string>css</string>
+		<string>css.less</string>
 	</array>
 	<key>foldingStartMarker</key>
 	<string>/\*\*(?!\*)|\{\s*($|/\*(?!.*?\*/.*\S))</string>
