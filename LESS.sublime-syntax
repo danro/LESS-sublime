@@ -60,7 +60,7 @@ contexts:
             0: punctuation.definition.comment.css
           pop: true
   less-at-rules:
-    - match: ^\s*((@)(?:-(?:webkit|moz|o)-)?(charset|import|namespace|media|page|font-face|keyframes|supports|document)\b)
+    - match: ((@)(?:-(?:webkit|moz|o)-)?(charset|import|namespace|media|page|font-face|keyframes|supports|document)\b)
       scope: meta.at-rule.css
       captures:
         1: keyword.control.at-rule.css
