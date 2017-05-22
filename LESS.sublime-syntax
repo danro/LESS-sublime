@@ -87,8 +87,16 @@ contexts:
       captures:
         1: entity.other.attribute-name.class.css entity.other.less.mixin
   less-operators:
-    - match: /|!important|$|%|&|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\|\||\?\:|%=|\+=|\-=|&=|not\b|or\b|and\b|when\b
+    - match: /|!important|$|%|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\|\||\?\:|%=|\+=|\-=|&=|not\b|or\b|and\b|when\b
       scope: keyword.operator.less
+    - match: '&'
+      scope: keyword.operator.ampersand.less
+      push:
+        - match: '\s'
+          pop: true
+        - include: selector
+        - match: '(-+|_+)[a-zA-Z_][a-zA-Z0-9_-]*'
+          scope: entity.other.attribute-name.css
   less-parameters:
     - match: '\(|(}\s*,)'
       push:
