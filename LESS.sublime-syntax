@@ -82,11 +82,10 @@ contexts:
           scope: punctuation.definition.group.end.css
           pop: true
   less-functions:
-    - match: (abs|acos|alpha|argb|asin|atan|average|blue|calc|ceil|color|contrast|convert|convert|cos|darken|data-uri|desaturate|difference|e|escape|exclusion|extract|fade|fadein|fadeout|floor|format|green|greyscale|hardlight|hsl|hsla|hsv|hsva|hsvhue|hsvsaturation|hsvvalue|hue|length|lighten|lightness|luma|max|min|mix|mod|multiply|negation|overlay|percentage|pi|pow|red|replace|round|saturate|saturation|screen|sin|softlight|spin|sqrt|tan|unit)(?=\()
-      scope: support.function.less
-    - match: '([\.#](?![0-9])[a-zA-Z0-9_-]+(?=\())'
-      captures:
-        1: entity.other.attribute-name.class.css entity.other.less.mixin
+    - match: \b(abs|acos|alpha|argb|asin|atan|average|blue|calc|ceil|color|contrast|convert|convert|cos|darken|data-uri|desaturate|difference|e|escape|exclusion|extract|fade|fadein|fadeout|floor|format|green|greyscale|hardlight|hsl|hsla|hsv|hsva|hsvhue|hsvsaturation|hsvvalue|hue|length|lighten|lightness|luma|max|min|mix|mod|multiply|negation|overlay|percentage|pi|pow|red|replace|round|saturate|saturation|screen|sin|softlight|spin|sqrt|tan|unit)(?=\()
+      scope: meta.function-call.less support.function.less
+    - match: '[\.#](?![0-9])[a-zA-Z0-9_-]+(?=\()'
+      scope: entity.other.attribute-name.class.css entity.other.less.mixin
   less-operators:
     - match: /|$|%|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\|\||\?\:|%=|\+=|\-=|&=|not\b|or\b|and\b|when\b
       scope: keyword.operator.less
