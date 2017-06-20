@@ -37,9 +37,8 @@ contexts:
         2: punctuation.section.group.begin.css
       push:
         - meta_scope: meta.group.css
-        - match: (\))
-          captures:
-            1: punctuation.section.group.end.css
+        - match: '\)'
+          scope: punctuation.section.group.end.css
           pop: true
         - match: '(?x)\b(0*((1?[0-9]{1,2})|(2([0-4][0-9]|5[0-5])))\s*,\s*){2}(0*((1?[0-9]{1,2})|(2([0-4][0-9]|5[0-5])))\b)(\s*,\s*((0?\.[0-9]+)|[0-1]))?'
           scope: constant.other.color.rgb-value.css
@@ -48,23 +47,19 @@ contexts:
         - include: numeric-values
   comment-block:
     - match: /\*
-      captures:
-        0: punctuation.definition.comment.css
+      scope: punctuation.definition.comment.css
       push:
         - meta_scope: comment.block.css
         - match: \*/
-          captures:
-            0: punctuation.definition.comment.css
+          scope: punctuation.definition.comment.css
           pop: true
   comment-line:
     - match: //
-      captures:
-        0: punctuation.definition.comment.css
+      scope: punctuation.definition.comment.css
       push:
         - meta_scope: comment.line.double-slash.less
         - match: $\n?
-          captures:
-            0: punctuation.definition.comment.css
+          scope: punctuation.definition.comment.css
           pop: true
   less-at-rules:
     - match: ((@)(?:-(?:webkit|moz|o)-)?(charset|import|namespace|media|page|font-face|keyframes|supports|document)\b)
@@ -83,9 +78,8 @@ contexts:
         - include: string-single
         - match: '[\/\.a-zA-Z0-9_\-:;,]*'
           scope: string.unquoted.css
-        - match: (\))
-          captures:
-            1: punctuation.definition.group.end.css
+        - match: '\)'
+          scope: punctuation.definition.group.end.css
           pop: true
   less-functions:
     - match: (abs|acos|alpha|argb|asin|atan|average|blue|calc|ceil|color|contrast|convert|convert|cos|darken|data-uri|desaturate|difference|e|escape|exclusion|extract|fade|fadein|fadeout|floor|format|green|greyscale|hardlight|hsl|hsla|hsv|hsva|hsvhue|hsvsaturation|hsvvalue|hue|length|lighten|lightness|luma|max|min|mix|mod|multiply|negation|overlay|percentage|pi|pow|red|replace|round|saturate|saturation|screen|sin|softlight|spin|sqrt|tan|unit)(?=\()
@@ -203,9 +197,8 @@ contexts:
         2: punctuation.section.group.begin.css
       push:
         - meta_scope: meta.group.css
-        - match: (\))
-          captures:
-            1: punctuation.section.group.end.css
+        - match: '\)'
+          scope: punctuation.section.group.end.css
           pop: true
         - include: numeric-values
     - match: '(url|translate[XYZ]|translate3d|translate|skew[XY]|skew|scale[XYZ]|scale|rotate[XYZ]|rotate3d|rotate|rgba|rgb|repeating-radial-gradient|repeating-linear-gradient|rect|radial-gradient|matrix3d|matrix|local|linear-gradient|hsla|hsl|format|drop-shadow|cubic-bezier|counters|counter|blur|attr)\s*(\()'
@@ -214,9 +207,8 @@ contexts:
         2: punctuation.section.group.begin.css
       push:
         - meta_scope: meta.function-call.css meta.group.css
-        - match: (\))
-          captures:
-            1: punctuation.section.group.end.css
+        - match: '\)'
+          scope: punctuation.section.group.end.css
           pop: true
         - include: less-variables
         - include: string-single
@@ -249,7 +241,7 @@ contexts:
       scope: entity.other.attribute-name.id.css
       captures:
         1: punctuation.definition.entity.css
-    - match: \*
+    - match: '\*'
       scope: entity.name.tag.wildcard.css
     - match: (:)(visited|valid|target|scope|root|right|required|read-write|read-only|out-of-range|optional|only-of-type|only-child|link|left|last-of-type|last-child|invalid|indeterminate|in-range|hover|fullscreen|focus|first-of-type|first-child|first|enabled|empty|disabled|default|checked|any|active)\b
       scope: entity.other.pseudo-class.css
@@ -267,8 +259,7 @@ contexts:
       push:
         - meta_scope: meta.group.css
         - match: '\)'
-          captures:
-            0: punctuation.section.group.end.css
+          scope: punctuation.section.group.end.css
           pop: true
         - include: selector
     - match: ((:)nth-(?:(?:last-)?child|(?:last-)?of-type))(?=\()
@@ -300,25 +291,21 @@ contexts:
         8: punctuation.definition.entity.css
   string-double:
     - match: '"'
-      captures:
-        0: punctuation.definition.string.begin.css
+      scope: punctuation.definition.string.begin.css
       push:
         - meta_scope: string.quoted.double.css
         - match: '"'
-          captures:
-            0: punctuation.definition.string.end.css
+          scope: punctuation.definition.string.end.css
           pop: true
         - match: \\.
           scope: constant.character.escape.css
   string-single:
     - match: "'"
-      captures:
-        0: punctuation.definition.string.begin.css
+      scope: punctuation.definition.string.begin.css
       push:
         - meta_scope: string.quoted.single.css
         - match: "'"
-          captures:
-            0: punctuation.definition.string.end.css
+          scope: punctuation.definition.string.end.css
           pop: true
         - match: \\.
           scope: constant.character.escape.css
