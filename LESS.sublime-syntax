@@ -28,11 +28,12 @@ contexts:
     - match: (hsla?|rgba?)\s*(\()
       captures:
         1: support.function.misc.css
-        2: punctuation.section.function.css
+        2: punctuation.section.group.begin.css
       push:
+        - meta_scope: meta.group.css
         - match: (\))
           captures:
-            1: punctuation.section.function.css
+            1: punctuation.section.group.end.css
           pop: true
         - match: '(?x)\b(0*((1?[0-9]{1,2})|(2([0-4][0-9]|5[0-5])))\s*,\s*){2}(0*((1?[0-9]{1,2})|(2([0-4][0-9]|5[0-5])))\b)(\s*,\s*((0?\.[0-9]+)|[0-1]))?'
           scope: constant.other.color.rgb-value.css
@@ -193,22 +194,25 @@ contexts:
     - match: (rect)\s*(\()
       captures:
         1: support.function.misc.css
-        2: punctuation.section.function.css
+        2: punctuation.section.group.begin.css
       push:
+        - meta_scope: meta.group.css
         - match: (\))
           captures:
-            1: punctuation.section.function.css
+            1: punctuation.section.group.end.css
           pop: true
         - include: numeric-values
     - match: '(url|translate[XYZ]|translate3d|translate|skew[XY]|skew|scale[XYZ]|scale|rotate[XYZ]|rotate3d|rotate|rgba|rgb|repeating-radial-gradient|repeating-linear-gradient|rect|radial-gradient|matrix3d|matrix|local|linear-gradient|hsla|hsl|format|drop-shadow|cubic-bezier|counters|counter|blur|attr)\s*(\()'
       captures:
-        1: support.function.misc.css
-        2: punctuation.section.function.css
+        1: support.function.css
+        2: punctuation.section.group.begin.css
       push:
+        - meta_scope: meta.function-call.css meta.group.css
         - match: (\))
           captures:
-            1: punctuation.section.function.css
+            1: punctuation.section.group.end.css
           pop: true
+        - include: less-variables
         - include: string-single
         - include: string-double
         - include: color-values
@@ -253,23 +257,25 @@ contexts:
       captures:
         1: entity.other.pseudo-class.css
         2: punctuation.definition.entity.css
-        3: punctuation.section.function.css
+        3: punctuation.section.group.begin.css
       push:
-        - match: \)
+        - meta_scope: meta.group.css
+        - match: '\)'
           captures:
-            0: punctuation.section.function.css
+            0: punctuation.section.group.end.css
           pop: true
         - include: selector
-    - match: ((:)nth-(?:(?:last-)?child|(?:last-)?of-type))(\()
+    - match: ((:)nth-(?:(?:last-)?child|(?:last-)?of-type))(?=\()
       captures:
         1: entity.other.pseudo-class.css
         2: punctuation.definition.entity.css
-        3: punctuation.section.function.css
       push:
-        - meta_content_scope: constant.numeric.css
-        - match: (\))
-          captures:
-            1: punctuation.section.function.css
+        - match: '\('
+          scope: meta.group.css punctuation.section.group.begin.css
+        - match: '[0-9]+'
+          scope: meta.group.css constant.numeric.css
+        - match: '\)'
+          scope: meta.group.css punctuation.section.group.end.css
           pop: true
     - match: (:|::)(selection|first-line|first-letter|before|backdrop|after)\b
       scope: entity.other.pseudo-element.css

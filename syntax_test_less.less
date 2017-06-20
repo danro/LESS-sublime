@@ -81,20 +81,36 @@ html::before {
   &:hover {
     color: lighten(@link-color, 5%);
 /*  ^ source.less support.type.property-name.css */
+/*         ^ source.less meta.property-value.css support.function.less */
+/*                ^ source.less meta.property-value.css meta.function.parameters.less */
+    background: linear-gradient(@grey2, @black);
+/*                            ^ source.less meta.property-value.css meta.function-call.css meta.group.css support.function.css */
+/*                             ^ source.less meta.property-value.css meta.group.css punctuation.section.group.begin.css */
+/*                              ^ source.less meta.property-value.css variable.other.less punctuation.definition.variable.less */
+/*                               ^ source.less meta.property-value.css variable.other.less */
+/*                                      ^ source.less meta.property-value.css variable.other.less punctuation.definition.variable.less */
+/*                                       ^ source.less meta.property-value.css variable.other.less */
+/*                                            ^ source.less meta.property-value.css meta.group.css punctuation.section.group.end.css */
   }
 }
 
 
 #namespace when (@mode = huge) {
-/*                     ^ source.less meta.parameter.less keyword.operator.less */
+/*                     ^ source.less meta.function.parameters.less keyword.operator.less */
   .mixin() { /* */ }
 }
 .mixin (@a) when not (isnumber(@a)) and (@a > 0) ... }
-/*                                          ^ source.less meta.parameter.less keyword.operator.less */
+/*                                          ^ source.less meta.function.parameters.less keyword.operator.less */
 
 @media (max-width: 600px) and (max-aspectratio: 1920/1200) { }
 
-.avatar {
+.avatar:nth-child(3) {
+/*     ^ source.less entity.other.pseudo-class.css punctuation.definition.entity.css */
+/*.     ^ source.less entity.other.pseudo-class.css */
+/*.              ^ source.less meta.group.css punctuation.section.group.begin.css */
+/*.               ^ source.less meta.group.css constant.numeric.css */
+/*.                ^ source.less meta.group.css punctuation.section.group.end.css */
+/*.                 ^ source.less */
   display: inline-block;
   width: 48px;
   height: 48px;
