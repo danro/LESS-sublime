@@ -77,9 +77,6 @@ contexts:
           captures:
             1: punctuation.section.function.css
           pop: true
-  less-declarations:
-    - match: '@[a-zA-Z0-9_-][\w-]*'
-      scope: variable.declaration.less
   less-functions:
     - match: (abs|acos|alpha|argb|asin|atan|average|blue|calc|ceil|color|contrast|convert|convert|cos|darken|data-uri|desaturate|difference|e|escape|exclusion|extract|fade|fadein|fadeout|floor|format|green|greyscale|hardlight|hsl|hsla|hsv|hsva|hsvhue|hsvsaturation|hsvvalue|hue|length|lighten|lightness|luma|max|min|mix|mod|multiply|negation|overlay|percentage|pi|pow|red|replace|round|saturate|saturation|screen|sin|softlight|spin|sqrt|tan|unit)(?=\()
       scope: support.function.less
@@ -113,11 +110,23 @@ contexts:
         - match: '(?:\:/)?[\/\.a-zA-Z0-9_\-]*'
           scope: variable.parameter.misc.css
         - include: less-operators
+  less-declarations:
+    - match: '(@)([a-zA-Z0-9_-][\w-]*)'
+      scope: variable.declaration.less
+      captures:
+        1: punctuation.definition.variable.less
   less-variables:
-    - match: '@[a-zA-Z0-9_-][\w-]*'
+    - match: '(@)([a-zA-Z0-9_-][\w-]*)'
       scope: variable.other.less
-    - match: '@{[a-zA-Z0-9_-][\w-]*}'
-      scope: variable.interpolation.less
+      captures:
+        1: punctuation.definition.variable.less
+    - match: '(@)({)([a-zA-Z0-9_-][\w-]*)(})'
+      scope: variable.other.less
+      captures:
+        1: punctuation.definition.variable.less
+        2: punctuation.definition.string.begin.less
+        3: string.interpolated.less
+        4: punctuation.definition.string.end.less
     - match: "`"
       push:
         - meta_scope: comment markup.raw
