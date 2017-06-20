@@ -230,16 +230,16 @@ contexts:
     - match: \*
       scope: entity.name.tag.wildcard.css
     - match: (:)(visited|valid|target|scope|root|right|required|read-write|read-only|out-of-range|optional|only-of-type|only-child|link|left|last-of-type|last-child|invalid|indeterminate|in-range|hover|fullscreen|focus|first-of-type|first-child|first|enabled|empty|disabled|default|checked|any|active)\b
-      scope: entity.other.attribute-name.pseudo-class.css
+      scope: entity.other.pseudo-class.css
       captures:
         1: punctuation.definition.entity.css
     - match: (:)(extend)\b
-      scope: entity.other.attribute-name.pseudo-class.less
+      scope: entity.other.pseudo-class.less
       captures:
         1: punctuation.definition.entity.css
     - match: ((:)not|lang|dir)(\()
       captures:
-        1: entity.other.attribute-name.pseudo-class.css
+        1: entity.other.pseudo-class.css
         2: punctuation.definition.entity.css
         3: punctuation.section.function.css
       push:
@@ -250,7 +250,7 @@ contexts:
         - include: selector
     - match: ((:)nth-(?:(?:last-)?child|(?:last-)?of-type))(\()
       captures:
-        1: entity.other.attribute-name.pseudo-class.css
+        1: entity.other.pseudo-class.css
         2: punctuation.definition.entity.css
         3: punctuation.section.function.css
       push:
@@ -260,7 +260,7 @@ contexts:
             1: punctuation.section.function.css
           pop: true
     - match: (:|::)(selection|first-line|first-letter|before|backdrop|after)\b
-      scope: entity.other.attribute-name.pseudo-element.css
+      scope: entity.other.pseudo-element.css
       captures:
         1: punctuation.definition.entity.css
     - match: '(?i)(\[)\s*(-?[_a-z\\][_a-z0-9\-\\]*)(?:\s*([~|^$*]?=)\s*(?:(-?[_a-z\\][_a-z0-9\-\\]*)|(([''"])(?:[^\\]|\\.)*([''"]))))?\s*(\]|i\])'

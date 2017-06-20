@@ -11,7 +11,17 @@
 @background-color: hsl(30,100%,96%);
 /* ^ source.less variable.declaration.less */
 
-html {
+html:after,
+/*  ^ source.less entity.other.pseudo-element.css punctuation.definition.entity.css */
+/*   ^ source.less entity.other.pseudo-element.css */
+html:hover,
+/*  ^ source.less entity.other.pseudo-class.css punctuation.definition.entity.css */
+/*   ^ source.less entity.other.pseudo-class.css */
+html::before {
+/* ^ source.less entity.name.tag.css, keyword.control.html.elements */
+/*  ^ source.less entity.other.pseudo-element.css punctuation.definition.entity.css */
+/*   ^ source.less entity.other.pseudo-element.css punctuation.definition.entity.css */
+/*     ^ source.less entity.other.pseudo-element.css */
   font-family: 'Lucida Grande', Verdana, sans-serif;
   font-size: 16px;
   cursor: pointer;
