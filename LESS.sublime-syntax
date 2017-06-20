@@ -210,6 +210,7 @@ contexts:
           scope: punctuation.section.group.end.css
           pop: true
         - include: less-variables
+        - include: less-functions
         - include: string-single
         - include: string-double
         - include: color-values
