@@ -86,11 +86,13 @@ html::before {
 
 
 #namespace when (@mode = huge) {
-/*                     ^ source.less parameter.less keyword.operator.less */
+/*                     ^ source.less meta.parameter.less keyword.operator.less */
   .mixin() { /* */ }
 }
-.mixin (@a) when not (isnumber(@a)) and (@a > 0) { ... }
-/*                                          ^ source.less parameter.less keyword.operator.less */
+.mixin (@a) when not (isnumber(@a)) and (@a > 0) ... }
+/*                                          ^ source.less meta.parameter.less keyword.operator.less */
+
+@media (max-width: 600px) and (max-aspectratio: 1920/1200) { }
 
 .avatar {
   display: inline-block;

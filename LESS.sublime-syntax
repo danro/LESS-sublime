@@ -97,7 +97,7 @@ contexts:
   less-parameters:
     - match: '\(|(}\s*,)'
       push:
-        - meta_scope: parameter.less
+        - meta_scope: meta.parameter.less
         - match: '\)|{'
           pop: true
         - include: color-values
