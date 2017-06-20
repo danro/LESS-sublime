@@ -83,6 +83,7 @@ html::before {
 /*  ^ source.less support.type.property-name.css */
 /*         ^ source.less meta.property-value.css support.function.less */
 /*                ^ source.less meta.property-value.css meta.function.parameters.less */
+/*                   ^ source.less meta.property-value.css meta.function-call.css meta.function.parameters.less variable.other.less */
     background: linear-gradient(@grey2, @black);
 /*                            ^ source.less meta.property-value.css meta.function-call.css meta.group.css support.function.css */
 /*                             ^ source.less meta.property-value.css meta.group.css punctuation.section.group.begin.css */
@@ -102,8 +103,18 @@ html::before {
 .mixin (@a) when not (isnumber(@a)) and (@a > 0) ... }
 /*                                          ^ source.less meta.function.parameters.less keyword.operator.less */
 
-@media (max-width: 600px) and (max-aspectratio: 1920/1200) { }
-
+@media only tv and (-webkit-max-width: @pixels) and (max-pixel-ratio: 1920/1200) and (min-aspect-ratio: portrait) { }
+/*     ^ source.less meta.at-rule.media.css keyword.operator.logic.media.css */
+/*          ^ source.less meta.at-rule.media.css support.constant.media.css */
+/*                 ^ source.less meta.at-rule.media.css meta.group.css punctuation.section.group.begin.css */
+/*                  ^ source.less meta.at-rule.media.css meta.group.css support.type.vendor-prefix.css */
+/*                   ^ source.less meta.at-rule.media.css meta.group.css support.type.vendor-prefix.css */
+/*                           ^ source.less meta.at-rule.media.css meta.group.css support.type.property-name.media.css */
+/*                                   ^ source.less meta.at-rule.media.css meta.group.css punctuation.separator.key-value.css */
+/*                                     ^ source.less meta.at-rule.media.css meta.group.css variable.other.less punctuation.definition.variable.less */
+/*                                      ^ source.less meta.at-rule.media.css meta.group.css variable.other.less */
+/*                                              ^ source.less meta.at-rule.media.css keyword.operator.less */
+/*                                                                                                      ^ source.less meta.at-rule.media.css meta.group.css support.constant.property-value.css */
 .avatar:nth-child(3) {
 /*     ^ source.less entity.other.pseudo-class.css punctuation.definition.entity.css */
 /*.     ^ source.less entity.other.pseudo-class.css */
