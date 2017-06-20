@@ -66,16 +66,19 @@ contexts:
         1: keyword.control.at-rule.css
         2: punctuation.definition.keyword.css
   less-data-uri:
-    - match: (url)(\("|\('|\()(data:)
+    - match: (url)(\()(?=(data:|"data:|'data:))
       captures:
         1: support.function.misc.css
-        2: punctuation.section.function.css
-        3: parameter.less.data-uri comment markup.raw
+        2: punctuation.definition.group.begin.css
       push:
-        - meta_content_scope: parameter.less.data-uri comment markup.raw
+        - meta_scope: meta.group.css
+        - include: string-double
+        - include: string-single
+        - match: '[\/\.a-zA-Z0-9_\-:;,]*'
+          scope: string.unquoted.css
         - match: (\))
           captures:
-            1: punctuation.section.function.css
+            1: punctuation.definition.group.end.css
           pop: true
   less-functions:
     - match: (abs|acos|alpha|argb|asin|atan|average|blue|calc|ceil|color|contrast|convert|convert|cos|darken|data-uri|desaturate|difference|e|escape|exclusion|extract|fade|fadein|fadeout|floor|format|green|greyscale|hardlight|hsl|hsla|hsv|hsva|hsvhue|hsvsaturation|hsvvalue|hue|length|lighten|lightness|luma|max|min|mix|mod|multiply|negation|overlay|percentage|pi|pow|red|replace|round|saturate|saturation|screen|sin|softlight|spin|sqrt|tan|unit)(?=\()
