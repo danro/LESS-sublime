@@ -1,4 +1,4 @@
-/* SYNTAX TEST "Packages/LESS/LESS.sublime-syntax" */
+/* SYNTAX TEST "Packages/LessImproved/LESS.sublime-syntax" */
 
 @import "mixins";
 /* ^ source.less meta.at-rule.css keyword.control.at-rule.css */
@@ -14,10 +14,16 @@
 html {
   font-family: 'Lucida Grande', Verdana, sans-serif;
   font-size: 16px;
+  cursor: pointer;
+/* ^ source.less support.type.property-name.css */
+/*          ^ source.less meta.property-value.css support.constant.property-value.css */
   display: -webkit-flex;
 /*  ^ source.less support.type.property-name.css */
+/*         ^ source.less meta.property-value.css support.type.vendor-prefix.css */
+/*                 ^ source.less meta.property-value.css support.constant.property-value.css */
   -webkit-user-select: none;
-/*  ^ source.less support.type.property-name.vendor-prefix.css */
+/*  ^ source.less support.type.vendor-prefix.css */
+/*         ^ source.less support.type.property-name.css */
   line-height: 1.5 * 20;
 /*                 ^ source.less meta.property-value.css keyword.operator.less */
   line-height: (1.5 %= 20);
@@ -26,6 +32,13 @@ html {
 /*         ^ source.less meta.property-value.css variable.other.less */
   padding-left: @{background-color};
 /*                 ^ source.less meta.property-value.css variable.interpolation.less */
+}
+
+cursor {
+/* ^ source.less entity.name.tag.css, keyword.control.html.elements */
+  fill: rebeccapurple;
+/* ^ source.less support.type.property-name.css */
+/*        ^ source.less meta.property-value.css support.constant.color.w3c-standard-color-name.css */
 }
 
   a[data-property="text"] {
