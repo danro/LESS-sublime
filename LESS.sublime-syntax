@@ -129,28 +129,28 @@ contexts:
         4: punctuation.definition.string.end.less
     - match: "`"
       push:
-        - meta_scope: comment markup.raw
+        - meta_scope: markup.raw
         - match: "`"
           pop: true
     - match: (~)`
       captures:
         1: keyword.operator.less
       push:
-        - meta_scope: comment markup.raw
+        - meta_scope: markup.raw
         - match: "`"
           pop: true
     - match: (~)"
       captures:
         1: keyword.operator.less
       push:
-        - meta_scope: string.quoted.double.css comment markup.raw
+        - meta_scope: string.quoted.double.css markup.raw
         - match: '"'
           pop: true
     - match: (~)'
       captures:
         1: keyword.operator.less
       push:
-        - meta_scope: string.quoted.single.css comment markup.raw
+        - meta_scope: string.quoted.single.css markup.raw
         - match: "'"
           pop: true
   numeric-values:
