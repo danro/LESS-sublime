@@ -273,11 +273,12 @@ contexts:
     - match: '(url|translate[XYZ]|translate3d|translate|skew[XY]|skew|scale[XYZ]|scale|rotate[XYZ]|rotate3d|rotate|rgba|rgb|repeating-radial-gradient|repeating-linear-gradient|rect|radial-gradient|matrix3d|matrix|local|linear-gradient|hsla|hsl|format|drop-shadow|cubic-bezier|counters|counter|blur|attr)\s*(\()'
       captures:
         1: support.function.css
-        2: punctuation.section.group.begin.css
+        2: meta.group.css punctuation.section.group.begin.css
       push:
-        - meta_scope: meta.function-call.css meta.group.css
+        - meta_scope: meta.function-call.css
+        - meta_content_scope: meta.group.css meta.function.parameters.css
         - match: '\)'
-          scope: punctuation.section.group.end.css
+          scope: meta.group.css punctuation.section.group.end.css
           pop: true
         - include: less-variables
         - include: less-functions
