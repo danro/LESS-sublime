@@ -136,8 +136,28 @@ contexts:
         - match: '[\/\.a-zA-Z0-9_\-:;,]*'
           scope: string.unquoted.css
   less-functions:
-    - match: \b(unit|tan|sqrt|spin|softlight|sin|screen|saturation|saturate|round|replace|red|pow|pi|percentage|overlay|negation|multiply|mod|mix|min|max|luma|lightness|lighten|length|isnumber|hue|hsvvalue|hsvsaturation|hsvhue|hsva|hsv|hsla|hsl|hardlight|greyscale|green|format|floor|fadeout|fadein|fade|extract|exclusion|escape|e|difference|desaturate|data-uri|darken|cos|convert|convert|contrast|color|ceil|calc|blue|average|atan|asin|argb|alpha|acos|abs)(?=\()
-      scope: meta.function-call.less support.function.less
+    - match: \b(unit|tan|sqrt|spin|softlight|sin|screen|saturation|saturate|round|replace|red|pow|pi|percentage|overlay|negation|multiply|mod|mix|min|max|luma|lightness|lighten|length|isnumber|hue|hsvvalue|hsvsaturation|hsvhue|hsva|hsv|hsla|hsl|hardlight|greyscale|green|format|floor|fadeout|fadein|fade|extract|exclusion|escape|e|difference|desaturate|data-uri|darken|cos|convert|convert|contrast|color|ceil|calc|blue|average|atan|asin|argb|alpha|acos|abs)(\()
+      captures:
+        1: support.function.less
+        2: meta.group.less punctuation.section.group.begin.less
+      push:
+        - meta_scope: meta.function-call.less
+        - meta_content_scope: meta.group.less meta.function.parameters.less
+        - match: '\)'
+          scope: meta.group.less punctuation.section.group.end.less
+          pop: true
+        - match: ':'
+          scope: punctuation.separator.key-value.css
+        - include: color-values
+        - include: less-parameters
+        - include: less-functions
+        - include: numeric-values
+        - include: string-double
+        - include: string-single
+        - include: less-variables
+        - include: less-operators
+        - include: commas
+        - include: terminator
     - match: '[\.#](?![0-9])[a-zA-Z0-9_-]+(?=\()'
       scope: entity.other.attribute-name.class.css entity.other.less.mixin
   less-operators:
@@ -160,7 +180,6 @@ contexts:
         - match: ':'
           scope: punctuation.separator.key-value.css
         - include: color-values
-        - include: less-parameters
         - include: less-functions
         - include: numeric-values
         - include: string-double
