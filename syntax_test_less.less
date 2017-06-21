@@ -24,6 +24,7 @@ html::before {
 /*     ^ source.less entity.other.pseudo-element.css */
   font-family: 'Lucida Grande', Verdana, sans-serif;
   font-size: 16px;
+  line-height: ~"calc(@{space} + 4px)";
   cursor: pointer !important;
 /* ^ source.less support.type.property-name.css */
 /*          ^ source.less meta.property-value.css support.constant.property-value.css */
@@ -81,11 +82,11 @@ html::before {
   &:hover {
     color: lighten(@link-color, 5%);
 /*  ^ source.less support.type.property-name.css */
-/*         ^ source.less meta.property-value.css support.function.less */
-/*                ^ source.less meta.property-value.css meta.function.parameters.less */
-/*                   ^ source.less meta.property-value.css meta.function-call.css meta.function.parameters.less variable.other.less */
+/*         ^ source.less meta.property-value.css meta.function-call.less support.function.less */
+/*                ^ source.less meta.property-value.css meta.function-call.less punctuation.section.group.begin.less */
+/*                   ^ source.less meta.property-value.css meta.function-call.less meta.group.less meta.function.parameters.less variable.other.less */
     background: linear-gradient(@grey2, @black);
-/*                            ^ source.less meta.property-value.css meta.function-call.css meta.group.css support.function.css */
+/*                            ^ source.less meta.property-value.css meta.function-call.css support.function.css */
 /*                             ^ source.less meta.property-value.css meta.group.css punctuation.section.group.begin.css */
 /*                              ^ source.less meta.property-value.css variable.other.less punctuation.definition.variable.less */
 /*                               ^ source.less meta.property-value.css variable.other.less */
@@ -180,7 +181,7 @@ html::before {
 /*       ^ source.less meta.property-value.css meta.function-call.less support.function.less */
   background: mix(@white, mix(@grey4, @grey5));
 /*                          ^ source.less meta.property-value.css meta.function-call.less support.function.less */
-  background-color: linear-gradient(@white, mix(@grey4, @grey5));
+  background-color: linear-gradient(@white, mix(@grey4, mix(@grey4, @grey5)));
 /*                                          ^ source.less meta.property-value.css meta.function-call.less support.function.less */
   padding: @padding;
 }
