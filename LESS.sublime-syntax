@@ -193,11 +193,7 @@ contexts:
       scope: variable.declaration.less
       captures:
         1: punctuation.definition.variable.less
-  less-variables:
-    - match: '(@)([a-zA-Z0-9_-][\w-]*)'
-      scope: variable.other.less
-      captures:
-        1: punctuation.definition.variable.less
+  less-escaped-variables:
     - match: '(@)({)([a-zA-Z0-9_-][\w-]*)(})'
       scope: variable.other.less
       captures:
@@ -205,32 +201,32 @@ contexts:
         2: punctuation.definition.string.begin.less
         3: string.interpolated.less
         4: punctuation.definition.string.end.less
-    - match: "`"
-      push:
-        - meta_scope: markup.raw
-        - match: "`"
-          pop: true
-    - match: (~)`
+  less-variables:
+    - match: '(@)([a-zA-Z0-9_-][\w-]*)'
+      scope: variable.other.less
+      captures:
+        1: punctuation.definition.variable.less
+    - include: less-escaped-variables
+    - match: (~)(")
       captures:
         1: keyword.operator.less
+        2: punctuation.definition.string.begin.less
       push:
-        - meta_scope: markup.raw
-        - match: "`"
-          pop: true
-    - match: (~)"
-      captures:
-        1: keyword.operator.less
-      push:
-        - meta_scope: string.quoted.double.css markup.raw
+        - meta_scope: string.quoted.double.css markup.raw.less
         - match: '"'
+          scope: punctuation.definition.string.end.less
           pop: true
-    - match: (~)'
+        - include: less-escaped-variables
+    - match: (~)(')
       captures:
         1: keyword.operator.less
+        2: punctuation.definition.string.begin.less
       push:
-        - meta_scope: string.quoted.single.css markup.raw
+        - meta_scope: string.quoted.single.css markup.raw.less
         - match: "'"
+          scope: punctuation.definition.string.end.less
           pop: true
+        - include: less-escaped-variables
   numeric-values:
     - match: '(#)([0-9a-fA-F]{3}|[0-9a-fA-F]{6})\b'
       scope: constant.other.color.rgb-value.css
