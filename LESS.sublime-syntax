@@ -9,6 +9,8 @@ scope: source.less
 contexts:
   main:
     - include: curlies
+    - include: commas
+    - include: terminator
     - include: comment-block
     - include: comment-line
     - include: less-at-rules
@@ -27,6 +29,14 @@ contexts:
       scope: punctuation.section.property-list.begin.css
     - match: '\}'
       scope: punctuation.section.property-list.end.css
+  commas:
+    - match: '\s*(,)\s*'
+      captures:
+        1: punctuation.separator.css
+  terminator:
+    - match: '\s*(;)\s*'
+      captures:
+        1: punctuation.terminator.statement.css
   color-values:
     - match: \b(yellowgreen|yellow|whitesmoke|white|wheat|violet|turquoise|tomato|thistle|teal|tan|steelblue|springgreen|snow|slategrey|slategray|slateblue|skyblue|silver|sienna|seashell|seagreen|sandybrown|salmon|saddlebrown|royalblue|rosybrown|red|rebeccapurple|purple|powderblue|plum|pink|peru|peachpuff|papayawhip|palevioletred|paleturquoise|palegreen|palegoldenrod|orchid|orangered|orange|olivedrab|olive|oldlace|navy|navajowhite|moccasin|mistyrose|mintcream|midnightblue|mediumvioletred|mediumturquoise|mediumspringgreen|mediumslateblue|mediumseagreen|mediumpurple|mediumorchid|mediumblue|mediumaquamarine|maroon|linen|limegreen|lime|lightyellow|lightsteelblue|lightslategrey|lightslategray|lightskyblue|lightseagreen|lightsalmon|lightpink|lightgrey|lightgreen|lightgray|lightgoldenrodyellow|lightcyan|lightcoral|lightblue|lemonchiffon|lawngreen|lavenderblush|lavender|khaki|ivory|indigo|indianred|hotpink|honeydew|grey|greenyellow|green|gray|goldenrod|gold|ghostwhite|gainsboro|fuchsia|forestgreen|floralwhite|firebrick|dodgerblue|dimgrey|dimgray|deepskyblue|deeppink|darkviolet|darkturquoise|darkslategrey|darkslategray|darkslateblue|darkseagreen|darksalmon|darkred|darkorchid|darkorange|darkolivegreen|darkmagenta|darkkhaki|darkgrey|darkgreen|darkgray|darkgoldenrod|darkcyan|darkblue|crimson|cornsilk|cornflowerblue|coral|chocolate|chartreuse|cadetblue|burlywood|brown|blueviolet|blue|blanchedalmond|black|bisque|beige|azure|aquamarine|aqua|antiquewhite|aliceblue)\b
       comment: http://www.w3.org/TR/CSS21/syndata.html#value-def-color
@@ -157,6 +167,8 @@ contexts:
         - include: string-single
         - include: less-variables
         - include: less-operators
+        - include: commas
+        - include: terminator
   less-declarations:
     - match: '(@)([a-zA-Z0-9_-][\w-]*)'
       scope: variable.declaration.less
