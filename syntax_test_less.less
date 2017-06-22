@@ -177,10 +177,7 @@ html::before {
   }
 }
 
-.mixin {};
-.mixin() {};
-.mixin(@default: 10px) {};
-.mixin(@color: black; /*@margin: 10px;*/ @padding: 20px) {
+.a-test-mixin(@color: black; /*@margin: 10px;*/ @padding: 20px) when (lightness(@a) >= 50%) {
   color: mix(@grey4, @grey5);
 /*       ^ source.less meta.property-value.css meta.function-call.less support.function.less */
   background: mix(@white, mix(@grey4, @grey5));
@@ -189,14 +186,8 @@ html::before {
 /*                                          ^ source.less meta.property-value.css meta.function-call.less support.function.less */
   padding: @padding;
 }
-.mixin (@a) when (lightness(@a) >= 50%) {
-  background-color: black;
-}
 
 .use-mixin {
-  .mixin;
-  .mixin();
-  .mixin(5px);
   &--bem {}
   &_bem {}
 }
