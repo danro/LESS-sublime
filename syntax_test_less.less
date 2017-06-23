@@ -1,5 +1,7 @@
 /* SYNTAX TEST "Packages/LessImproved/LESS.sublime-syntax" */
 
+@import "@{themes}/tidal-wave.less";
+/*         ^ source.less string.quoted.double.css variable.other.less string.interpolated.less */
 @import "mixins";
 /* ^ source.less meta.at-rule.css keyword.control.at-rule.css */
 /*      ^ source.less string.quoted.double.css punctuation.definition.string.begin.css */
@@ -103,8 +105,9 @@ html::before {
 /*                     ^ source.less meta.function.parameters.less keyword.operator.less */
   .mixin() { /* */ }
 }
-.mixin (@a) when not (isnumber(@a)) and (@a > 0) ... }
-/*                                          ^ source.less meta.function.parameters.less keyword.operator.less */
+.mixin(@a) when not (isnumber(@a)) and (@a > 0) ... }
+/*   ^ source.less entity.other.attribute-name.class.css entity.other.less.mixin */
+/*                                         ^ source.less meta.function.parameters.less keyword.operator.less */
 
 @media only tv /*awesome*/ and (-webkit-max-width: @pixels) and (max-pixel-ratio: 1920/1200) and (min-aspect-ratio: portrait) { }
 /*     ^ source.less meta.at-rule.media.css keyword.operator.logic.media.css */
@@ -123,6 +126,7 @@ html::before {
 .avatar:nth-child(3) {
 /*     ^ source.less entity.other.pseudo-class.css punctuation.definition.entity.css */
 /*.     ^ source.less entity.other.pseudo-class.css */
+/*.         ^ source.less entity.other.pseudo-class.css */
 /*.              ^ source.less meta.group.css punctuation.section.group.begin.css */
 /*.               ^ source.less meta.group.css constant.numeric.css */
 /*.                ^ source.less meta.group.css punctuation.section.group.end.css */
@@ -131,36 +135,47 @@ html::before {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: url(data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7);
+  background: url(data:@{image}/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7);
 /*               ^ source.less meta.property-value.css meta.group.css punctuation.definition.group.begin.css */
 /*                 ^ source.less meta.property-value.css meta.group.css string.unquoted.css */
-/*                                                                                                                                                                                                                                                                                                                                      ^ source.less meta.property-value.css meta.group.css punctuation.definition.group.end.css */
-  background: url("data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7");
+/*                      ^ source.less meta.property-value.css meta.group.css variable.other.less punctuation.definition.string.begin.less */
+/*                                                                                                                                                                                                                                                                                                                                         ^ source.less meta.property-value.css meta.group.css punctuation.definition.group.end.css */
+  background: url("data:@{image}/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7");
 /*               ^ source.less meta.property-value.css meta.group.css punctuation.definition.group.begin.css */
 /*                ^ source.less meta.property-value.css meta.group.css string.quoted.double.css punctuation.definition.string.begin.css */
 /*                 ^ source.less meta.property-value.css meta.group.css string.quoted.double.css */
-/*                                                                                                                                                                                                                                                                                                                                       ^ source.less meta.property-value.css meta.group.css string.quoted.double.css punctuation.definition.string.end.css */
-/*                                                                                                                                                                                                                                                                                                                                        ^ source.less meta.property-value.css meta.group.css punctuation.definition.group.end.css */
-  background: url('data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7');
+/*                      ^ source.less meta.property-value.css meta.group.css string.quoted.double.css variable.other.less punctuation.definition.variable.less */
+/*                                                                                                                                                                                                                                                                                                                                          ^ source.less meta.property-value.css meta.group.css string.quoted.double.css punctuation.definition.string.end.css */
+/*                                                                                                                                                                                                                                                                                                                                           ^ source.less meta.property-value.css meta.group.css punctuation.definition.group.end.css */
+  background: url('data:@{image}/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7');
 /*               ^ source.less meta.property-value.css meta.group.css punctuation.definition.group.begin.css */
 /*                ^ source.less meta.property-value.css meta.group.css string.quoted.single.css punctuation.definition.string.begin.css */
 /*                 ^ source.less meta.property-value.css meta.group.css string.quoted.single.css */
-/*                                                                                                                                                                                                                                                                                                                                       ^ source.less meta.property-value.css meta.group.css string.quoted.single.css punctuation.definition.string.end.css */
-/*                                                                                                                                                                                                                                                                                                                                        ^ source.less meta.property-value.css meta.group.css punctuation.definition.group.end.css */
+/*                      ^ source.less meta.property-value.css meta.group.css string.quoted.single.css variable.other.less punctuation.definition.variable.less */
+/*                                                                                                                                                                                                                                                                                                                                          ^ source.less meta.property-value.css meta.group.css string.quoted.single.css punctuation.definition.string.end.css */
+/*                                                                                                                                                                                                                                                                                                                                           ^ source.less meta.property-value.css meta.group.css punctuation.definition.group.end.css */
 }
 
 @import "variables";
 @import (reference) "variables";
 
-.variables {
+#variables {
   @variable: 10px;
   @another-variable: @variable;
 
   width: @variable + @another-variable;
   width: @variable*2;
 
-}
+  &:first-child {}
 
+  .@{varname}--subclass#another@{variable}id[data-attr="text"] { color: @orangy; }
+/*            ^ source.less entity.other.attribute-name.class.css */
+/*                     ^ source.less entity.other.attribute-name.id.css punctuation.definition.entity.css */
+/*                             ^ source.less entity.other.attribute-name.id.css variable.other.less punctuation.definition.variable.less */
+/*                                        ^ source.less entity.other.attribute-name.id.css */
+}
+#@{varname}--subclass { color: @orangy; }
+/*          ^ source.less entity.other.attribute-name.id.css */
 .functions {
   color: hue(orange);
   color: lighten(@color, 10%);
