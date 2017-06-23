@@ -1,7 +1,9 @@
 /* SYNTAX TEST "Packages/LessImproved/LESS.sublime-syntax" */
 
-@import "@{themes}/tidal-wave.less";
-/*         ^ source.less string.quoted.double.css variable.other.less string.interpolated.less */
+@import (reference) "@{themes}/tidal-wave.less";
+/*       ^ source.less meta.at-rule.css meta.group.less meta.function.parameters.less */
+/*                      ^ source.less string.quoted.double.css variable.other.less string.interpolated.less */
+/*                                             ^ source.less punctuation.terminator.statement.css */
 @import "mixins";
 /* ^ source.less meta.at-rule.css keyword.control.at-rule.css */
 /*      ^ source.less string.quoted.double.css punctuation.definition.string.begin.css */
@@ -29,6 +31,8 @@ html::before {
   font-family: 'Lucida Grande', Verdana, sans-serif;
   font-size: 16px;
   line-height: ~"calc(@{space} + 4px)";
+  transition: background-color .2s ease-in-out;
+/*            ^ source.less meta.property-value.css support.type.property-name.css */
   cursor: pointer !important;
 /* ^ source.less support.type.property-name.css */
 /*          ^ source.less meta.property-value.css support.constant.property-value.css */
@@ -55,6 +59,23 @@ html::before {
   fill: rebeccapurple;
 /* ^ source.less support.type.property-name.css */
 /*        ^ source.less meta.property-value.css support.constant.color.w3c-standard-color-name.css */
+  .fade-in(@selector) {
+    @keyframes fade-in-animation {
+/*  ^ source.less meta.at-rule.keyframes.css keyword.control.at-rule.css punctuation.definition.keyword.css */
+/*             ^ source.less meta.at-rule.keyframes.css variable.other.css */
+      to {
+        opacity: 1;
+      }
+    }
+
+    .@{selector} {
+      will-change: transform;
+      animation: fade-in-animation .15s ease-in;
+/*               ^ source.less meta.property-value.css variable.other.css */
+/*                                      ^ source.less meta.property-value.css support.constant.property-value.css */
+/*                                             ^ source.less punctuation.terminator.statement.css */
+    }
+  }
 }
 
   a[data-property="text"] {
@@ -190,7 +211,7 @@ html::before {
   & + & {}
   .class & {}
   @media screen and (max-width: 100px) {
-    .mixin (@a) when not (isnumber(@a)) and (@a > 0) ... }
+    .mixin(@a) when not (isnumber(@a)) and (@a > 0) ... }
   }
 }
 
