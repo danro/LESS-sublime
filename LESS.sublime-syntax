@@ -196,7 +196,7 @@ contexts:
       scope: entity.other.attribute-name.class.css entity.other.less.mixin
 
   less-operators:
-    - match: /|$|%|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\|\||\?\:|%=|\+=|\-=|&=|not\b|or\b|and\b|when\b|from\b|to\b
+    - match: /|$|%|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\|\||\?\:|%=|\+=|\-=|&=|\bnot\b|\bor\b|\band\b|\bwhen\b|\bfrom\b|\bto\b
       scope: keyword.operator.less
     - match: '&'
       scope: keyword.operator.ampersand.less
