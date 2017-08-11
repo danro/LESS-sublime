@@ -51,6 +51,15 @@ html::before {
   color: @foreground-color;
 /*       ^ source.less meta.property-value.css variable.other.less punctuation.definition.variable.less */
 /*        ^ source.less meta.property-value.css variable.other.less */
+  --custom-background-color: green;
+/*        ^ source.less support.type.custom-property.css support.type.custom-property.name.css */
+/*                         ^ source.less meta.property-value.css punctuation.separator.key-value.css */
+  padding-top: var(--custom-background-color);
+/*              ^ source.less meta.property-value.css meta.function-call.css support.function.var.css */
+/*                ^ source.less meta.property-value.css meta.function-call.css meta.group.css punctuation.definition.group.begin.css */
+/*                  ^ source.less meta.property-value.css meta.function-call.css meta.group.css support.type.custom-property.css punctuation.definition.custom-property.css */
+/*                    ^ source.less meta.property-value.css meta.function-call.css meta.group.css support.type.custom-property.css support.type.custom-property.name.css */
+/*                                           ^ source.less punctuation.terminator.statement.css */
   padding-left: @{background-color};
 /*              ^ source.less meta.property-value.css variable.other.less punctuation.definition.variable.less */
 /*               ^ source.less meta.property-value.css variable.other.less punctuation.definition.string.begin.less */
