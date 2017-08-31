@@ -1,18 +1,24 @@
 /* SYNTAX TEST "Packages/LessImproved/LESS.sublime-syntax" */
 
 @import (reference) "@{themes}/tidal-wave.less";
-/*       ^ meta.at-rule.css meta.group.less meta.function.parameters.less */
+/*      ^^^^^^^^^^^ meta.at-rule.css meta.group.less meta.function.parameters.less */
+/*      ^ punctuation.section.group.begin.less */
+/*                ^ punctuation.section.group.end.less */
+/*                   ^ variable.other.less punctuation.definition.variable.less */
 /*                      ^ string.quoted.double.css variable.other.less string.interpolated.less */
 /*                                             ^ punctuation.terminator.statement.css */
 @import "mixins";
+/* <- meta.at-rule.css keyword.control.at-rule.css punctuation.definition.keyword.css */
 /* ^ meta.at-rule.css keyword.control.at-rule.css */
-/*      ^ string.quoted.double.css punctuation.definition.string.begin.css */
-/*        ^ string.quoted.double.css */
-/*             ^ string.quoted.double.css punctuation.definition.string.end.css */
+/*      ^^^^^^^^ string.quoted.double.css */
+/*      ^ punctuation.definition.string.begin.css */
+/*             ^ punctuation.definition.string.end.css */
 
 @foreground-color: #333;
+/* <- variable.declaration.less punctuation.definition.variable.less */
 /* ^ variable.declaration.less */
 @background-color: hsl(30,100%,96%);
+/* <- variable.declaration.less punctuation.definition.variable.less */
 /* ^ variable.declaration.less */
 
 html{}
@@ -92,13 +98,14 @@ html::before {
 }
 
   a[data-property="text"] {
-/* ^ meta.attribute-selector.css punctuation.definition.entity.css */
-/*   ^ meta.attribute-selector.css entity.other.attribute-name.attribute.css */
-/*               ^ meta.attribute-selector.css punctuation.separator.operator.css */
-/*                ^ meta.attribute-selector.css string.quoted.attribute-value.css punctuation.definition.string.begin.css */
-/*                  ^ meta.attribute-selector.css string.quoted.attribute-value.css */
-/*                     ^ meta.attribute-selector.css string.quoted.attribute-value.css punctuation.definition.string.end.css */
-/*                      ^ meta.attribute-selector.css punctuation.definition.entity.css */
+/* ^^^^^^^^^^^^^^^^^^^^^^ meta.attribute-selector.css */
+/* ^ punctuation.definition.entity.css */
+/*   ^ entity.other.attribute-name.attribute.css */
+/*               ^ punctuation.separator.operator.css */
+/*                ^ string.quoted.attribute-value.css punctuation.definition.string.begin.css */
+/*                  ^ string.quoted.attribute-value.css */
+/*                     ^ string.quoted.attribute-value.css punctuation.definition.string.end.css */
+/*                      ^ punctuation.definition.entity.css */
   a[value^="text"] {
 /*   ^ meta.attribute-selector.css entity.other.attribute-name.attribute.css */
 /*       ^ meta.attribute-selector.css punctuation.separator.operator.css */
