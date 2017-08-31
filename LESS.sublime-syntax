@@ -259,7 +259,7 @@ contexts:
         - meta_scope: meta.function-call.css
         - meta_content_scope: meta.group.css
         - match: '\)'
-          scope: punctuation.definition.group.end.css
+          scope: meta.group.css punctuation.definition.group.end.css
           pop: true
         - match: '(\()((--)({{nmchar}}+))'
           captures:
