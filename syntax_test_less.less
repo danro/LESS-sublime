@@ -1,166 +1,225 @@
 /* SYNTAX TEST "Packages/LessImproved/LESS.sublime-syntax" */
 
+@import (reference) "@{themes}/tidal-wave.less";
+/*      ^^^^^^^^^^^ meta.at-rule.css meta.group.less meta.function.parameters.less */
+/*      ^ punctuation.section.group.begin.less */
+/*                ^ punctuation.section.group.end.less */
+/*                   ^ variable.other.less punctuation.definition.variable.less */
+/*                      ^ string.quoted.double.css variable.other.less string.interpolated.less */
+/*                                             ^ punctuation.terminator.statement.css */
 @import "mixins";
-/* ^ source.less meta.at-rule.css keyword.control.at-rule.css */
-/*      ^ source.less string.quoted.double.css punctuation.definition.string.begin.css */
-/*        ^ source.less string.quoted.double.css */
-/*             ^ source.less string.quoted.double.css punctuation.definition.string.end.css */
+/* <- meta.at-rule.css keyword.control.at-rule.css punctuation.definition.keyword.css */
+/* ^ meta.at-rule.css keyword.control.at-rule.css */
+/*      ^^^^^^^^ string.quoted.double.css */
+/*      ^ punctuation.definition.string.begin.css */
+/*             ^ punctuation.definition.string.end.css */
 
 @foreground-color: #333;
-/* ^ source.less variable.declaration.less */
+/* <- variable.declaration.less punctuation.definition.variable.less */
+/* ^ variable.declaration.less */
 @background-color: hsl(30,100%,96%);
-/* ^ source.less variable.declaration.less */
+/* <- variable.declaration.less punctuation.definition.variable.less */
+/* ^ variable.declaration.less */
 
 html{}
-/* ^ source.less entity.name.tag.css */
+/* ^ entity.name.tag.css */
 html:after,
-/*  ^ source.less entity.other.pseudo-element.css punctuation.definition.entity.css */
-/*   ^ source.less entity.other.pseudo-element.css */
+/*  ^ entity.other.pseudo-element.css punctuation.definition.entity.css */
+/*   ^ entity.other.pseudo-element.css */
 html:hover,
-/*  ^ source.less entity.other.pseudo-class.css punctuation.definition.entity.css */
-/*   ^ source.less entity.other.pseudo-class.css */
+/*  ^ entity.other.pseudo-class.css punctuation.definition.entity.css */
+/*   ^ entity.other.pseudo-class.css */
 html::before {
-/* ^ source.less entity.name.tag.css, keyword.control.html.elements */
-/*  ^ source.less entity.other.pseudo-element.css punctuation.definition.entity.css */
-/*   ^ source.less entity.other.pseudo-element.css punctuation.definition.entity.css */
-/*     ^ source.less entity.other.pseudo-element.css */
+/* ^ entity.name.tag.css, keyword.control.html.elements */
+/*  ^^ entity.other.pseudo-element.css punctuation.definition.entity.css */
+/*     ^ entity.other.pseudo-element.css */
   font-family: 'Lucida Grande', Verdana, sans-serif;
   font-size: 16px;
   line-height: ~"calc(@{space} + 4px)";
+  transition: background-color .2s ease-in-out;
+/*            ^ meta.property-value.css support.type.property-name.css */
   cursor: pointer !important;
-/* ^ source.less support.type.property-name.css */
-/*          ^ source.less meta.property-value.css support.constant.property-value.css */
-/*                  ^ source.less meta.property-value.css keyword.other.important.css */
+/* ^ support.type.property-name.css */
+/*          ^ meta.property-value.css support.constant.property-value.css */
+/*                  ^ meta.property-value.css keyword.other.important.css */
   display: -webkit-flex;
-/*  ^ source.less support.type.property-name.css */
-/*         ^ source.less meta.property-value.css support.type.vendor-prefix.css */
-/*                 ^ source.less meta.property-value.css support.constant.property-value.css */
+/*  ^ support.type.property-name.css */
+/*         ^ meta.property-value.css support.type.vendor-prefix.css */
+/*                 ^ meta.property-value.css support.constant.property-value.css */
   -webkit-user-select: none;
-/*  ^ source.less support.type.vendor-prefix.css */
-/*         ^ source.less support.type.property-name.css */
+/*  ^ support.type.vendor-prefix.css */
+/*         ^ support.type.property-name.css */
   line-height: 1.5 * 20;
-/*                 ^ source.less meta.property-value.css keyword.operator.less */
+/*                 ^ meta.property-value.css keyword.operator.less */
   line-height: (1.5 %= 20);
-/*                  ^ source.less meta.property-value.css keyword.operator.less */
+/*                  ^ meta.property-value.css keyword.operator.less */
   color: @foreground-color;
-/*       ^ source.less meta.property-value.css variable.other.less punctuation.definition.variable.less */
-/*        ^ source.less meta.property-value.css variable.other.less */
+/*       ^^ meta.property-value.css variable.other.less */
+/*       ^ punctuation.definition.variable.less */
+  --custom-background-color: green;
+/*        ^ support.type.custom-property.css support.type.custom-property.name.css */
+/*                         ^ meta.property-value.css punctuation.separator.key-value.css */
+  padding-top: var(--custom-background-color);
+/*             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css */
+/*             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.css */
+/*             ^^^ support.function.var.css */
+/*                ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.css */
+/*                ^ punctuation.definition.group.begin.css */
+/*                                          ^ punctuation.definition.group.end.css */
+/*                 ^^ support.type.custom-property.css punctuation.definition.custom-property.css */
+/*                    ^ support.type.custom-property.css support.type.custom-property.name.css */
+/*                                           ^ punctuation.terminator.statement.css */
   padding-left: @{background-color};
-/*              ^ source.less meta.property-value.css variable.other.less punctuation.definition.variable.less */
-/*               ^ source.less meta.property-value.css variable.other.less punctuation.definition.string.begin.less */
-/*                ^ source.less meta.property-value.css variable.other.less string.interpolated.less */
-/*                                ^ source.less meta.property-value.css variable.other.less punctuation.definition.string.end.less */
+/*              ^^^^^^^^^^^^^^^^^^^ meta.property-value.css variable.other.less */
+/*              ^ punctuation.definition.variable.less */
+/*               ^ punctuation.definition.string.begin.less */
+/*                ^ string.interpolated.less */
+/*                                ^ punctuation.definition.string.end.less */
   fill: rebeccapurple;
-/* ^ source.less support.type.property-name.css */
-/*        ^ source.less meta.property-value.css support.constant.color.w3c-standard-color-name.css */
+/* ^ support.type.property-name.css */
+/*        ^ meta.property-value.css support.constant.color.w3c-standard-color-name.css */
+  .fade-in(@selector) {
+    @keyframes fade-in-animation {
+/*  ^ meta.at-rule.keyframes.css keyword.control.at-rule.css punctuation.definition.keyword.css */
+/*             ^ meta.at-rule.keyframes.css variable.other.css */
+      to {
+        opacity: 1;
+      }
+    }
+
+    .@{selector} {
+      will-change: transform;
+      animation: fade-in-animation .15s ease-in;
+/*               ^ meta.property-value.css variable.other.css */
+/*                                      ^ meta.property-value.css support.constant.property-value.css */
+/*                                             ^ punctuation.terminator.statement.css */
+    }
+  }
 }
 
   a[data-property="text"] {
-/* ^ source.less meta.attribute-selector.css punctuation.definition.entity.css */
-/*   ^ source.less meta.attribute-selector.css entity.other.attribute-name.attribute.css */
-/*               ^ source.less meta.attribute-selector.css punctuation.separator.operator.css */
-/*                ^ source.less meta.attribute-selector.css string.quoted.attribute-value.css punctuation.definition.string.begin.css */
-/*                  ^ source.less meta.attribute-selector.css string.quoted.attribute-value.css */
-/*                     ^ source.less meta.attribute-selector.css string.quoted.attribute-value.css punctuation.definition.string.end.css */
-/*                      ^ source.less meta.attribute-selector.css punctuation.definition.entity.css */
+/* ^^^^^^^^^^^^^^^^^^^^^^ meta.attribute-selector.css */
+/* ^ punctuation.definition.entity.css */
+/*   ^ entity.other.attribute-name.attribute.css */
+/*               ^ punctuation.separator.operator.css */
+/*                ^ string.quoted.attribute-value.css punctuation.definition.string.begin.css */
+/*                  ^ string.quoted.attribute-value.css */
+/*                     ^ string.quoted.attribute-value.css punctuation.definition.string.end.css */
+/*                      ^ punctuation.definition.entity.css */
   a[value^="text"] {
-/*   ^ source.less meta.attribute-selector.css entity.other.attribute-name.attribute.css */
-/*       ^ source.less meta.attribute-selector.css punctuation.separator.operator.css */
+/*   ^ meta.attribute-selector.css entity.other.attribute-name.attribute.css */
+/*       ^ meta.attribute-selector.css punctuation.separator.operator.css */
   a[href~="#"] {
-/*       ^ source.less meta.attribute-selector.css punctuation.separator.operator.css */
+/*       ^ meta.attribute-selector.css punctuation.separator.operator.css */
   a[value|='text'] {
-/*       ^ source.less meta.attribute-selector.css punctuation.separator.operator.css */
-/*           ^ source.less meta.attribute-selector.css string.quoted.attribute-value.css */
+/*       ^ meta.attribute-selector.css punctuation.separator.operator.css */
+/*           ^ meta.attribute-selector.css string.quoted.attribute-value.css */
   a[value$=text] {
-/*       ^ source.less meta.attribute-selector.css punctuation.separator.operator.css */
-/*          ^ source.less meta.attribute-selector.css string.unquoted.attribute-value.css */
+/*       ^ meta.attribute-selector.css punctuation.separator.operator.css */
+/*          ^ meta.attribute-selector.css string.unquoted.attribute-value.css */
   a[width*="100%" i] {
-/*       ^ source.less meta.attribute-selector.css punctuation.separator.operator.css */
-/*                ^ source.less meta.attribute-selector.css punctuation.definition.entity.css */
+/*       ^ meta.attribute-selector.css punctuation.separator.operator.css */
+/*                ^ meta.attribute-selector.css punctuation.definition.entity.css */
   a[value*="text" I] {
-/*       ^ source.less meta.attribute-selector.css punctuation.separator.operator.css */
+/*       ^ meta.attribute-selector.css punctuation.separator.operator.css */
   color: @link-color;
   text-decoration: none;
   &:hover {
     color: lighten(@link-color, 5%);
-/*  ^ source.less support.type.property-name.css */
-/*         ^ source.less meta.property-value.css meta.function-call.less support.function.less */
-/*                ^ source.less meta.property-value.css meta.function-call.less punctuation.section.group.begin.less */
-/*                   ^ source.less meta.property-value.css meta.function-call.less meta.group.less meta.function.parameters.less variable.other.less */
+/*  ^ support.type.property-name.css */
+/*         ^ meta.property-value.css meta.function-call.less support.function.less */
+/*                ^ meta.property-value.css meta.function-call.less punctuation.section.group.begin.less */
+/*                   ^ meta.property-value.css meta.function-call.less meta.group.less meta.function.parameters.less variable.other.less */
     background: linear-gradient(@grey2, @black);
-/*                            ^ source.less meta.property-value.css meta.function-call.css support.function.css */
-/*                             ^ source.less meta.property-value.css meta.group.css punctuation.section.group.begin.css */
-/*                              ^ source.less meta.property-value.css variable.other.less punctuation.definition.variable.less */
-/*                               ^ source.less meta.property-value.css variable.other.less */
-/*                                      ^ source.less meta.property-value.css variable.other.less punctuation.definition.variable.less */
-/*                                       ^ source.less meta.property-value.css variable.other.less */
-/*                                            ^ source.less meta.property-value.css meta.group.css punctuation.section.group.end.css */
+/*                            ^ meta.property-value.css meta.function-call.css support.function.css */
+/*                             ^ meta.property-value.css meta.group.css punctuation.section.group.begin.css */
+/*                              ^ meta.property-value.css variable.other.less punctuation.definition.variable.less */
+/*                               ^ meta.property-value.css variable.other.less */
+/*                                      ^ meta.property-value.css variable.other.less punctuation.definition.variable.less */
+/*                                       ^ meta.property-value.css variable.other.less */
+/*                                            ^ meta.property-value.css meta.group.css punctuation.section.group.end.css */
   }
 }
 
 
 #namespace when (@mode = huge) {
-/*                     ^ source.less meta.function.parameters.less keyword.operator.less */
+/*                     ^ meta.function.parameters.less keyword.operator.less */
   .mixin() { /* */ }
 }
-.mixin (@a) when not (isnumber(@a)) and (@a > 0) ... }
-/*                                          ^ source.less meta.function.parameters.less keyword.operator.less */
+.mixin(@a) when not (isnumber(@a)) and (@a > 0) ... }
+/*   ^ entity.other.attribute-name.class.css entity.other.less.mixin */
+/*                                         ^ meta.function.parameters.less keyword.operator.less */
 
 @media only tv /*awesome*/ and (-webkit-max-width: @pixels) and (max-pixel-ratio: 1920/1200) and (min-aspect-ratio: portrait) { }
-/*     ^ source.less meta.at-rule.media.css keyword.operator.logic.media.css */
-/*                                                         ^ source.less meta.at-rule.media.css */
-/*          ^ source.less meta.at-rule.media.css support.constant.media.css */
-/*               ^ source.less meta.at-rule.media.css comment.block.css */
-/*                             ^ source.less meta.at-rule.media.css meta.group.css punctuation.section.group.begin.css */
-/*                              ^ source.less meta.at-rule.media.css meta.group.css support.type.vendor-prefix.css */
-/*                               ^ source.less meta.at-rule.media.css meta.group.css support.type.vendor-prefix.css */
-/*                                       ^ source.less meta.at-rule.media.css meta.group.css support.type.property-name.media.css */
-/*                                               ^ source.less meta.at-rule.media.css meta.group.css punctuation.separator.key-value.css */
-/*                                                 ^ source.less meta.at-rule.media.css meta.group.css variable.other.less punctuation.definition.variable.less */
-/*                                                  ^ source.less meta.at-rule.media.css meta.group.css variable.other.less */
-/*                                                          ^ source.less meta.at-rule.media.css keyword.operator.less */
-/*                                                                                                                  ^ source.less meta.at-rule.media.css meta.group.css support.constant.property-value.css */
+/*     ^ meta.at-rule.media.css keyword.operator.logic.media.css */
+/*                                                         ^ meta.at-rule.media.css */
+/*          ^ meta.at-rule.media.css support.constant.media.css */
+/*               ^ meta.at-rule.media.css comment.block.css */
+/*                             ^ meta.at-rule.media.css meta.group.css punctuation.section.group.begin.css */
+/*                              ^ meta.at-rule.media.css meta.group.css support.type.vendor-prefix.css */
+/*                               ^ meta.at-rule.media.css meta.group.css support.type.vendor-prefix.css */
+/*                                       ^ meta.at-rule.media.css meta.group.css support.type.property-name.media.css */
+/*                                               ^ meta.at-rule.media.css meta.group.css punctuation.separator.key-value.css */
+/*                                                 ^ meta.at-rule.media.css meta.group.css variable.other.less punctuation.definition.variable.less */
+/*                                                  ^ meta.at-rule.media.css meta.group.css variable.other.less */
+/*                                                          ^ meta.at-rule.media.css keyword.operator.less */
+/*                                                                                                                  ^ meta.at-rule.media.css meta.group.css support.constant.property-value.css */
+.avatar:not(.class) {}
+/*               ^ meta.group.css entity.other.attribute-name.class.css */
+/*                ^ meta.group.css punctuation.section.group.end.css */
 .avatar:nth-child(3) {
-/*     ^ source.less entity.other.pseudo-class.css punctuation.definition.entity.css */
-/*.     ^ source.less entity.other.pseudo-class.css */
-/*.              ^ source.less meta.group.css punctuation.section.group.begin.css */
-/*.               ^ source.less meta.group.css constant.numeric.css */
-/*.                ^ source.less meta.group.css punctuation.section.group.end.css */
-/*.                 ^ source.less */
+/*     ^ entity.other.pseudo-class.css punctuation.definition.entity.css */
+/*.     ^ entity.other.pseudo-class.css */
+/*.         ^ entity.other.pseudo-class.css */
+/*.              ^ meta.group.css punctuation.section.group.begin.css */
+/*.               ^ meta.group.css constant.numeric.css */
+/*.                ^ meta.group.css punctuation.section.group.end.css */
+/*.                 ^ */
   display: inline-block;
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: url(data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7);
-/*               ^ source.less meta.property-value.css meta.group.css punctuation.definition.group.begin.css */
-/*                 ^ source.less meta.property-value.css meta.group.css string.unquoted.css */
-/*                                                                                                                                                                                                                                                                                                                                      ^ source.less meta.property-value.css meta.group.css punctuation.definition.group.end.css */
-  background: url("data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7");
-/*               ^ source.less meta.property-value.css meta.group.css punctuation.definition.group.begin.css */
-/*                ^ source.less meta.property-value.css meta.group.css string.quoted.double.css punctuation.definition.string.begin.css */
-/*                 ^ source.less meta.property-value.css meta.group.css string.quoted.double.css */
-/*                                                                                                                                                                                                                                                                                                                                       ^ source.less meta.property-value.css meta.group.css string.quoted.double.css punctuation.definition.string.end.css */
-/*                                                                                                                                                                                                                                                                                                                                        ^ source.less meta.property-value.css meta.group.css punctuation.definition.group.end.css */
-  background: url('data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7');
-/*               ^ source.less meta.property-value.css meta.group.css punctuation.definition.group.begin.css */
-/*                ^ source.less meta.property-value.css meta.group.css string.quoted.single.css punctuation.definition.string.begin.css */
-/*                 ^ source.less meta.property-value.css meta.group.css string.quoted.single.css */
-/*                                                                                                                                                                                                                                                                                                                                       ^ source.less meta.property-value.css meta.group.css string.quoted.single.css punctuation.definition.string.end.css */
-/*                                                                                                                                                                                                                                                                                                                                        ^ source.less meta.property-value.css meta.group.css punctuation.definition.group.end.css */
+  background: url(data:@{image}/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7);
+/*               ^ meta.property-value.css meta.group.css punctuation.definition.group.begin.css */
+/*                 ^ meta.property-value.css meta.group.css string.unquoted.css */
+/*                      ^ meta.property-value.css meta.group.css variable.other.less punctuation.definition.string.begin.less */
+/*                                                                                                                                                                                                                                                                                                                                         ^ meta.property-value.css meta.group.css punctuation.definition.group.end.css */
+  background: url("data:@{image}/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7");
+/*               ^ meta.property-value.css meta.group.css punctuation.definition.group.begin.css */
+/*                ^ meta.property-value.css meta.group.css string.quoted.double.css punctuation.definition.string.begin.css */
+/*                 ^ meta.property-value.css meta.group.css string.quoted.double.css */
+/*                      ^ meta.property-value.css meta.group.css string.quoted.double.css variable.other.less punctuation.definition.variable.less */
+/*                                                                                                                                                                                                                                                                                                                                          ^ meta.property-value.css meta.group.css string.quoted.double.css punctuation.definition.string.end.css */
+/*                                                                                                                                                                                                                                                                                                                                           ^ meta.property-value.css meta.group.css punctuation.definition.group.end.css */
+  background: url('data:@{image}/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7');
+/*               ^ meta.property-value.css meta.group.css punctuation.definition.group.begin.css */
+/*                ^ meta.property-value.css meta.group.css string.quoted.single.css punctuation.definition.string.begin.css */
+/*                 ^ meta.property-value.css meta.group.css string.quoted.single.css */
+/*                      ^ meta.property-value.css meta.group.css string.quoted.single.css variable.other.less punctuation.definition.variable.less */
+/*                                                                                                                                                                                                                                                                                                                                          ^ meta.property-value.css meta.group.css string.quoted.single.css punctuation.definition.string.end.css */
+/*                                                                                                                                                                                                                                                                                                                                           ^ meta.property-value.css meta.group.css punctuation.definition.group.end.css */
 }
 
 @import "variables";
 @import (reference) "variables";
 
-.variables {
+#variables {
   @variable: 10px;
   @another-variable: @variable;
 
   width: @variable + @another-variable;
   width: @variable*2;
 
-}
+  &:first-child {}
 
+  .@{varname}--subclass#another@{variable}id[data-attr="text"] { color: @orangy; }
+/*            ^ entity.other.attribute-name.class.css */
+/*                     ^ entity.other.attribute-name.id.css punctuation.definition.entity.css */
+/*                             ^ entity.other.attribute-name.id.css variable.other.less punctuation.definition.variable.less */
+/*                                        ^ entity.other.attribute-name.id.css */
+}
+#@{varname}--subclass { color: @orangy; }
+/*          ^ entity.other.attribute-name.id.css */
 .functions {
   color: hue(orange);
   color: lighten(@color, 10%);
@@ -175,17 +234,17 @@ html::before {
   & + & {}
   .class & {}
   @media screen and (max-width: 100px) {
-    .mixin (@a) when not (isnumber(@a)) and (@a > 0) ... }
+    .mixin(@a) when not (isnumber(@a)) and (@a > 0) ... }
   }
 }
 
 .a-test-mixin(@color: black; /*@margin: 10px;*/ @padding: 20px) when (lightness(@a) >= 50%) {
   color: mix(@grey4, @grey5);
-/*       ^ source.less meta.property-value.css meta.function-call.less support.function.less */
+/*       ^ meta.property-value.css meta.function-call.less support.function.less */
   background: mix(@white, mix(@grey4, @grey5));
-/*                          ^ source.less meta.property-value.css meta.function-call.less support.function.less */
+/*                          ^ meta.property-value.css meta.function-call.less support.function.less */
   background-color: linear-gradient(@white, mix(@grey4, mix(@grey4, @grey5)));
-/*                                          ^ source.less meta.property-value.css meta.function-call.less support.function.less */
+/*                                          ^ meta.property-value.css meta.function-call.less support.function.less */
   padding: @padding;
 }
 
