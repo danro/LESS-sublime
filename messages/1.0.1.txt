@@ -1,0 +1,18 @@
+LESS 1.0.1
+----------------------
+
+Big changes are coming to LESS!
+
+We are about to merge a lot of  changes into LESS to improve of features
+across the board and fix a bunch of bugs. To make the move as smooth as
+possible we'll be doing a period of beta releases.
+To use those beta's, you can subscribe to pre-releases by editing your
+Package Control preferences and adding LESS to the "install_prereleases" key:
+
+"install_prereleases":
+[
+  "LESS"
+]
+
+If you find any bugs, please let us know:
+https://github.com/danro/LESS-sublime/issues
