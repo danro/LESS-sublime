@@ -1,0 +1,10 @@
+LESS 2.0.0 Pre-release
+======================
+
+Less for Sublime Text has been updated! It now finally supports things like
+flex-box syntax and it's in line with the scope naming guidelines for Sublime
+Text 3.0.
+
+A lot of changes were made to get to this point and we were able to close
+a lot of issues. If something doesn't work for you let us know at:
+https://github.com/danro/LESS-sublime/issues

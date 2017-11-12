@@ -17,12 +17,6 @@
             [
               {
                 "command": "open_file",
-                "args": {"file": "${packages}/LESS/README.md"},
-                "caption": "README"
-              },
-              { "caption": "-" },
-              {
-                "command": "open_file",
                 "args": {"file": "${packages}/LESS/LESS.sublime-settings"},
                 "caption": "Settings – Default"
               },
