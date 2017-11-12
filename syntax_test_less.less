@@ -1,4 +1,4 @@
-/* SYNTAX TEST "Packages/LessImproved/LESS.sublime-syntax" */
+/* SYNTAX TEST "Packages/LESS/LESS.sublime-syntax" */
 
 @import (reference) "@{themes}/tidal-wave.less";
 /*      ^^^^^^^^^^^ meta.at-rule.css meta.group.less meta.function.parameters.less */
@@ -125,6 +125,9 @@ html::before {
   color: @link-color;
   text-decoration: none;
   &:hover {
+    object-fit: scale-down;
+/*  ^^^^^^^^^^ support.type.property-name.css */
+/*              ^^^^^^^^^^ meta.property-value.css support.constant.property-value.css */
     color: lighten(@link-color, 5%);
 /*  ^ support.type.property-name.css */
 /*         ^ meta.property-value.css meta.function-call.less support.function.less */
