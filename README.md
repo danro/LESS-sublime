@@ -12,5 +12,14 @@ Highlights code using up to date specifications for properties and values to hel
 
 This package is available through [Package Control](https://packagecontrol.io).
 
-Alternatively you can download a release from the [GitHub repo](https://github.com/danro/LESS-sublime) and extract it to your Packages folder.
+## Pre-releases
 
+Big changes are coming to LESS! To try them out now, you can subscribe to pre-releases by editing your Package Control preferences and adding LESS to the "install_prereleases" key:
+
+
+```json
+"install_prereleases":
+[
+  "LESS"
+]
+```
