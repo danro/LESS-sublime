@@ -226,6 +226,16 @@ contexts:
           pop: true
         - match: ':'
           scope: punctuation.separator.key-value.css
+        - match: '\{'
+          scope: punctuation.section.property-list.begin.css
+          push:
+            - meta_scope: test.less
+            - match: '\}'
+              scope: punctuation.section.property-list.end.css
+              pop: true
+            - include: rule-list
+            - include: terminator
+        - include: comment-line
         - include: comment-block
         - include: color-values
         - include: less-functions

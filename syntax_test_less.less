@@ -203,6 +203,23 @@ html::before {
 /*                                                                                                                                                                                                                                                                                                                                           ^ meta.property-value.css meta.group.css punctuation.definition.group.end.css */
 }
 
+// http://lesscss.org/features/#detached-rulesets-feature
+header {
+  background-color: blue;
+
+  .desktop-and-old-ie({
+/*                    ^ punctuation.section.property-list.begin.css */
+    background-color: red;
+/*  ^^^^^^^^^^^^^^^^  meta.property-name.css support.type.property-name.css */
+/*                  ^ punctuation.separator.key-value.css */
+/*                    ^^^ meta.property-value.css support.constant.color.w3c-standard-color-name.css */
+/*                       ^ punctuation.terminator.statement.css */
+    width: @variable + @another-variable;
+    height: 100px;
+  });
+/*^ punctuation.section.property-list.end.css */
+}
+
 @import "variables";
 @import (reference) "variables";
 
