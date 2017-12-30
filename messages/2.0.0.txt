@@ -1,0 +1,10 @@
+LESS 2.0.0
+======================
+
+Thank you for installing Less for Sublime Text.
+
+2.0 supports things like flex-box syntax, custom properties.
+Less is now also in line with the scope naming guidelines for Sublime Text 3.0.
+
+If something doesn't work for you let us know at:
+https://github.com/danro/LESS-sublime/issues
