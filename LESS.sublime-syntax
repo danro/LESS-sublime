@@ -243,11 +243,13 @@ contexts:
         - match: '\{'
           scope: punctuation.section.property-list.begin.css
           push:
-            - meta_scope: test.less
             - match: '\}'
               scope: punctuation.section.property-list.end.css
               pop: true
+            - include: selector
             - include: rule-list
+            - include: less-operators
+            - include: less-parameters
             - include: terminator
         - include: comment-line
         - include: comment-block

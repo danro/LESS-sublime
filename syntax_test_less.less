@@ -218,6 +218,16 @@ html::before {
 header {
   background-color: blue;
 
+  #hover({
+/*       ^ punctuation.section.property-list.begin.css */
+    .site-header-info-extra-tooltip {
+      opacity: 1;
+      #transition(~'opacity @{duration-short} @{ease}')
+/*                ^ string.quoted.single.css markup.raw.less keyword.operator.less */
+    }
+
+  })
+
   .desktop-and-old-ie({
 /*                    ^ punctuation.section.property-list.begin.css */
     background-color: red;
