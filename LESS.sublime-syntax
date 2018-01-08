@@ -98,6 +98,20 @@ contexts:
         - meta_scope: meta.at-rule.css
         - match: '\s*(?=[\{;])'
           pop: true
+        - match: (url)(\()
+          captures:
+            1: meta.function-call.css support.function.url.css
+            2: punctuation.definition.group.begin.css
+          push:
+            - meta_scope: meta.group.css
+            - match: '\)'
+              scope: punctuation.definition.group.end.css
+              pop: true
+            - include: string-double
+            - include: string-single
+            - include: less-interpolation
+            - match: '[\/\.a-zA-Z0-9_\-:;,?=]*'
+              scope: string.unquoted.css
         - include: comment-block
         - include: less-parameters
         - include: string-double
