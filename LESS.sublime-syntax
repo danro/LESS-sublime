@@ -212,6 +212,7 @@ contexts:
         - include: string-double
         - include: string-single
         - include: less-variables
+        - include: css-variables
         - include: less-operators
         - include: commas
         - include: terminator
@@ -259,6 +260,7 @@ contexts:
         - include: string-double
         - include: string-single
         - include: less-variables
+        - include: css-variables
         - include: less-operators
         - include: commas
         - include: terminator

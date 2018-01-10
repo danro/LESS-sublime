@@ -136,6 +136,10 @@ html::before {
   color: @link-color;
   text-decoration: none;
   &:hover {
+    .message-mixin(success; var(--green); var(--green-dark));
+/*                          ^^^ support.function.var.css */
+/*                              ^^ punctuation.definition.custom-property.css*/
+/*                                ^ support.type.custom-property.name.css */
     object-fit: scale-down;
 /*  ^^^^^^^^^^ support.type.property-name.css */
 /*              ^^^^^^^^^^ meta.property-value.css support.constant.property-value.css */
