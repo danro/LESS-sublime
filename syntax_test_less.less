@@ -32,6 +32,14 @@
 /* <- variable.declaration.less punctuation.definition.variable.less */
 /* ^ variable.declaration.less */
 
+filter,
+/* ^ entity.name.tag.css */
+filter {}
+/* ^ entity.name.tag.css */
+filter{}
+/* ^ entity.name.tag.css */
+filter::before {}
+/* ^ entity.name.tag.css */
 html{}
 /* ^ entity.name.tag.css */
 html:after,
@@ -89,6 +97,19 @@ html::before {
   fill: rebeccapurple;
 /* ^ support.type.property-name.css */
 /*        ^ meta.property-value.css support.constant.color.w3c-standard-color-name.css */
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
+/* ^ support.type.property-name.css */
+  filter,
+/* ^ entity.name.tag.css */
+  filter {}
+/* ^ entity.name.tag.css */
+  filter{}
+/* ^ entity.name.tag.css */
+  filter:hover {}
+/* ^ entity.name.tag.css */
+  filter::before {}
+/* ^ entity.name.tag.css */
+
   .fade-in(@selector) {
     @keyframes fade-in-animation {
 /*  ^ meta.at-rule.keyframes.css keyword.control.at-rule.css punctuation.definition.keyword.css */
@@ -99,8 +120,12 @@ html::before {
     }
 
     .@{selector} {
-      will-change: transform;
+      animation : progress-fade-in-animation .15s ease-in;
+/*                ^ meta.property-value.css variable.other.css */
+/*    ^ meta.property-name.css support.type.property-name.css */
       animation: progress-fade-in-animation .15s ease-in;
+/*             ^ source.less punctuation.separator.key-value.css */
+/*    ^ meta.property-name.css support.type.property-name.css */
 /*               ^ meta.property-value.css variable.other.css */
 /*                                               ^ meta.property-value.css support.constant.property-value.css */
 /*                                                      ^ punctuation.terminator.statement.css */
