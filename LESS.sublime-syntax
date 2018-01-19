@@ -25,8 +25,7 @@ contexts:
     - include: less-variables
     - include: css-variables
     - include: less-functions
-    - include: string-double
-    - include: string-single
+    - include: literal-string
     - include: selector
     - include: rule-list
     - include: less-operators
@@ -35,6 +34,13 @@ contexts:
     - include: comment-block
     - include: comment-line
     - include: property-names
+
+  qualified-name:
+    - match: '(?:({{ident}})|(\*))?([|])(?!=)'
+      captures:
+        1: entity.other.namespace-prefix.css
+        2: entity.name.namespace.wildcard.css
+        3: punctuation.separator.namespace.css
 
   curlies:
     - match: '\{'
@@ -107,15 +113,12 @@ contexts:
             - match: '\)'
               scope: punctuation.definition.group.end.css
               pop: true
-            - include: string-double
-            - include: string-single
-            - include: less-interpolation
+            - include: literal-string
             - match: '[\/\.a-zA-Z0-9_\-:;,?=]*'
               scope: string.unquoted.css
         - include: comment-block
         - include: less-parameters
-        - include: string-double
-        - include: string-single
+        - include: literal-string
     - match: \s*((@)keyframes)(?=.*?)
       captures:
         1: keyword.control.at-rule.css
@@ -186,8 +189,7 @@ contexts:
         - match: '\)'
           scope: punctuation.definition.group.end.css
           pop: true
-        - include: string-double
-        - include: string-single
+        - include: literal-string
         - include: less-interpolation
         - match: '[\/\.a-zA-Z0-9_\-:;,]*'
           scope: string.unquoted.css
@@ -209,8 +211,7 @@ contexts:
         - include: color-values
         - include: less-functions
         - include: numeric-values
-        - include: string-double
-        - include: string-single
+        - include: literal-string
         - include: less-variables
         - include: css-variables
         - include: less-operators
@@ -257,8 +258,7 @@ contexts:
         - include: color-values
         - include: less-functions
         - include: numeric-values
-        - include: string-double
-        - include: string-single
+        - include: literal-string
         - include: less-variables
         - include: css-variables
         - include: less-operators
@@ -373,8 +373,7 @@ contexts:
     - include: color-values
     - include: numeric-values
     - include: selector
-    - include: string-double
-    - include: string-single
+    - include: literal-string
     - include: comment-block
     - match: \b(wrap-reverse|wrap|whitespace|wait|w-resize|visible|vertical-text|vertical-ideographic|uppercase|upper-roman|upper-alpha|unicase|underline|ultra-expanded|ultra-condensed|transparent|transform|top|titling-caps|thin|thick|text-top|text-bottom|text|tb-rl|table-row-group|table-row|table-header-group|table-footer-group|table-column-group|table-column|table-cell|table|sw-resize|subpixel-antialiased|super|strict|stretch|step-start|step-end|static|start|sRGB|square|square|space-between|space-around|space|solid|soft-light|small-caps|separate|semi-expanded|semi-condensed|se-resize|scroll|screen|scale-down|saturation|s-resize|running|rtl|row-reverse|row-resize|row|round|round|right|ridge|reverse|repeat-y|repeat-x|repeat|relative|progressive|progress|pre-wrap|pre-line|pre|pointer|petite-caps|paused|pan-y|pan-x|pan-up|pan-right|pan-left|pan-down|padding-box|overline|overlay|outside|outset|optimizeSpeed|optimizeSpeed|optimizeQuality|optimizeLegibility|opacity|oblique|nw-resize|nowrap|not-allowed|normal|nonzero|none|no-repeat|no-drop|newspaper|ne-resize|n-resize|multiply|move|miter|middle|middle|medium|max-height|manipulation|main-size|luminosity|ltr|lr-tb|lowercase|lower-roman|lower-alpha|loose|local|list-item|linearRGB|linear(?!-)|line-through|line-edge|line|lighter|lighten|left|keep-all|justify|italic|inter-word|inter-ideograph|inside|inset|inline-block|inline|inherit|infinite|inactive|ideograph-space|ideograph-parenthesis|ideograph-numeric|ideograph-alpha|hue|horizontal|hidden|help|hard-light|hand|groove|geometricPrecision |geometricPrecision|forwards|flex-start|flex-end|flex|fixed|extra-expanded|extra-condensed|expanded|exclusion|evenodd |end |ellipsis|ease-out|ease-in-out|ease-in|ease|e-resize|double|dotted|distribute-space|distribute-letter|distribute-all-lines|distribute|disc|disabled|difference|default|decimal|dashed|darken|currentColor|crosshair|crispEdges|cover|content-box|contain|condensed|column-reverse|column|color-dodge|color-burn|color|collapse|col-resize|circle|char|center|capitalize|butt|break-word|break-all|bottom|both|border-box|bolder|bold|block|bidi-override|bevel|below|baseline|balance|backwards|auto|antialiased|always|alternate-reverse|alternate|all-small-caps|all-scroll|all-petite-caps|all|absolute)(?![-])\b
       scope: support.constant.property-value.css
@@ -403,8 +402,7 @@ contexts:
         - include: less-variables
         - include: css-variables
         - include: less-functions
-        - include: string-single
-        - include: string-double
+        - include: literal-string
         - include: color-values
         - include: numeric-values
     - include: property-names
@@ -477,38 +475,54 @@ contexts:
       scope: meta.selector.css entity.other.pseudo-element.css
       captures:
         1: punctuation.definition.entity.css
-    - match: '(?i)(\[)\s*(-?[_a-z\\][_a-z0-9\-\\]*)(?:\s*([~|^$*]?=)\s*(?:(-?[_a-z\\][_a-z0-9\-\\]*)|(([''"])(?:[^\\]|\\.)*([''"]))))?\s*(\]|i\])'
-      scope: meta.selector.css meta.attribute-selector.css
-      captures:
-        1: punctuation.definition.entity.css
-        2: entity.other.attribute-name.attribute.css
-        3: punctuation.separator.operator.css
-        4: string.unquoted.attribute-value.css
-        5: string.quoted.attribute-value.css
-        6: punctuation.definition.string.begin.css
-        7: punctuation.definition.string.end.css
-        8: punctuation.definition.entity.css
-
-  string-double:
-    - match: '"'
-      scope: punctuation.definition.string.begin.css
+    - match: '\['
+      scope: punctuation.definition.entity.css
       push:
-        - meta_scope: string.quoted.double.css
-        - match: '"'
-          scope: punctuation.definition.string.end.css
+        - meta_scope: meta.attribute-selector.css
+        - include: qualified-name
+        - match: '({{ident}})'
+          scope: entity.other.attribute-name.css
+        - match: '\s*([~*|^$]?=)\s*'
+          captures:
+            1: keyword.operator.attribute-selector.css
+          push:
+            - match: '[^\s\]\[''"]'
+              scope: string.unquoted.css
+            - include: literal-string
+            - match: '(?=(\s|\]))'
+              pop: true
+        - match: '(?:\s+([iI]))?'  # case insensitive flag
+          captures:
+            1: keyword.other.css
+        - match: '\]'
+          scope: punctuation.definition.entity.css
           pop: true
-        - match: \\.
-          scope: constant.character.escape.css
-        - include: less-interpolation
 
-  string-single:
+  literal-string:
     - match: "'"
       scope: punctuation.definition.string.begin.css
       push:
         - meta_scope: string.quoted.single.css
-        - match: "'"
-          scope: punctuation.definition.string.end.css
+        - match: (')|(\n)
+          captures:
+            1: punctuation.definition.string.end.css
+            2: invalid.illegal.newline.css
           pop: true
-        - match: \\.
-          scope: constant.character.escape.css
-        - include: less-interpolation
+        - include: string-content
+    - match: '"'
+      scope: punctuation.definition.string.begin.css
+      push:
+        - meta_scope: string.quoted.double.css
+        - match: (")|(\n)
+          captures:
+            1: punctuation.definition.string.end.css
+            2: invalid.illegal.newline.css
+          pop: true
+        - include: string-content
+
+  string-content:
+    - match: \\\s*\n
+      scope: constant.character.escape.newline.css
+    - match: '\\(\h{1,6}|.)'
+      scope: constant.character.escape.css
+    - include: less-interpolation

@@ -132,32 +132,33 @@ html::before {
     }
   }
 }
-
+  a[value="text"], a[value="text"] { }
+/*                  ^ punctuation.definition.entity.css */
   a[data-property="text"] {
 /* ^^^^^^^^^^^^^^^^^^^^^^ meta.attribute-selector.css */
 /* ^ punctuation.definition.entity.css */
-/*   ^ entity.other.attribute-name.attribute.css */
-/*               ^ punctuation.separator.operator.css */
-/*                ^ string.quoted.attribute-value.css punctuation.definition.string.begin.css */
-/*                  ^ string.quoted.attribute-value.css */
-/*                     ^ string.quoted.attribute-value.css punctuation.definition.string.end.css */
+/*   ^ entity.other.attribute-name.css */
+/*               ^ keyword.operator.attribute-selector.css */
+/*                ^ string.quoted.double.css punctuation.definition.string.begin.css */
+/*                  ^ string.quoted.double.css */
+/*                     ^ punctuation.definition.string.end.css */
 /*                      ^ punctuation.definition.entity.css */
   a[value^="text"] {
-/*   ^ meta.attribute-selector.css entity.other.attribute-name.attribute.css */
-/*       ^ meta.attribute-selector.css punctuation.separator.operator.css */
+/*   ^ meta.attribute-selector.css entity.other.attribute-name.css */
+/*       ^ meta.attribute-selector.css keyword.operator.attribute-selector.css */
   a[href~="#"] {
-/*       ^ meta.attribute-selector.css punctuation.separator.operator.css */
+/*       ^ meta.attribute-selector.css keyword.operator.attribute-selector.css */
   a[value|='text'] {
-/*       ^ meta.attribute-selector.css punctuation.separator.operator.css */
-/*           ^ meta.attribute-selector.css string.quoted.attribute-value.css */
+/*       ^ meta.attribute-selector.css keyword.operator.attribute-selector.css */
+/*           ^ meta.attribute-selector.css string.quoted.single.css */
   a[value$=text] {
-/*       ^ meta.attribute-selector.css punctuation.separator.operator.css */
-/*          ^ meta.attribute-selector.css string.unquoted.attribute-value.css */
+/*       ^ meta.attribute-selector.css keyword.operator.attribute-selector.css */
+/*          ^ meta.attribute-selector.css string.unquoted.css */
   a[width*="100%" i] {
-/*       ^ meta.attribute-selector.css punctuation.separator.operator.css */
-/*                ^ meta.attribute-selector.css punctuation.definition.entity.css */
+/*       ^ meta.attribute-selector.css keyword.operator.attribute-selector.css */
+/*                ^ meta.attribute-selector.css keyword.other.css */
   a[value*="text" I] {
-/*       ^ meta.attribute-selector.css punctuation.separator.operator.css */
+/*       ^ meta.attribute-selector.css keyword.operator.attribute-selector.css */
   color: @link-color;
   text-decoration: none;
   &:hover {
