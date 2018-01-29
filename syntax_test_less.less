@@ -255,7 +255,18 @@ header {
       #transition(~'opacity @{duration-short} @{ease}')
 /*                ^ string.quoted.single.css markup.raw.less keyword.operator.less */
     }
+    .site-header-info-extra-tooltip {
+/*  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css entity.other.attribute-name.class.css */
+      opacity: 1;
+      #transition(~'opacity @{duration-short} @{ease}')
 
+      .site-header-info-extra-tooltip {
+/*    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css entity.other.attribute-name.class.css */
+        opacity: 1;
+        #transition(~'opacity @{duration-short} @{ease}')
+
+      }
+    }
   })
 
   .desktop-and-old-ie({
