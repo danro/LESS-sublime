@@ -211,8 +211,10 @@ contexts:
         - include: less-operators
         - include: commas
         - include: terminator
-    - match: '[\.#](?![0-9])[a-zA-Z0-9_-]+(?=\()'
-      scope: entity.other.attribute-name.class.css entity.other.less.mixin
+    - match: '([\.#])(?![0-9])[a-zA-Z0-9_-]+(?=\()'
+      scope: meta.selector.css entity.other.attribute-name.class.css entity.other.less.mixin
+      captures:
+        1: punctuation.definition.entity.css
 
   less-operators:
     - match: /|$|%|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\|\||\?\:|%=|\+=|\-=|&=|\bnot\b|\bor\b|\band\b|\bwhen\b|\bfrom\b|\bto\b

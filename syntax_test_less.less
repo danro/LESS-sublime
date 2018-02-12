@@ -162,6 +162,12 @@ html::before {
   color: @link-color;
   text-decoration: none;
   &:hover {
+    .mixin   { /* */ }
+/*  ^ punctuation.definition.entity.css */
+/*  ^^^^^^ meta.selector.css */
+    .mixin() { /* */ }
+/*  ^ punctuation.definition.entity.css */
+/*  ^^^^^^ meta.selector.css */
     .message-mixin(success; var(--green); var(--green-dark));
 /*                          ^^^ support.function.var.css */
 /*                              ^^ punctuation.definition.custom-property.css*/
@@ -188,6 +194,7 @@ html::before {
 
 #namespace when (@mode = huge) {
 /*                     ^ meta.function.parameters.less keyword.operator.less */
+  .mixin   { /* */ }
   .mixin() { /* */ }
 }
 .mixin(@a) when not (isnumber(@a)) and (@a > 0) ... }
