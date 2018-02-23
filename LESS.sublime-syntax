@@ -124,7 +124,7 @@ contexts:
         - include: comment-block
         - match: '[a-zA-Z0-9_-]+'
           scope: variable.other.css
-    - match: \s*((@)media)(?=.*?)
+    - match: \s*((@)media)(?=\s+.*?)
       captures:
         1: keyword.control.at-rule.media.css
         2: punctuation.definition.keyword.css
