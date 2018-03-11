@@ -323,7 +323,7 @@ contexts:
       scope: constant.other.color.rgb-value.css
       captures:
         1: punctuation.definition.constant.css
-    - match: '(?x)(?:-|\+)?(?:(?:[0-9]+(?:\.[0-9]+)?)|(?:\.[0-9]+))((?:vw|vmin|vh|turn|s|rem|rad|px|pt|pc|ms|mm|in|grad|ex|em|dppx|dpi|dpcm|deg|cm|ch)\b|%)?'
+    - match: '(?x)(?:-|\+)?(?:(?:[0-9]+(?:\.[0-9]+)?)|(?:\.[0-9]+))((?:vw|vmin|vmax|vh|turn|s|rem|rad|px|pt|pc|ms|mm|in|grad|fr|ex|em|dppx|dpi|dpcm|deg|cm|ch)\b|%)?'
       scope: constant.numeric.css
       captures:
         1: keyword.other.unit.css
