@@ -10,4 +10,4 @@ Highlights code using up to date specifications for properties and values to hel
 
 ## Installation
 
-This package is available through [Package Control](https://packagecontrol.
+This package is available through [Package Control](https://packagecontrol.io)
