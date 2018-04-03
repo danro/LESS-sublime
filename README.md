@@ -10,16 +10,4 @@ Highlights code using up to date specifications for properties and values to hel
 
 ## Installation
 
-This package is available through [Package Control](https://packagecontrol.io).
-
-## Pre-releases
-
-Big changes are coming to LESS! To try them out now, you can subscribe to pre-releases by editing your Package Control preferences and adding LESS to the "install_prereleases" key:
-
-
-```json
-"install_prereleases":
-[
-  "LESS"
-]
-```
+This package is available through [Package Control](https://packagecontrol.
