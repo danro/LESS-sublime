@@ -268,7 +268,7 @@ PROPERTY_DICT = {
     'grid': [],
     'grid-area': [],
     'grid-auto-columns': ['auto', '<percentage>', '<length>'],
-    'grid-auto-flow': ['row', 'column' 'dense'],
+    'grid-auto-flow': ['row', 'column', 'dense'],
     'grid-auto-rows': ['auto', '<percentage>', '<length>'],
     'grid-column-gap': ['<length>', '<percentage>'],
     'grid-gap': ['<length>', '<percentage>'],
@@ -487,13 +487,13 @@ class LESSCompletions(sublime_plugin.EventListener):
                     add_semi_colon = view.substr(sublime.Region(loc, loc + 1)) != ';'
 
                     for value in values:
-                        desc = value
+                        desc = value + "\t" + prop_name
                         snippet = value
 
                         if add_semi_colon:
                             snippet += ";"
 
-                        if snippet.find("$1") != -1:
+                        if "$1" in snippet:
                             desc = desc.replace("$1", "")
 
                         l.append((desc, snippet))
@@ -506,8 +506,8 @@ class LESSCompletions(sublime_plugin.EventListener):
 
             for prop in self.props:
                 if add_colon:
-                    l.append((prop, prop + ": "))
+                    l.append((prop + "\tproperty", prop + ": "))
                 else:
-                    l.append((prop, prop))
+                    l.append((prop + "\tproperty", prop))
 
             return (l, sublime.INHIBIT_WORD_COMPLETIONS)
