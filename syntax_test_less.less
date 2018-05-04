@@ -167,6 +167,9 @@ html::before {
   a[value*="text" I] {
 /*       ^ meta.attribute-selector.css keyword.operator.attribute-selector.css */
   color: @link-color;
+/*       ^ punctuation.definition.variable.less */
+  color: @@color; // variable variables
+/*       ^^ punctuation.definition.variable.less */
   text-decoration: none;
   &:hover {
     .mixin   { /* */ }

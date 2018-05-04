@@ -292,7 +292,7 @@ contexts:
            4: support.type.custom-property.name.css
 
   less-variables:
-    - match: '(@)([a-zA-Z0-9_-][\w-]*)'
+    - match: '(@{1,2})([a-zA-Z0-9_-][\w-]*)'
       scope: variable.other.less
       captures:
         1: punctuation.definition.variable.less
