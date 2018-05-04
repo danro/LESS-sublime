@@ -464,8 +464,12 @@ contexts:
           pop: true
         - match: '\('
           scope: meta.group.css punctuation.section.group.begin.css
-        - match: '[0-9]+'
+        - match: '[+-]'
+          scope: keyword.operator.css
+        - match: '[0-9]+(n*)'
           scope: meta.group.css constant.numeric.css
+          captures:
+            1: keyword.other.unit.css
     - match: (:|::)(selection|first-line|first-letter|before|backdrop|after)\b
       scope: meta.selector.css entity.other.pseudo-element.css
       captures:
