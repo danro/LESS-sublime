@@ -5,7 +5,7 @@
 	<key>name</key>
 	<string>Comments</string>
 	<key>scope</key>
-	<string>source.less</string>
+	<string>source.css.less</string>
 	<key>settings</key>
 	<dict>
 		<key>shellVariables</key>
