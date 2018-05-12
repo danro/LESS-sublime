@@ -20,20 +20,20 @@ contexts:
     - include: comment-block
     - include: comment-line
     - include: commas
-    - include: terminator
-    - include: at-rules
-    - include: less-declarations
-    - include: less-variables
     - include: css-variables
-    - include: less-functions
+    - include: terminator
     - include: literal-string
+    - include: at-rules
     - include: selector
     - include: rule-list
-    - include: less-operators
-    - include: less-parameters
     - include: numeric-values
     - include: property-names
     - include: property-list
+    - include: less-functions
+    - include: less-declarations
+    - include: less-variables
+    - include: less-operators
+    - include: less-parameters
 
   qualified-name:
     - match: '(?:({{ident}})|(\*))?([|])(?!=)'
@@ -111,8 +111,8 @@ contexts:
             - match: '[\/\.a-zA-Z0-9_\-:;,?=]*'
               scope: string.unquoted.css
         - include: comment-block
-        - include: less-parameters
         - include: literal-string
+        - include: less-parameters
     - match: \s*((@)keyframes)(?=.*?)
       captures:
         1: keyword.control.at-rule.css
@@ -163,15 +163,15 @@ contexts:
               scope: support.constant.property-value.css
             - match: ':'
               scope: punctuation.separator.key-value.css
+            - include: comment-block
+            - include: comment-line
             - include: numeric-values
+            - include: css-variables
             - include: property-names
             - include: property-values
             - include: less-functions
             - include: less-variables
-            - include: css-variables
             - include: less-operators
-            - include: comment-block
-            - include: comment-line
 
   less-data-uri:
     - match: (url)(\()(?=(data:|"data:|'data:))
@@ -202,19 +202,15 @@ contexts:
         - match: ':'
           scope: punctuation.separator.key-value.css
         - include: comment-block
-        - include: color-values
-        - include: less-functions
-        - include: numeric-values
-        - include: literal-string
-        - include: less-variables
-        - include: css-variables
-        - include: less-operators
         - include: commas
         - include: terminator
-    - match: '([\.#])(?![0-9])[a-zA-Z0-9_-]+(?=\()'
-      scope: meta.selector.css entity.other.attribute-name.class.css entity.other.less.mixin
-      captures:
-        1: punctuation.definition.entity.css
+        - include: color-values
+        - include: numeric-values
+        - include: literal-string
+        - include: css-variables
+        - include: less-functions
+        - include: less-variables
+        - include: less-operators
 
   less-operators:
     - match: /|$|%|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\|\||\?\:|%=|\+=|\-=|&=|\bnot\b|\bor\b|\band\b|\bwhen\b|\bfrom\b|\bto\b
@@ -247,18 +243,18 @@ contexts:
           pop: true
         - match: ':'
           scope: punctuation.separator.key-value.css
-        - include: property-list
         - include: comment-line
         - include: comment-block
-        - include: color-values
-        - include: less-functions
-        - include: numeric-values
-        - include: literal-string
-        - include: less-variables
-        - include: css-variables
-        - include: less-operators
         - include: commas
         - include: terminator
+        - include: property-list
+        - include: color-values
+        - include: numeric-values
+        - include: css-variables
+        - include: literal-string
+        - include: less-functions
+        - include: less-variables
+        - include: less-operators
 
   less-declarations:
     - match: '(@)([a-zA-Z0-9_-][\w-]*)'
@@ -435,17 +431,17 @@ contexts:
       scope: keyword.other.important.css
       captures:
         1: punctuation.definition.keyword.css
+    - include: comment-block
+    - include: literal-string
     - include: vendor-prefixes
-    - include: less-variables
+    - include: color-values
+    - include: numeric-values
     - include: css-variables
+    - include: less-variables
     - include: less-data-uri
     - include: less-functions
     - include: less-operators
-    - include: color-values
-    - include: numeric-values
     - include: selector
-    - include: literal-string
-    - include: comment-block
     - match: \b(wrap-reverse|wrap|whitespace|wait|w-resize|visible|vertical-text|vertical-ideographic|uppercase|upper-roman|upper-alpha|unicase|underline|ultra-expanded|ultra-condensed|transparent|transform|top|titling-caps|thin|thick|text-top|text-bottom|text|tb-rl|table-row-group|table-row|table-header-group|table-footer-group|table-column-group|table-column|table-cell|table|sw-resize|super|subpixel-antialiased|strict|stretch|step-start|step-end|static|start|sRGB|square|square|space-between|space-around|space|solid|soft-light|small-caps|separate|semi-expanded|semi-condensed|se-resize|scroll|screen|scale-down|saturation|s-resize|running|rtl|row-reverse|row-resize|row|round|round|right|ridge|reverse|repeat-y|repeat-x|repeat|relative|progressive|progress|pre-wrap|pre-line|pre|pointer|petite-caps|paused|pan-y|pan-x|pan-up|pan-right|pan-left|pan-down|padding-box|overline|overlay|outside|outset|optimizeSpeed|optimizeSpeed|optimizeQuality|optimizeLegibility|open-quote|opacity|oblique|nw-resize|nowrap|not-allowed|normal|nonzero|none|no-repeat|no-open-quote|no-drop|no-close-quote|newspaper|ne-resize|n-resize|multiply|move|miter|middle|middle|medium|max-height|manipulation|main-size|luminosity|ltr|lr-tb|lowercase|lower-roman|lower-alpha|loose|local|list-item|linearRGB|linear(?!-)|line-through|line-edge|line|lighter|lighten|left|keep-all|justify|italic|inter-word|inter-ideograph|inside|inset|inline-block|inline|inherit|infinite|inactive|ideograph-space|ideograph-parenthesis|ideograph-numeric|ideograph-alpha|hue|horizontal|hidden|help|hard-light|hand|groove|geometricPrecision |geometricPrecision|forwards|flex-start|flex-end|flex|fixed|extra-expanded|extra-condensed|expanded|exclusion|evenodd |end |ellipsis|ease-out|ease-in-out|ease-in|ease|e-resize|double|dotted|distribute-space|distribute-letter|distribute-all-lines|distribute|disc|disabled|difference|default|decimal|dashed|darken|currentColor|crosshair|crispEdges|cover|content-box|contain|condensed|column-reverse|column|color-dodge|color-burn|color|collapse|col-resize|close-quote|circle|char|center|capitalize|butt|break-word|break-all|bottom|both|border-box|bolder|bold|block|bidi-override|bevel|below|baseline|balance|backwards|auto|antialiased|always|alternate-reverse|alternate|all-small-caps|all-scroll|all-petite-caps|all|absolute)(?![-])\b
       scope: support.constant.property-value.css
     - match: (\b(?i:webdings|verdana|utopia|trebuchet|times|tahoma|system|symbol|serif|sans-serif|monospace|lucida|impact|helvetica|georgia|garamond|futura|fantasy|cursive|courier|comic|century|arial)\b)
@@ -470,12 +466,12 @@ contexts:
         - match: '\)'
           scope: meta.group.css punctuation.section.group.end.css
           pop: true
-        - include: less-variables
-        - include: css-variables
-        - include: less-functions
         - include: literal-string
+        - include: css-variables
         - include: color-values
         - include: numeric-values
+        - include: less-variables
+        - include: less-functions
     - include: property-names
 
   rule-list:
@@ -490,6 +486,10 @@ contexts:
         - include: property-values
 
   selector:
+    - match: '([\.#])(?![0-9])[a-zA-Z0-9_-]+(?=\()'
+      scope: meta.selector.css entity.other.attribute-name.class.css entity.other.less.mixin
+      captures:
+        1: punctuation.definition.entity.css
     - match: '\b(vkern|view|video|var|use|ul|u|tt|tspan|tref|tr|title|time|thead|th|tfoot|textPath|textarea|text|td|tbody|table(?!-)|symbol|switch|svg|sup|summary|sub|style|strong|strike|stop|span|small|set|select|section|script|samp|s|ruby|rect|radialGradient|q|pre|polyline|polygon|pattern|path|param|p|output|option|optgroup|ol|object|noscript|noframes|nav|mpath|missing-glyph|metadata|meta|menu|mask|marker|mark|map|main|link|linearGradient|line|li|legend|label|kbd|ins|input|img|image|iframe|i|html|hr|hkern|hgroup|header|head|glyphRef|glyph|g|frameset|frame|form|foreignObject|footer|font-face-uri|font-face-src|font-face-name|font-face-format|font-face|font|filter|figure|figcaption|fieldset|feTurbulence|feTile|feSpotLight|feSpecularLighting|fePointLight|feOffset|feMorphology|feMergeNode|feMerge|feImage|feGaussianBlur|feFuncR|feFuncG|feFuncB|feFuncA|feFlood|feDistantLight|feDisplacementMap|feDiffuseLighting|feConvolveMatrix|feComposite|feComponentTransfer|feColorMatrix|feBlend|embed|em|ellipse|dt|dl|div|dfn|details|desc|del|defs|dd|color-profile|colgroup|col|code|clipPath|cite|circle|center|caption|canvas|button|br|body|blockquote|big|base|b|audio|aside|article|area|applet|animateTransform|animateMotion|animateColor|animate|altGlyphItem|altGlyphDef|altGlyph|address|acronym|abbr|a|(h[1-6]))\b(?=([a-z.,{#\s\[\)]|:+[a-z]))'
       scope: meta.selector.css entity.name.tag.css
     - match: '(\.)(?=-?([a-zA-Z_]|@{)[a-zA-Z0-9_-]*)'
