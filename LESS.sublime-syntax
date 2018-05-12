@@ -6,6 +6,7 @@ file_extensions:
   - less
   - css.less
 scope: source.css.less
+
 variables:
   unicode: '\\\h{1,6}[ \t\n\f]?'
   escape: '(?:{{unicode}}|\\[^\n\f\h])'
@@ -13,13 +14,13 @@ variables:
   nmstart: '(?:[[_a-zA-Z]{{nonascii}}]|{{escape}})'
   nmchar: '(?:[[-\w]{{nonascii}}]|{{escape}})'
   ident: '(?:--{{nmchar}}+|-?{{nmstart}}{{nmchar}}*)'
+
 contexts:
   main:
-    - include: property-list
-    - include: commas
-    - include: terminator
     - include: comment-block
     - include: comment-line
+    - include: commas
+    - include: terminator
     - include: at-rules
     - include: less-declarations
     - include: less-variables
@@ -31,9 +32,8 @@ contexts:
     - include: less-operators
     - include: less-parameters
     - include: numeric-values
-    - include: comment-block
-    - include: comment-line
     - include: property-names
+    - include: property-list
 
   qualified-name:
     - match: '(?:({{ident}})|(\*))?([|])(?!=)'
@@ -433,6 +433,8 @@ contexts:
   property-values:
     - match: \!\s*important
       scope: keyword.other.important.css
+      captures:
+        1: punctuation.definition.keyword.css
     - include: vendor-prefixes
     - include: less-variables
     - include: css-variables
