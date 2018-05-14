@@ -242,8 +242,8 @@ contexts:
         - include: property-list
         - include: color-values
         - include: numeric-values
-        - include: css-variables
         - include: literal-string
+        - include: css-variables
         - include: less-functions
         - include: less-variables
         - include: less-operators
@@ -459,9 +459,9 @@ contexts:
           scope: meta.group.css punctuation.section.group.end.css
           pop: true
         - include: literal-string
-        - include: css-variables
         - include: color-values
         - include: numeric-values
+        - include: css-variables
         - include: less-variables
         - include: less-functions
     - include: property-names
