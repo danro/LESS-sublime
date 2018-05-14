@@ -215,14 +215,6 @@ contexts:
   less-operators:
     - match: /|$|%|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\|\||\?\:|%=|\+=|\-=|&=|\bnot\b|\bor\b|\band\b|\bwhen\b|\bfrom\b|\bto\b
       scope: keyword.operator.less
-    - match: '&'
-      scope: keyword.operator.ampersand.less
-      push:
-        - match: '\s'
-          pop: true
-        - include: selector
-        - match: '(-+|_+)[a-zA-Z_][a-zA-Z0-9_-]*'
-          scope: entity.other.attribute-name.css
 
   property-list:
     - match: '\{'
@@ -486,6 +478,14 @@ contexts:
         - include: property-values
 
   selector:
+    - match: '&'
+      scope: meta.selector.css keyword.operator.ampersand.less
+      push:
+        - match: '\s'
+          pop: true
+        - include: selector
+        - match: '(-+|_+)[a-zA-Z_][a-zA-Z0-9_-]*'
+          scope: entity.other.attribute-name.css
     - match: '([\.#])(?![0-9])[a-zA-Z0-9_-]+(?=\()'
       scope: meta.selector.css entity.other.attribute-name.class.css entity.other.less.mixin
       captures:
