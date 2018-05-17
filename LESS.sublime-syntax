@@ -59,11 +59,11 @@ contexts:
     - match: (hsla?|rgba?)\s*(\()
       captures:
         1: support.function.misc.css
-        2: punctuation.section.group.begin.css
+        2: punctuation.definition.group.begin.css
       push:
         - meta_scope: meta.group.css
         - match: '\)'
-          scope: punctuation.section.group.end.css
+          scope: punctuation.definition.group.end.css
           pop: true
         - match: '(?x)\b(0*((1?[0-9]{1,2})|(2([0-4][0-9]|5[0-5])))\s*,\s*){2}(0*((1?[0-9]{1,2})|(2([0-4][0-9]|5[0-5])))\b)(\s*,\s*((0?\.[0-9]+)|[0-1]))?'
           scope: constant.other.color.rgb-value.css
@@ -140,11 +140,11 @@ contexts:
             1: keyword.operator.logic.media.css
             2: support.constant.media.css
         - match: '\('
-          scope: punctuation.section.group.begin.css
+          scope: punctuation.definition.group.begin.css
           push:
             - meta_scope: meta.group.css
             - match: '\)'
-              scope: punctuation.section.group.end.css
+              scope: punctuation.definition.group.end.css
               pop: true
             - include: vendor-prefixes
             - match: |-
@@ -192,12 +192,12 @@ contexts:
     - match: \b(unit|tan|sqrt|spin|softlight|sin|screen|saturation|saturate|round|replace|red|pow|pi|percentage|overlay|negation|multiply|mod|mix|min|max|luma|lightness|lighten|length|isnumber|hue|hsvvalue|hsvsaturation|hsvhue|hsva|hsv|hsla|hsl|hardlight|greyscale|green|format|floor|fadeout|fadein|fade|extract|exclusion|escape|e|difference|desaturate|data-uri|darken|cos|convert|convert|contrast|color|ceil|calc|blue|average|atan|asin|argb|alpha|acos|abs)(\()
       captures:
         1: support.function.less
-        2: meta.group.less punctuation.section.group.begin.less
+        2: meta.group.less punctuation.definition.group.begin.less
       push:
         - meta_scope: meta.function-call.less
         - meta_content_scope: meta.group.less meta.function.parameters.less
         - match: '\)'
-          scope: meta.group.less punctuation.section.group.end.less
+          scope: meta.group.less punctuation.definition.group.end.less
           pop: true
         - match: ':'
           scope: punctuation.separator.key-value.css
@@ -227,11 +227,11 @@ contexts:
 
   less-parameters:
     - match: '\('
-      scope: punctuation.section.group.begin.less
+      scope: punctuation.definition.group.begin.less
       push:
         - meta_scope: meta.group.less meta.function.parameters.less
         - match: '\)'
-          scope: punctuation.section.group.end.less
+          scope: punctuation.definition.group.end.less
           pop: true
         - match: ':'
           scope: punctuation.separator.key-value.css
@@ -441,22 +441,22 @@ contexts:
     - match: (rect)\s*(\()
       captures:
         1: support.function.misc.css
-        2: punctuation.section.group.begin.css
+        2: punctuation.definition.group.begin.css
       push:
         - meta_scope: meta.group.css
         - match: '\)'
-          scope: punctuation.section.group.end.css
+          scope: punctuation.definition.group.end.css
           pop: true
         - include: numeric-values
     - match: '(whiteness|url-prefix|url|translate[XYZ]|translate3d|translate|tint|skew[XY]|skew|shade|sepia|scale[XYZ]|scale|saturation|saturate|rotate[XYZ]|rotate3d|rotate|rgba|rgb|repeating-radial-gradient|repeating-linear-gradient|regexp|rect|radial-gradient|opacity|minmax|matrix3d|matrix|local|linear-gradient|lightness|invert|image-set|image|hsla|hsl|grayscale|gray|format|drop-shadow|domain|device-cmyk|cubic-bezier|cross-fade|counters|counter|contrast|color|brightness|blur|blenda|blend|blackness|attr)\s*(\()'
       captures:
         1: support.function.css
-        2: meta.group.css punctuation.section.group.begin.css
+        2: meta.group.css punctuation.definition.group.begin.css
       push:
         - meta_scope: meta.function-call.css
         - meta_content_scope: meta.group.css meta.function.parameters.css
         - match: '\)'
-          scope: meta.group.css punctuation.section.group.end.css
+          scope: meta.group.css punctuation.definition.group.end.css
           pop: true
         - include: literal-string
         - include: color-values
@@ -522,11 +522,11 @@ contexts:
       captures:
         1: entity.other.pseudo-class.css
         2: punctuation.definition.entity.css
-        3: punctuation.section.group.begin.css
+        3: punctuation.definition.group.begin.css
       push:
         - meta_scope: meta.selector.css meta.group.css
         - match: '\)'
-          scope: punctuation.section.group.end.css
+          scope: punctuation.definition.group.end.css
           pop: true
         - include: selector
     - match: ((:)nth-(?:(?:last-)?child|(?:last-)?of-type))(?=\()
@@ -536,10 +536,10 @@ contexts:
       push:
         - meta_scope: meta.selector.css
         - match: '\)'
-          scope: meta.group.css punctuation.section.group.end.css
+          scope: meta.group.css punctuation.definition.group.end.css
           pop: true
         - match: '\('
-          scope: meta.group.css punctuation.section.group.begin.css
+          scope: meta.group.css punctuation.definition.group.begin.css
         - match: '[+-]'
           scope: keyword.operator.css
         - match: '[0-9]+(n*)'
