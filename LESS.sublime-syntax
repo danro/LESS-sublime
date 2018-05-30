@@ -109,8 +109,7 @@ contexts:
               scope: punctuation.definition.group.end.css
               pop: true
             - include: literal-string
-            - match: '[\/\.a-zA-Z0-9_\-:;,?=]*'
-              scope: string.unquoted.css
+            - include: unquoted-string
         - include: comment-block
         - include: literal-string
         - include: less-parameters
@@ -184,10 +183,9 @@ contexts:
         - match: '\)'
           scope: punctuation.definition.group.end.css
           pop: true
-        - include: literal-string
         - include: less-interpolation
-        - match: '[\/\.a-zA-Z0-9_\-:;,]*'
-          scope: string.unquoted.css
+        - include: literal-string
+        - include: unquoted-string
 
   less-functions:
     - match: \b(unit|tan|sqrt|spin|softlight|sin|screen|saturation|saturate|round|replace|red|pow|pi|percentage|overlay|negation|multiply|mod|mix|min|max|luma|lightness|lighten|length|isnumber|hue|hsvvalue|hsvsaturation|hsvhue|hsva|hsv|hsla|hsl|hardlight|greyscale|green|format|floor|fadeout|fadein|fade|extract|exclusion|escape|e|difference|desaturate|data-uri|darken|cos|convert|convert|contrast|color|ceil|calc|blue|average|atan|asin|argb|alpha|acos|abs)(\()
@@ -569,9 +567,8 @@ contexts:
           captures:
             1: keyword.operator.attribute-selector.css
           push:
-            - match: '[^\s\]\[''"]'
-              scope: string.unquoted.css
             - include: literal-string
+            - include: unquoted-string
             - match: '(?=(\s|\]))'
               pop: true
         - match: '(?:\s+([iI]))?'  # case insensitive flag
@@ -580,6 +577,10 @@ contexts:
         - match: '\]'
           scope: punctuation.definition.entity.css
           pop: true
+
+  unquoted-string:
+    - match: '[^\s\]\[''"]'
+      scope: string.unquoted.css
 
   literal-string:
     - match: "'"
