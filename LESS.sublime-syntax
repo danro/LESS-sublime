@@ -14,6 +14,7 @@ variables:
   nmstart: '(?:[[_a-zA-Z]{{nonascii}}]|{{escape}})'
   nmchar: '(?:[[-\w]{{nonascii}}]|{{escape}})'
   ident: '(?:--{{nmchar}}+|-?{{nmstart}}{{nmchar}}*)'
+  combinators: '(?:>{1,3}|[~+])'
 
 contexts:
   main:
@@ -478,6 +479,13 @@ contexts:
         - include: property-values
 
   selector:
+      # Combinators
+      # https://drafts.csswg.org/selectors-4/#combinators
+      # https://drafts.csswg.org/css-scoping/#deep-combinator
+    - match: '\s*({{combinators}})(?![>~+])\s*'
+      scope: meta.selector.css
+      captures:
+        1: punctuation.separator.combinator.css
     - match: '&'
       scope: meta.selector.css keyword.operator.ampersand.less
       push:
