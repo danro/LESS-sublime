@@ -17,17 +17,18 @@
 
 filter,
 // ^^^ meta.selector.css entity.name.tag.css
-//    ^ punctuation.separator.css - meta.selector.css
+//    ^ meta.selector.css punctuation.separator.css
 filter {}
-//    ^ - meta.selector.css
+//    ^ meta.selector.css
 // ^ entity.name.tag.css
+//    ^ - entity.name.tag.css
 filter{}
 // ^ entity.name.tag.css
 #main h1+.sub {
 // <- entity.other.attribute-name.id.css punctuation.definition.entity.css
 // ^^ entity.other.attribute-name.id.css
 //    ^^ meta.selector.css entity.name.tag.css
-//           ^ - meta.selector.css
+//           ^ meta.selector.css
 //     ^ - constant.numeric
 //            ^ punctuation.section.property-list.begin.css
 filter::before {}
@@ -50,7 +51,7 @@ html::before {
 //  ^^ entity.other.pseudo-element.css punctuation.definition.entity.css
 //     ^ entity.other.pseudo-element.css
   &:first-child {}
-//^^^^^^^^^^^^^ meta.selector.css
+//^^^^^^^^^^^^^^ meta.selector.css
 // ^^^^^^^^^^^^ entity.other.pseudo-class.css
 //^ keyword.operator.ampersand.less
 // ^ punctuation.definition.entity.css
@@ -158,6 +159,8 @@ html::before {
   color: @@color; // variable variables
 //       ^^ punctuation.definition.variable.less
   text-decoration: none;
+  & {}
+//^^ meta.selector.css
   &:hover {
     .mixin   { /* */ }
 //  ^ punctuation.definition.entity.css
@@ -212,7 +215,7 @@ html::before {
 //^ keyword.operator.ampersand.less
   &_bem {}
 // ^^^^ meta.selector.css entity.other.attribute-name
-//     ^ - meta.selector.css
+//     ^ meta.selector.css
 }
 .accordion__copy,
 // ^^^^^^^^^^^^^ meta.selector.css entity.other.attribute-name.class.css

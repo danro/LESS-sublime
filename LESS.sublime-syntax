@@ -46,6 +46,7 @@ contexts:
   commas:
     - match: '\s*(,)\s*'
       captures:
+        0: meta.selector.css
         1: punctuation.separator.css
 
   terminator:
@@ -480,7 +481,7 @@ contexts:
       # Combinators
       # https://drafts.csswg.org/selectors-4/#combinators
       # https://drafts.csswg.org/css-scoping/#deep-combinator
-    - match: '\s*({{combinators}})(?![>~+])\s*'
+    - match: '\s*({{combinators}})(?![>~+]\s*)'
       scope: meta.selector.css
       captures:
         1: punctuation.separator.combinator.css
@@ -488,6 +489,7 @@ contexts:
       scope: meta.selector.css keyword.operator.ampersand.less
       push:
         - match: '\s'
+          scope: meta.selector.css
           pop: true
         - include: selector
         - match: '(-+|_+)[a-zA-Z_][a-zA-Z0-9_-]*'
@@ -496,15 +498,19 @@ contexts:
       scope: meta.selector.css entity.other.attribute-name.class.css entity.other.less.mixin
       captures:
         1: punctuation.definition.entity.css
-    - match: '\b(use|tspan|tref|textPath|text|symbol|switch|stop|rect|radialGradient|polyline|polygon|pattern|path|mask|marker|linearGradient|line|image|glyphRef|glyph|g|foreignObject|filter|ellipse|defs|clipPath|circle|xmp|wbr|video|var|ul|u|tt|track|tr|title|time|thead|th|tfoot|textarea|template|td|tbody|table|svg|sup|summary|sub|style|strong|strike|span|source|small|shadow|select|section|script|samp|s|rtc|rt|rp|q|progress|pre|picture|param|p|output|option|optgroup|ol|object|noscript|noframes|nav|meter|meta|menu|mark|map|main|link|li|legend|label|keygen|kbd|isindex|ins|input|img|iframe|i|html|hr|hgroup|header|head|h[1-6]|frameset|frame|form|footer|figcaption|figure|fieldset|eventsource|embed|em|element|dt|dl|div|dialog|dir|dfn|details|del|dd|datalist|data|content|colgroup|col|code|cite|caption|canvas|button|br|body|blockquote|big|bdo|bdi|basefont|base|b|audio|aside|article|area|applet|address|acronym|abbr|a)\b(?=([a-z.,+~{#\s\[\)]|:+[a-z]))'
-      scope: meta.selector.css entity.name.tag.css
+    - match: '\b(use|tspan|tref|textPath|text|symbol|switch|stop|rect|radialGradient|polyline|polygon|pattern|path|mask|marker|linearGradient|line|image|glyphRef|glyph|g|foreignObject|filter|ellipse|defs|clipPath|circle|xmp|wbr|video|var|ul|u|tt|track|tr|title|time|thead|th|tfoot|textarea|template|td|tbody|table|svg|sup|summary|sub|style|strong|strike|span|source|small|shadow|select|section|script|samp|s|rtc|rt|rp|q|progress|pre|picture|param|p|output|option|optgroup|ol|object|noscript|noframes|nav|meter|meta|menu|mark|map|main|link|li|legend|label|keygen|kbd|isindex|ins|input|img|iframe|i|html|hr|hgroup|header|head|h[1-6]|frameset|frame|form|footer|figcaption|figure|fieldset|eventsource|embed|em|element|dt|dl|div|dialog|dir|dfn|details|del|dd|datalist|data|content|colgroup|col|code|cite|caption|canvas|button|br|body|blockquote|big|bdo|bdi|basefont|base|b|audio|aside|article|area|applet|address|acronym|abbr|a)\b(\s*)(?=([a-z.,+~{#\s\[\)]|:+[a-z]))'
+      captures:
+        1: meta.selector.css entity.name.tag.css
+        2: meta.selector.css
     - match: '(\.)(?=-?([a-zA-Z_]|@{)[a-zA-Z0-9_-]*)'
       captures:
         1: punctuation.definition.entity.css
       push:
         - meta_scope: meta.selector.css entity.other.attribute-name.class.css
         - include: less-interpolation
-        - match: '(?=[^a-zA-Z0-9_-])'
+        - match: '(\s*)(?=[^a-zA-Z0-9_-])'
+          captures:
+            1: meta.selector.css
           pop: true
     - match: "(#)(?=-?([a-zA-Z_]|@{)[a-zA-Z0-9_-]*)"
       captures:
