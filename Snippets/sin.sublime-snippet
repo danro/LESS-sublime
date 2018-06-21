@@ -1,0 +1,8 @@
+<snippet>
+<content><![CDATA[
+sin(${1:number})
+]]></content>
+<tabTrigger>sin</tabTrigger>
+<description>less math</description>
+<scope>source.css.less</scope>
+</snippet>

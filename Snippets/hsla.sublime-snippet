@@ -1,0 +1,8 @@
+<snippet>
+<content><![CDATA[
+hsla(${1:hue}, ${2:saturation}, ${3:lightness}, ${4:alpha})
+]]></content>
+<tabTrigger>hsla</tabTrigger>
+<description>less color-definition</description>
+<scope>source.css.less</scope>
+</snippet>

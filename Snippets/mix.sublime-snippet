@@ -1,0 +1,8 @@
+<snippet>
+<content><![CDATA[
+mix(${1:color}, ${2:color}, ${3:percentage}%)
+]]></content>
+<tabTrigger>mix</tabTrigger>
+<description>less color-operations</description>
+<scope>source.css.less</scope>
+</snippet>

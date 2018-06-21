@@ -1,0 +1,8 @@
+<snippet>
+<content><![CDATA[
+contrast(${1:color}, ${2:darkcolor/black}, ${3:lightcolor/white}, ${4:threshold})
+]]></content>
+<tabTrigger>contrast</tabTrigger>
+<description>less color-operations</description>
+<scope>source.css.less</scope>
+</snippet>

@@ -1,0 +1,8 @@
+<snippet>
+<content><![CDATA[
+extract({1:list}, ${2:index})
+]]></content>
+<tabTrigger>extract</tabTrigger>
+<description>less list</description>
+<scope>source.css.less</scope>
+</snippet>

@@ -1,0 +1,8 @@
+<snippet>
+<content><![CDATA[
+data-uri(${1:url})
+]]></content>
+<tabTrigger>data-uri</tabTrigger>
+<description>less misc</description>
+<scope>source.css.less</scope>
+</snippet>

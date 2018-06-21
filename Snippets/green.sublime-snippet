@@ -1,0 +1,8 @@
+<snippet>
+<content><![CDATA[
+green(${1:color})
+]]></content>
+<tabTrigger>green</tabTrigger>
+<description>less color-channel</description>
+<scope>source.css.less</scope>
+</snippet>

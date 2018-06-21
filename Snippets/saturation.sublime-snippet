@@ -1,0 +1,8 @@
+<snippet>
+<content><![CDATA[
+saturation(${1:color})
+]]></content>
+<tabTrigger>saturation</tabTrigger>
+<description>less color-channel</description>
+<scope>source.css.less</scope>
+</snippet>

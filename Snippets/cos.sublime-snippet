@@ -1,0 +1,8 @@
+<snippet>
+<content><![CDATA[
+cos(${1:number})
+]]></content>
+<tabTrigger>cos</tabTrigger>
+<description>less math</description>
+<scope>source.css.less</scope>
+</snippet>

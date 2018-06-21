@@ -1,0 +1,8 @@
+<snippet>
+<content><![CDATA[
+hsvhue(${1:color})
+]]></content>
+<tabTrigger>hsvhue</tabTrigger>
+<description>less color-channel</description>
+<scope>source.css.less</scope>
+</snippet>

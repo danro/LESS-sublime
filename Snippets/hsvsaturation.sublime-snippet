@@ -1,0 +1,8 @@
+<snippet>
+<content><![CDATA[
+hsvsaturation(${1:color})
+]]></content>
+<tabTrigger>hsvsaturation</tabTrigger>
+<description>less color-channel</description>
+<scope>source.css.less</scope>
+</snippet>

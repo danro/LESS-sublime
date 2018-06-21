@@ -1,0 +1,8 @@
+<snippet>
+<content><![CDATA[
+rgba(${1:r}, ${2:g}, ${3:b}, ${4:a})
+]]></content>
+<tabTrigger>rgba</tabTrigger>
+<description>less color-definition</description>
+<scope>source.css.less</scope>
+</snippet>

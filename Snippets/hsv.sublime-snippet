@@ -1,0 +1,8 @@
+<snippet>
+<content><![CDATA[
+hsv(${1:hue}, ${2:saturation}, ${3:value})
+]]></content>
+<tabTrigger>hsv</tabTrigger>
+<description>less color-definition</description>
+<scope>source.css.less</scope>
+</snippet>

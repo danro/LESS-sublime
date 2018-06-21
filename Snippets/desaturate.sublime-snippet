@@ -1,0 +1,8 @@
+<snippet>
+<content><![CDATA[
+desaturate(${1:color}, ${2:percentage}%)
+]]></content>
+<tabTrigger>desaturate</tabTrigger>
+<description>less color-operations</description>
+<scope>source.css.less</scope>
+</snippet>

@@ -1,0 +1,8 @@
+<snippet>
+<content><![CDATA[
+abs(${1:number})
+]]></content>
+<tabTrigger>abs</tabTrigger>
+<description>less math</description>
+<scope>source.css.less</scope>
+</snippet>

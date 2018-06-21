@@ -1,0 +1,8 @@
+<snippet>
+<content><![CDATA[
+exclusion(${1:color}, ${1:color})
+]]></content>
+<tabTrigger>exclusion</tabTrigger>
+<description>less color-blending</description>
+<scope>source.css.less</scope>
+</snippet>

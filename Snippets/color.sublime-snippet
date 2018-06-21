@@ -1,0 +1,8 @@
+<snippet>
+<content><![CDATA[
+color({1:string})
+]]></content>
+<tabTrigger>color</tabTrigger>
+<description>less misc</description>
+<scope>source.css.less</scope>
+</snippet>

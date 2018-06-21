@@ -1,0 +1,8 @@
+<snippet>
+<content><![CDATA[
+max(${1:x}, ${1:y})
+]]></content>
+<tabTrigger>max</tabTrigger>
+<description>less math</description>
+<scope>source.css.less</scope>
+</snippet>
