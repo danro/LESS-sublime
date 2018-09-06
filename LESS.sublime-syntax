@@ -14,320 +14,219 @@ variables:
   nmstart: '(?:[[_a-zA-Z]{{nonascii}}]|{{escape}})'
   nmchar: '(?:[[-\w]{{nonascii}}]|{{escape}})'
   ident: '(?:--{{nmchar}}+|-?{{nmstart}}{{nmchar}}*)'
+
+  integer: '(?:[-+]?\d+)'
+  number: '[-+]?(?:(?:\d*\.\d+(?:[eE]{{integer}})*)|{{integer}})'
+
+  font_relative_lengths: '(?i:em|ex|ch|rem)'
+  viewport_percentage_lengths: '(?i:vw|vh|vmin|vmax)'
+  absolute_lengths: '(?i:cm|mm|q|in|pt|pc|px|fr)'
+  angle_units: '(?i:deg|grad|rad|turn)'
+  duration_units: '(?i:s|ms)'
+  frequency_units: '(?i:Hz|kHz)'
+  resolution_units: '(?i:dpi|dpcm|dppx)'
+
   combinators: '(?:>{1,3}|[~+])'
+
+  counter_styles: |-
+    (?xi:
+        arabic-indic | armenian | bengali | cambodian | circle
+      | cjk-decimal | cjk-earthly-branch | cjk-heavenly-stem | decimal-leading-zero
+      | decimal | devanagari | disclosure-closed | disclosure-open | disc
+      | ethiopic-numeric | georgian | gujarati | gurmukhi | hebrew
+      | hiragana-iroha | hiragana | japanese-formal | japanese-informal
+      | kannada | katakana-iroha | katakana | khmer
+      | korean-hangul-formal | korean-hanja-formal | korean-hanja-informal | lao
+      | lower-alpha | lower-armenian | lower-greek | lower-latin | lower-roman
+      | malayalam | mongolian | myanmar | oriya | persian
+      | simp-chinese-formal | simp-chinese-informal
+      | square | tamil | telugu | thai | tibetan
+      | trad-chinese-formal | trad-chinese-informal
+      | upper-alpha | upper-armenian | upper-latin | upper-roman
+    )
+
+  custom_element_chars: |-
+    (?x:
+        [-_a-z0-9\x{00B7}]
+      | \\\.
+      | [\x{00C0}-\x{00D6}]
+      | [\x{00D8}-\x{00F6}]
+      | [\x{00F8}-\x{02FF}]
+      | [\x{0300}-\x{037D}]
+      | [\x{037F}-\x{1FFF}]
+      | [\x{200C}-\x{200D}]
+      | [\x{203F}-\x{2040}]
+      | [\x{2070}-\x{218F}]
+      | [\x{2C00}-\x{2FEF}]
+      | [\x{3001}-\x{D7FF}]
+      | [\x{F900}-\x{FDCF}]
+      | [\x{FDF0}-\x{FFFD}]
+      | [\x{10000}-\x{EFFFF}]
+    )
 
 contexts:
   main:
     - include: comment-block
     - include: comment-line
-    - include: commas
-    - include: css-variables
-    - include: terminator
-    - include: literal-string
-    - include: at-rules
+    - include: properties
+    - include: keyframe-operators
     - include: selector
-    - include: rule-list
+    - include: at-rules
+    - include: less-variable-declaration
     - include: numeric-values
-    - include: property-names
-    - include: property-list
-    - include: less-functions
-    - include: less-declarations
-    - include: less-variables
-    - include: less-operators
-    - include: less-parameters
-
-  qualified-name:
-    - match: '(?:({{ident}})|(\*))?([|])(?!=)'
-      captures:
-        1: entity.other.namespace-prefix.css
-        2: entity.name.namespace.wildcard.css
-        3: punctuation.separator.namespace.css
-
-  commas:
-    - match: '\s*(,)\s*'
-      captures:
-        0: meta.selector.css
-        1: punctuation.separator.css
-
-  terminator:
-    - match: '\s*(;)\s*'
-      captures:
-        1: punctuation.terminator.statement.css
-
-  color-values:
-    - match: \b(yellowgreen|yellow|whitesmoke|white|wheat|violet|turquoise|tomato|thistle|teal|tan|steelblue|springgreen|snow|slategrey|slategray|slateblue|skyblue|silver|sienna|seashell|seagreen|sandybrown|salmon|saddlebrown|royalblue|rosybrown|red|rebeccapurple|purple|powderblue|plum|pink|peru|peachpuff|papayawhip|palevioletred|paleturquoise|palegreen|palegoldenrod|orchid|orangered|orange|olivedrab|olive|oldlace|navy|navajowhite|moccasin|mistyrose|mintcream|midnightblue|mediumvioletred|mediumturquoise|mediumspringgreen|mediumslateblue|mediumseagreen|mediumpurple|mediumorchid|mediumblue|mediumaquamarine|maroon|linen|limegreen|lime|lightyellow|lightsteelblue|lightslategrey|lightslategray|lightskyblue|lightseagreen|lightsalmon|lightpink|lightgrey|lightgreen|lightgray|lightgoldenrodyellow|lightcyan|lightcoral|lightblue|lemonchiffon|lawngreen|lavenderblush|lavender|khaki|ivory|indigo|indianred|hotpink|honeydew|grey|greenyellow|green|gray|goldenrod|gold|ghostwhite|gainsboro|fuchsia|forestgreen|floralwhite|firebrick|dodgerblue|dimgrey|dimgray|deepskyblue|deeppink|darkviolet|darkturquoise|darkslategrey|darkslategray|darkslateblue|darkseagreen|darksalmon|darkred|darkorchid|darkorange|darkolivegreen|darkmagenta|darkkhaki|darkgrey|darkgreen|darkgray|darkgoldenrod|darkcyan|darkblue|crimson|cornsilk|cornflowerblue|coral|chocolate|chartreuse|cadetblue|burlywood|brown|blueviolet|blue|blanchedalmond|black|bisque|beige|azure|aquamarine|aqua|antiquewhite|aliceblue)\b
-      comment: http://www.w3.org/TR/CSS21/syndata.html#value-def-color
-      scope: support.constant.color.w3c-standard-color-name.css
-    - match: (hsla?|rgba?)\s*(\()
-      captures:
-        1: support.function.misc.css
-        2: punctuation.definition.group.begin.css
-      push:
-        - meta_scope: meta.group.css
-        - match: '\)'
-          scope: punctuation.definition.group.end.css
-          pop: true
-        - match: '(?x)\b(0*((1?[0-9]{1,2})|(2([0-4][0-9]|5[0-5])))\s*,\s*){2}(0*((1?[0-9]{1,2})|(2([0-4][0-9]|5[0-5])))\b)(\s*,\s*((0?\.[0-9]+)|[0-1]))?'
-          scope: constant.other.color.rgb-value.css
-        - match: '\b([0-9]{1,2}|100)\s*%,\s*([0-9]{1,2}|100)\s*%,\s*([0-9]{1,2}|100)\s*%'
-          scope: constant.other.color.rgb-percentage.css
-        - include: numeric-values
-
-  comment-block:
-    - match: /\*
-      scope: punctuation.definition.comment.css
-      push:
-        - meta_scope: comment.block.css
-        - match: \*/
-          scope: punctuation.definition.comment.css
-          pop: true
-
-  comment-line:
-    - match: //
-      scope: punctuation.definition.comment.css
-      push:
-        - meta_scope: comment.line.double-slash.less
-        - match: $\n?
-          scope: punctuation.definition.comment.css
-          pop: true
-
-  at-rules:
-    - match: ((@)(?:-(?:webkit|moz|o)-)?(charset|import|namespace|page|font-face|supports|document)\b)
-      captures:
-        1: keyword.control.at-rule.css
-        2: punctuation.definition.keyword.css
-      push:
-        - meta_scope: meta.at-rule.css
-        - match: '\s*(?=[\{;])'
-          pop: true
-        - match: (url)(\()
-          captures:
-            1: meta.function-call.css support.function.url.css
-            2: punctuation.definition.group.begin.css
-          push:
-            - meta_scope: meta.group.css
-            - match: '\)'
-              scope: punctuation.definition.group.end.css
-              pop: true
-            - include: literal-string
-            - include: unquoted-string
-        - include: comment-block
-        - include: literal-string
-        - include: less-parameters
-    - match: \s*((@)keyframes)(?=.*?)
-      captures:
-        1: keyword.control.at-rule.css
-        2: punctuation.definition.keyword.css
-      push:
-        - meta_scope: meta.at-rule.keyframes.css
-        - match: '\s*(?=[\{;])'
-          pop: true
-        - include: comment-block
-        - match: '[a-zA-Z0-9_-]+'
-          scope: variable.other.css
-    - match: \s*((@)media)(?=\s+.*?)
-      captures:
-        1: keyword.control.at-rule.media.css
-        2: punctuation.definition.keyword.css
-        3: support.constant.media.css
-      push:
-        - meta_scope: meta.at-rule.media.css
-        - match: '\s*(?=\{)'
-          pop: true
-        - include: comment-block
-        - include: less-operators
-        - match: (?i)\s*(only|not)?\s*(all|aural|braille|embossed|handheld|print|projection|screen|speech|tty|tv)?
-          captures:
-            1: keyword.operator.logic.media.css
-            2: support.constant.media.css
-        - match: '\('
-          scope: punctuation.definition.group.begin.css
-          push:
-            - meta_scope: meta.group.css
-            - match: '\)'
-              scope: punctuation.definition.group.end.css
-              pop: true
-            - include: vendor-prefixes
-            - match: |-
-                (?x)
-                (
-                    ((min|max)-)?
-                    (
-                        ((device-)?(height|width|aspect-ratio|pixel-ratio))|
-                        (color(-index)?)|monochrome|resolution
-                    )
-                )|grid|scan|orientation
-                \s*(?=[:)])
-              captures:
-                0: support.type.property-name.media.css
-            - match: \b(portrait|landscape|progressive|interlace)
-              scope: support.constant.property-value.css
-            - match: ':'
-              scope: punctuation.separator.key-value.css
-            - include: comment-block
-            - include: comment-line
-            - include: numeric-values
-            - include: css-variables
-            - include: property-names
-            - include: property-values
-            - include: less-functions
-            - include: less-variables
-            - include: less-operators
-
-  less-data-uri:
-    - match: (url)(\()(?=(data:|"data:|'data:))
-      captures:
-        1: support.function.misc.css
-        2: punctuation.definition.group.begin.css
-      push:
-        - meta_scope: meta.group.css
-        - match: '\)'
-          scope: punctuation.definition.group.end.css
-          pop: true
-        - include: less-interpolation
-        - include: literal-string
-        - include: unquoted-string
-
-  less-functions:
-    - match: \b(unit|tan|sqrt|spin|softlight|sin|screen|saturation|saturate|round|replace|red|pow|pi|percentage|overlay|negation|multiply|mod|mix|min|max|luma|lightness|lighten|length|isnumber|hue|hsvvalue|hsvsaturation|hsvhue|hsva|hsv|hsla|hsl|hardlight|greyscale|green|format|floor|fadeout|fadein|fade|extract|exclusion|escape|e|difference|desaturate|data-uri|darken|cos|convert|convert|contrast|color|ceil|calc|blue|average|atan|asin|argb|alpha|acos|abs)(\()
-      captures:
-        1: support.function.less
-        2: meta.group.less punctuation.definition.group.begin.less
-      push:
-        - meta_scope: meta.function-call.less
-        - meta_content_scope: meta.group.less meta.function.parameters.less
-        - match: '\)'
-          scope: meta.group.less punctuation.definition.group.end.less
-          pop: true
-        - match: ':'
-          scope: punctuation.separator.key-value.css
-        - include: comment-block
-        - include: commas
-        - include: terminator
-        - include: color-values
-        - include: numeric-values
-        - include: literal-string
-        - include: css-variables
-        - include: less-functions
-        - include: less-variables
-        - include: less-operators
-
-  less-operators:
-    - match: /|$|%|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\|\||\?\:|%=|\+=|\-=|&=|\bnot\b|\bor\b|\band\b|\bwhen\b|\bfrom\b|\bto\b
-      scope: keyword.operator.less
-
-  property-list:
+    - include: comma-delimiter
     - match: '\{'
       scope: punctuation.section.property-list.begin.css
-      push:
-        - match: '\}'
-          scope: punctuation.section.property-list.end.css
-          pop: true
-        - include: main
+    - match: '\}'
+      scope: punctuation.section.property-list.end.css
 
-  less-parameters:
-    - match: '\('
-      scope: punctuation.definition.group.begin.less
-      push:
-        - meta_scope: meta.group.less meta.function.parameters.less
-        - match: '\)'
-          scope: punctuation.definition.group.end.less
-          pop: true
-        - match: ':'
-          scope: punctuation.separator.key-value.css
-        - include: comment-line
-        - include: comment-block
-        - include: commas
-        - include: terminator
-        - include: property-list
-        - include: color-values
-        - include: numeric-values
-        - include: literal-string
-        - include: css-variables
-        - include: less-functions
-        - include: less-variables
-        - include: less-operators
 
-  less-declarations:
-    - match: '(@)([a-zA-Z0-9_-][\w-]*)'
-      scope: variable.declaration.less
+  selector:
+    - include: comma-delimiter
+    - match: '({{combinators}})(?![>~+])'
+      scope: punctuation.separator.combinator.css
+    - match: \*
+      scope: entity.name.tag.wildcard.css
+      push:
+        - meta_scope: meta.selector.css
+        - match: \s*(?=$)
+          pop: true
+        - match: '\{'
+          scope: punctuation.section.property-list.begin.css
+          pop: true
+        - match: '(?=\))'
+          pop: true
+        - include: pseudo-elements
+        - include: pseudo-classes
+        - include: selector
+    - match: '&'
+      scope: meta.selector.css keyword.operator.ampersand.less
+      push:
+        - meta_scope: meta.selector.css
+        - match: \s*(?=$)
+          pop: true
+        - match: '\{'
+          scope: punctuation.section.property-list.begin.css
+          pop: true
+        - match: '(?=\))'
+          pop: true
+        - match: '(-+|_+)[a-zA-Z_][a-zA-Z0-9_-]*'
+          scope: meta.selector.css entity.other.attribute-name.css
+        - include: pseudo-elements
+        - include: pseudo-classes
+        - include: selector
+    - match: '\b(a|abbr|acronym|address|applet|area|article|aside|audio|b|base|basefont|bdi|bdo|big|blockquote|body|br|button|canvas|caption|cite|code|col|colgroup|content|data|datalist|dd|del|details|dfn|dir|dialog|div|dl|dt|element|em|embed|eventsource|fieldset|figure|figcaption|footer|form|frame|frameset|h[1-6]|head|header|hgroup|hr|html|i|iframe|img|input|ins|isindex|kbd|keygen|label|legend|li|link|main|map|mark|menu|meta|meter|nav|noframes|noscript|object|ol|optgroup|option|output|p|param|picture|pre|progress|q|rp|rt|rtc|s|samp|script|section|select|shadow|small|source|span|strike|strong|style|sub|summary|sup|svg|table|tbody|td|template|textarea|tfoot|th|thead|time|title|tr|track|tt|u|ul|var|video|wbr|xmp|circle|clipPath|defs|ellipse|filter|foreignObject|g|glyph|glyphRef|image|line|linearGradient|marker|mask|path|pattern|polygon|polyline|radialGradient|rect|stop|switch|symbol|text|textPath|tref|tspan|use)\b'
+      scope: entity.name.tag.css
+      push:
+        - meta_scope: meta.selector.css
+        - match: \s*(?=$)
+          pop: true
+        - match: '(?=[{)])'
+          pop: true
+        - include: pseudo-elements
+        - include: pseudo-classes
+        - include: selector
+    - match: '(\.){{ident}}*'
       captures:
-        1: punctuation.definition.variable.less
-
-  less-interpolation:
-    - match: '(@)({)([a-zA-Z0-9_-][\w-]*)(})'
-      scope: variable.other.less
-      captures:
-        1: punctuation.definition.variable.less
-        2: punctuation.definition.string.begin.less
-        3: string.interpolated.less
-        4: punctuation.definition.string.end.less
-
-  css-variables:
-    - match: '\b(var)(?=\()'
-      scope: support.function.var.css
+        0: entity.other.attribute-name.class.css
+        1: punctuation.definition.entity.css
       push:
-        - meta_scope: meta.function-call.css
-        - meta_content_scope: meta.group.css
-        - match: '\)'
-          scope: meta.group.css punctuation.definition.group.end.css
+        - meta_scope: meta.selector.css
+        - match: \s*(?=$)
           pop: true
-        - match: '(\()((--)({{nmchar}}+))'
+        - match: '(?=[{)])'
+          pop: true
+        - match: '(-+|_+)[a-zA-Z_][a-zA-Z0-9_-]*'
+          scope: entity.other.attribute-name.class.css
+        - include: less-interpolation
+        - include: pseudo-elements
+        - include: pseudo-classes
+        - include: less-mixin
+        - include: selector
+    - match: '(\#){{ident}}*'
+      captures:
+        0: entity.other.attribute-name.id.css
+        1: punctuation.definition.entity.css
+      push:
+        - meta_scope: meta.selector.css
+        - match: \s*(?=$)
+          pop: true
+        - match: '(?=[{)])'
+          pop: true
+        - match: '(-+|_+)[a-zA-Z_][a-zA-Z0-9_-]*'
+          scope: entity.other.attribute-name.id.css
+        - include: less-interpolation
+        - include: pseudo-elements
+        - include: pseudo-classes
+        - include: less-mixin
+        - include: selector
+    - match: '\b([a-z](?:{{custom_element_chars}})*-(?:{{custom_element_chars}})*)\b'
+      captures:
+        0: entity.name.tag.custom.css
+      push:
+        - meta_scope: meta.selector.css
+        - match: \s*(?=$)
+          pop: true
+        - match: '(?=[{)])'
+          pop: true
+        - include: less-interpolation
+        - include: pseudo-elements
+        - include: pseudo-classes
+        - include: selector
+    - match: '\['
+      scope: punctuation.definition.entity.css
+      push:
+        - meta_scope: meta.attribute-selector.css
+        - include: qualified-name
+        - match: '({{ident}})'
+          scope: entity.other.attribute-name.css
+        - match: '\s*([~*|^$]?=)\s*'
           captures:
-           1: punctuation.definition.group.begin.css
-           2: support.type.custom-property.css
-           3: punctuation.definition.custom-property.css
-           4: support.type.custom-property.name.css
-
-  less-variables:
-    - match: '(@{1,2})([a-zA-Z0-9_-][\w-]*)'
-      scope: variable.other.less
-      captures:
-        1: punctuation.definition.variable.less
-    - include: less-interpolation
-    - match: (~)(")
-      captures:
-        1: keyword.operator.less
-        2: punctuation.definition.string.begin.less
-      push:
-        - meta_scope: string.quoted.double.css markup.raw.less
-        - match: '"'
-          scope: punctuation.definition.string.end.less
+            1: keyword.operator.attribute-selector.css
+          push:
+            - match: '[^\s\]\[''"]'
+              scope: string.unquoted.css
+            - include: literal-string
+            - match: '(?=(\s|\]))'
+              pop: true
+        - match: '(?:\s+([iI]))?'  # case insensitive flag
+          captures:
+            1: keyword.other.css
+        - match: '\]'
+          scope: punctuation.definition.entity.css
           pop: true
-        - include: less-interpolation
-    - match: (~)(')
-      captures:
-        1: keyword.operator.less
-        2: punctuation.definition.string.begin.less
-      push:
-        - meta_scope: string.quoted.single.css markup.raw.less
-        - match: "'"
-          scope: punctuation.definition.string.end.less
-          pop: true
-        - include: less-interpolation
+    - include: less-operators
 
-  numeric-values:
-    - match: '(#)([0-9a-fA-F]{3}|[0-9a-fA-F]{6})\b'
-      scope: constant.other.color.rgb-value.css
-      captures:
-        1: punctuation.definition.constant.css
-    - match: '(?x)(?:-|\+)?(?:(?:[0-9]+(?:\.[0-9]+)?)|(?:\.[0-9]+))((?:vw|vmin|vmax|vh|turn|s|rem|rad|px|pt|pc|ms|mm|in|grad|fr|ex|em|dppx|dpi|dpcm|deg|cm|ch)\b|%)?'
-      scope: constant.numeric.css
-      captures:
-        1: keyword.other.unit.css
 
-  vendor-prefixes:
-    - match: '(-webkit-|-o-|-ms-|-moz-|-khtml-)(?=[A-Za-z])'
-      scope: support.type.vendor-prefix.css
-
-  property-names:
-    - include: vendor-prefixes
+  properties:
     - include: comment-block
-    - match: '(--)({{nmchar}}+)'
-      scope: support.type.custom-property.css
+    - include: vendor-prefix
+    - include: custom-property-name
+    - match: '\b(var-)({{ident}})(?=\s)'
+      scope: meta.property-name.css invalid.deprecated.custom-property.css
       captures:
-        1: punctuation.definition.custom-property.css
+        1: keyword.other.custom-property.prefix.css
         2: support.type.custom-property.name.css
+    - match: \bfont(-family)?(?!-)\b
+      scope: meta.property-name.css support.type.property-name.css
+      push:
+        - match: (:)([ \t]*)
+          captures:
+            1: punctuation.separator.key-value.css
+            2: meta.property-value.css
+          push:
+            - meta_content_scope: meta.property-value.css
+            - match: '\s*(;)|(?=[})])'
+              captures:
+                1: punctuation.terminator.rule.css
+              pop: true
+            - include: property-values
+            - match: '{{ident}}(\s+{{ident}})*'
+              scope: string.unquoted.css
+            - match: ','
+              scope: punctuation.separator.css
+        - match: ''
+          pop: true
     - match: |-
         \b(?x)(
             display|width|background-color|height|position|font-family|font-weight
@@ -359,7 +258,7 @@ contexts:
           | widows|border-right-style|border-right|flex-align|outline-style
           | outline|background-origin|animation-direction|fill-opacity
           | background-attachment|flex-wrap|transform-style|counter-increment
-          | overflow-wrap|counter-reset|animation-play-state
+          | overflow-wrap|counter-reset|animation-play-state|animation
           | will-change|box-ordinal-group|image-rendering|mask-image|flex-flow
           | background-position-y|stroke-width|background-position-x|background-position
           | background-blend-mode|flex-shrink|flex-basis|flex-order|flex-item-align
@@ -402,190 +301,1628 @@ contexts:
           | blend-mode|azimuth|pause-after|pause-before|pause|pitch-range|pitch
           | text-height|system|negative|prefix|suffix|range|pad|fallback
           | additive-symbols|symbols|speak-as|speak|grid-gap
-        )\b
+        )\b(?=\s*:[^:]*(;|\n))
       scope: meta.property-name.css support.type.property-name.css
-    - match: '\b(animation-name|animation)\b'
-      scope: meta.property-name.css support.type.property-name.css
+    - match: (:)([ \t]*)
+      captures:
+        1: punctuation.separator.key-value.css
+        2: meta.property-value.css
       push:
         - meta_content_scope: meta.property-value.css
-        - match: '\s*(?=;|(?=[{}]))'
+        - match: '\s*(;)|(?=[})])'
+          captures:
+            1: punctuation.terminator.rule.css
           pop: true
-        - match: ':'
-          scope: punctuation.separator.key-value.css
-        - include: comment-block
-        - include: comment-line
         - include: property-values
-        - match: '[a-zA-Z0-9_-]+'
-          scope: variable.other.css
 
   property-values:
     - match: \!\s*important
       scope: keyword.other.important.css
       captures:
         1: punctuation.definition.keyword.css
+    - include: vendor-prefix
     - include: comment-block
-    - include: literal-string
-    - include: vendor-prefixes
-    - include: color-values
+    - include: builtin-functions
+    - include: unicode-range
     - include: numeric-values
-    - include: css-variables
-    - include: less-variables
-    - include: less-data-uri
-    - include: less-functions
+    - include: color-values
+    - include: property-value-constants
+    - include: literal-string
     - include: less-operators
-    - include: selector
-    - match: \b(wrap-reverse|wrap|whitespace|wait|w-resize|visible|vertical-text|vertical-ideographic|uppercase|upper-roman|upper-alpha|unicase|underline|ultra-expanded|ultra-condensed|transparent|transform|top|titling-caps|thin|thick|text-top|text-bottom|text|tb-rl|table-row-group|table-row|table-header-group|table-footer-group|table-column-group|table-column|table-cell|table|sw-resize|super|subpixel-antialiased|strict|stretch|step-start|step-end|static|start|sRGB|square|square|space-between|space-around|space|solid|soft-light|small-caps|separate|semi-expanded|semi-condensed|se-resize|scroll|screen|scale-down|saturation|s-resize|running|rtl|row-reverse|row-resize|row|round|round|right|ridge|reverse|repeat-y|repeat-x|repeat|relative|progressive|progress|pre-wrap|pre-line|pre|pointer|petite-caps|paused|pan-y|pan-x|pan-up|pan-right|pan-left|pan-down|padding-box|overline|overlay|outside|outset|optimizeSpeed|optimizeSpeed|optimizeQuality|optimizeLegibility|open-quote|opacity|oblique|nw-resize|nowrap|not-allowed|normal|nonzero|none|no-repeat|no-open-quote|no-drop|no-close-quote|newspaper|ne-resize|n-resize|multiply|move|miter|middle|middle|medium|max-height|manipulation|main-size|luminosity|ltr|lr-tb|lowercase|lower-roman|lower-alpha|loose|local|list-item|linearRGB|linear(?!-)|line-through|line-edge|line|lighter|lighten|left|keep-all|justify|italic|inter-word|inter-ideograph|inside|inset|inline-block|inline|inherit|infinite|inactive|ideograph-space|ideograph-parenthesis|ideograph-numeric|ideograph-alpha|hue|horizontal|hidden|help|hard-light|hand|groove|geometricPrecision |geometricPrecision|forwards|flex-start|flex-end|flex|fixed|extra-expanded|extra-condensed|expanded|exclusion|evenodd |end |ellipsis|ease-out|ease-in-out|ease-in|ease|e-resize|double|dotted|distribute-space|distribute-letter|distribute-all-lines|distribute|disc|disabled|difference|default|decimal|dashed|darken|currentColor|crosshair|crispEdges|cover|content-box|contain|condensed|column-reverse|column|color-dodge|color-burn|color|collapse|col-resize|close-quote|circle|char|center|capitalize|butt|break-word|break-all|bottom|both|border-box|bolder|bold|block|bidi-override|bevel|below|baseline|balance|backwards|auto|antialiased|always|alternate-reverse|alternate|all-small-caps|all-scroll|all-petite-caps|all|absolute)(?![-])\b
-      scope: support.constant.property-value.css
-    - match: (\b(?i:webdings|verdana|utopia|trebuchet|times|tahoma|system|symbol|serif|sans-serif|monospace|lucida|impact|helvetica|georgia|garamond|futura|fantasy|cursive|courier|comic|century|arial)\b)
-      scope: support.constant.font-name.css
-    - match: (rect)\s*(\()
-      captures:
-        1: support.function.misc.css
-        2: punctuation.definition.group.begin.css
-      push:
-        - meta_scope: meta.group.css
-        - match: '\)'
-          scope: punctuation.definition.group.end.css
-          pop: true
-        - include: numeric-values
-    - match: '(whiteness|url-prefix|url|translate[XYZ]|translate3d|translate|tint|skew[XY]|skew|shade|sepia|scale[XYZ]|scale|saturation|saturate|rotate[XYZ]|rotate3d|rotate|rgba|rgb|repeating-radial-gradient|repeating-linear-gradient|regexp|rect|radial-gradient|opacity|minmax|matrix3d|matrix|local|linear-gradient|lightness|invert|image-set|image|hsla|hsl|grayscale|gray|format|drop-shadow|domain|device-cmyk|cubic-bezier|cross-fade|counters|counter|contrast|color|brightness|blur|blenda|blend|blackness|attr)\s*(\()'
-      captures:
-        1: support.function.css
-        2: meta.group.css punctuation.definition.group.begin.css
-      push:
-        - meta_scope: meta.function-call.css
-        - meta_content_scope: meta.group.css meta.function.parameters.css
-        - match: '\)'
-          scope: meta.group.css punctuation.definition.group.end.css
-          pop: true
-        - include: literal-string
-        - include: color-values
-        - include: numeric-values
-        - include: css-variables
-        - include: less-variables
-        - include: less-functions
-    - include: property-names
+    - include: less-variables
+    - include: less-functions
 
-  rule-list:
-    - include: property-names
-    - match: (:)\s*
-      captures:
-        1: punctuation.separator.key-value.css
-      push:
-        - meta_scope: meta.property-value.css
-        - match: '\s*(?=;|(?=[{}]))'
-          pop: true
-        - include: property-values
 
-  selector:
-      # Combinators
-      # https://drafts.csswg.org/selectors-4/#combinators
-      # https://drafts.csswg.org/css-scoping/#deep-combinator
-    - match: '\s*({{combinators}})(?![>~+]\s*)'
-      scope: meta.selector.css
+  at-rules:
+    - match: ((@)(?:-(?:webkit|moz|o)-)?(charset|namespace|font-face|supports)\b)
       captures:
-        1: punctuation.separator.combinator.css
-    - match: '&'
-      scope: meta.selector.css keyword.operator.ampersand.less
+        1: keyword.control.at-rule.css
+        2: punctuation.definition.keyword.css
       push:
-        - match: '\s'
-          scope: meta.selector.css
+        - meta_scope: meta.at-rule.css
+        - match: '\s*(?=[\{;])'
           pop: true
-        - include: selector
-        - match: '(-+|_+)[a-zA-Z_][a-zA-Z0-9_-]*'
-          scope: meta.selector.css entity.other.attribute-name.css
-    - match: '([\.#])(?![0-9])[a-zA-Z0-9_-]+(?=\()'
-      scope: meta.selector.css entity.other.attribute-name.class.css entity.other.less.mixin
-      captures:
-        1: punctuation.definition.entity.css
-    - match: '\b(use|tspan|tref|textPath|text|symbol|switch|stop|rect|radialGradient|polyline|polygon|pattern|path|mask|marker|linearGradient|line|image|glyphRef|glyph|g|foreignObject|filter|ellipse|defs|clipPath|circle|xmp|wbr|video|var|ul|u|tt|track|tr|title|time|thead|th|tfoot|textarea|template|td|tbody|table|svg|sup|summary|sub|style|strong|strike|span|source|small|shadow|select|section|script|samp|s|rtc|rt|rp|q|progress|pre|picture|param|p|output|option|optgroup|ol|object|noscript|noframes|nav|meter|meta|menu|mark|map|main|link|li|legend|label|keygen|kbd|isindex|ins|input|img|iframe|i|html|hr|hgroup|header|head|h[1-6]|frameset|frame|form|footer|figcaption|figure|fieldset|eventsource|embed|em|element|dt|dl|div|dialog|dir|dfn|details|del|dd|datalist|data|content|colgroup|col|code|cite|caption|canvas|button|br|body|blockquote|big|bdo|bdi|basefont|base|b|audio|aside|article|area|applet|address|acronym|abbr|a)\b(\s*)(?=([a-z.,+~{#\s\[\)]|:+[a-z]|$))'
-      captures:
-        1: meta.selector.css entity.name.tag.css
-        2: meta.selector.css
-    - match: '(\.)(?=-?([a-zA-Z_]|@{)[a-zA-Z0-9_-]*)'
-      captures:
-        1: punctuation.definition.entity.css
-      push:
-        - meta_scope: meta.selector.css entity.other.attribute-name.class.css
-        - include: less-interpolation
-        - match: '(\s*)(?=[^a-zA-Z0-9_-])'
+        - match: (url)(\()
           captures:
-            1: meta.selector.css
-          pop: true
-    - match: "(#)(?=-?([a-zA-Z_]|@{)[a-zA-Z0-9_-]*)"
-      captures:
-        1: punctuation.definition.entity.css
-      push:
-        - meta_scope: meta.selector.css entity.other.attribute-name.id.css
-        - include: less-interpolation
-        - match: '(?=[^a-zA-Z0-9_-])'
-          pop: true
-    - match: '\*'
-      scope: entity.name.tag.wildcard.css
-    - match: (:)(visited|valid|target|scope|root|right|required|read-write|read-only|out-of-range|optional|only-of-type|only-child|link|left|last-of-type|last-child|invalid|indeterminate|in-range|hover|fullscreen|focus|first-of-type|first-child|first|enabled|empty|disabled|default|checked|any|active)\b
-      scope: meta.selector.css entity.other.pseudo-class.css
-      captures:
-        1: punctuation.definition.entity.css
-    - match: (:)(extend)\b
-      scope: meta.selector.css entity.other.pseudo-class.less
-      captures:
-        1: punctuation.definition.entity.css
-    - match: ((:)not|lang|dir)(\()
-      captures:
-        1: entity.other.pseudo-class.css
-        2: punctuation.definition.entity.css
-        3: punctuation.definition.group.begin.css
-      push:
-        - meta_scope: meta.selector.css meta.group.css
-        - match: '\)'
-          scope: punctuation.definition.group.end.css
-          pop: true
-        - include: selector
-    - match: ((:)nth-(?:(?:last-)?child|(?:last-)?of-type))(?=\()
-      captures:
-        1: entity.other.pseudo-class.css
-        2: punctuation.definition.entity.css
-      push:
-        - meta_scope: meta.selector.css
-        - match: '\)'
-          scope: meta.group.css punctuation.definition.group.end.css
-          pop: true
-        - match: '\('
-          scope: meta.group.css punctuation.definition.group.begin.css
-        - match: '[+-]'
-          scope: keyword.operator.css
-        - match: '[0-9]+(n*)'
-          scope: meta.group.css constant.numeric.css
-          captures:
-            1: keyword.other.unit.css
-    - match: (:|::)(selection|first-line|first-letter|before|backdrop|after)\b
-      scope: meta.selector.css entity.other.pseudo-element.css
-      captures:
-        1: punctuation.definition.entity.css
-    - match: '\['
-      scope: punctuation.definition.entity.css
-      push:
-        - meta_scope: meta.attribute-selector.css
-        - include: qualified-name
-        - match: '({{ident}})'
-          scope: entity.other.attribute-name.css
-        - match: '\s*([~*|^$]?=)\s*'
-          captures:
-            1: keyword.operator.attribute-selector.css
+            1: meta.function-call.css support.function.url.css
+            2: punctuation.definition.group.begin.css
           push:
+            - meta_scope: meta.group.css
+            - match: '\)'
+              scope: punctuation.definition.group.end.css
+              pop: true
             - include: literal-string
             - include: unquoted-string
-            - match: '(?=(\s|\]))'
-              pop: true
-        - match: '(?:\s+([iI]))?'  # case insensitive flag
+        - include: comment-block
+        - include: literal-string
+    - match: (?=\s*@custom-media\b)
+      push:
+        - match: ;
+          scope: punctuation.terminator.css
+          pop: true
+        - match: \s*((@)custom-media)
           captures:
-            1: keyword.other.css
-        - match: '\]'
-          scope: punctuation.definition.entity.css
+            1: keyword.control.at-rule.custom-media.css
+            2: punctuation.definition.keyword.css
+            3: support.constant.custom-media.css
+          push:
+            - meta_scope: meta.at-rule.custom-media.css
+            - match: \s*(?=;)
+              pop: true
+            - include: media-query
+    - match: '((@)document)'
+      captures:
+        1: keyword.control.at-rule.document.css
+        2: punctuation.definition.keyword.css
+      push:
+        - meta_scope: meta.at-rule.document.css
+        - match: '(?=[\{;])'
+          pop: true
+        - include: comment-block
+        - include: comment-line
+        - include: url-function
+        - include: url-prefix-function
+        - include: domain-function
+        - include: regexp-function
+        - include: comma-delimiter
+    - match: \s*((@)(-webkit-|-moz-|-o-)?keyframes)
+      captures:
+        1: keyword.control.at-rule.keyframe.css
+        2: punctuation.definition.keyword.css
+      push:
+        - meta_scope: meta.at-rule.keyframe.css
+        - match: '\s*(?=[\{;])'
+          pop: true
+        - include: comment-block
+        - match: '\s*({{ident}})?'
+          captures:
+            1: entity.other.animation-name.css
+        - match: '\s*(?:(,)|(?=[{;]))'
+          captures:
+            1: punctuation.definition.arbitrary-repetition.css
+    - match: \s*((@)media)(?=\s+.*?)
+      captures:
+        1: keyword.control.at-rule.media.css
+        2: punctuation.definition.keyword.css
+        3: support.constant.media.css
+      push:
+        - meta_scope: meta.at-rule.media.css
+        - include: media-query
+        - match: '(?=\{)'
+          pop: true
+    - match: '\s*((@)namespace)\s+({{ident}}(?!{{nmchar}}|\())?'
+      captures:
+        1: keyword.control.at-rule.namespace.css
+        2: punctuation.definition.keyword.css
+        3: entity.other.namespace-prefix.css
+      push:
+        - meta_scope: meta.at-rule.namespace.css
+        - include: at-rule-punctuation
+        - include: literal-string
+        - include: url-function
+        - include: comment-block
+    - match: '\s*((@)page)\s*(?:(:)(first|left|right))?\s*'
+      captures:
+        1: keyword.control.at-rule.page.css
+        2: punctuation.definition.keyword.css
+        3: punctuation.definition.entity.css
+        4: entity.other.pseudo-class.css
+      push:
+        - meta_scope: meta.at-rule.page.css
+        - include: comment-block
+        - match: '\s*(?=\{)'
+          pop: true
+    - match: \s*((@)import\b)\s*
+      captures:
+        1: keyword.control.at-rule.import.css
+        2: punctuation.definition.keyword.css
+      push:
+        - meta_scope: meta.at-rule.import.css
+        - match: '(\()(reference|inline|less|css|once|multiple|optional)(\))'
+          captures:
+            0: meta.function.parameters.less
+            1: punctuation.definition.group.begin.less
+            2: constant.other.less
+            3: punctuation.definition.group.end.less
+        - include: at-rule-punctuation
+        - include: literal-string
+        - include: url-function
+        - include: media-query
+
+  keyframe-operators:
+    - include: numeric-values
+    - match: from|to
+      scope: keyword.keyframe-selector.css
+
+  at-rule-punctuation:
+    - match: \;
+      scope: punctuation.terminator.rule.css
+    - match: (?=;|$)
+      pop: true
+
+  media-query:
+    - include: comment-block
+    - match: \b(?i:all|aural|braille|embossed|handheld|print|projection|screen|speech|tty|tv)\b
+      scope: support.constant.media.css
+    - match: '\b(?i:and|or|not|only)\b'
+      scope: keyword.operator.logic.media.css
+    - match: ','
+      scope: punctuation.definition.arbitrary-repetition.css
+    - match: \(
+      scope: punctuation.definition.group.begin.css
+      push:
+        - match: \)
+          scope: punctuation.definition.group.end.css
+          pop: true
+        - include: comment-block
+        - match: |-
+            (?x)
+            (
+                (-webkit-|-o-)?
+                ((min|max)-)?
+                (-moz-)?
+                (
+                    ((device-)?(height|width|aspect-ratio|pixel-ratio))|
+                    (color(-index)?)|monochrome|resolution
+                )
+            )|grid|scan|orientation
+            \s*(?=[:)])
+          captures:
+            0: support.type.property-name.media.css
+            2: support.type.vendor-prefix.css
+            5: support.type.vendor-prefix.css
+          push:
+            - match: (:)|(?=\))
+              captures:
+                1: punctuation.separator.key-value.css
+              pop: true
+        - match: \b(portrait|landscape|progressive|interlace)
+          scope: support.constant.property-value.css
+        - match: \s*(\d+)(/)(\d+)
+          captures:
+            1: constant.numeric.css
+            2: keyword.operator.arithmetic.css
+            3: constant.numeric.css
+        - include: less-variables
+        - include: less-functions
+        - include: numeric-values
+
+
+
+  less-variable-declaration:
+    - match: '(@)([a-zA-Z0-9_-][\w-]*)'
+      captures:
+        0: variable.declaration.less
+        1: punctuation.definition.variable.less
+
+  less-variables:
+    - include: less-interpolation
+    - match: '(@{1,2})([a-zA-Z0-9_-][\w-]*)'
+      captures:
+        0: variable.other.less
+        1: punctuation.definition.variable.less
+    - match: (~)(")
+      captures:
+        1: keyword.operator.less
+        2: punctuation.definition.string.begin.less
+      push:
+        - meta_scope: string.quoted.double.css markup.raw.less
+        - match: '"'
+          scope: punctuation.definition.string.end.less
+          pop: true
+        - include: less-interpolation
+    - match: (~)(')
+      captures:
+        1: keyword.operator.less
+        2: punctuation.definition.string.begin.less
+      push:
+        - meta_scope: string.quoted.single.css markup.raw.less
+        - match: "'"
+          scope: punctuation.definition.string.end.less
+          pop: true
+        - include: less-interpolation
+
+  less-functions:
+    - match: \b(unit|tan|sqrt|spin|softlight|sin|screen|saturation|saturate|round|replace|red|pow|pi|percentage|overlay|negation|multiply|mod|mix|min|max|luma|lightness|lighten|length|isnumber|hue|hsvvalue|hsvsaturation|hsvhue|hsva|hsv|hsla|hsl|hardlight|greyscale|green|format|floor|fadeout|fadein|fade|extract|exclusion|escape|e|difference|desaturate|data-uri|darken|cos|convert|convert|contrast|color|ceil|calc|blue|average|atan|asin|argb|alpha|acos|abs)(\()
+      captures:
+        1: support.function.less
+        2: meta.group.less punctuation.definition.group.begin.less
+      push:
+        - meta_scope: meta.function-call.less
+        - meta_content_scope: meta.group.less meta.function.parameters.less
+        - match: '\)'
+          scope: meta.group.less punctuation.definition.group.end.less
+          pop: true
+        - match: ':'
+          scope: punctuation.separator.key-value.css
+        - include: comment-block
+        - include: comma-delimiter
+        - include: color-values
+        - include: numeric-values
+        - include: literal-string
+        - include: less-variables
+        - include: less-functions
+        - include: less-operators
+
+  less-interpolation:
+    - match: '(@)({)([a-zA-Z0-9_-][\w-]*)(})'
+      captures:
+        0: variable.other.less
+        1: punctuation.definition.variable.less
+        2: punctuation.definition.string.begin.less
+        3: string.interpolated.less
+        4: punctuation.definition.string.end.less
+
+  less-operators:
+    - match: /|$|%|\*|\-\-|\-|\+\+|\+|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\|\||\?\:|%=|\+=|\-=|&=|\bnot\b|\bor\b|\band\b|\bwhen\b
+      scope: keyword.operator.less
+
+  less-mixin:
+    - match: '\('
+      scope: punctuation.definition.group.begin.css
+      push:
+        - meta_scope: meta.function.parameters.less
+        - include: less-variables
+        - include: less-functions
+        - include: property-values
+        - include: literal-string
+        - include: selector
+        - match: '\{'
+          scope: punctuation.section.property-list.begin.css
+          push:
+          - match: '\}'
+            scope: punctuation.section.property-list.end.css
+            pop: true
+          - include: main
+        - match: '\)'
+          scope: punctuation.definition.group.begin.css
           pop: true
 
+
+
+  property-value-constants:
+    - match: |-
+            (?x)\b(
+                absolute|active|add
+              | all(-(petite|small)-caps|-scroll)?
+              | alpha(betic)?
+              | alternate(-reverse)?
+              | always|annotation|antialiased|at
+              | auto(hiding-scrollbar)?
+              | avoid(-column|-page|-region)?
+              | background(-color|-image|-position|-size)?
+              | backwards|balance|baseline|below|bevel|bicubic|bidi-override|blink
+              | block(-line-height)?
+              | blur
+              | bold(er)?
+              | border(-bottom|-left|-right|-top)?-(color|radius|width|style)
+              | border-(bottom|top)-(left|right)-radius
+              | border-image(-outset|-repeat|-slice|-source|-width)?
+              | border(-bottom|-left|-right|-top|-collapse|-spacing|-box)?
+              | both|bottom
+              | box(-shadow)?
+              | break-(all|word)
+              | brightness
+              | butt(on)?
+              | capitalize
+              | cent(er|ral)
+              | char(acter-variant)?
+              | cjk-ideographic|clip|clone|close-quote
+              | closest-(corner|side)
+              | col-resize|collapse
+              | color(-stop|-burn|-dodge)?
+              | column((-count|-gap|-reverse|-rule(-color|-width)?|-width)|s)?
+              | common-ligatures|condensed|consider-shifts|contain
+              | content(-box|s)?
+              | contextual|contrast|cover
+              | crisp(-e|E)dges
+              | crop
+              | cross(hair)?
+              | da(rken|shed)
+              | default|dense|diagonal-fractions|difference|disabled
+              | discretionary-ligatures|disregard-shifts
+              | distribute(-all-lines|-letter|-space)?
+              | dotted|double|drop-shadow
+              | (nwse|nesw|ns|ew|sw|se|nw|ne|w|s|e|n)-resize
+              | ease(-in-out|-in|-out)?
+              | element|ellipsis|embed|end|EndColorStr|evenodd
+              | exclu(de(-ruby)?|sion)
+              | expanded
+              | (extra|semi|ultra)-(condensed|expanded)
+              | farthest-(corner|side)?
+              | fill(-box|-opacity)?
+              | filter|fixed|flat
+              | flex((-basis|-end|-grow|-shrink|-start)|box)?
+              | flip|flood-color
+              | font(-size(-adjust)?|-stretch|-weight)?
+              | forwards
+              | from(-image)?
+              | full-width|geometricPrecision|glyphs|gradient|grayscale
+              | grid(-height)?
+              | groove|hand|hanging|hard-light|height|help|hidden|hide
+              | historical-(forms|ligatures)
+              | horizontal(-tb)?
+              | hue
+              | ideograph(-alpha|-numeric|-parenthesis|-space|ic)
+              | inactive|include-ruby|infinite|inherit|initial
+              | inline(-block|-box|-flex(box)?|-line-height|-table)?
+              | inset|inside
+              | inter(-ideograph|-word|sect)
+              | invert|isolat(e|ion)|italic
+              | jis(04|78|83|90)
+              | justify(-all)?
+              | keep-all
+              | large[r]?
+              | last|left|letter-spacing
+              | light(e[nr]|ing-color)
+              | line(-edge|-height|-through)?
+              | linear(-gradient|RGB)?
+              | lining-nums|list-item|local|loose|lowercase|lr-tb|ltr
+              | lumin(osity|ance)|manual
+              | margin(-bottom|-box|-left|-right|-top)?
+              | marker(-offset|s)?
+              | mathematical
+              | max-(content|height|lines|size|width)
+              | medium|middle
+              | min-(content|height|width)
+              | miter|mixed|move|multiply|newspaper
+              | no-(change|clip|(close|open)-quote|(common|discretionary|historical)-ligatures|contextual|drop|repeat)
+              | none|nonzero|normal|not-allowed|nowrap|oblique
+              | offset(-after|-before|-end|-start)?
+              | oldstyle-nums|opacity|open-quote
+              | optimize(Legibility|Precision|Quality|Speed)
+              | order|ordinal|ornaments
+              | outline(-color|-offset|-width)?
+              | outset|outside|over(line|-edge|lay)
+              | padding(-bottom|-box|-left|-right|-top)?
+              | page|painted|paused
+              | perspective-origin
+              | petite-caps|pixelated|pointer
+              | pre(-line|-wrap)?
+              | preserve-3d
+              | progid:DXImageTransform.Microsoft.(Alpha|Blur|dropshadow|gradient|Shadow)
+              | progress
+              | proportional-(nums|width)
+              | radial-gradient|recto|region|relative
+              | repeat(-[xy])?
+              | repeating-(linear|radial)-gradient
+              | replaced|reset-size|reverse|ridge|right
+              | round
+              | row(-resize|-reverse)?
+              | run-in
+              | ruby(-base|-text)?(-container)?
+              | rtl|running|saturat(e|ion)|screen
+              | scroll(-position|bar)?
+              | separate|sepia
+              | scale-down
+              | shape-(image-threshold|margin|outside)
+              | show
+              | sideways(-lr|-rl)?
+              | simplified
+              | slashed-zero|slice
+              | small(-caps|er)?
+              | smooth|snap|solid|soft-light
+              | space(-around|-between)?
+              | span|sRGB
+              | stack(ed-fractions)?
+              | start(ColorStr)?
+              | static
+              | step-(end|start)
+              | sticky
+              | stop-(color|opacity)
+              | stretch|strict
+              | stroke(-box|-dash(array|offset)|-miterlimit|-opacity|-width)?
+              | style(set)?
+              | stylistic
+              | sub(grid|pixel-antialiased|tract)?
+              | super|swash
+              | table(-caption|-cell|(-column|-footer|-header|-row)-group|-column|-row)?
+              | tabular-nums|tb-rl
+              | text((-bottom|-(decoration|emphasis)-color|-indent|-(over|under|after|before)-edge|-shadow|-size(-adjust)?|-top)|field)?
+              | thi(ck|n)
+              | titling-ca(ps|se)
+              | to[p]?
+              | touch|traditional
+              | transform(-origin)?
+              | under(-edge|line)?
+              | unicase|unset|uppercase|upright
+              | use-(glyph-orientation|script)
+              | verso
+              | vertical(-align|-ideographic|-lr|-rl|-text)?
+              | view-box
+              | viewport-fill(-opacity)?
+              | visibility
+              | visible(Fill|Painted|Stroke)?
+              | wait|wavy|weight|whitespace|width|word-spacing
+              | wrap(-reverse)?
+              | x{1,2}-(large|small)
+              | z-index|zero
+              | zoom(-in|-out)?
+              | ({{counter_styles}})
+            )\b(?=[\s;])
+      scope: support.constant.property-value.css
+    - match: \b(?i:sans-serif|serif|monospace|fantasy|cursive|system-ui)\b(?=\s*[;,\n}])
+      scope: support.constant.font-name.css
+
+  custom-property-name:
+    - match: '(--)({{nmchar}}+)'
+      captures:
+        0: meta.property-name.css support.type.custom-property.css
+        1: punctuation.definition.custom-property.css
+        2: support.type.custom-property.name.css
+
+  vendor-prefix:
+    - match: "-(?:webkit|moz|ms|o)-"
+      scope: support.type.vendor-prefix.css
+
+
+
+  pseudo-elements:
+    - match: |-
+        (?x:
+            (:{1,2})(?:before|after|first-line|first-letter) # CSS1 & CSS2 require : or ::
+          | (::)(-(?:moz|ms|webkit)-)?(?:{{ident}}) # CSS3 requires ::
+        )\b
+      scope: entity.other.pseudo-element.css
+      captures:
+        1: punctuation.definition.entity.css
+        2: punctuation.definition.entity.css
+        3: support.type.vendor-prefix.css
+
+  pseudo-classes:
+    - match: '(:)(dir|lang)(?=\()'
+      scope: entity.other.pseudo-class.css
+      captures:
+        1: punctuation.definition.entity.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: unquoted-string
+
+    - match: '(:)(matches|not|has)(?=\()'
+      scope: entity.other.pseudo-class.css
+      captures:
+        1: punctuation.definition.entity.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: selector
+
+    - match: '(:)(drop)(?=\()'
+      scope: entity.other.pseudo-class.css
+      captures:
+        1: punctuation.definition.entity.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - match: \b(active|valid|invalid)\b
+            scope: keyword.other.pseudo-class.css
+
+    - match: '(:)(nth-last-child|nth-child|nth-last-of-type|nth-of-type)(?=\()'
+      scope: entity.other.pseudo-class.css
+      captures:
+        1: punctuation.definition.entity.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - match: \b(even|odd)\b
+            scope: keyword.other.pseudo-class.css
+          - match: '(?:[-+]?(?:\d+)?(n)(\s*[-+]\s*\d+)?|[-+]?\s*\d+)'
+            scope: constant.numeric.css
+            captures:
+              1: keyword.other.unit.css
+
+    - match: '(:)({{ident}})'
+      scope: entity.other.pseudo-class.css
+      captures:
+        1: punctuation.definition.entity.css
+
+
+
+  builtin-functions:
+    - include: attr-function
+    - include: calc-function
+    - include: cross-fade-function
+    - include: filter-functions
+    - include: gradient-functions
+    - include: image-function
+    - include: image-set-function
+    - include: minmax-function
+    - include: url-function
+    - include: var-function
+    - include: color-adjuster-functions
+
+    - match: '\b(filter)(?=\()'
+      scope: support.function.filter.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: comma-delimiter
+          - include: image-type
+          - include: literal-string
+          - include: filter-functions
+          - include: less-variables
+          - include: less-functions
+
+    - match: '\b(counter)(?=\()'
+      scope: support.function.counter.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - match: '({{ident}})'
+            scope: entity.other.counter-name.css string.unquoted.css
+          - match: '(?=,)'
+            push:
+              - match: '(?=\))'
+                pop: true
+              - include: comma-delimiter
+              - include: less-variables
+              - include: less-functions
+              - match: '\b({{counter_styles}}|none)\b'
+                scope: support.constant.property-value.counter-style.css
+
+    - match: '\b(counters)(?=\()'
+      scope: support.function.counter.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - match: '({{ident}})'
+            scope: entity.other.counter-name.css string.unquoted.css
+          - match: '(?=,)'
+            push:
+              - match: '(?=\))'
+                pop: true
+              - include: comma-delimiter
+              - include: less-variables
+              - include: less-functions
+              - include: literal-string
+              - match: '\b({{counter_styles}}|none)\b'
+                scope: support.constant.property-value.counter-style.css
+
+    - match: '\b(symbols)(?=\()'
+      scope: support.function.counter.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - match: '\b(cyclic|numeric|alphabetic|symbolic|fixed)\b'
+            scope: support.constant.symbol-type.css
+          - include: comma-delimiter
+          - include: less-variables
+          - include: less-functions
+          - include: literal-string
+          - include: image-type
+
+    - match: '\b(format)(?=\()'
+      scope: support.function.font-face.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: less-variables
+          - include: less-functions
+          - include: literal-string
+
+    - match: '\b(local)(?=\()'
+      scope: support.function.font-face.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: less-variables
+          - include: less-functions
+          - include: unquoted-string
+
+    - match: '\b(matrix3d|scale3d|matrix|scale)(?=\()'
+      scope: support.function.transform.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: comma-delimiter
+          - include: less-variables
+          - include: less-functions
+          - include: number-type
+          - include: var-function
+
+    - match: '\b(translate(3d)?)(?=\()'
+      scope: support.function.transform.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: comma-delimiter
+          - include: less-variables
+          - include: less-functions
+          - include: percentage-type
+          - include: length-type
+          - include: number-type
+          - include: var-function
+
+    - match: '\b(translate[XY])(?=\()'
+      scope: support.function.transform.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: less-variables
+          - include: less-functions
+          - include: percentage-type
+          - include: length-type
+          - include: number-type
+
+    - match: '\b(rotate[XYZ]?|skew[XY])(?=\()'
+      scope: support.function.transform.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: less-variables
+          - include: less-functions
+          - include: angle-type
+
+    - match: '\b(skew)(?=\()'
+      scope: support.function.transform.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: comma-delimiter
+          - include: less-variables
+          - include: less-functions
+          - include: angle-type
+
+    - match: '\b(translateZ|perspective)(?=\()'
+      scope: support.function.transform.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: less-variables
+          - include: less-functions
+          - include: length-type
+
+    - match: '\b(rotate3d)(?=\()'
+      scope: support.function.transform.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: comma-delimiter
+          - include: less-variables
+          - include: less-functions
+          - include: angle-type
+          - include: number-type
+
+    - match: '\b(scale[XYZ])(?=\()'
+      scope: support.function.transform.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: comma-delimiter
+          - include: less-variables
+          - include: less-functions
+          - include: number-type
+
+    - match: '\b(cubic-bezier)(?=\()'
+      scope: support.function.timing.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: comma-delimiter
+          - include: less-variables
+          - include: less-functions
+          - include: number-type
+
+    - match: '\b(steps)(?=\()'
+      scope: support.function.timing.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: comma-delimiter
+          - include: less-variables
+          - include: less-functions
+          - include: integer-type
+          - match: (end|middle|start)
+            scope: support.keyword.timing-direction.css
+
+    - match: '\b(rect)(?=\()'
+      scope: support.function.shape.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - match: \bauto\b
+            scope: support.constant.property-value.css
+          - include: less-variables
+          - include: less-functions
+          - include: length-type
+
+    - match: '\b(inset)(?=\()'
+      scope: support.function.shape.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - match: '\bround\b'
+            scope: keyword.other.css
+          - include: less-variables
+          - include: less-functions
+          - include: length-type
+          - include: percentage-type
+
+    - match: '\b(circle|ellipse)(?=\()'
+      scope: support.function.shape.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - match: '\bat\b'
+            scope: keyword.other.css
+          - match: '\b(top|right|bottom|left|center|closest-side|farthest-side)\b'
+            scope: support.constant.property-value.css
+          - include: less-variables
+          - include: less-functions
+          - include: length-type
+          - include: percentage-type
+
+    - match: '\b(polygon)(?=\()'
+      scope: support.function.shape.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - match: '\b(nonzero|evenodd)\b'
+            scope: support.constant.property-value.css
+          - include: less-variables
+          - include: less-functions
+          - include: length-type
+          - include: percentage-type
+
+    - match: '\b(toggle)(?=\()'
+      scope: support.function.toggle.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: comma-delimiter
+          - include: less-variables
+          - include: less-functions
+          - include: vendor-prefix
+          - include: property-value-constants
+          - include: numeric-values
+          - include: color-values
+          - include: literal-string
+
+    - match: '\b(repeat)(?=\()'
+      scope: support.function.grid.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: comma-delimiter
+          - include: less-variables
+          - include: less-functions
+          - include: length-type
+          - include: percentage-type
+          - include: minmax-function
+          - include: integer-type
+          - include: var-function
+          - match: \b(auto-fill|auto-fit)\b
+            scope: support.keyword.repetitions.css
+          - match: \b(max-content|min-content|auto)\b
+            scope: support.constant.property-value.css
+
+  var-function:
+    - match: '\b(var)(?=\()'
+      scope: support.function.var.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: comma-delimiter
+          - include: less-variables
+          - include: less-functions
+          - include: custom-property-name
+
+  filter-functions:
+    - match: '\b(blur)(?=\()'
+      scope: support.function.filter.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: less-variables
+          - include: less-functions
+          - include: length-type
+
+    - match: '\b(brightness|contrast|grayscale|invert|opacity|saturate|sepia)(?=\()'
+      scope: support.function.filter.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: less-variables
+          - include: less-functions
+          - include: percentage-type
+          - include: number-type
+
+    - match: '\b(drop-shadow)(?=\()'
+      scope: support.function.filter.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: less-variables
+          - include: less-functions
+          - include: length-type
+          - include: color-values
+
+    - match: '\b(hue-rotate)(?=\()'
+      scope: support.function.filter.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: less-variables
+          - include: less-functions
+          - include: angle-type
+
+  calc-function:
+    - match: '\b(calc)(?=\()'
+      scope: support.function.calc.css
+      push:
+        - meta_scope: meta.function-call.css
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push: inside-calc-parens
+        - match: ''
+          pop: true
+
+  inside-calc-parens:
+    - meta_scope: meta.group.css
+    - match: '(?=\))'
+      set: function-notation-terminator
+    - include: less-variables
+    - include: less-functions
+    - include: calc-function
+    - include: var-function
+    - include: numeric-values
+    - include: attr-function
+    - match: "[-/*+]"
+      scope: keyword.operator.css
+    - match: '\('
+      scope: punctuation.definition.group.begin.css
+      push: inside-calc-parens
+
+  attr-function:
+    - match: '\b(attr)(?=\()'
+      scope: support.function.attr.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: less-variables
+          - include: less-functions
+          - include: qualified-name
+          - include: literal-string
+          - match: '({{ident}})'
+            scope: entity.other.attribute-name.css
+            push:
+            - match: |-
+                (?x)\b(
+                    {{font_relative_lengths}}
+                  | {{viewport_percentage_lengths}}
+                  | {{absolute_lengths}}
+                  | {{angle_units}}
+                  | {{duration_units}}
+                  | {{frequency_units}}
+                  | {{resolution_units}}
+                )\b
+              scope: keyword.other.unit.css
+            - match: '(?=\))'
+              pop: true
+            - include: comma-delimiter
+            - include: less-variables
+            - include: less-functions
+            - include: property-value-constants
+            - include: numeric-values
+            - include: color-values
+
+  url-function:
+    - match: '\b(url)(?=\()'
+      scope: support.function.url.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: less-variables
+          - include: less-functions
+          - include: literal-string
+          - include: unquoted-string
+
+  url-prefix-function:
+    - match: '\b(url-prefix)(?=\()'
+      scope: support.function.url-prefix.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: less-variables
+          - include: less-functions
+          - include: literal-string
+          - include: unquoted-string
+
+  domain-function:
+    - match: '\b(domain)(?=\()'
+      scope: support.function.domain.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: less-variables
+          - include: less-functions
+          - include: literal-string
+          - include: unquoted-string
+
+  regexp-function:
+    - match: '\b(regexp)(?=\()'
+      scope: support.function.regexp.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: less-variables
+          - include: less-functions
+          - include: literal-string
+
+  image-function:
+    - match: '\b(image)(?=\()'
+      scope: support.function.image.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: less-variables
+          - include: less-functions
+          - include: image-type
+          - include: literal-string
+          - include: color-values
+          - include: comma-delimiter
+          - include: unquoted-string
+
+  image-set-function:
+    - match: '\b(image-set)(?=\()'
+      scope: support.function.image.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: less-variables
+          - include: less-functions
+          - include: literal-string
+          - include: color-values
+          - include: comma-delimiter
+          - include: resolution-type
+          - include: image-type
+          - match: '[0-9]+(x)'
+            scope: constant.numeric.css
+            captures:
+              1: keyword.other.unit.css
+          - include: unquoted-string
+
+  gradient-functions:
+    - match: '\b((?:repeating-)?linear-gradient)(?=\()'
+      scope: support.function.gradient.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: less-variables
+          - include: less-functions
+          - include: angle-type
+          - include: comma-delimiter
+          - include: color-values
+          - include: percentage-type
+          - include: length-type
+          - match: '\bto\b'
+            scope: keyword.other.css
+          - match: \b(top|right|bottom|left)\b
+            scope: support.constant.property-value.css
+
+    - match: '\b((?:repeating-)?radial-gradient)(?=\()'
+      scope: support.function.gradient.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: comma-delimiter
+          - include: less-variables
+          - include: less-functions
+          - include: color-values
+          - include: percentage-type
+          - include: length-type
+          - match: '\b(at|circle|ellipse)\b'
+            scope: keyword.other.css
+          - match: |-
+              (?x)\b(
+                  left
+                | center
+                | right
+                | top
+                | bottom
+                | closest-corner
+                | closest-side
+                | farthest-corner
+                | farthest-side
+              )\b
+            scope: support.constant.property-value.css
+
+  cross-fade-function:
+    - match: '\b(cross-fade)(?=\()'
+      scope: support.function.image.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: comma-delimiter
+          - include: less-variables
+          - include: less-functions
+          - include: percentage-type
+          - include: color-values
+          - include: image-type
+          - include: literal-string
+          - include: unquoted-string
+
+  minmax-function:
+    - match: '\b(minmax)(?=\()'
+      scope: support.function.grid.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: comma-delimiter
+          - include: less-variables
+          - include: less-functions
+          - include: length-type
+          - match: \b(max-content|min-content)\b
+            scope: support.constant.property-value.css
+
+  color-functions:
+    - match: '\b(rgba?)(?=\()'
+      scope: support.function.color.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: comma-delimiter
+          - include: less-variables
+          - include: less-variables
+          - include: percentage-type
+          - include: number-type
+
+    - match: '\b(hsla?|hwb)(?=\()'
+      scope: support.function.color.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: comma-delimiter
+          - include: less-variables
+          - include: less-variables
+          - include: angle-type
+          - include: percentage-type
+          - include: number-type
+
+    - match: '\b(gray)(?=\()'
+      scope: support.function.color.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: comma-delimiter
+          - include: less-variables
+          - include: less-variables
+          - include: percentage-type
+          - include: number-type
+
+    - match: '\b(device-cmyk)(?=\()'
+      scope: support.function.color.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: comma-delimiter
+          - include: less-variables
+          - include: less-variables
+          - include: color-adjuster-functions # must be included before `color-values`
+          - include: color-values
+          - include: percentage-type
+          - include: number-type
+
+    - match: '\b(color)(?=\()'
+      scope: support.function.color.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: comma-delimiter
+          - include: less-variables
+          - include: less-variables
+          - include: color-adjuster-functions # must be included before `color-values`
+          - include: var-function
+          - include: color-values
+          - include: angle-type
+          - include: number-type
+
+  color-adjuster-functions:
+    - match: '\b(red|green|blue|alpha|a)(?=\()'
+      scope: support.function.color.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: color-adjuster-operators
+          - include: percentage-type
+          - include: number-type
+
+    - match: '\b(hue|h)(?=\()'
+      scope: support.function.color.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: less-variables
+          - include: less-variables
+          - include: color-adjuster-operators
+          - include: angle-type
+
+    - match: '\b(saturation|lightness|whiteness|blackness|[slwb])(?=\()'
+      scope: support.function.color.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: less-variables
+          - include: less-variables
+          - include: color-adjuster-operators
+          - include: percentage-type
+
+    - match: '\b(tint|shade)(?=\()'
+      scope: support.function.color.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - include: less-variables
+          - include: less-variables
+          - include: percentage-type
+
+    - match: '\b(blenda|blend)(?=\()'
+      scope: support.function.color.css
+      push:
+        - meta_scope: meta.function-call.css
+        - include: function-notation-terminator
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+          - meta_scope: meta.group.css
+          - match: '(?=\))'
+            pop: true
+          - match: '\b(rgb|hsl|hwb)\b'
+            scope: keyword.other.color-space.css
+          - include: less-variables
+          - include: less-variables
+          - include: color-values
+          - include: percentage-type
+          - include: var-function
+
+  color-adjuster-operators:
+    - match: '[\-\+*](?=\s+)'
+      scope: keyword.operator.css
+
+  function-notation-terminator:
+    - match: '\)'
+      scope: meta.group.css punctuation.definition.group.end.css
+      pop: true
+
+  comma-delimiter:
+    - match: '\s*(,)\s*'
+      captures:
+        1: punctuation.separator.css
+
+
+  unicode-range:
+    - match: |-
+        (?xi)
+            (u\+)
+            ([0-9a-f?]{1,6}
+            (?:(-)[0-9a-f]{1,6})?)
+      scope: support.unicode-range.css
+      captures:
+        1: support.constant.unicode-range.prefix.css
+        2: constant.codepoint-range.css
+        3: punctuation.section.range.css
+
+  qualified-name:
+    - match: '(?:({{ident}})|(\*))?([|])(?!=)'
+      captures:
+        1: entity.other.namespace-prefix.css
+        2: entity.name.namespace.wildcard.css
+        3: punctuation.separator.namespace.css
+
+
+  color-values:
+    - include: color-functions
+    - match: \b(aqua|black|blue|fuchsia|gray|green|lime|maroon|navy|olive|orange|purple|red|silver|teal|white|yellow)\b
+      scope: support.constant.color.w3c-standard-color-name.css
+    - match: \b(aliceblue|antiquewhite|aquamarine|azure|beige|bisque|blanchedalmond|blueviolet|brown|burlywood|cadetblue|chartreuse|chocolate|coral|cornflowerblue|cornsilk|crimson|cyan|darkblue|darkcyan|darkgoldenrod|darkgray|darkgreen|darkgrey|darkkhaki|darkmagenta|darkolivegreen|darkorange|darkorchid|darkred|darksalmon|darkseagreen|darkslateblue|darkslategray|darkslategrey|darkturquoise|darkviolet|deeppink|deepskyblue|dimgray|dimgrey|dodgerblue|firebrick|floralwhite|forestgreen|gainsboro|ghostwhite|gold|goldenrod|greenyellow|grey|honeydew|hotpink|indianred|indigo|ivory|khaki|lavender|lavenderblush|lawngreen|lemonchiffon|lightblue|lightcoral|lightcyan|lightgoldenrodyellow|lightgray|lightgreen|lightgrey|lightpink|lightsalmon|lightseagreen|lightskyblue|lightslategray|lightslategrey|lightsteelblue|lightyellow|limegreen|linen|magenta|mediumaquamarine|mediumblue|mediumorchid|mediumpurple|mediumseagreen|mediumslateblue|mediumspringgreen|mediumturquoise|mediumvioletred|midnightblue|mintcream|mistyrose|moccasin|navajowhite|oldlace|olivedrab|orangered|orchid|palegoldenrod|palegreen|paleturquoise|palevioletred|papayawhip|peachpuff|peru|pink|plum|powderblue|rebeccapurple|rosybrown|royalblue|saddlebrown|salmon|sandybrown|seagreen|seashell|sienna|skyblue|slateblue|slategray|slategrey|snow|springgreen|steelblue|tan|thistle|tomato|turquoise|violet|wheat|whitesmoke|yellowgreen)\b
+      scope: support.constant.color.w3c-extended-color-keywords.css
+    - match: \b((?i)currentColor|transparent)\b
+      scope: support.constant.color.w3c-special-color-keyword.css
+    - match: '(#)(\h{3}|\h{6})\b'
+      scope: constant.other.color.rgb-value.css
+      captures:
+        1: punctuation.definition.constant.css
+    - match: '(#)(\h{4}|\h{8})\b'
+      scope: constant.other.color.rgba-value.css
+      captures:
+        1: punctuation.definition.constant.css
+
+  numeric-values:
+    - include: dimensions
+    - include: percentage-type
+    - include: number-type
+
+  integer-type:
+    - match: '{{integer}}'
+      scope: constant.numeric.css
+
+  number-type:
+    - match: '{{number}}'
+      scope: constant.numeric.css
+
+  percentage-type:
+    - match: '{{number}}(%)'
+      scope: constant.numeric.css
+      captures:
+        1: keyword.other.unit.css
+
+  dimensions:
+    - include: angle-type
+    - include: frequency-type
+    - include: length-type
+    - include: resolution-type
+    - include: time-type
+
+  length-type:
+    - match: '{{number}}({{font_relative_lengths}}|{{viewport_percentage_lengths}}|{{absolute_lengths}})\b'
+      scope: constant.numeric.css
+      captures:
+        1: keyword.other.unit.css
+    - match: '0\b(?!%)'
+      scope: constant.numeric.css
+
+  time-type:
+    - match: '{{number}}({{duration_units}})\b'
+      scope: constant.numeric.css
+      captures:
+        1: keyword.other.unit.css
+
+  frequency-type:
+    - match: '{{number}}({{frequency_units}})\b'
+      scope: constant.numeric.css
+      captures:
+        1: keyword.other.unit.css
+
+  resolution-type:
+    - match: '{{number}}({{resolution_units}})\b'
+      scope: constant.numeric.css
+      captures:
+        1: keyword.other.unit.css
+
+  angle-type:
+    - match: '{{number}}({{angle_units}})\b'
+      scope: constant.numeric.css
+      captures:
+        1: keyword.other.unit.css
+
+  image-type:
+    - include: cross-fade-function
+    - include: gradient-functions
+    - include: image-function
+    - include: image-set-function
+    - include: url-function
+
+
+
   unquoted-string:
-    - match: '[^\s\]\[''"]'
+    - match: '[^\s''"]'
       scope: string.unquoted.css
 
   literal-string:
@@ -616,3 +1953,24 @@ contexts:
     - match: '\\(\h{1,6}|.)'
       scope: constant.character.escape.css
     - include: less-interpolation
+
+
+
+  comment-block:
+    - match: /\*
+      scope: punctuation.definition.comment.css
+      push:
+        - meta_scope: comment.block.css
+        - match: \*/
+          scope: punctuation.definition.comment.css
+          pop: true
+
+  comment-line:
+    - match: //
+      scope: punctuation.definition.comment.css
+      push:
+        - meta_scope: comment.line.double-slash.less
+        - match: $\n?
+          scope: punctuation.definition.comment.css
+          pop: true
+
