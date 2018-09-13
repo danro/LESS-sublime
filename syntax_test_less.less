@@ -619,9 +619,9 @@ header {
 }
 
     @font-face
-//  ^^^^^^^^^^^ meta.at-rule.font-face.css
+//  ^^^^^^^^^^^ meta.at-rule.css
 //  ^          punctuation.definition.keyword.css
-//   ^^^^^^^^^ keyword.control.at-rule.font-face.css
+//   ^^^^^^^^^ keyword.control.at-rule.css
 {
     font-family: monospace,
 //  ^^^^^^^^^^^ support.type.property-name.css
@@ -631,28 +631,27 @@ header {
 }
 
     @supports not ( and ( top: 2px ) ) { }
-//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.supports.css
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.supports.css
 //  ^          punctuation.definition.keyword.css
 //   ^^^^^^^^ keyword.control.at-rule.supports.css
 //            ^^^ keyword.operator.logic.css
-//                ^ meta.group.css punctuation.definition.group.begin.css
+//                ^ punctuation.definition.group.begin.css
 //                  ^^^ keyword.operator.logic.css
-//                      ^ meta.group.css punctuation.definition.group.begin.css
+//                      ^ punctuation.definition.group.begin.css
 //                        ^^^ support.type.property-name.css
 //                           ^ punctuation.separator.key-value.css
 //                              ^^ constant.numeric.css keyword.other.unit.css
-//                                 ^ meta.group.css punctuation.definition.group.end.css
-//                                   ^ meta.group.css punctuation.definition.group.end.css
-//                                     ^^^ meta.block.css
-//                                     ^ punctuation.definition.block.begin.css
-//                                       ^ punctuation.definition.block.end.css
+//                                 ^ punctuation.definition.group.end.css
+//                                   ^ punctuation.definition.group.end.css
+//                                     ^ punctuation.section
+//                                       ^ punctuation.section
 
 @supports (--foo: green) {
 //         ^^^^^ support.type.custom-property.css
     .class {
-//  ^^^^^^ meta.at-rule.supports.css entity.other.attribute-name.class.css
+//  ^^^^^^ entity.other.attribute-name.class.css
         display: none;
-//      ^^^^^^^ meta.at-rule.supports.css meta.property-name.css
+//      ^^^^^^^ meta.property-name.css
     }
 }
 

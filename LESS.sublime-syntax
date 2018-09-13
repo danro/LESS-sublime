@@ -334,7 +334,7 @@ contexts:
 
 
   at-rules:
-    - match: ((@)(?:-(?:webkit|moz|o)-)?(charset|namespace|font-face|supports)\b)
+    - match: ((@)(?:-(?:webkit|moz|o)-)?(charset|namespace|font-face)\b)
       captures:
         1: keyword.control.at-rule.css
         2: punctuation.definition.keyword.css
@@ -385,6 +385,22 @@ contexts:
         - include: domain-function
         - include: regexp-function
         - include: comma-delimiter
+    - match: \s*((@)import\b)\s*
+      captures:
+        1: keyword.control.at-rule.import.css
+        2: punctuation.definition.keyword.css
+      push:
+        - meta_scope: meta.at-rule.import.css
+        - match: '(\()(reference|inline|less|css|once|multiple|optional)(\))'
+          captures:
+            0: meta.function.parameters.less
+            1: punctuation.definition.group.begin.less
+            2: constant.other.less
+            3: punctuation.definition.group.end.less
+        - include: at-rule-punctuation
+        - include: literal-string
+        - include: url-function
+        - include: media-query
     - match: \s*((@)(-webkit-|-moz-|-o-)?keyframes)
       captures:
         1: keyword.control.at-rule.keyframe.css
@@ -432,22 +448,33 @@ contexts:
         - include: comment-block
         - match: '\s*(?=\{)'
           pop: true
-    - match: \s*((@)import\b)\s*
+    - match: '((@)supports)'
       captures:
-        1: keyword.control.at-rule.import.css
+        1: keyword.control.at-rule.supports.css
         2: punctuation.definition.keyword.css
       push:
-        - meta_scope: meta.at-rule.import.css
-        - match: '(\()(reference|inline|less|css|once|multiple|optional)(\))'
-          captures:
-            0: meta.function.parameters.less
-            1: punctuation.definition.group.begin.less
-            2: constant.other.less
-            3: punctuation.definition.group.end.less
-        - include: at-rule-punctuation
-        - include: literal-string
-        - include: url-function
-        - include: media-query
+        - meta_scope: meta.at-rule.supports.css
+        - match: '(?=\{)'
+          pop: true
+        - include: at-supports-operators
+        - include: at-supports-parens
+
+  at-supports-operators:
+    - match: '\b(?i:and|or|not)\b'
+      scope: keyword.operator.logic.css
+
+  at-supports-parens:
+    - match: '\('
+      scope: punctuation.definition.group.begin.css
+      push:
+        - meta_scope: meta.group.css
+        - match: '\)'
+          scope: punctuation.definition.group.end.css
+          pop: true
+        - include: at-supports-operators
+        - include: at-supports-parens
+        - include: comment-block
+        - include: properties
 
   keyframe-operators:
     - include: numeric-values
