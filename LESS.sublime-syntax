@@ -1406,12 +1406,12 @@ contexts:
     - meta_scope: meta.group.css
     - match: '(?=\))'
       set: function-notation-terminator
-    - include: less-variables
-    - include: less-functions
     - include: calc-function
     - include: var-function
     - include: numeric-values
     - include: attr-function
+    - include: less-variables
+    - include: less-functions
     - match: "[-/*+]"
       scope: keyword.operator.css
     - match: '\('
