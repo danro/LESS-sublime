@@ -355,6 +355,17 @@ contexts:
             - include: unquoted-string
         - include: comment-block
         - include: literal-string
+    - match: \s*((@)counter-style\b)\s+(?:(?i:\b(decimal|none)\b)|({{ident}}))?\s*(?=\{|$)
+      captures:
+        1: keyword.control.at-rule.counter-style.css
+        2: punctuation.definition.keyword.css
+        3: invalid.illegal.counter-style-name.css
+        4: entity.other.counter-style-name.css
+      push:
+        - meta_scope: meta.at-rule.counter-style.css
+        - include: comment-block
+        - match: '(?=\{)'
+          pop: true
     - match: (?=\s*@custom-media\b)
       push:
         - match: ;
