@@ -71,6 +71,15 @@ html::before {
 // ^ entity.name.tag.css, keyword.control.html.elements
 //  ^^ entity.other.pseudo-element.css punctuation.definition.entity.css
 //     ^ entity.other.pseudo-element.css
+  &:not(:first-child, :last-child) { text-decoration: underline; }
+//      ^^^^^^^^^^^^ entity.other.pseudo-class.css
+//      ^ punctuation.definition.entity.css
+//                  ^ punctuation.separator.css
+//                    ^^^^^^^^^^^ entity.other.pseudo-class.css
+//                    ^ punctuation.definition.entity.css
+  strong:not(:not(.strong)) {}
+//           ^^^^ entity.other.pseudo-class.css
+//                ^^^^^^^ entity.other.attribute-name.class.css
   &:first-child {}
 //^^^^^^^^^^^^^^ meta.selector.css
 // ^^^^^^^^^^^^ entity.other.pseudo-class.css

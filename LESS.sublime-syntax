@@ -595,7 +595,7 @@ contexts:
             pop: true
           - include: main
         - match: '\)'
-          scope: punctuation.definition.group.begin.css
+          scope: punctuation.definition.group.end.css
           pop: true
 
 
@@ -818,6 +818,7 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
+          - include: pseudo-classes
           - include: selector
 
     - match: '(:)(drop)(?=\()'
@@ -1642,7 +1643,6 @@ contexts:
             pop: true
           - include: comma-delimiter
           - include: less-variables
-          - include: less-variables
           - include: percentage-type
           - include: number-type
 
@@ -1658,7 +1658,6 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: less-variables
           - include: less-variables
           - include: angle-type
           - include: percentage-type
@@ -1677,7 +1676,6 @@ contexts:
             pop: true
           - include: comma-delimiter
           - include: less-variables
-          - include: less-variables
           - include: percentage-type
           - include: number-type
 
@@ -1693,7 +1691,6 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: less-variables
           - include: less-variables
           - include: color-adjuster-functions # must be included before `color-values`
           - include: color-values
@@ -1712,7 +1709,6 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: comma-delimiter
-          - include: less-variables
           - include: less-variables
           - include: color-adjuster-functions # must be included before `color-values`
           - include: var-function
@@ -1748,7 +1744,6 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: less-variables
-          - include: less-variables
           - include: color-adjuster-operators
           - include: angle-type
 
@@ -1763,7 +1758,6 @@ contexts:
           - meta_scope: meta.group.css
           - match: '(?=\))'
             pop: true
-          - include: less-variables
           - include: less-variables
           - include: color-adjuster-operators
           - include: percentage-type
@@ -1780,7 +1774,6 @@ contexts:
           - match: '(?=\))'
             pop: true
           - include: less-variables
-          - include: less-variables
           - include: percentage-type
 
     - match: '\b(blenda|blend)(?=\()'
@@ -1796,7 +1789,6 @@ contexts:
             pop: true
           - match: '\b(rgb|hsl|hwb)\b'
             scope: keyword.other.color-space.css
-          - include: less-variables
           - include: less-variables
           - include: color-values
           - include: percentage-type
