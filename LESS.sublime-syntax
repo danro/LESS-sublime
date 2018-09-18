@@ -173,28 +173,39 @@ contexts:
         - include: pseudo-elements
         - include: pseudo-classes
         - include: selector
-    - match: '\['
-      scope: punctuation.definition.entity.css
+    - match: '(?=\[)'
       push:
-        - meta_scope: meta.attribute-selector.css
-        - include: qualified-name
-        - match: '({{ident}})'
-          scope: entity.other.attribute-name.css
-        - match: '\s*([~*|^$]?=)\s*'
-          captures:
-            1: keyword.operator.attribute-selector.css
-          push:
-            - match: '[^\s\]\[''"]'
-              scope: string.unquoted.css
-            - include: literal-string
-            - match: '(?=(\s|\]))'
-              pop: true
-        - match: '(?:\s+([iI]))?'  # case insensitive flag
-          captures:
-            1: keyword.other.css
-        - match: '\]'
-          scope: punctuation.definition.entity.css
-          pop: true
+      - meta_scope: meta.selector.css
+      - match: \s*(?=$)
+        pop: true
+      - match: '(?=[{)])'
+        pop: true
+      - match: '\['
+        scope: punctuation.definition.entity.css
+        push:
+          - meta_scope: meta.attribute-selector.css
+          - include: qualified-name
+          - match: '({{ident}})'
+            scope: entity.other.attribute-name.css
+          - match: '\s*([~*|^$]?=)\s*'
+            captures:
+              1: keyword.operator.attribute-selector.css
+            push:
+              - match: '[^\s\]\[''"]'
+                scope: string.unquoted.css
+              - include: literal-string
+              - match: '(?=(\s|\]))'
+                pop: true
+          - match: '(?:\s+([iI]))?'  # case insensitive flag
+            captures:
+              1: keyword.other.css
+          - match: '\]'
+            scope: punctuation.definition.entity.css
+            pop: true
+      - include: less-interpolation
+      - include: pseudo-elements
+      - include: pseudo-classes
+      - include: selector
     - include: less-operators
 
 
