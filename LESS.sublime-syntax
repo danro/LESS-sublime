@@ -68,6 +68,8 @@ contexts:
   main:
     - include: comment-block
     - include: comment-line
+    - include: pseudo-elements
+    - include: pseudo-classes
     - include: properties
     - include: keyframe-operators
     - include: selector
@@ -207,6 +209,8 @@ contexts:
       - include: pseudo-classes
       - include: selector
     - include: less-operators
+    - include: pseudo-elements
+    - include: pseudo-classes
 
 
   properties:
