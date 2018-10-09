@@ -502,7 +502,7 @@ contexts:
 
   keyframe-operators:
     - include: numeric-values
-    - match: from|to
+    - match: \b(from|to)\b
       scope: keyword.keyframe-selector.css
 
   at-rule-punctuation:
