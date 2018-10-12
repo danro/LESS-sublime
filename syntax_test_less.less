@@ -874,11 +874,6 @@ header {
 //                               ^     punctuation.separator.combinator.css
 //                                   ^ punctuation.separator.combinator.css
 
-.test-invalid-combinators +>> a +++ a ~+> {}
-//                        ^^^             invalid.illegal.combinator.css
-//                              ^^^       invalid.illegal.combinator.css
-//                                    ^^^ invalid.illegal.combinator.css
-
 .test-generic-font-families {
     font: serif;
 //        ^^^^^      support.constant.font-name.css
@@ -1422,15 +1417,12 @@ header {
 
 .test-meta-scopes-for-completions {
     top: 5px;
-//^^^^^^^^^^^ meta.property-list
 //  ^^^ meta.property-name
 //      ^^^^ meta.property-value
     top: ;
-//^^^^^^^^^^^ meta.property-list
 //  ^^^ meta.property-name
 //      ^ meta.property-value
-    top:
-//^^^^^^^ meta.property-list
+    top: 0
 //  ^^^ meta.property-name
 }/*     ^ meta.property-value */
 
