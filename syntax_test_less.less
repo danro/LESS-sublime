@@ -1,5 +1,44 @@
 // SYNTAX TEST "Packages/LESS/LESS.sublime-syntax"
 
+/*
+Correctly differentiate between properties and selectors,
+especially with pseudo-stuff because of the :
+*/
+
+*,
+& + h1,
+&:active #unit h1 + div,
+&-element + h1,
+[data-type="text"],
+span::before[data-type="text"],
+selector-ish::before[data-type="text"]:not(:first-child),
+.selector:hover selector-ish.selector::before {
+  *,
+  & + h1,
+  &:active + h1,
+  &-element + h1,
+  [data-type="text"],
+  span::before[data-type="text"],
+  filter::before[data-type="text"],
+  selector-ish::before[data-type="text"]:not(:first-child),
+  #selec-tor:hover, selector-ish::before {
+    color: rgba(100, 120, 12, 95%);
+    background-color: blue;
+    line-height: ~"calc(@{space} + 4px)";
+    span:hover {}
+    filter:not(.empty) {}
+    filter:drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
+    filter:blue;
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3))
+  }
+  color: rgba(100, 120, 12, 95%);
+  background-color: blue
+}
+
+
+
+
+
 :root,
 // <- entity.other.pseudo-class.css punctuation.definition.entity.css
 // ^^ entity.other.pseudo-class.css
@@ -34,8 +73,9 @@
 //                  ^^^^^^^ entity.other.pseudo-class.css
 //                  ^ punctuation.definition.entity.css
 
-  #id@{interopol}
-  background: bla
+  #id@{interopol}bla,
+  custom-element@{interopol}test,
+  background: blue
 // ^ meta.property-name.css
 }
 
@@ -157,7 +197,7 @@ html::before {
   filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
 // ^ support.type.property-name.css
 
-  .fade-in(@selector) {
+  .fade-in(h1) {
     @keyframes fade-in-animation {
 //  ^ meta.at-rule.keyframe.css keyword.control.at-rule.keyframe.css punctuation.definition.keyword.css
 //             ^ meta.at-rule.keyframe.css entity.other.animation-name.css
@@ -179,6 +219,22 @@ html::before {
     }
   }
 }
+
+
+/*
+  Mixins
+  http://lesscss.org/features/#mixins-feature
+*/
+.border-radius(@color: h1; @padding; @margin: 2) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
+}
+
+
+/*
+Attribute selectors
+*/
   a[data-property="text"] {
 // ^^^^^^^^^^^^^^^^^^^^^^ meta.attribute-selector.css
 // ^ punctuation.definition.entity.css
@@ -206,6 +262,11 @@ html::before {
 //                ^ meta.attribute-selector.css keyword.other.css
   a[value*="text" I] {
 //       ^ meta.attribute-selector.css keyword.operator.attribute-selector.css
+
+
+
+
+
   color: @link-color;
 //       ^ punctuation.definition.variable.less
   color: @@color; // variable variables
@@ -217,7 +278,7 @@ html::before {
     .mixin   { /* */ }
 //  ^ punctuation.definition.entity.css
 //  ^^^^^^ meta.selector.css
-    .mixin() { /* */ }
+    #mixin(@color-param, @position-param) { /* */ }
 //  ^ punctuation.definition.entity.css
 //  ^^^^^^ meta.selector.css
     .border-radius(@radius: 5px) {
@@ -259,8 +320,8 @@ html::before {
   .@{varname}--subclass#another-variable@{variable}id[data-attr="text"] { color: @orangy; }
 //            ^ entity.other.attribute-name.class.css
 //                     ^ entity.other.attribute-name.id.css punctuation.definition.entity.css
-//                             ^ entity.other.attribute-name.id.css variable.other.less punctuation.definition.variable.less
-//                                        ^ entity.other.attribute-name.id.css
+//                             ^ entity.other.attribute-name.id.css
+//                                                 ^ entity.other.attribute-name.id.css
 }
 #@{varname}--subclass { color: @orangy; }
 //          ^ entity.other.attribute-name.id.css
@@ -342,6 +403,7 @@ html::before {
   height: 48px;
   border-radius: 50%;
   background: url(data:@{image}/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7);
+// ^ support.type.property-name.css
 //               ^ meta.property-value.css meta.group.css punctuation.definition.group.begin.css
 //                 ^ meta.property-value.css meta.group.css string.unquoted.css
 //                      ^ meta.property-value.css meta.group.css variable.other.less punctuation.definition.string.begin.less
@@ -386,6 +448,50 @@ html::before {
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100,300,500);
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.css string.unquoted.css
 
+
+/*
+  Maps
+  http://lesscss.org/#maps
+*/
+@sizes: {
+  mobile: 320px;
+//^^^^^^ meta.group.map.less variable.declaration.map.less
+//        ^^^^^ constant.numeric.css
+//      ^ punctuation.separator.key-value.less
+//             ^ punctuation.terminator.rule
+  tablet: 768px;
+  desktop: 1024px;
+}
+@config: {
+  @options: {
+    library-on: true
+//  ^^^^^^^^^^ meta.group.map.less variable.declaration.map.less
+  }
+}
+#colors() {
+  primary: blue;
+  secondary: green;
+}
+#library() {
+  .colors() { primary: grey; }
+}
+
+.button {
+  color: #colors[primary];
+  border: 1px solid #colors[secondary];
+}
+.navbar {
+  display: block;
+
+  @media (min-width: @sizes[tablet]) {
+    display: inline-block;
+  }
+}
+& when (@config[@options][library-on] = true) {
+  .produce-ruleset {
+    prop: val;
+  }
+}
 
 // http://lesscss.org/features/#detached-rulesets-feature
 header {
