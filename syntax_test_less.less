@@ -32,7 +32,8 @@ selector-ish::before[data-type="text"]:not(:first-child),
     filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3))
   }
   color: rgba(100, 120, 12, 95%);
-  background-color: blue
+  background-color: blue;
+  testbackground-color: blue;
 }
 
 
@@ -457,12 +458,13 @@ Attribute selectors
 /*
   Maps
   http://lesscss.org/#maps
+  http://lesscss.org/features/#maps-feature
 */
 @sizes: {
   mobile: 320px;
-//^^^^^^ meta.group.map.less variable.declaration.map.less
+//^^^^^^ variable.declaration.map.less
 //        ^^^^^ constant.numeric.css
-//      ^ punctuation.separator.key-value.less
+//      ^ punctuation.separator.key-value
 //             ^ punctuation.terminator.rule
   tablet: 768px;
   desktop: 1024px;
@@ -470,7 +472,7 @@ Attribute selectors
 @config: {
   @options: {
     library-on: true
-//  ^^^^^^^^^^ meta.group.map.less variable.declaration.map.less
+//  ^^^^^^^^^^ variable.declaration.map.less
   }
 }
 #colors() {
@@ -535,6 +537,10 @@ header {
   });
 //^ punctuation.section.property-list.end.css
 }
+
+
+
+
 
 
 
