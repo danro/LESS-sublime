@@ -540,13 +540,48 @@ http://lesscss.org/features/#mixins-feature-mixin-aliasing-feature
 }
 
 .navbar {
-  @colors: #theme.dark.navbar.colors(dark);
+  @colors: .theme#dark.navbar.colors(dark);
+//       ^ punctuation.separator.key-value.css
+//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css meta.alias.less
+//         ^ punctuation.definition.entity.less
+//               ^ punctuation.definition.entity.less
+//                    ^ punctuation.definition.entity.less
+//                           ^ punctuation.definition.entity.less
+//                                  ^ punctuation.definition.group.begin
+//                                       ^ punctuation.definition.group.end
+//                                        ^ punctuation.terminator.rule.css
+  @colors: .theme.dark.navbar#colors(dark);
+//       ^ punctuation.separator.key-value.css
+//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css meta.alias.less
+//         ^ punctuation.definition.entity.less
+//               ^ punctuation.definition.entity.less
+//                    ^ punctuation.definition.entity.less
+//                           ^ punctuation.definition.entity.less
+//                                  ^ punctuation.definition.group.begin
+//                                       ^ punctuation.definition.group.end
+//                                        ^ punctuation.terminator.rule.css
+  @colors: #theme.dark.navbar#colors(dark);
+//       ^ punctuation.separator.key-value.css
+//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css meta.alias.less
+//         ^ punctuation.definition.entity.less
+//               ^ punctuation.definition.entity.less
+//                    ^ punctuation.definition.entity.less
+//                           ^ punctuation.definition.entity.less
+//                                  ^ punctuation.definition.group.begin
+//                                       ^ punctuation.definition.group.end
+//                                        ^ punctuation.terminator.rule.css
   background: @colors[primary];
   border: 1px solid @colors[secondary];
   .button {
     @colors: #library.colors();
     color: @colors[primary];
     border-color: @colors[secondary];
+    border-color: #library.colors[secondary];
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css meta.alias.less
+//                                          ^ punctuation.terminator.rule.css - meta.alias.less
+//                               ^^^^^^^^^^^ meta.brackets.less
+//                               ^ punctuation.section.brackets.begin.less
+//                                         ^ punctuation.section.brackets.end.less
   }
 }
 

@@ -593,12 +593,6 @@ contexts:
       push:
         - include: property-value-wrapper
 
-  less-map-values:
-    - match: '{{ident}}'
-      scope: variable.declaration.map.less
-      push:
-        - include: property-value-wrapper
-
   property-value-wrapper:
     - match: '(\s*)(;)'
       pop: true
@@ -635,6 +629,7 @@ contexts:
     - include: less-variables
     - include: less-functions
     - include: less-operators
+    - include: less-aliases
 
 
   at-rules:
@@ -848,9 +843,16 @@ contexts:
         - include: less-variables
         - include: less-functions
         - include: numeric-values
+        - include: less-aliases
 
 
 
+
+  less-map-values:
+    - match: '{{ident}}'
+      scope: variable.declaration.map.less
+      push:
+        - include: property-value-wrapper
 
   less-map-lookups:
     - match: '\['
@@ -859,6 +861,7 @@ contexts:
       scope: meta.brackets.less punctuation.section.brackets.end.less
       pop: true
     - include: less-variables
+    - include: less-aliases
     - match: '{{ident}}'
       scope: variable.other.less
 
@@ -885,35 +888,80 @@ contexts:
         - include: literal-string
         - include: less-operators
         - include: curly-braces
+        - include: less-aliases
         - match: '{{ident}}' # pretty much everything else
           scope: string.unquoted.css
         - match: '\)'
           scope: punctuation.definition.group.end.css
           pop: true
 
+  less-aliases:
+    - match: '((\.){{ident}})(?=[.#])'
+      captures:
+        1: entity.other.attribute-name.class.less
+        2: punctuation.definition.entity.less
+      push:
+        - meta_scope: meta.alias.less
+        - include: less-mixin-params
+        - match: '(?=\[)'
+          push:
+            - meta_content_scope: meta.brackets.less
+            - include: less-map-lookups
+        - match: '(?=;|$)'
+          pop: true
+        - match: '(\.){{ident}}'
+          captures:
+            0: entity.other.attribute-name.class.less
+            1: punctuation.definition.entity.less
+        - match: '(#){{ident}}'
+          captures:
+            0: entity.other.attribute-name.id.less
+            1: punctuation.definition.entity.less
+    - match: '((\#){{ident}})(?=[.#])'
+      captures:
+        1: entity.other.attribute-name.id.less
+        2: punctuation.definition.entity.less
+      push:
+        - meta_scope: meta.alias.less
+        - include: less-mixin-params
+        - match: '(?=\[)'
+          push:
+            - meta_content_scope: meta.brackets.less
+            - include: less-map-lookups
+        - match: '(?=;|$)'
+          pop: true
+        - match: '(\.){{ident}}'
+          captures:
+            0: entity.other.attribute-name.class.less
+            1: punctuation.definition.entity.less
+        - match: '(#){{ident}}'
+          captures:
+            0: entity.other.attribute-name.id.less
+            1: punctuation.definition.entity.less
+
   less-variables:
-    - match: '(\.)\S+(?=\[)'
+    - include: less-interpolation
+    - match: '(\.){{ident}}(?=\[)'
       captures:
         0: entity.other.attribute-name.class.less
         1: punctuation.definition.entity.less
       push:
         - meta_content_scope: meta.brackets.less
         - include: less-map-lookups
-    - match: '(#)\S+(?=\[)'
+    - match: '(#){{ident}}(?=\[)'
       captures:
         0: entity.other.attribute-name.id.less
         1: punctuation.definition.entity.less
       push:
         - meta_content_scope: meta.brackets.less
         - include: less-map-lookups
-    - match: '(@)\S+(?=\[)'
+    - match: '(@){{ident}}(?=\[)'
       captures:
         0: variable.other.less
         1: punctuation.definition.variable.less
       push:
         - meta_content_scope: meta.brackets.less
         - include: less-map-lookups
-    - include: less-interpolation
     - match: '(@{1,2})([a-zA-Z0-9_-][\w-]*)'
       captures:
         0: variable.other.less
@@ -958,6 +1006,7 @@ contexts:
         - include: numeric-values
         - include: literal-string
         - include: less-variables
+        - include: less-aliases
         - include: less-functions
         - include: less-operators
 
@@ -1171,6 +1220,7 @@ contexts:
           - include: literal-string
           - include: filter-functions
           - include: less-variables
+          - include: less-aliases
           - include: less-functions
 
     - match: '\b(counter)(?=\()'
@@ -1192,6 +1242,7 @@ contexts:
                 pop: true
               - include: comma-delimiter
               - include: less-variables
+              - include: less-aliases
               - include: less-functions
               - match: '\b({{counter_styles}}|none)\b'
                 scope: support.constant.property-value.counter-style.css
@@ -1217,6 +1268,7 @@ contexts:
               - include: less-variables
               - include: less-functions
               - include: literal-string
+              - include: less-aliases
               - match: '\b({{counter_styles}}|none)\b'
                 scope: support.constant.property-value.counter-style.css
 
@@ -1237,6 +1289,7 @@ contexts:
           - include: less-variables
           - include: less-functions
           - include: literal-string
+          - include: less-aliases
           - include: image-type
 
     - match: '\b(format)(?=\()'
@@ -1253,6 +1306,7 @@ contexts:
           - include: less-variables
           - include: less-functions
           - include: literal-string
+          - include: less-aliases
 
     - match: '\b(local)(?=\()'
       scope: support.function.font-face.css
@@ -1268,6 +1322,7 @@ contexts:
           - include: less-variables
           - include: less-functions
           - include: unquoted-string
+          - include: less-aliases
 
     - match: '\b(matrix3d|scale3d|matrix|scale)(?=\()'
       scope: support.function.transform.css
@@ -1285,6 +1340,7 @@ contexts:
           - include: less-functions
           - include: number-type
           - include: var-function
+          - include: less-aliases
 
     - match: '\b(translate(3d)?)(?=\()'
       scope: support.function.transform.css
@@ -1304,6 +1360,7 @@ contexts:
           - include: length-type
           - include: number-type
           - include: var-function
+          - include: less-aliases
 
     - match: '\b(translate[XY])(?=\()'
       scope: support.function.transform.css
@@ -1321,6 +1378,7 @@ contexts:
           - include: percentage-type
           - include: length-type
           - include: number-type
+          - include: less-aliases
 
     - match: '\b(rotate[XYZ]?|skew[XY])(?=\()'
       scope: support.function.transform.css
@@ -1336,6 +1394,7 @@ contexts:
           - include: less-variables
           - include: less-functions
           - include: angle-type
+          - include: less-aliases
 
     - match: '\b(skew)(?=\()'
       scope: support.function.transform.css
@@ -1352,6 +1411,7 @@ contexts:
           - include: less-variables
           - include: less-functions
           - include: angle-type
+          - include: less-aliases
 
     - match: '\b(translateZ|perspective)(?=\()'
       scope: support.function.transform.css
@@ -1367,6 +1427,7 @@ contexts:
           - include: less-variables
           - include: less-functions
           - include: length-type
+          - include: less-aliases
 
     - match: '\b(rotate3d)(?=\()'
       scope: support.function.transform.css
@@ -1384,6 +1445,7 @@ contexts:
           - include: less-functions
           - include: angle-type
           - include: number-type
+          - include: less-aliases
 
     - match: '\b(scale[XYZ])(?=\()'
       scope: support.function.transform.css
@@ -1400,6 +1462,7 @@ contexts:
           - include: less-variables
           - include: less-functions
           - include: number-type
+          - include: less-aliases
 
     - match: '\b(cubic-bezier)(?=\()'
       scope: support.function.timing.css
@@ -1416,6 +1479,7 @@ contexts:
           - include: less-variables
           - include: less-functions
           - include: number-type
+          - include: less-aliases
 
     - match: '\b(steps)(?=\()'
       scope: support.function.timing.css
@@ -1432,6 +1496,7 @@ contexts:
           - include: less-variables
           - include: less-functions
           - include: integer-type
+          - include: less-aliases
           - match: (end|middle|start)
             scope: support.keyword.timing-direction.css
 
@@ -1451,6 +1516,7 @@ contexts:
           - include: less-variables
           - include: less-functions
           - include: length-type
+          - include: less-aliases
 
     - match: '\b(inset)(?=\()'
       scope: support.function.shape.css
@@ -1469,6 +1535,7 @@ contexts:
           - include: less-functions
           - include: length-type
           - include: percentage-type
+          - include: less-aliases
 
     - match: '\b(circle|ellipse)(?=\()'
       scope: support.function.shape.css
@@ -1489,6 +1556,7 @@ contexts:
           - include: less-functions
           - include: length-type
           - include: percentage-type
+          - include: less-aliases
 
     - match: '\b(polygon)(?=\()'
       scope: support.function.shape.css
@@ -1507,6 +1575,7 @@ contexts:
           - include: less-functions
           - include: length-type
           - include: percentage-type
+          - include: less-aliases
 
     - match: '\b(toggle)(?=\()'
       scope: support.function.toggle.css
@@ -1528,6 +1597,7 @@ contexts:
           - include: numeric-values
           - include: color-values
           - include: literal-string
+          - include: less-aliases
 
     - match: '\b(repeat)(?=\()'
       scope: support.function.grid.css
@@ -1548,6 +1618,7 @@ contexts:
           - include: minmax-function
           - include: integer-type
           - include: var-function
+          - include: less-aliases
           - match: \b(auto-fill|auto-fit)\b
             scope: support.keyword.repetitions.css
           - match: \b(max-content|min-content|auto)\b
@@ -1568,6 +1639,7 @@ contexts:
           - include: comma-delimiter
           - include: less-variables
           - include: less-functions
+          - include: less-aliases
           - match: '(--)({{nmchar}}+)'
             captures:
               0: meta.property-name.css support.type.custom-property.css
@@ -1589,6 +1661,7 @@ contexts:
           - include: less-variables
           - include: less-functions
           - include: length-type
+          - include: less-aliases
 
     - match: '\b(brightness|contrast|grayscale|invert|opacity|saturate|sepia)(?=\()'
       scope: support.function.filter.css
@@ -1605,6 +1678,7 @@ contexts:
           - include: less-functions
           - include: percentage-type
           - include: number-type
+          - include: less-aliases
 
     - match: '\b(drop-shadow)(?=\()'
       scope: support.function.filter.css
@@ -1621,6 +1695,7 @@ contexts:
           - include: less-functions
           - include: length-type
           - include: color-values
+          - include: less-aliases
 
     - match: '\b(hue-rotate)(?=\()'
       scope: support.function.filter.css
@@ -1636,6 +1711,7 @@ contexts:
           - include: less-variables
           - include: less-functions
           - include: angle-type
+          - include: less-aliases
 
   calc-function:
     - match: '\b(calc)(?=\()'
@@ -1658,6 +1734,7 @@ contexts:
     - include: attr-function
     - include: less-variables
     - include: less-functions
+    - include: less-aliases
     - match: "[-/*+]"
       scope: keyword.operator.css
     - match: '\('
@@ -1680,6 +1757,7 @@ contexts:
           - include: less-functions
           - include: qualified-name
           - include: literal-string
+          - include: less-aliases
           - match: '({{ident}})'
             scope: entity.other.attribute-name.css
             push:
@@ -1702,6 +1780,7 @@ contexts:
             - include: property-value-constants
             - include: numeric-values
             - include: color-values
+            - include: less-aliases
 
   url-function:
     - match: '\b(url)(?=\()'
@@ -1719,6 +1798,7 @@ contexts:
           - include: less-functions
           - include: literal-string
           - include: unquoted-string
+          - include: less-aliases
 
   url-prefix-function:
     - match: '\b(url-prefix)(?=\()'
@@ -1736,6 +1816,7 @@ contexts:
           - include: less-functions
           - include: literal-string
           - include: unquoted-string
+          - include: less-aliases
 
   domain-function:
     - match: '\b(domain)(?=\()'
@@ -1753,6 +1834,7 @@ contexts:
           - include: less-functions
           - include: literal-string
           - include: unquoted-string
+          - include: less-aliases
 
   regexp-function:
     - match: '\b(regexp)(?=\()'
@@ -1769,6 +1851,7 @@ contexts:
           - include: less-variables
           - include: less-functions
           - include: literal-string
+          - include: less-aliases
 
   image-function:
     - match: '\b(image)(?=\()'
@@ -1789,6 +1872,7 @@ contexts:
           - include: color-values
           - include: comma-delimiter
           - include: unquoted-string
+          - include: less-aliases
 
   image-set-function:
     - match: '\b(image-set)(?=\()'
@@ -1809,6 +1893,7 @@ contexts:
           - include: comma-delimiter
           - include: resolution-type
           - include: image-type
+          - include: less-aliases
           - match: '[0-9]+(x)'
             scope: constant.numeric.css
             captures:
@@ -1834,6 +1919,7 @@ contexts:
           - include: color-values
           - include: percentage-type
           - include: length-type
+          - include: less-aliases
           - match: '\bto\b'
             scope: keyword.other.css
           - match: \b(top|right|bottom|left)\b
@@ -1856,6 +1942,7 @@ contexts:
           - include: color-values
           - include: percentage-type
           - include: length-type
+          - include: less-aliases
           - match: '\b(at|circle|ellipse)\b'
             scope: keyword.other.css
           - match: |-
@@ -1892,6 +1979,7 @@ contexts:
           - include: image-type
           - include: literal-string
           - include: unquoted-string
+          - include: less-aliases
 
   minmax-function:
     - match: '\b(minmax)(?=\()'
@@ -1909,6 +1997,7 @@ contexts:
           - include: less-variables
           - include: less-functions
           - include: length-type
+          - include: less-aliases
           - match: \b(max-content|min-content)\b
             scope: support.constant.property-value.css
 
@@ -1928,6 +2017,7 @@ contexts:
           - include: less-variables
           - include: percentage-type
           - include: number-type
+          - include: less-aliases
 
     - match: '\b(hsla?|hwb)(?=\()'
       scope: support.function.color.css
@@ -1945,6 +2035,7 @@ contexts:
           - include: angle-type
           - include: percentage-type
           - include: number-type
+          - include: less-aliases
 
     - match: '\b(gray)(?=\()'
       scope: support.function.color.css
@@ -1961,6 +2052,7 @@ contexts:
           - include: less-variables
           - include: percentage-type
           - include: number-type
+          - include: less-aliases
 
     - match: '\b(device-cmyk)(?=\()'
       scope: support.function.color.css
@@ -1979,6 +2071,7 @@ contexts:
           - include: color-values
           - include: percentage-type
           - include: number-type
+          - include: less-aliases
 
     - match: '\b(color)(?=\()'
       scope: support.function.color.css
@@ -1998,6 +2091,7 @@ contexts:
           - include: color-values
           - include: angle-type
           - include: number-type
+          - include: less-aliases
 
   color-adjuster-functions:
     - match: '\b(red|green|blue|alpha|a)(?=\()'
@@ -2029,6 +2123,7 @@ contexts:
           - include: less-variables
           - include: color-adjuster-operators
           - include: angle-type
+          - include: less-aliases
 
     - match: '\b(saturation|lightness|whiteness|blackness|[slwb])(?=\()'
       scope: support.function.color.css
@@ -2044,6 +2139,7 @@ contexts:
           - include: less-variables
           - include: color-adjuster-operators
           - include: percentage-type
+          - include: less-aliases
 
     - match: '\b(tint|shade)(?=\()'
       scope: support.function.color.css
@@ -2058,6 +2154,7 @@ contexts:
             pop: true
           - include: less-variables
           - include: percentage-type
+          - include: less-aliases
 
     - match: '\b(blenda|blend)(?=\()'
       scope: support.function.color.css
@@ -2076,6 +2173,7 @@ contexts:
           - include: color-values
           - include: percentage-type
           - include: var-function
+          - include: less-aliases
 
   color-adjuster-operators:
     - match: '[\-\+*](?=\s+)'
@@ -2198,7 +2296,7 @@ contexts:
 
   unquoted-string:
     - match: '[^\s''"]'
-      scope: string.unquoted.css
+      scope: region.orangish string.unquoted.css
 
   literal-string:
     - match: "'"
