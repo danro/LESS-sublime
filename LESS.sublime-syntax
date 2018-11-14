@@ -82,14 +82,11 @@ contexts:
     - include: selectors
     - include: properties
     - include: custom-element-selectors
-    # - include: custom-property-name
     - include: keyframe-operators
     - include: at-rules
+    - include: curly-braces
     # - include: less-map-keys
-    - match: '\{'
-      scope: punctuation.section.property-list.begin.css
-    - match: '\}'
-      scope: punctuation.section.property-list.end.css
+
 
 
   selectors:
@@ -210,7 +207,7 @@ contexts:
         - meta_scope: meta.selector.css
         - include: selector-parts
     # classes / mixins
-    - match: '(\.)(?={{ident}})'
+    - match: '(\.)(?={{ident}}|@)'
       captures:
         1: entity.other.attribute-name.class.css punctuation.definition.entity.css
       push:
@@ -221,7 +218,7 @@ contexts:
         - include: less-mixin-params
         - include: selector-parts
     # id's / mixins
-    - match: '(\#)(?={{ident}})'
+    - match: '(\#)(?={{ident}}|@)'
       captures:
         1: entity.other.attribute-name.id.css punctuation.definition.entity.css
       push:
@@ -498,10 +495,11 @@ contexts:
         - include: property-value-wrapper
 
   property-value-wrapper:
-    - match: '\s*(;)'
+    - match: '(\s*)(;)'
       pop: true
       captures:
-        1: punctuation.terminator.rule.css
+        1: meta.property-value.css
+        2: punctuation.terminator.rule.css
     - match: '(?=\s*($|[;})]))'
       pop: true
     - match: ':'
@@ -753,19 +751,28 @@ contexts:
         1: variable.declaration.map-key.less
 
   less-mixin-params:
-    - match: '\('
-      scope: punctuation.definition.group.begin.css
+    - match: \s*(not|or|and|when)\b
+      captures:
+        1: keyword.operator.logic.mixin.less
+    - match: '\s*(\()'
+      captures:
+        1: punctuation.definition.group.begin.css
       push:
         - meta_scope: meta.function.parameters.less
         - match: ';'
           scope: punctuation.separator.comma.less
         - match: ':'
           scope: punctuation.separator.key-value.less
-        - include: selectors
+        - include: comment-block
+        - include: comment-line
         - include: less-variables
         - include: less-functions
+        - include: properties
         - include: property-values
+        - include: selectors
         - include: literal-string
+        - include: less-operators
+        - include: curly-braces
         - match: '\)'
           scope: punctuation.definition.group.end.css
           pop: true
@@ -2087,6 +2094,13 @@ contexts:
       scope: constant.character.escape.css
     - include: less-interpolation
 
+
+
+  curly-braces:
+    - match: '\{'
+      scope: punctuation.section.property-list.begin.css
+    - match: '\}'
+      scope: punctuation.section.property-list.end.css
 
 
   comment-block:
