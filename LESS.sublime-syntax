@@ -852,8 +852,18 @@ contexts:
 
 
 
+  less-map-lookups:
+    - match: '\['
+      scope: punctuation.section.brackets.begin.less
+    - match: '\]'
+      scope: meta.brackets.less punctuation.section.brackets.end.less
+      pop: true
+    - include: less-variables
+    - match: '{{ident}}'
+      scope: variable.other.less
+
   less-mixin-params:
-    - match: \s*(not|or|and|when)\b
+    - match: '\s*(not|or|and|when)\b'
       captures:
         1: keyword.operator.logic.mixin.less
     - match: '\s*(\()'
@@ -880,6 +890,27 @@ contexts:
           pop: true
 
   less-variables:
+    - match: '(\.)\S+(?=\[)'
+      captures:
+        0: entity.other.attribute-name.class.less
+        1: punctuation.definition.entity.less
+      push:
+        - meta_content_scope: meta.brackets.less
+        - include: less-map-lookups
+    - match: '(#)\S+(?=\[)'
+      captures:
+        0: entity.other.attribute-name.id.less
+        1: punctuation.definition.entity.less
+      push:
+        - meta_content_scope: meta.brackets.less
+        - include: less-map-lookups
+    - match: '(@)\S+(?=\[)'
+      captures:
+        0: variable.other.less
+        1: punctuation.definition.variable.less
+      push:
+        - meta_content_scope: meta.brackets.less
+        - include: less-map-lookups
     - include: less-interpolation
     - match: '(@{1,2})([a-zA-Z0-9_-][\w-]*)'
       captures:

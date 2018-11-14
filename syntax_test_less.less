@@ -485,12 +485,29 @@ Attribute selectors
 
 .button {
   color: #colors[primary];
-  border: 1px solid #colors[secondary];
+//       ^^^^^^^ entity.other.attribute-name.id
+//       ^ punctuation.definition.entity
+//              ^^^^^^^^^ meta.brackets.less
+//              ^ punctuation.section.brackets.begin
+//                      ^ punctuation.section.brackets.end
+//                ^^^^^^ variable.other.less
+  border: 1px solid .colors[@secondary];
+//                  ^^^^^^^ entity.other.attribute-name.class
+//                  ^ punctuation.definition.entity
+//                         ^^^^^^^^^ meta.brackets.less
+//                         ^ punctuation.section.brackets.begin
+//                                    ^ punctuation.section.brackets.end
+//                          ^^^^^^ variable.other.less
+//                          ^ punctuation.definition.variable
 }
 .navbar {
   display: block;
 
   @media (min-width: @sizes[tablet]) {
+//                         ^^^^^^^^ meta.brackets.less
+//                         ^ punctuation.section.brackets.begin
+//                                ^ punctuation.section.brackets.end
+//                          ^^^^^^ variable.other.less
     display: inline-block;
   }
 }
@@ -498,6 +515,11 @@ Attribute selectors
   .produce-ruleset {
     prop: val;
   }
+}
+.button {
+  @colors: #library.colors();
+  color: @colors[primary];
+  border-color: @colors[secondary];
 }
 
 // http://lesscss.org/features/#detached-rulesets-feature
