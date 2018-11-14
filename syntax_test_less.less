@@ -223,6 +223,7 @@ html::before {
     .@{selector} {
       animation : progress-fade-in-animation .15s ease-in;
 //                ^ meta.property-value.css
+//                ^ string.unquoted.css
 //    ^ meta.property-name.css support.type.property-name.css
       animation: progress-fade-in-animation .15s ease-in;
 //             ^ source.css.less punctuation.separator.key-value.css
@@ -239,7 +240,7 @@ html::before {
   Mixins
   http://lesscss.org/features/#mixins-feature
 */
-.border-radius(@color: h1; @padding; @margin: 2) {
+.border-radius(@color: h1; @padding; @margin: 2;) {
   -webkit-border-radius: @radius;
      -moz-border-radius: @radius;
           border-radius: @radius;
@@ -253,7 +254,7 @@ http://lesscss.org/features/#mixins-feature-guarded-namespaces
 
 #namespace when not (@mode = huge) {
 //                         ^ meta.function.parameters.less keyword.operator.less
-
+//                           ^ string.unquoted
 .a-test-mixin(@color: black; /*@margin: 10px;*/ @padding: 20px) when (lightness(@a) >= 50%) {
 //                           ^^^^^^^^^^^^^^^^^^ comment.block.css
 //                           ^^ punctuation.definition.comment.css
@@ -477,6 +478,8 @@ Attribute selectors
 }
 #colors() {
   primary: blue;
+//  ^^^^^ variable.declaration.map.less
+//       ^ punctuation.separator.key-value
   secondary: green;
 }
 #library() {
@@ -516,13 +519,42 @@ Attribute selectors
     prop: val;
   }
 }
-.button {
-  @colors: #library.colors();
-  color: @colors[primary];
-  border-color: @colors[secondary];
+
+
+/*
+Aliasing Mixins
+http://lesscss.org/features/#mixins-feature-mixin-aliasing-feature
+*/
+#theme.dark.navbar {
+  .colors(light) {
+    primary: purple;
+  }
+  .colors(dark) {
+    primary: black;
+    secondary: grey;
+  }
+  .box {
+    @alias: #library.rules();
+    @alias();
+  }
 }
 
-// http://lesscss.org/features/#detached-rulesets-feature
+.navbar {
+  @colors: #theme.dark.navbar.colors(dark);
+  background: @colors[primary];
+  border: 1px solid @colors[secondary];
+  .button {
+    @colors: #library.colors();
+    color: @colors[primary];
+    border-color: @colors[secondary];
+  }
+}
+
+
+/*
+Detached Rulesets
+http://lesscss.org/features/#detached-rulesets-feature
+*/
 header {
   background-color: blue;
 
