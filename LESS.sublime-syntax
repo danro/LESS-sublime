@@ -387,6 +387,7 @@ contexts:
     - include: comment-block
     - include: pseudo-elements
     - include: pseudo-classes
+    - include: less-mixin-params
     - match: '(?=\s)'
       pop: true
 

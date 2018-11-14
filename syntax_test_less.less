@@ -514,10 +514,36 @@ Attribute selectors
     display: inline-block;
   }
 }
+
+/*
+CSS Guards
+http://lesscss.org/features/#css-guards-feature
+*/
+
 & when (@config[@options][library-on] = true) {
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css
+// ^ keyword.operator.logic.mixin.less
+//     ^ meta.function.parameters.less punctuation.definition.group.begin
   .produce-ruleset {
     prop: val;
   }
+}
+
+.my-optional-style() when (@my-option = true) {
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css
+//                   ^ keyword.operator.logic.mixin.less
+//                        ^ meta.function.parameters.less punctuation.definition.group.begin
+  button {
+    color: white;
+  }
+}
+
+button when not (@my-option = true) {
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css
+//        ^ keyword.operator.logic.mixin.less
+//          ^ keyword.operator.logic.mixin.less
+//              ^ meta.function.parameters.less punctuation.definition.group.begin
+  color: white;
 }
 
 
