@@ -4,5 +4,5 @@ hsvhue(${1:color})
 ]]></content>
 <tabTrigger>hsvhue</tabTrigger>
 <description>less color-channel</description>
-<scope>source.css.less</scope>
+<scope>source.less</scope>
 </snippet>

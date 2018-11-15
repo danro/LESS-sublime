@@ -4,5 +4,5 @@ lighten(${1:color}, ${2:percentage}%)
 ]]></content>
 <tabTrigger>lighten</tabTrigger>
 <description>less color-operations</description>
-<scope>source.css.less</scope>
+<scope>source.less</scope>
 </snippet>

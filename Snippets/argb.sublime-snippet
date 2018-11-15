@@ -4,5 +4,5 @@ argb(${1:color})
 ]]></content>
 <tabTrigger>argb</tabTrigger>
 <description>less color-definition</description>
-<scope>source.css.less</scope>
+<scope>source.less</scope>
 </snippet>

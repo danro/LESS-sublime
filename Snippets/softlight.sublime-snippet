@@ -4,5 +4,5 @@ softlight(${1:color}, ${1:color})
 ]]></content>
 <tabTrigger>softlight</tabTrigger>
 <description>less color-blending</description>
-<scope>source.css.less</scope>
+<scope>source.less</scope>
 </snippet>

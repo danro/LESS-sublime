@@ -5,7 +5,7 @@ name: Less
 file_extensions:
   - less
   - css.less
-scope: source.css.less
+scope: source.less
 
 variables:
   unicode: '\\\h{1,6}[ \t\n\f]?'
@@ -391,7 +391,9 @@ contexts:
     - include: pseudo-elements
     - include: pseudo-classes
     - include: less-mixin-params
-    - match: '(?=\s)'
+    - match: '\s*(?=$|//|/\*)'
+      pop: true
+    - match: '\s*(?=\b)'
       pop: true
 
   pseudo-elements:
@@ -853,9 +855,10 @@ contexts:
 
 
   less-map-values:
-    - match: '{{ident}}'
+    - match: '{{ident}}(?=:\s*\b)'
       scope: variable.declaration.map.less
       push:
+        - meta_scope: meta.map-value.less
         - include: property-value-wrapper
 
   less-map-lookups:

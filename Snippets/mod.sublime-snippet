@@ -4,5 +4,5 @@ mod(${1:number}, ${2:number})
 ]]></content>
 <tabTrigger>mod</tabTrigger>
 <description>less math</description>
-<scope>source.css.less</scope>
+<scope>source.less</scope>
 </snippet>

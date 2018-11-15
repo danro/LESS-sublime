@@ -37,6 +37,16 @@ selector-ish::before[data-type="text"]:not(:first-child),
 }
 
 
+/*
+Test for ; insertion
+the caret immediately after a selector should still be in meta.selector
+*/
+  button
+  , button  // perhaps you want to type button:hover
+//        ^ meta.selector
+  , selector-ish  /* with comments at the end */
+//              ^ meta.selector
+  , button: // or maybe button::before (is caught by a regex in the keymap)
 
 
 
@@ -229,7 +239,7 @@ html::before {
 //                ^ string.unquoted.css
 //    ^ meta.property-name.css support.type.property-name.css
       animation: progress-fade-in-animation .15s ease-in;
-//             ^ source.css.less punctuation.separator.key-value.css
+//             ^ source.less punctuation.separator.key-value.css
 //    ^ meta.property-name.css support.type.property-name.css
 //               ^ meta.property-value.css
 //                                               ^ meta.property-value.css support.constant.property-value.css
@@ -447,7 +457,7 @@ Attribute selectors
 //      ^ punctuation.definition.string.begin.css
 //             ^ punctuation.definition.string.end.css
 @import url("https://fonts.googleapis.com/css?family=Source+Code+Pro:400");
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.css.less meta.at-rule.import.css  meta.function-call.css meta.group.css string.quoted.double.css
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.less meta.at-rule.import.css  meta.function-call.css meta.group.css string.quoted.double.css
 //          ^ punctuation.definition.string.begin.css
 //                                                                      ^ punctuation.definition.string.end.css
 @import url(somefile);

@@ -4,5 +4,5 @@ spin(${1:color}, ${2:angle})
 ]]></content>
 <tabTrigger>spin</tabTrigger>
 <description>less color-operations</description>
-<scope>source.css.less</scope>
+<scope>source.less</scope>
 </snippet>
