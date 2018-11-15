@@ -88,7 +88,10 @@ contexts:
     - include: less-map-values
     - include: at-rules
     - include: curly-braces
-
+    - match: '\s*(,)\s*'
+      captures:
+        1: punctuation.separator.css
+      pop: true
 
 
   selectors:
