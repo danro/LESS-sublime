@@ -4,7 +4,7 @@
 	<key>name</key>
 	<string>LESS Indent</string>
 	<key>scope</key>
-	<string>source.css.less</string>
+	<string>source.less</string>
 	<key>settings</key>
 	<dict>
 		<key>decreaseIndentPattern</key>

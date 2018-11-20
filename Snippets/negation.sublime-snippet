@@ -4,5 +4,5 @@ negation(${1:color}, ${2:color})
 ]]></content>
 <tabTrigger>negation</tabTrigger>
 <description>less color-blending</description>
-<scope>source.css.less</scope>
+<scope>source.less</scope>
 </snippet>

@@ -4,5 +4,5 @@ e({1:string})
 ]]></content>
 <tabTrigger>e</tabTrigger>
 <description>less string</description>
-<scope>source.css.less</scope>
+<scope>source.less</scope>
 </snippet>

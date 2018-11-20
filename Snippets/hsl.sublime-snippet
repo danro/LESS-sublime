@@ -4,5 +4,5 @@ hsl(${1:hue}, ${2:saturation}, ${3:lightness})
 ]]></content>
 <tabTrigger>hsl</tabTrigger>
 <description>less color-definition</description>
-<scope>source.css.less</scope>
+<scope>source.less</scope>
 </snippet>

@@ -1,5 +1,55 @@
 // SYNTAX TEST "Packages/LESS/LESS.sublime-syntax"
 
+/*
+Correctly differentiate between properties and selectors,
+especially with pseudo-stuff because of the :
+*/
+
+*,
+& + h1,
+&:active #unit h1 + div,
+&-element + h1,
+[data-type="text"],
+span::before[data-type="text"],
+selector-ish::before[data-type="text"]:not(:first-child),
+.selector:hover selector-ish.selector::before {
+  *,
+  & + h1,
+  &:active + h1,
+  &-element + h1,
+  [data-type="text"],
+  span::before[data-type="text"],
+  filter::before[data-type="text"],
+  selector-ish::before[data-type="text"]:not(:first-child),
+  #selec-tor:hover, selector-ish::before {
+    color: rgba(100, 120, 12, 95%);
+    background-color: blue;
+    line-height: ~"calc(@{space} + 4px)";
+    span:hover {}
+    filter:not(.empty) {}
+    filter:drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
+    filter:blue;
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3))
+  }
+  color: rgba(100, 120, 12, 95%);
+  background-color: blue;
+  testbackground-color: blue;
+}
+
+
+/*
+Test for ; insertion
+the caret immediately after a selector should still be in meta.selector
+*/
+  button
+  , button  // perhaps you want to type button:hover
+//        ^ meta.selector
+  , selector-ish  /* with comments at the end */
+//              ^ meta.selector
+  , button: // or maybe button::before (is caught by a regex in the keymap)
+
+
+
 :root,
 // <- entity.other.pseudo-class.css punctuation.definition.entity.css
 // ^^ entity.other.pseudo-class.css
@@ -34,8 +84,9 @@
 //                  ^^^^^^^ entity.other.pseudo-class.css
 //                  ^ punctuation.definition.entity.css
 
-  #id@{interopol}
-  background: bla
+  #id@{interopol}bla,
+  custom-element@{interopol}test,
+  background: blue
 // ^ meta.property-name.css
 }
 
@@ -60,12 +111,28 @@
 filter,
 // ^^^ meta.selector.css entity.name.tag.css
 //    ^ meta.selector.css punctuation.separator.css
+filter
+, .element
+// <- punctuation.separator.css
 filter {}
 //    ^ meta.selector.css
 // ^ entity.name.tag.css
 //    ^ - entity.name.tag.css
 filter{}
 // ^ entity.name.tag.css
+.use-mixin {
+// ^^^^^^^ meta.selector.css entity.other.attribute-name.class.css
+  &--bem {}
+// ^^^^^ meta.selector.css entity.other.attribute-name
+//^ keyword.operator.ampersand.less
+  &_bem {}
+// ^^^^ meta.selector.css entity.other.attribute-name
+//     ^ meta.selector.css
+}
+.accordion__copy,
+// ^^^^^^^^^^^^^ meta.selector.css entity.other.attribute-name.class.css
+.accordion__copy--open {}
+// ^^^^^^^^^^^^^^^^^^^ meta.selector.css entity.other.attribute-name.class.css
 #main h1+.sub {
 // <- entity.other.attribute-name.id.css punctuation.definition.entity.css
 // ^^ entity.other.attribute-name.id.css
@@ -157,7 +224,7 @@ html::before {
   filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
 // ^ support.type.property-name.css
 
-  .fade-in(@selector) {
+  .fade-in(h1) {
     @keyframes fade-in-animation {
 //  ^ meta.at-rule.keyframe.css keyword.control.at-rule.keyframe.css punctuation.definition.keyword.css
 //             ^ meta.at-rule.keyframe.css entity.other.animation-name.css
@@ -169,9 +236,10 @@ html::before {
     .@{selector} {
       animation : progress-fade-in-animation .15s ease-in;
 //                ^ meta.property-value.css
+//                ^ string.unquoted.css
 //    ^ meta.property-name.css support.type.property-name.css
       animation: progress-fade-in-animation .15s ease-in;
-//             ^ source.css.less punctuation.separator.key-value.css
+//             ^ source.less punctuation.separator.key-value.css
 //    ^ meta.property-name.css support.type.property-name.css
 //               ^ meta.property-value.css
 //                                               ^ meta.property-value.css support.constant.property-value.css
@@ -179,6 +247,56 @@ html::before {
     }
   }
 }
+
+
+/*
+  Mixins
+  http://lesscss.org/features/#mixins-feature
+*/
+.border-radius(@color: h1; @padding; @margin: 2;) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
+}
+
+
+/*
+Guarded Namespaces and Mixins
+http://lesscss.org/features/#mixins-feature-guarded-namespaces
+*/
+
+#namespace when not (@mode = huge) {
+//                         ^ meta.function.parameters.less keyword.operator.less
+//                           ^ string.unquoted
+.a-test-mixin(@color: black; /*@margin: 10px;*/ @padding: 20px) when (lightness(@a) >= 50%) {
+//                           ^^^^^^^^^^^^^^^^^^ comment.block.css
+//                           ^^ punctuation.definition.comment.css
+//                                           ^^ punctuation.definition.comment.css
+//                                                              ^^ keyword.operator
+//                                                                              ^^ meta.function.parameters.less variable.other.less
+//                                                                              ^ punctuation.definition.variable.less
+  .nested {
+    @media screen and (max-width: 100px) {
+      .mixin(@a) when not (isnumber(@a)) and (@a > 0) ... }
+//                    ^^ keyword.operator
+//                         ^^^^^^^^ meta.function-call.less support.function.less
+    }
+  }
+  color: mix(@grey4, @grey5);
+//       ^ meta.property-value.css meta.function-call.less support.function.less
+  background: mix(@white, mix(@grey4, @grey5));
+//                          ^ meta.property-value.css meta.function-call.less support.function.less
+  background-color: linear-gradient(@white, mix(@grey4, mix(@grey4, @grey5)));
+//                                          ^ meta.property-value.css meta.function-call.less support.function.less
+  padding: @padding;
+}
+.mixin(@a) when not (isnumber(@a)) and (@a > 0) ... }
+//                                         ^ meta.function.parameters.less keyword.operator.less
+
+
+/*
+Attribute selectors
+*/
   a[data-property="text"] {
 // ^^^^^^^^^^^^^^^^^^^^^^ meta.attribute-selector.css
 // ^ punctuation.definition.entity.css
@@ -206,6 +324,11 @@ html::before {
 //                ^ meta.attribute-selector.css keyword.other.css
   a[value*="text" I] {
 //       ^ meta.attribute-selector.css keyword.operator.attribute-selector.css
+
+
+
+
+
   color: @link-color;
 //       ^ punctuation.definition.variable.less
   color: @@color; // variable variables
@@ -217,7 +340,7 @@ html::before {
     .mixin   { /* */ }
 //  ^ punctuation.definition.entity.css
 //  ^^^^^^ meta.selector.css
-    .mixin() { /* */ }
+    #mixin(@color-param, @position-param) { /* */ }
 //  ^ punctuation.definition.entity.css
 //  ^^^^^^ meta.selector.css
     .border-radius(@radius: 5px) {
@@ -259,53 +382,11 @@ html::before {
   .@{varname}--subclass#another-variable@{variable}id[data-attr="text"] { color: @orangy; }
 //            ^ entity.other.attribute-name.class.css
 //                     ^ entity.other.attribute-name.id.css punctuation.definition.entity.css
-//                             ^ entity.other.attribute-name.id.css variable.other.less punctuation.definition.variable.less
-//                                        ^ entity.other.attribute-name.id.css
+//                             ^ entity.other.attribute-name.id.css
+//                                                 ^ entity.other.attribute-name.id.css
 }
 #@{varname}--subclass { color: @orangy; }
 //          ^ entity.other.attribute-name.id.css
-
-.use-mixin {
-// ^^^^^^^ meta.selector.css entity.other.attribute-name.class.css
-  &--bem {}
-// ^^^^^ meta.selector.css entity.other.attribute-name
-//^ keyword.operator.ampersand.less
-  &_bem {}
-// ^^^^ meta.selector.css entity.other.attribute-name
-//     ^ meta.selector.css
-}
-.accordion__copy,
-// ^^^^^^^^^^^^^ meta.selector.css entity.other.attribute-name.class.css
-.accordion__copy--open {}
-// ^^^^^^^^^^^^^^^^^^^ meta.selector.css entity.other.attribute-name.class.css
-
-#namespace when (@mode = huge) {
-//                     ^ meta.function.parameters.less keyword.operator.less
-
-.a-test-mixin(@color: black; /*@margin: 10px;*/ @padding: 20px) when (lightness(@a) >= 50%) {
-//                           ^^^^^^^^^^^^^^^^^^ comment.block.css
-//                           ^^ punctuation.definition.comment.css
-//                                           ^^ punctuation.definition.comment.css
-//                                                              ^^ keyword.operator.less
-//                                                                              ^^ meta.function.parameters.less variable.other.less
-//                                                                              ^ punctuation.definition.variable.less
-  .nested {
-    @media screen and (max-width: 100px) {
-      .mixin(@a) when not (isnumber(@a)) and (@a > 0) ... }
-//                    ^^ keyword.operator.less
-//                         ^^^^^^^^ meta.function-call.less support.function.less
-    }
-  }
-  color: mix(@grey4, @grey5);
-//       ^ meta.property-value.css meta.function-call.less support.function.less
-  background: mix(@white, mix(@grey4, @grey5));
-//                          ^ meta.property-value.css meta.function-call.less support.function.less
-  background-color: linear-gradient(@white, mix(@grey4, mix(@grey4, @grey5)));
-//                                          ^ meta.property-value.css meta.function-call.less support.function.less
-  padding: @padding;
-}
-.mixin(@a) when not (isnumber(@a)) and (@a > 0) ... }
-//                                         ^ meta.function.parameters.less keyword.operator.less
 
 @media only tv /*awesome*/ and (-webkit-max-width: @pixels) and (max-pixel-ratio: 1920/1200) and (min-aspect-ratio: portrait) { }
 //     ^ meta.at-rule.media.css keyword.operator.logic.media.css
@@ -342,6 +423,7 @@ html::before {
   height: 48px;
   border-radius: 50%;
   background: url(data:@{image}/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7);
+// ^ support.type.property-name.css
 //               ^ meta.property-value.css meta.group.css punctuation.definition.group.begin.css
 //                 ^ meta.property-value.css meta.group.css string.unquoted.css
 //                      ^ meta.property-value.css meta.group.css variable.other.less punctuation.definition.string.begin.less
@@ -375,7 +457,7 @@ html::before {
 //      ^ punctuation.definition.string.begin.css
 //             ^ punctuation.definition.string.end.css
 @import url("https://fonts.googleapis.com/css?family=Source+Code+Pro:400");
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.css.less meta.at-rule.import.css  meta.function-call.css meta.group.css string.quoted.double.css
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.less meta.at-rule.import.css  meta.function-call.css meta.group.css string.quoted.double.css
 //          ^ punctuation.definition.string.begin.css
 //                                                                      ^ punctuation.definition.string.end.css
 @import url(somefile);
@@ -387,7 +469,166 @@ html::before {
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.css string.unquoted.css
 
 
-// http://lesscss.org/features/#detached-rulesets-feature
+/*
+  Maps
+  http://lesscss.org/#maps
+  http://lesscss.org/features/#maps-feature
+*/
+@sizes: {
+  mobile: 320px;
+//^^^^^^ variable.declaration.map.less
+//        ^^^^^ constant.numeric.css
+//      ^ punctuation.separator.key-value
+//             ^ punctuation.terminator.rule
+  tablet: 768px;
+  desktop: 1024px;
+}
+@config: {
+  @options: {
+    library-on: true
+//  ^^^^^^^^^^ variable.declaration.map.less
+  }
+}
+#colors() {
+  primary: blue;
+//  ^^^^^ variable.declaration.map.less
+//       ^ punctuation.separator.key-value
+  secondary: green;
+}
+#library() {
+  .colors() { primary: grey; }
+}
+
+.button {
+  color: #colors[primary];
+//       ^^^^^^^ entity.other.attribute-name.id
+//       ^ punctuation.definition.entity
+//              ^^^^^^^^^ meta.brackets.less
+//              ^ punctuation.section.brackets.begin
+//                      ^ punctuation.section.brackets.end
+//                ^^^^^^ variable.other.less
+  border: 1px solid .colors[@secondary];
+//                  ^^^^^^^ entity.other.attribute-name.class
+//                  ^ punctuation.definition.entity
+//                         ^^^^^^^^^ meta.brackets.less
+//                         ^ punctuation.section.brackets.begin
+//                                    ^ punctuation.section.brackets.end
+//                          ^^^^^^ variable.other.less
+//                          ^ punctuation.definition.variable
+}
+.navbar {
+  display: block;
+
+  @media (min-width: @sizes[tablet]) {
+//                         ^^^^^^^^ meta.brackets.less
+//                         ^ punctuation.section.brackets.begin
+//                                ^ punctuation.section.brackets.end
+//                          ^^^^^^ variable.other.less
+    display: inline-block;
+  }
+}
+
+/*
+CSS Guards
+http://lesscss.org/features/#css-guards-feature
+*/
+
+& when (@config[@options][library-on] = true) {
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css
+// ^ keyword.operator.logic.mixin.less
+//     ^ meta.function.parameters.less punctuation.definition.group.begin
+  .produce-ruleset {
+    prop: val;
+  }
+}
+
+.my-optional-style() when (@my-option = true) {
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css
+//                   ^ keyword.operator.logic.mixin.less
+//                        ^ meta.function.parameters.less punctuation.definition.group.begin
+  button {
+    color: white;
+  }
+}
+
+button when not (@my-option = true) {
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css
+//        ^ keyword.operator.logic.mixin.less
+//          ^ keyword.operator.logic.mixin.less
+//              ^ meta.function.parameters.less punctuation.definition.group.begin
+  color: white;
+}
+
+
+/*
+Aliasing Mixins
+http://lesscss.org/features/#mixins-feature-mixin-aliasing-feature
+*/
+#theme.dark.navbar {
+  .colors(light) {
+    primary: purple;
+  }
+  .colors(dark) {
+    primary: black;
+    secondary: grey;
+  }
+  .box {
+    @alias: #library.rules();
+    @alias();
+  }
+}
+
+.navbar {
+  @colors: .theme#dark.navbar.colors(dark);
+//       ^ punctuation.separator.key-value.css
+//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css meta.alias.less
+//         ^ punctuation.definition.entity.less
+//               ^ punctuation.definition.entity.less
+//                    ^ punctuation.definition.entity.less
+//                           ^ punctuation.definition.entity.less
+//                                  ^ punctuation.definition.group.begin
+//                                       ^ punctuation.definition.group.end
+//                                        ^ punctuation.terminator.rule.css
+  @colors: .theme.dark.navbar#colors(dark);
+//       ^ punctuation.separator.key-value.css
+//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css meta.alias.less
+//         ^ punctuation.definition.entity.less
+//               ^ punctuation.definition.entity.less
+//                    ^ punctuation.definition.entity.less
+//                           ^ punctuation.definition.entity.less
+//                                  ^ punctuation.definition.group.begin
+//                                       ^ punctuation.definition.group.end
+//                                        ^ punctuation.terminator.rule.css
+  @colors: #theme.dark.navbar#colors(dark);
+//       ^ punctuation.separator.key-value.css
+//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css meta.alias.less
+//         ^ punctuation.definition.entity.less
+//               ^ punctuation.definition.entity.less
+//                    ^ punctuation.definition.entity.less
+//                           ^ punctuation.definition.entity.less
+//                                  ^ punctuation.definition.group.begin
+//                                       ^ punctuation.definition.group.end
+//                                        ^ punctuation.terminator.rule.css
+  background: @colors[primary];
+  border: 1px solid @colors[secondary];
+  .button {
+    @colors: #library.colors();
+    color: @colors[primary];
+    border-color: @colors[secondary];
+    border-color: #library.colors[secondary];
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css meta.alias.less
+//                                          ^ punctuation.terminator.rule.css - meta.alias.less
+//                               ^^^^^^^^^^^ meta.brackets.less
+//                               ^ punctuation.section.brackets.begin.less
+//                                         ^ punctuation.section.brackets.end.less
+  }
+}
+
+
+/*
+Detached Rulesets
+http://lesscss.org/features/#detached-rulesets-feature
+*/
 header {
   background-color: blue;
 
@@ -424,6 +665,10 @@ header {
   });
 //^ punctuation.section.property-list.end.css
 }
+
+
+
+
 
 
 
@@ -716,10 +961,6 @@ header {
 //          ^^^^^^^^^^ support.type.custom-property.css
 //          ^^         punctuation.definition.custom-property
 //            ^^^^^^^^ support.type.custom-property.name.css
-
-.test-deprecated-var { var-deprecated- }
-//                     ^^^^^^^^^^^^^^^ invalid.deprecated.custom-property.css
-//                     ^^^^ keyword.other.custom-property.prefix.css
 
 .test-types {
     top: 20;

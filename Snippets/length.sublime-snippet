@@ -4,5 +4,5 @@ length({1:list})
 ]]></content>
 <tabTrigger>length</tabTrigger>
 <description>less list</description>
-<scope>source.css.less</scope>
+<scope>source.less</scope>
 </snippet>
