@@ -618,15 +618,20 @@ contexts:
       captures:
         1: meta.property-value.css
         2: punctuation.terminator.rule.css
-    - match: '(?=\s*($|[;})]))'
+    - match: '(?=\s*[;})])'
       pop: true
-    - match: ':'
-      scope: punctuation.separator.key-value.css
+    - match: '\s*(:)'
+      captures:
+        1: punctuation.separator.key-value.css
       push:
         - meta_content_scope: meta.property-value.css
-        - match: '(?=\s*($|[;})]))'
+        - match: '(?=\s*[;})])'
           pop: true
         - include: property-values
+        - match: '(?={)'
+          pop: true
+    - match: ''
+      pop: true
 
   property-values:
     - match: \!\s*important
