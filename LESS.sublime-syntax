@@ -478,22 +478,39 @@ contexts:
 
   properties:
     - include: comment-block
-    - match: '\bfont(-family)?(?!-)\b(?=\s*:)'
+    - match: '\b(font-family|font|family)\b(?=\s*:)'
       scope: meta.property-name.css support.type.property-name.css
       push:
+        - match: '(\s*)(;)'
+          pop: true
+          captures:
+            1: meta.property-value.css
+            2: punctuation.terminator.rule.css
+        - match: '(?=\s*[;})])'
+          pop: true
         - match: ':'
           scope: punctuation.separator.key-value.css
           push:
             - meta_content_scope: meta.property-value.css
-            - match: '\s*(;)|(?=[})])'
-              captures:
-                1: punctuation.terminator.rule.css
+            - match: '(?=\s*([;})]))'
               pop: true
-            - include: property-values
-            - match: '{{ident}}(\s+{{ident}})*'
+            - include: comment-line
+            - include: comment-block
+            - include: numeric-values
+            - include: property-value-constants
+            - include: literal-string
+            - include: unquoted-concatenated-string
+            - include: less-variables
+            - include: less-functions
+            - match: '{{ident}}(\s+{{ident}})*\b(?!:)'
               scope: string.unquoted.css
-            - match: ','
-              scope: punctuation.separator.css
+            - include: less-operators
+            - include: less-aliases
+            - match: '\s*(,)\s*'
+              captures:
+                1: punctuation.separator.css
+            - match: '(?={)'
+              pop: true
         - match: ''
           pop: true
     - match: |-
@@ -610,8 +627,6 @@ contexts:
         - match: '(?=\s*($|[;})]))'
           pop: true
         - include: property-values
-        - match: '{{ident}}' # e.g. animation-name
-          scope: string.unquoted.css
 
   property-values:
     - match: \!\s*important
@@ -632,6 +647,11 @@ contexts:
     - include: less-functions
     - include: less-operators
     - include: less-aliases
+    - match: '\s*(,)\s*'
+      captures:
+        1: punctuation.separator.css
+    - match: '{{ident}}' # e.g. animation-name
+      scope: string.unquoted.css
 
 
   at-rules:
