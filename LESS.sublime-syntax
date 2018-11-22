@@ -91,7 +91,6 @@ contexts:
     - match: '\s*(,)\s*'
       captures:
         1: punctuation.separator.css
-      pop: true
 
 
   selectors:
