@@ -262,7 +262,6 @@ contexts:
     - include: pseudo-elements
     - include: pseudo-classes
 
-
   custom-element-selectors:
     # custom elements + pseudo elements
     - match: '({{custom_elements}})({{pseudo_elements}})'
@@ -366,8 +365,6 @@ contexts:
       push:
         - meta_scope: meta.selector.css
         - include: selector-parts
-
-
 
   selector-parts:
     - match: '\s*(,)\s*'
@@ -1195,6 +1192,7 @@ contexts:
       scope: support.constant.property-value.css
     - match: \b(?i:sans-serif|serif|monospace|fantasy|cursive|system-ui)\b(?=\s*[;,\n}])
       scope: support.constant.font-name.css
+
 
 
   builtin-functions:
