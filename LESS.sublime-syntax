@@ -2300,7 +2300,7 @@ contexts:
 
   unquoted-string:
     - match: '[^\s''"]'
-      scope: region.orangish string.unquoted.css
+      scope: string.unquoted.css
 
   literal-string:
     - match: "'"
