@@ -1650,7 +1650,7 @@ contexts:
           - include: less-aliases
           - match: \b(auto-fill|auto-fit)\b
             scope: support.keyword.repetitions.css
-          - match: \b(max-content|min-content|auto)\b
+          - match: \b(auto|max-content|min-content|auto)\b
             scope: support.constant.property-value.css
 
   var-function:
