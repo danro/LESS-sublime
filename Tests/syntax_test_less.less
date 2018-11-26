@@ -206,16 +206,18 @@ html::before {
   --custom-background-color: green;
 //        ^ support.type.custom-property.css support.type.custom-property.name.css
 //                         ^ punctuation.separator.key-value.css
-  padding-top: var(--custom-background-color);
+  padding-top: var(--custom-background-color, @blue);
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.css
 //             ^^^ support.function.var.css
 //                ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.css
 //                ^ punctuation.definition.group.begin.css
-//                                          ^ punctuation.definition.group.end.css
 //                 ^^ support.type.custom-property.css punctuation.definition.custom-property.css
 //                    ^ support.type.custom-property.css support.type.custom-property.name.css
-//                                           ^ punctuation.terminator.rule.css
+//                                           ^ punctuation.separator
+//                                            ^^^^^ variable.other
+//                                                 ^ punctuation.definition.group.end.css
+//                                                  ^ punctuation.terminator.rule.css
   padding-left: @{background-color};
 //              ^^^^^^^^^^^^^^^^^^^ meta.property-value.css variable.other.less
 //              ^ punctuation.definition.variable.less
