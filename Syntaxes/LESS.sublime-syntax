@@ -1213,7 +1213,7 @@ contexts:
               | z-index|zero
               | zoom(-in|-out)?
               | ({{counter_styles}})
-            )\b(?=[\s;{)])
+            )\b(?=[\s;{)/])
       scope: support.constant.property-value.css
     - match: \b(?i:sans-serif|serif|monospace|fantasy|cursive|system-ui)\b(?=\s*[;,\n}])
       scope: support.constant.font-name.css
