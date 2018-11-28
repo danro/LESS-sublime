@@ -261,6 +261,9 @@ contexts:
         - include: selector-parts
     - include: pseudo-elements
     - include: pseudo-classes
+    - match: '^\s*({{combinators}})(?![>~+])\s*'
+      captures:
+        1: punctuation.separator.combinator.css
 
   custom-element-selectors:
     # custom elements + pseudo elements
