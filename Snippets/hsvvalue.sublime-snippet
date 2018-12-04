@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-hsvvalue(${1:color})
-]]></content>
-<tabTrigger>hsvvalue</tabTrigger>
-<description>less color-channel</description>
-<scope>source.less</scope>
-</snippet>

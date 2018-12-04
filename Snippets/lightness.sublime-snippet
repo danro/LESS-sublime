@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-lightness(${1:color})
-]]></content>
-<tabTrigger>lightness</tabTrigger>
-<description>less color-channel</description>
-<scope>source.less</scope>
-</snippet>

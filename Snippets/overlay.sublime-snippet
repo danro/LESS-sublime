@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-overlay(${1:color}, ${2:color})
-]]></content>
-<tabTrigger>overlay</tabTrigger>
-<description>less color-blending</description>
-<scope>source.less</scope>
-</snippet>

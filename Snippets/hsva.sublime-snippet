@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-hsva(${1:hue}, ${2:saturation}, ${3:value}, ${4:alpha})
-]]></content>
-<tabTrigger>hsva</tabTrigger>
-<description>less color-definition</description>
-<scope>source.less</scope>
-</snippet>

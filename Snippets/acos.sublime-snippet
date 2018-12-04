@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-acos(${1:number})
-]]></content>
-<tabTrigger>acos</tabTrigger>
-<description>less math</description>
-<scope>source.less</scope>
-</snippet>

@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-negation(${1:color}, ${2:color})
-]]></content>
-<tabTrigger>negation</tabTrigger>
-<description>less color-blending</description>
-<scope>source.less</scope>
-</snippet>

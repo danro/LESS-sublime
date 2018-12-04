@@ -36,7 +36,33 @@ COMMON_VALUES = {
     'break_inside': [
         'auto', 'avoid', 'avoid-page', 'avoid-column', 'avoid-region'
     ],
-    'color': ['currentColor', 'rgb($1)', 'rgba($1)', 'hsl($1)', 'hsla($1)', 'transparent'],
+    'color': [
+        'currentColor', 'rgb($1)', 'rgba($1)', 'hsl($1)', 'hsla($1)', 'transparent',
+        'argb(${1:color})',
+        'average(${1:color}, ${2:color})'
+        'color(${1:string})',
+        'contrast(${1:color}, $2)',
+        'darken(${1:color}, ${2:percentage}%)',
+        'desaturate(${1:color}, ${2:percentage}%)',
+        'difference(${1:color}, ${2:color})',
+        'exclusion(${1:color}, ${1:color})',
+        'fade(${1:color}, ${2:percentage}%)',
+        'fadein(${1:color}, ${2:percentage}%)',
+        'fadeout(${1:color}, ${2:percentage}%)',
+        'greyscale(${1:color})',
+        'hardlight(${1:color}, ${2:color})',
+        'hsv($1)',
+        'hsva($1)',
+        'lighten(${1:color}, ${2:percentage}%)',
+        'mix(${1:color}, ${2:color})',
+        'multiply(${1:color}, ${1:color})',
+        'negation(${1:color}, ${2:color})',
+        'overlay(${1:color}, ${2:color})',
+        'saturate(${1:color}, ${2:percentage}%)',
+        'screen(${1:color}, ${1:color})',
+        'softlight(${1:color}, ${1:color})',
+        'spin(${1:color}, ${2:angle})'
+    ],
     'font_variant_alternates': [
         'normal', 'historical-forms', 'stylistic($1)', 'styleset($1)',
         'character-variant($1)', 'swash($1)', 'ornaments($1)', 'annotation($1)'
@@ -67,18 +93,44 @@ COMMON_VALUES = {
         'lower-armenian', 'upper-armenian', 'georgian', 'cjk-ideographic',
         'hiragana', 'katakana', 'hiragana-iroha', 'katakana-iroha'
     ],
+    'number': [
+        'abs(${1:number})',
+        'ceil(${1:number})',
+        'convert(${1:number}, ${2:units})',
+        'floor(${1:number})',
+        'max(${1:number}, ${1:number})',
+        'min(${1:number}, ${1:number})',
+        'mod(${1:number}, ${2:number})',
+        'pi()',
+        'pow(${1:base}, ${2:exponent})',
+        'round(${1:number}, ${2:places})',
+        'sqrt(${1:number})',
+        'unit(${1:number}, ${2:units})'
+    ],
+    'percentage': [
+        'percentage({1:number})'
+    ],
     'position': ['top', 'right', 'bottom', 'left', 'center'],
     'relative_size': ['larger', 'smaller'],
     'relative_weight': ['bolder', 'lighter'],
     'repeat_style': [
         'repeat', 'repeat-x', 'repeat-y', 'space', 'round', 'no-repeat'
     ],
-    'string': ['\"$1\"'],
+    'string': [
+        '\"$1\"',
+        'e(${1:string})',
+        'escape(${1:string})',
+        '%(${1:string}, ${2:args...})',
+        'replace(${1:string}, ${2:...})'
+    ],
     'timing_function': [
         'ease', 'ease-in', 'ease-out', 'ease-in-out', 'linear',
         'cubic-bezier($1)', 'step-start', 'step-end', 'steps($1)'
     ],
-    'uri': ['url($1)'],
+    'uri': [
+        'url($1)',
+        'data-uri(${1:url})'
+    ],
 }
 
 PROPERTY_DICT = {
@@ -440,6 +492,7 @@ def parse_css_data():
 
     return props
 
+
 class CSSCompletions(sublime_plugin.EventListener):
     props = None
     regex = None
@@ -447,10 +500,7 @@ class CSSCompletions(sublime_plugin.EventListener):
     def on_query_completions(self, view, prefix, locations):
         # match inside a CSS document and
         # match inside the style attribute of HTML tags, incl. just before the quote that closes the attribute value
-        css_selector_scope = "source.less - meta.selector.css"
-        html_style_attr_selector_scope = "text.html meta.attribute-with-value.style.html " + \
-                                    "string.quoted - punctuation.definition.string.begin.html"
-        selector_scope = css_selector_scope + ', ' + html_style_attr_selector_scope
+        selector_scope = "source.less - meta.selector.css"
         prop_name_scope = "meta.property-name.css"
         prop_value_scope = "meta.property-value.css"
         loc = locations[0]
@@ -499,6 +549,15 @@ class CSSCompletions(sublime_plugin.EventListener):
 
                         if "$1" in snippet:
                             desc = desc.replace("$1", "")
+
+                        if "${1:" in snippet:
+                            desc = desc.replace("${1:", "")
+
+                        if "${2:" in snippet:
+                            desc = desc.replace("${2:", "")
+
+                        if "}" in snippet:
+                            desc = desc.replace("}", "")
 
                         l.append((desc, snippet))
 

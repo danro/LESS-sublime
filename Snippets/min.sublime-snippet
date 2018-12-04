@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-min(${1:x}, ${1:y})
-]]></content>
-<tabTrigger>min</tabTrigger>
-<description>less math</description>
-<scope>source.less</scope>
-</snippet>

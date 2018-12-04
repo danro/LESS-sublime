@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-floor({1:number})
-]]></content>
-<tabTrigger>floor</tabTrigger>
-<description>less math</description>
-<scope>source.less</scope>
-</snippet>

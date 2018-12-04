@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-greyscale(${1:color})
-]]></content>
-<tabTrigger>greyscale</tabTrigger>
-<description>less color-operations</description>
-<scope>source.less</scope>
-</snippet>

@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-%({1:string}, ${2:values...})
-]]></content>
-<tabTrigger>format</tabTrigger>
-<description>less string</description>
-<scope>source.less</scope>
-</snippet>

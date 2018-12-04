@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-saturate(${1:color}, ${2:percentage}%)
-]]></content>
-<tabTrigger>saturate</tabTrigger>
-<description>less color-operations</description>
-<scope>source.less</scope>
-</snippet>

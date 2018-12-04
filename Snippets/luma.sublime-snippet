@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-luma(${1:color})
-]]></content>
-<tabTrigger>luma</tabTrigger>
-<description>less color-channel</description>
-<scope>source.less</scope>
-</snippet>

@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-length({1:list})
-]]></content>
-<tabTrigger>length</tabTrigger>
-<description>less list</description>
-<scope>source.less</scope>
-</snippet>

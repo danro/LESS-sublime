@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-tan(${1:number})
-]]></content>
-<tabTrigger>tan</tabTrigger>
-<description>less math</description>
-<scope>source.less</scope>
-</snippet>

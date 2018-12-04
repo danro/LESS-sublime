@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-pow(${1:base}, ${2:exponent})
-]]></content>
-<tabTrigger>pow</tabTrigger>
-<description>less math</description>
-<scope>source.less</scope>
-</snippet>

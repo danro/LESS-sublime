@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-atan(${1:number})
-]]></content>
-<tabTrigger>atan</tabTrigger>
-<description>less math</description>
-<scope>source.less</scope>
-</snippet>

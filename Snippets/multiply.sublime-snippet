@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-multiply(${1:color}, ${1:color})
-]]></content>
-<tabTrigger>multiply</tabTrigger>
-<description>less color-blending</description>
-<scope>source.less</scope>
-</snippet>

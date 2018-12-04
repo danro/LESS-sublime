@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-difference(${1:color}, ${2:color})
-]]></content>
-<tabTrigger>difference</tabTrigger>
-<description>less color-blending</description>
-<scope>source.less</scope>
-</snippet>

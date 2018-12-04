@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-replace({1:string}, ${2:pattern}, ${3:replacement})
-]]></content>
-<tabTrigger>replace</tabTrigger>
-<description>less string</description>
-<scope>source.less</scope>
-</snippet>

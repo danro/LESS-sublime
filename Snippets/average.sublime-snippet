@@ -1,8 +1,0 @@
-<snippet>
-<content><![CDATA[
-average(${1:color}, ${2:color})
-]]></content>
-<tabTrigger>average</tabTrigger>
-<description>less color-blending</description>
-<scope>source.less</scope>
-</snippet>
