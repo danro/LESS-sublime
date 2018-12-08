@@ -633,6 +633,16 @@ contexts:
         2: support.type.custom-property.name.css
       push:
         - include: property-value-wrapper
+    - match: '[a-zA-Z0-9_-]*((@)({)([a-zA-Z0-9_-][\w-]*)(}))[a-zA-Z0-9_-]*'
+      captures:
+        0: meta.property-name.css support.type.property-name
+        1: variable.other.less
+        2: punctuation.definition.variable.less
+        3: punctuation.definition.string.begin.less
+        4: string.interpolated.less
+        5: punctuation.definition.string.end.less
+      push:
+        - include: property-value-wrapper
 
   property-value-wrapper:
     - match: '(\s*)(;)'

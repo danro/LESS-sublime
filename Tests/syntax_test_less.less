@@ -260,6 +260,17 @@ http://lesscss.org/features/#variables-feature-variable-interpolation
 //   ^ punctuation.definition.string.begin.less
 //    ^ string.interpolated.less
 //            ^ punctuation.definition.string.end.less
+      @{property}: #0ee;
+//    ^^^^^^^^^^^ meta.property-name
+//    ^^^^^^^^^^^ variable.other
+      background-@{property}: #999;
+//              ^ - variable.other
+//               ^^^^^^^^^^^ variable.other
+//    ^^^^^^^^^^^^^^^^^^^^^^ meta.property-name
+      @{property}-color: #999;
+//    ^^^^^^^^^^^^^^^^^ meta.property-name
+//    ^^^^^^^^^^^ variable.other
+//               ^ - variable.other
       animation : progress-fade-in-animation .15s ease-in;
 //                ^ meta.property-value.css
 //                ^ string.unquoted.css
