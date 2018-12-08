@@ -108,7 +108,7 @@ COMMON_VALUES = {
         'unit(${1:number}, ${2:units})'
     ],
     'percentage': [
-        'percentage({1:number})'
+        'percentage(${1:number})'
     ],
     'position': ['top', 'right', 'bottom', 'left', 'center'],
     'relative_size': ['larger', 'smaller'],
@@ -324,8 +324,8 @@ PROPERTY_DICT = {
     'grid-gap': ['<length>', '<percentage>'],
     'grid-row-gap': ['<length>', '<percentage>'],
     'grid-template-areas': [],
-    'grid-template-columns': ['auto', '<percentage>', '<length>'],
-    'grid-template-rows': ['auto', '<percentage>', '<length>'],
+    'grid-template-columns': ['auto', 'repeat($1)', 'minmax($1)', '<percentage>', '<length>'],
+    'grid-template-rows': ['auto', 'repeat($1)', 'minmax($1)', '<percentage>', '<length>'],
     'grid-column': ['<number>'],
     'grid-column-end': ['<number>'],
     'grid-column-start': ['<number>'],
@@ -498,25 +498,14 @@ class CSSCompletions(sublime_plugin.EventListener):
     regex = None
 
     def on_query_completions(self, view, prefix, locations):
-        # match inside a CSS document and
-        # match inside the style attribute of HTML tags, incl. just before the quote that closes the attribute value
         selector_scope = "source.less - meta.selector.css"
         prop_name_scope = "meta.property-name.css"
         prop_value_scope = "meta.property-value.css"
         loc = locations[0]
 
-        # When not inside CSS, don’t trigger
+        # When not inside LESS, don’t trigger
         if not view.match_selector(loc, selector_scope):
-            # if the text immediately after the caret is a HTML style tag beginning, and the character before the
-            # caret matches the CSS scope, then probably the user is typing here (where | represents the caret):
-            # <style type="text/css">.test { f|</style>
-            # i.e. after a "style" HTML open tag and immediately before the closing tag.
-            # so we want to offer CSS completions here.
-            if view.match_selector(loc, 'text.html meta.tag.style.end punctuation.definition.tag.begin.html') and \
-               view.match_selector(loc - 1, selector_scope):
-                pass
-            else:
-                return []
+            return []
 
         if not self.props:
             self.props = parse_css_data()
@@ -526,13 +515,13 @@ class CSSCompletions(sublime_plugin.EventListener):
         if (view.match_selector(loc, prop_value_scope) or
             # This will catch scenarios like:
             # - .foo {font-style: |}
-            # - <style type="text/css">.foo { font-weight: b|</style>
             view.match_selector(loc - 1, prop_value_scope)):
 
             alt_loc = loc - len(prefix)
             line = view.substr(sublime.Region(view.line(alt_loc).begin(), alt_loc))
 
             match = re.search(self.regex, line)
+
             if match:
                 prop_name = match.group(1)
                 if prop_name in self.props:
