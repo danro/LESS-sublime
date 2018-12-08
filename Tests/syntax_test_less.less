@@ -351,6 +351,17 @@ Attribute selectors
 //       ^ punctuation.definition.variable.less
   color: @@color; // variable variables
 //       ^^ punctuation.definition.variable.less
+  /*
+  Properties as Variables
+  http://lesscss.org/features/#variables-feature-properties-as-variables-new-
+  */
+  color: $color;
+//       ^^^^^^ variable.other.less
+//       ^ punctuation.definition.variable.less
+  color: $nonproperty;
+//       ^^^^^^^^^^^^ - variable.other.less
+//       ^ - punctuation.definition.variable.less
+
   text-decoration: none;
   & {}
 //^^ meta.selector.css
