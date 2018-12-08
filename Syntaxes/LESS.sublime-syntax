@@ -162,6 +162,7 @@ contexts:
     - include: selectors
     - include: properties
     - include: keyframe-operators
+    - include: interpolated-selectors
     - include: custom-element-selectors
     - include: less-map-values
     - include: at-rules
@@ -277,6 +278,59 @@ contexts:
       captures:
         0: meta.selector.css
         1: punctuation.separator.combinator.css
+
+
+  interpolated-selectors:
+    - match: '\s*(@)({)([a-zA-Z0-9_-][\w-]*)(})(?={{pseudo_elements}})'
+      captures:
+        0: variable.other.less
+        1: punctuation.definition.variable.less
+        2: punctuation.definition.string.begin.less
+        3: string.interpolated.less
+        4: punctuation.definition.string.end.less
+      push:
+        - meta_scope: meta.selector.css
+        - include: selector-parts
+    - match: '\s*(@)({)([a-zA-Z0-9_-][\w-]*)(})(?=:{{regular_pseudo_classes}})'
+      captures:
+        0: variable.other.less
+        1: punctuation.definition.variable.less
+        2: punctuation.definition.string.begin.less
+        3: string.interpolated.less
+        4: punctuation.definition.string.end.less
+      push:
+        - meta_scope: meta.selector.css
+        - include: selector-parts
+    - match: '\s*(@)({)([a-zA-Z0-9_-][\w-]*)(})(?=:({{functional_pseudo_classes}})\()'
+      captures:
+        0: variable.other.less
+        1: punctuation.definition.variable.less
+        2: punctuation.definition.string.begin.less
+        3: string.interpolated.less
+        4: punctuation.definition.string.end.less
+      push:
+        - meta_scope: meta.selector.css
+        - include: selector-parts
+    - match: '\s*(@)({)([a-zA-Z0-9_-][\w-]*)(})(?=:(-(moz|ms|webkit)-){{ident}})'
+      captures:
+        0: variable.other.less
+        1: punctuation.definition.variable.less
+        2: punctuation.definition.string.begin.less
+        3: string.interpolated.less
+        4: punctuation.definition.string.end.less
+      push:
+        - meta_scope: meta.selector.css
+        - include: selector-parts
+    - match: '\s*(@)({)([a-zA-Z0-9_-][\w-]*)(})(?=(?![-:]))'
+      captures:
+        0: variable.other.less
+        1: punctuation.definition.variable.less
+        2: punctuation.definition.string.begin.less
+        3: string.interpolated.less
+        4: punctuation.definition.string.end.less
+      push:
+        - meta_scope: meta.selector.css
+        - include: selector-parts
 
   custom-element-selectors:
     # custom elements + pseudo elements

@@ -241,7 +241,25 @@ html::before {
       }
     }
 
-    .@{selector} {
+/*
+Interpolated selectors
+http://lesscss.org/features/#variables-feature-variable-interpolation
+*/
+    .@{selector}:hover + a,
+//  ^^^^^^^^^^^^^^^^^^^^^^ meta.selector
+//  ^ entity.other.attribute-name.class.css punctuation.definition.entity.css
+//   ^^^^^^^^^^^ variable.other.less
+//   ^ punctuation.definition.variable.less
+//    ^ punctuation.definition.string.begin.less
+//     ^ string.interpolated.less
+//             ^ punctuation.definition.string.end.less
+    @{selector}:hover + a {
+//  ^^^^^^^^^^^^^^^^^^^^^^ meta.selector
+//  ^^^^^^^^^^^ variable.other.less
+//  ^ punctuation.definition.variable.less
+//   ^ punctuation.definition.string.begin.less
+//    ^ string.interpolated.less
+//            ^ punctuation.definition.string.end.less
       animation : progress-fade-in-animation .15s ease-in;
 //                ^ meta.property-value.css
 //                ^ string.unquoted.css
