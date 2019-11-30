@@ -1408,6 +1408,7 @@ contexts:
             pop: true
           - include: less-variables
           - include: less-functions
+          - include: literal-string
           - include: unquoted-string
           - include: less-aliases
 
