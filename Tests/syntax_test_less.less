@@ -732,7 +732,19 @@ header {
 
 
 
-
+// ensure we don't confuse variables with @-keywords
+    @pageColor: blue;
+//  ^^^^^ - meta.at-rule
+    @namespaceColor: pink;
+//  ^^^^^ - meta.at-rule
+    @documentColor: pink;
+//  ^^^^^ - meta.at-rule
+    @importColor: pink;
+//  ^^^^^ - meta.at-rule
+    @keyframesColor: pink;
+//  ^^^^^ - meta.at-rule
+    @supportsColor: pink;
+//  ^^^^^ - meta.at-rule
 
 
 
@@ -797,6 +809,7 @@ header {
 //   ^^^^^^           keyword.control.at-rule
 //              ^^^^^ support.constant.media.css
 
+//  ^^^^^^^^^^ - meta.at-rule.namespace.css
     @namespace svg "http://www.w3.org/1999/xhtml";
 //  ^^^^^^^^^^^^^^^^^ meta.at-rule.namespace.css
 //  ^              punctuation.definition.keyword.css

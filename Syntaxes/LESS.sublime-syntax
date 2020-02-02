@@ -746,7 +746,7 @@ contexts:
             - match: '\s*(?=;)'
               pop: true
             - include: media-query
-    - match: '((@)document)'
+    - match: '((@)document)\b'
       captures:
         1: keyword.control.at-rule.document.css
         2: punctuation.definition.keyword.css
@@ -761,7 +761,7 @@ contexts:
         - include: domain-function
         - include: regexp-function
         - include: comma-delimiter
-    - match: '\s*((@)import\b)\s*'
+    - match: '\s*((@)import)\b\s*'
       captures:
         1: keyword.control.at-rule.import.css
         2: punctuation.definition.keyword.css
@@ -779,7 +779,7 @@ contexts:
         - include: literal-string
         - include: url-function
         - include: media-query
-    - match: '\s*((@)(-webkit-|-moz-|-o-)?keyframes)'
+    - match: '\s*((@)(-webkit-|-moz-|-o-)?keyframes)\b'
       captures:
         1: keyword.control.at-rule.keyframe.css
         2: punctuation.definition.keyword.css
@@ -806,7 +806,7 @@ contexts:
         - include: media-query
         - match: '(?=\{)'
           pop: true
-    - match: '\s*((@)namespace)\s+({{ident}}(?!{{nmchar}}|\())?'
+    - match: '\s*((@)namespace)\b\s+({{ident}}(?!{{nmchar}}|\())?'
       captures:
         1: keyword.control.at-rule.namespace.css
         2: punctuation.definition.keyword.css
@@ -817,7 +817,7 @@ contexts:
         - include: literal-string
         - include: url-function
         - include: comment-block
-    - match: '\s*((@)page)\s*(?:(:)(first|left|right))?\s*'
+    - match: '\s*((@)page)\b\s*(?:(:)(first|left|right))?\s*'
       captures:
         1: keyword.control.at-rule.page.css
         2: punctuation.definition.keyword.css
@@ -828,7 +828,7 @@ contexts:
         - include: comment-block
         - match: '\s*(?=\{)'
           pop: true
-    - match: '((@)supports)'
+    - match: '((@)supports)\b'
       captures:
         1: keyword.control.at-rule.supports.css
         2: punctuation.definition.keyword.css
