@@ -95,13 +95,14 @@ variables:
       | text-shadow|text-indent|border-style|overflow-y|list-style-type
       | word-wrap|border-spacing|appearance|zoom|overflow-x|border-top-left-radius
       | border-bottom-left-radius|border-top-color|pointer-events
-      | border-bottom-color|align-items|justify-content|letter-spacing
+      | border-bottom-color
       | border-top-right-radius|border-bottom-right-radius|border-right-width
       | font-smoothing|border-bottom-width|border-right-color|direction
       | border-top-width|src|border-left-color|border-left-width
-      | tap-highlight-color|table-layout|background-clip|word-break
+      | tap-highlight-color|table-layout|background-clip
       | transform-origin|resize|filter|backface-visibility|text-rendering
-      | box-orient|transition-property|transition-duration|word-spacing
+      | box-orient|transition-property|transition-duration
+      | word-break|word-spacing|letter-spacing
       | quotes|outline-offset|animation-timing-function|animation-duration
       | animation-name|transition-timing-function|border-bottom-style
       | border-bottom|transition-delay|transition|unicode-bidi|border-top-style
@@ -118,9 +119,12 @@ variables:
       | background-position-y|stroke-width|background-position-x|background-position
       | background-blend-mode|flex-shrink|flex-basis|flex-order|flex-item-align
       | flex-line-pack|flex-negative|flex-pack|flex-positive|flex-preferred-size
-      | flex|user-drag|font-stretch|column-count|empty-cells|align-self
-      | caption-side|mask-size|column-gap|mask-repeat|box-direction
-      | font-feature-settings|mask-position|align-content|object-fit
+      | flex|user-drag|font-stretch|column-count|empty-cells
+      | align-items|justify-items|place-items
+      | align-self|justify-self|place-self
+      | align-content|justify-content|place-content
+      | caption-side|mask-size|column-gap|row-gap|mask-repeat|box-direction
+      | font-feature-settings|mask-position|object-fit
       | columns|text-fill-color|clip-path|stop-color|font-kerning
       | page-break-before|stroke-dasharray|size|fill-rule|border-image-slice
       | column-width|break-inside|column-break-before|border-image-width
@@ -144,18 +148,20 @@ variables:
       | mask-clip|mask-origin|mask|font-variant-caps|font-variant-alternates
       | font-variant-east-asian|font-variant-numeric|font-variant-position
       | font-variant|font-size-adjust|font-size|font-language-override
-      | font-display|font-synthesis|font|line-box-contain|text-justify
-      | text-decoration-color|text-decoration-style|text-decoration-line
-      | text-decoration|text-underline-position|grid-template-rows
-      | grid-template-columns|grid-template-areas|grid-template|rotate|scale
-      | translate|scroll-behavior|grid-column-start|grid-column-end
-      | grid-column-gap|grid-row-start|grid-row-end|grid-auto-rows
-      | grid-area|grid-auto-flow|grid-auto-columns|image-orientation
+      | font-display|font-synthesis|font-variation-settings|font|line-box-contain
+      | text-justify|text-decoration-color|text-decoration-style
+      | text-decoration-line|text-decoration|text-underline-position
+      | grid-template-rows|grid-template-columns|grid-template-areas|grid-template
+      | grid-row-gap|grid-row|grid-column|gap
+      | grid-column-start|grid-column-end|grid-column-gap
+      | grid-row-start|grid-row-end|grid-auto-rows|grid-gap
+      | grid-area|grid-auto-flow|grid-auto-columns
+      | rotate|scale|translate|scroll-behavior|overscroll-behavior|image-orientation
       | hyphens|overflow-scrolling|overflow|color-profile|kerning
-      | nbsp-mode|color|image-resolution|grid-row-gap|grid-row|grid-column
+      | nbsp-mode|color|image-resolution
       | blend-mode|azimuth|pause-after|pause-before|pause|pitch-range|pitch
       | text-height|system|negative|prefix|suffix|range|pad|fallback
-      | additive-symbols|symbols|speak-as|speak|grid-gap
+      | additive-symbols|symbols|speak-as|speak|backdrop-filter
     )\b
 
 
