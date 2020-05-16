@@ -998,7 +998,7 @@ contexts:
           push:
             - meta_content_scope: meta.brackets.less
             - include: less-map-lookups
-        - match: '(?=;|$)'
+        - match: '(?=;|,|$)'
           pop: true
         - match: '(\.){{ident}}'
           captures:
