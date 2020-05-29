@@ -1,0 +1,12 @@
+# This file is used to slim down the size of the
+# Sublime Text package shipped via Package Control
+# by leveraging gitattributes
+
+
+*                   text    eol=lf
+
+.github/                    export-ignore
+Tests/                      export-ignore
+
+.gitattributes              export-ignore
+.gitignore                  export-ignore
