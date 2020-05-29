@@ -1,13 +1,6 @@
 name: continuous-integration
-on:
-  push:
-    paths:
-      - 'Syntaxes/**.sublime-syntax'
-      - 'Tests/*'
-  pull_request:
-    paths:
-      - 'Syntaxes/**.sublime-syntax'
-      - 'Tests/*'
+
+on: [push]
 
 jobs:
   build:
