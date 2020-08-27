@@ -101,7 +101,7 @@ variables:
       | font-smoothing|border-bottom-width|border-right-color|direction
       | border-top-width|src|border-left-color|border-left-width
       | tap-highlight-color|table-layout|background-clip|word-break
-      | transform-origin|resize|filter|backface-visibility|text-rendering
+      | transform-origin|resize|filter|backdrop-filter|backface-visibility|text-rendering
       | box-orient|transition-property|transition-duration|word-spacing
       | quotes|outline-offset|animation-timing-function|animation-duration
       | animation-name|transition-timing-function|border-bottom-style

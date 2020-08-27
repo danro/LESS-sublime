@@ -218,6 +218,11 @@ PROPERTY_DICT = {
     'background-blend-mode': ['<blend_mode>'],
     'background-clip': ['border-box', 'padding-box', 'content-box'],
     'background-color': ['<color>'],
+    'backdrop-filter': [
+        '<uri>', 'url($1)', 'blur($1)', 'brightness($1)', 'contrast($1)',
+        'drop-shadow($1)', 'grayscale($1)', 'hue-rotate($1)', 'invert($1)',
+        'opacity($1)', 'saturate($1)', 'sepia($1)'
+    ],
     'background-image': ['<uri>', 'none'],
     'background-origin': ['border-box', 'padding-box', 'content-box'],
     'background-position': ['<position>'],
