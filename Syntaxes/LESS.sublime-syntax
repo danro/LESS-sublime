@@ -173,6 +173,7 @@ contexts:
     - include: less-map-values
     - include: at-rules
     - include: curly-braces
+    - include: css-modules
     - match: '\s*(,)\s*'
       captures:
         1: punctuation.separator.css
@@ -578,6 +579,27 @@ contexts:
       captures:
         1: punctuation.definition.entity.css
 
+    - match: '\s*(:)(local|global)(?=\()'
+      scope: meta.selector.css entity.other.pseudo-class.css-modules.css
+      captures:
+        1: punctuation.definition.entity.css
+      push:
+        - meta_scope: meta.selector.css meta.function-call.css
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+            - meta_scope: meta.group.css
+            - match: '\)'
+              scope: punctuation.definition.group.end.css
+              pop: true
+            - include: selectors
+            - include: literal-string
+        - match: ''
+          pop: true
+    - match: '\s*(:)(local|global)'
+      scope: meta.selector.css entity.other.pseudo-class.css-modules.css
+      captures:
+        1: punctuation.definition.entity.css
 
 
   properties:
@@ -650,6 +672,10 @@ contexts:
         5: punctuation.definition.string.end.less
       push:
         - include: property-value-wrapper
+    - match: '\b(composes)\b'
+      scope: meta.property-name.css-modules.css support.type.property-name
+      push:
+        - include: property-value-wrapper
 
   property-value-wrapper:
     - match: '(\s*)(;)'
@@ -666,6 +692,8 @@ contexts:
         - meta_content_scope: meta.property-value.css
         - match: '(?=\s*[;})])'
           pop: true
+        - match: '\bfrom\b'
+          scope: keyword.control.import.from.css-modules.css
         - include: property-values
         - match: '(?={)'
           pop: true
@@ -2622,3 +2650,42 @@ contexts:
         - match: \n
           pop: true
 
+  css-modules:
+    - match: '\s*(:)(import|export)'
+      scope: meta.selector.css entity.other.pseudo-class.css-modules.css
+      captures:
+        1: punctuation.definition.entity.css
+      push:
+        - meta_scope: meta.selector.css meta.function-call.css
+        - match: '\('
+          scope: punctuation.definition.group.begin.css
+          push:
+            - meta_scope: meta.group.css
+            - match: '\)'
+              scope: punctuation.definition.group.end.css
+              pop: true
+            - include: selectors
+            - include: literal-string
+        - match: '\s*(\{)'
+          scope: punctuation.section.property-list.begin.css
+          push:
+            - meta_scope: meta.group.css-modules.css
+            - match: '\}'
+              scope: punctuation.section.property-list.end.css
+              pop: true
+            - include: comment-line
+            - include: comment-block
+            - match: '([a-zA-Z0-9_-]+)\s*(:)'
+              captures:
+                1: meta.property-name.css-modules.css support.type.property-name.css-modules.css
+                2: punctuation.separator.key-value.css
+                3: variable.other.css-modules.css
+              push:
+                - match: '(;|\s*(?=$))'
+                  captures:
+                    1: punctuation.terminator.rule.css
+                  pop: true
+                - include: literal-string
+                - include: unquoted-string
+        - match: ''
+          pop: true

@@ -291,6 +291,72 @@ http://lesscss.org/features/#variables-feature-variable-interpolation
 }
 
 
+/* CSS Modules
+
+   Interoperable CSS: https://github.com/css-modules/icss#specification
+   localAlias is basically any string inside a CSS file,
+   that will be replaced with the value stored as keyFromDep
+   keys must be a single term, consisting of only alphanumeric characters, underscores and dashes
+*/
+:import("path/to/dep.css") {
+// ^^^^ entity.other.pseudo-class.css-modules.css
+//     ^ punctuation.definition.group.begin.css
+//      ^^^^ string
+//                       ^ punctuation.definition.group.end.css
+//                         ^ punctuation.section.property-list.begin.css
+  localAlias: keyFromDep;
+// ^^^^^^^^^ meta.property-name.css-modules.css
+//            ^^^^^^^^^^ string
+   blababla : "keyFromDep";
+// ^^^^^^^^ meta.property-name.css-modules.css
+//          ^ punctuation
+//            ^^^^^^^^^^ string
+//                        ^ punctuation
+}
+// an exportedKey exposes a specific value (a selector, a value, anything really)
+:export {
+// ^^^^ entity.other.pseudo-class.css-modules.css
+  exportedKey: exportedValue;
+// ^^^^^^^^^ meta.property-name.css-modules.css
+//           ^ punctuation
+//             ^^^^^^^^^^ string
+//                          ^ punctuation
+}
+/* CSS Modules
+   Composing selectors: https://github.com/css-modules/css-modules#css-modules
+*/
+.otherClassName {
+  composes: className from "./style.css";  // from filename
+  composes: classNameA classNameB;         // multiple classnames
+  composes: globalClassName from global;   // from global classnames
+// ^^^^^^^ meta.property-name.css-modules.css
+//        ^ punctuation
+//                          ^^^^ keyword.control.import.from.css-modules.css
+//                                     ^ punctuation
+}
+/* CSS Modules
+   Global vs. local scope: https://github.com/css-modules/css-modules#exceptions
+*/
+.localA :global .global-b .global-c :local(.localD.localE::before) .global-d
+//      ^^^^^^^ entity.other.pseudo-class.css-modules
+//                                  ^^^^^^ entity.other.pseudo-class.css-modules
+//                                        ^ meta.function-call.css meta.group.css punctuation.definition.group.begin.css
+//                                         ^^^^^^^^^^^^^^^^^^^^^^ meta.selector
+//                                                               ^ punctuation.definition.group.end.css
+:global {  // global blocks
+// ^^^^ entity.other.pseudo-class.css-modules
+  .global-class-name {
+    color: green;
+  }
+}
+:local {  // local blocks
+// ^^^ entity.other.pseudo-class.css-modules
+  .global-class-name {
+    color: green;
+  }
+}
+
+
 /*
   Support property values after a line break
 */
