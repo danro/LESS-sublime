@@ -445,7 +445,7 @@ contexts:
         - meta_scope: meta.selector.css
         - include: selector-parts
     # custom elements
-    - match: '\s*({{custom_elements}})(?![-:])'
+    - match: '\s*({{custom_elements}})(?!-|\s*:)'
       captures:
         1: entity.name.tag.custom.css
       push:
