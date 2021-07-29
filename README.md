@@ -17,4 +17,4 @@ This package is available through [Package Control](https://packagecontrol.io)
 
 ☕️👌🏻
 
-If you enjoy this package, feel free to make a little [donation via PayPal](https://paypal.me/pools/c/89Rcz97pIQ) towards the coffee that keeps this project running. It's much appreciated!
+If you enjoy this package, feel free to make a little [donation via PayPal](https://paypal.me/koenlageveen) towards the coffee that keeps this project running. It's much appreciated!
