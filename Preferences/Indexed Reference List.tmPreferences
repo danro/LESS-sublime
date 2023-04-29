@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plist version="1.0">
+<dict>
+	<key>scope</key>
+	<string>
+		source.less meta.at-rule.import meta.function-call.arguments entity.other.layer,
+		source.less variable.other - meta.declaration.identifier - punctuation.definition.variable
+	</string>
+	<key>settings</key>
+	<dict>
+		<key>showInIndexedReferenceList</key>
+		<integer>1</integer>
+	</dict>
+</dict>
+</plist>
