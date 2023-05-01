@@ -297,6 +297,18 @@ contexts:
     - meta_prepend: true
     - include: less-string-interpolations
 
+  quoted-url:
+    - match: \"
+      scope:
+        meta.string.css string.quoted.double.css
+        punctuation.definition.string.begin.css
+      set: double-quoted-url-body
+    - match: \'
+      scope:
+        meta.string.css string.quoted.single.css
+        punctuation.definition.string.begin.css
+      set: single-quoted-url-body
+
 ###[ CSS MODULES / PSEUDO CLASSES ]############################################
 
   css-modules-pseudo-class:
@@ -410,6 +422,7 @@ contexts:
     - include: quoted-strings
     - match: (?i:from){{break}}
       scope: keyword.control.import.from.css
+      push: css-modules-from-url
     - match: (?i:global){{break}}
       scope: support.constant.namespace.global.css
     - match: '{{ident_begin}}'
@@ -418,6 +431,10 @@ contexts:
   css-modules-composes-class-name-content:
     - meta_scope: entity.other.attribute-name.class.css
     - include: identifier-content
+
+  css-modules-from-url:
+    - include: quoted-url
+    - include: else-pop
 
 ###[ LESS ]####################################################################
 
