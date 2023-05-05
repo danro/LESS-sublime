@@ -2498,6 +2498,103 @@ header {
 //             ^ meta.property-value.css - support
 //              ^^^^^ meta.property-value.css support.constant.property-value.css
 //                   ^ punctuation.terminator.rule.css
+
+    { foo: }
+//    ^^^ meta.property-name.css support.type.property-name.css
+//       ^  punctuation.separator.key-value.css
+
+    { { foo : } }
+//      ^^^ meta.property-name.css support.type.property-name.css
+//          ^  punctuation.separator.key-value.css
+
+    { foo : #ccc }
+//    ^^^ meta.property-name.css support.type.property-name.css
+//        ^ punctuation.separator.key-value.css
+//         ^^^^^^  meta.property-value.css
+}
+
+.properties-vs-selector-tests {
+
+    /**
+     * Using a special bailout to keep property name scoped as such
+     * if followed by a known at-rule.
+     **/
+
+    color:
+//  ^^^^^ meta.property-name.css support.type.property-name.css
+//       ^ punctuation.separator.key-value.css
+    @media only screen {}
+//  ^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.media.css
+//  ^^^^^^ keyword.control.directive.css
+//         ^^^^ keyword.operator.logical.css
+//              ^^^^^^ support.constant.media.css
+//                     ^ punctuation.section.block.begin.css
+//                      ^ punctuation.section.block.end.css
+
+    color:
+//  ^^^^^^^ meta.selector.css
+//  ^^^^^ entity.name.tag.other.css
+//       ^ punctuation.definition.pseudo-class.css
+    @unknown-at-rule {}
+//  ^^^^^^^^^^^^^^^^ meta.selector.css variable.other.less
+//                  ^ meta.selector.css - variable
+//                   ^ punctuation.section.block.begin.css
+//                    ^ punctuation.section.block.end.css
+
+    color:
+//  ^^^^^ meta.property-name.css support.type.property-name.css
+//       ^ punctuation.separator.key-value.css
+    @variable ;
+//  ^^^^^^^^^ meta.property-value.css variable.other.less
+//           ^ meta.property-value.css - variable
+//            ^ punctuation.terminator.rule.css
+
+    /**
+     * Incomplete properties may be matched as selectors consisting of
+     * custom elements or foreign tags as the syntax definition doesn't
+     * maintain ever changing lists of supported property names.
+     **/
+
+    color:color:red;
+//  ^^^^^^^^^^^^^^^ meta.selector.css
+//  ^^^^^ entity.name.tag.other.css
+//       ^ punctuation.definition.pseudo-class.css
+//        ^^^^^ entity.other.pseudo-class.css
+//             ^ punctuation.definition.pseudo-class.css
+//              ^^^ entity.other.pseudo-class.css
+//                 ^ punctuation.terminator.rule.css
+
+    color:
+//  ^^^^^^^ meta.selector.css
+//  ^^^^^ entity.name.tag.other.css
+//       ^ punctuation.definition.pseudo-class.css
+    color:red;
+// ^^^^^^^^^^ meta.selector.css
+//  ^^^^^ entity.name.tag.other.css
+//       ^ punctuation.definition.pseudo-class.css
+//        ^^^ entity.other.pseudo-class.css
+//           ^ punctuation.terminator.rule.css
+
+    color:
+//  ^^^^^^^ meta.selector.css
+//  ^^^^^ entity.name.tag.other.css
+//       ^ punctuation.definition.pseudo-class.css
+    color: red;
+// ^^^^^^^^^^^ meta.selector.css
+//  ^^^^^ entity.name.tag.other.css
+//       ^ punctuation.definition.pseudo-class.css
+//         ^^^ entity.name.tag.other.css
+//            ^ punctuation.terminator.rule.css
+
+    color:;
+//  ^^^^^ meta.property-name.css support.type.property-name.css
+//       ^  punctuation.separator.key-value.css
+//        ^  punctuation.terminator.rule.css
+    color: red;
+//  ^^^^^ meta.property-name.css support.type.property-name.css
+//       ^  punctuation.separator.key-value.css
+//        ^^^^ meta.property-value.css
+//            ^  punctuation.terminator.rule.css
 }
 
 .css-functions {

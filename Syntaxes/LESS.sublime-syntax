@@ -25,6 +25,11 @@ variables:
 
   # LESS variables
 
+  at_rules: |-
+    @(?xi: charset | counter-style | custom-media | document | font-face | import
+    | keyframes | layer | media | namespace | page | plugin | property
+    | scroll-timeline | supports ){{break}}
+
   hex_colors: (?:\h{3}|\h{4}|\h{6}|\h{8}){{break}}
 
   # https://lesscss.org/features/#import-atrules-feature-import-options
@@ -147,7 +152,7 @@ contexts:
   maybe-property:
     - include: property-identifiers
     # a property's value is followed/terminated by one of ; ) }
-    - match: (?=[;)}])
+    - match: (?=[;)}]|{{at_rules}})
       pop: 1
     # otherwise it is part of a selector
     - match: ''
@@ -252,6 +257,11 @@ contexts:
 
   value-prototype:
     - meta_prepend: true
+    # CSS terminates values if `@` is found, LESS can't do that due to variables
+    # Hence terminate valeus at least, if known at-rules are found, which can't
+    # be variables.
+    - match: (?={{at_rules}})
+      pop: 1
     - include: less-expressions
 
 ###[ CSS FUNCTIONS ]###########################################################
@@ -308,6 +318,12 @@ contexts:
         meta.string.css string.quoted.single.css
         punctuation.definition.string.begin.css
       set: single-quoted-url-body
+
+###[ CSS PROTOTYPES ]##########################################################
+
+  terminator-pop:
+    - match: (?=[:;){}])
+      pop: 1
 
 ###[ CSS MODULES / PSEUDO CLASSES ]############################################
 
