@@ -895,7 +895,7 @@ contexts:
       pop: 1
     - include: illegal-string-end
     - match: ''
-      push: scope:source.regexp.basic
+      push: scope:source.regexp.less
       with_prototype:
         - match: (?=["\n])
           pop: 1
@@ -910,7 +910,7 @@ contexts:
       pop: 1
     - include: illegal-string-end
     - match: ''
-      push: scope:source.regexp.basic
+      push: scope:source.regexp.less
       with_prototype:
         - match: (?=['\n])
           pop: 1
@@ -929,7 +929,7 @@ contexts:
   less-regexp-pattern-quantifiers:
     # make sure to not highlight quantifiers illegal after interpolation
     - meta_include_prototype: false
-    - include: scope:source.regexp.basic#quantifiers
+    - include: scope:source.regexp.less#quantifiers
     - include: immediately-pop
 
   less-quoted-replacement-string:
