@@ -163,7 +163,7 @@ contexts:
     - meta_include_prototype: false
     - meta_scope: meta.mixin.less
     - include: less-mixin-arguments-lists
-    - include: attribute-selectors
+    - include: less-mixin-item-access
     - include: selector-classes
     - include: selector-ids
     - match: (?=\s*[;}])
@@ -578,7 +578,7 @@ contexts:
     - meta_include_prototype: false
     - meta_scope: meta.mixin.less
     - include: less-mixin-value-arguments-lists
-    - include: attribute-selectors
+    - include: less-mixin-item-access
     - include: selector-classes
     - include: selector-ids
     - match: (?!\s*[.#(\[])
@@ -593,6 +593,31 @@ contexts:
     - clear_scopes: 1
     - meta_scope: meta.mixin.arguments.less meta.group.less
     - include: less-group-body
+
+  less-mixin-item-access:
+    - match: \[
+      scope: punctuation.section.brackets.begin.less
+      push: less-mixin-item-access-body
+
+  less-mixin-item-access-body:
+    - clear_scopes: 1
+    - meta_scope: meta.mixin.item-access.less meta.brackets.less
+    - include: less-mixin-item-access-end
+    - include: less-expressions
+    - include: less-properties
+
+  less-mixin-item-access-end:
+    - match: \]
+      scope: punctuation.section.brackets.end.less
+      pop: 1
+
+  less-properties:
+    - match: '{{ident_begin}}'
+      push: less-property-content
+
+  less-property-content:
+    - meta_content_scope: constant.other.property-name.less
+    - include: identifier-content
 
 ###[ LESS SELECTORS / GUARDS ]#################################################
 
