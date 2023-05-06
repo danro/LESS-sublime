@@ -147,6 +147,7 @@ contexts:
       branch_point: property-or-selector
       branch:
         - maybe-property
+        - maybe-property-mixin
         - selector-body
 
   maybe-property:
@@ -157,6 +158,30 @@ contexts:
     # otherwise it is part of a selector
     - match: ''
       fail: property-or-selector
+
+  maybe-property-mixin:
+    - meta_include_prototype: false
+    - meta_scope: meta.mixin.less
+    - include: less-mixin-arguments-lists
+    - include: attribute-selectors
+    - include: selector-classes
+    - include: selector-ids
+    - match: (?=\s*[;}])
+      pop: 1
+    - match: (?=\S)
+      fail: property-or-selector
+
+  less-mixin-arguments-lists:
+    - match: \(
+      scope: punctuation.section.group.begin.less
+      push: less-mixin-arguments-list-body
+
+  less-mixin-arguments-list-body:
+    - clear_scopes: 1
+    - meta_scope: meta.mixin.arguments.less meta.group.less
+    - match: (?=;)  # looks like a paramethrized mixin declaration
+      fail: property-or-selector
+    - include: less-group-body
 
 ###[ CSS SELECTORS ]############################################################
 
@@ -552,14 +577,14 @@ contexts:
   less-mixin-value-body:
     - meta_include_prototype: false
     - meta_scope: meta.mixin.less
-    - include: less-mixin-value-arguments
+    - include: less-mixin-value-arguments-lists
     - include: attribute-selectors
     - include: selector-classes
     - include: selector-ids
     - match: (?!\s*[.#(\[])
       pop: 1
 
-  less-mixin-value-arguments:
+  less-mixin-value-arguments-lists:
     - match: \(
       scope: punctuation.section.group.begin.less
       push: less-mixin-value-arguments-list-body

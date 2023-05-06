@@ -1142,8 +1142,8 @@ pre:hover:extend(div pre), .some-class:extend(div pre) {}
 
 .myclass {
   .mixin();
-//^^^^^^ meta.selector.css entity.other.attribute-name.class.css
-//      ^^ meta.selector.css meta.group.less
+//^^^^^^ meta.mixin.less entity.other.attribute-name.class.css
+//      ^^ meta.mixin.arguments.less meta.group.less
   box-shadow+: 0 0 20px black; // merge with comma
 //^^^^^^^^^^ meta.property-name.css
 //          ^^ - meta.property-name - meta.property-value
@@ -1187,14 +1187,18 @@ pre:hover:extend(div pre), .some-class:extend(div pre) {}
 //  ^ punctuation.definition.entity.css
 
 .mixin-class { .a(); }
-//             ^^^^ meta.property-list.css meta.block.css meta.selector.css
+//           ^^^^^^^^^ meta.property-list.css meta.block.css
+//             ^^ meta.block.css meta.mixin.less
+//               ^^ meta.mixin.arguments.less meta.group.less
 //             ^ punctuation.definition.entity.css
 //             ^^ entity.other.attribute-name.class.css
 //               ^ meta.group.less punctuation.section.group.begin.less
 //                ^ meta.group.less punctuation.section.group.end.less
 
 .mixin-id { #b(); }
-//          ^^^^ meta.property-list.css meta.block.css meta.selector.css
+//        ^^^^^^^^^ meta.property-list.css meta.block.css
+//          ^^ meta.block.css meta.mixin.less
+//            ^^ meta.mixin.arguments.less meta.group.less
 //          ^ punctuation.definition.entity.css
 //          ^^ entity.other.attribute-name.id.css
 //            ^ meta.group.less punctuation.section.group.begin.less
@@ -1217,8 +1221,8 @@ pre:hover:extend(div pre), .some-class:extend(div pre) {}
 
 button {
   .my-hover-mixin();
-//^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.selector.css - meta.group
-//               ^^ meta.property-list.css meta.block.css meta.selector.css meta.group.less
+//^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.mixin.less - meta.group
+//               ^^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less
 //^^^^^^^^^^^^^^^ entity.other.attribute-name.class.css
 //               ^ punctuation.section.group.begin.less
 //                ^ punctuation.section.group.end.less
@@ -1240,8 +1244,8 @@ button {
 
 .c { #outer.inner(); } // preferred
 // ^^ meta.property-list.css meta.block.css - meta.selector
-//   ^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.selector.css - meta.group
-//               ^^ meta.property-list.css meta.block.css meta.selector.css meta.group.less
+//   ^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.mixin.less - meta.group
+//               ^^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less
 //                 ^^^ meta.property-list.css meta.block.css - meta.selector
 // ^ punctuation.section.block.begin.css
 //   ^^^^^^ entity.other.attribute-name.id.css
@@ -1254,8 +1258,8 @@ button {
 
 .c { #outer .inner(); } // deprecated
 // ^^ meta.property-list.css meta.block.css - meta.selector
-//   ^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.selector.css - meta.group
-//                ^^ meta.property-list.css meta.block.css meta.selector.css meta.group.less
+//   ^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.mixin.less - meta.group
+//                ^^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less
 //                  ^^^ meta.property-list.css meta.block.css - meta.selector
 // ^ punctuation.section.block.begin.css
 //   ^^^^^^ entity.other.attribute-name.id.css
@@ -1341,8 +1345,8 @@ button {
 
 #header {
   .border-radius(4px);
-//^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.selector.css entity.other.attribute-name.class.css
-//              ^^^^^ meta.property-list.css meta.block.css meta.selector.css meta.group.less
+//^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.mixin.less entity.other.attribute-name.class.css
+//              ^^^^^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less
 }
 
 .border-radius(@radius) {
@@ -1767,8 +1771,8 @@ header {
 //  ^^^^^^^^^^^^^^^^^ meta.function-call.identifier.less variable.other.less
 //                   ^^ meta.function-call.arguments.less meta.group.less
     .mixin();
-//  ^^^^^^ meta.selector.css entity.other.attribute-name.class.css
-//        ^^ meta.selector.css meta.group.less
+//  ^^^^^^ meta.mixin.less entity.other.attribute-name.class.css
+//        ^^ meta.mixin.arguments.less meta.group.less
 }
 
 //=============================================================================
