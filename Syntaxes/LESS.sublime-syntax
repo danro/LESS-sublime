@@ -455,7 +455,7 @@ contexts:
 ###[ LESS ]####################################################################
 
   less-expressions:
-    - include: less-selectors
+    - include: less-mixin-values
     - include: less-functions
     - include: less-groups
     - include: less-logical-operators
@@ -541,22 +541,33 @@ contexts:
     - include: block-end2
     - include: stylesheet
 
-###[ LESS SELECTORS ]##########################################################
+###[ LESS MIXIN VALUES ]#######################################################
 
-  less-selectors:
+  less-mixin-values:
     # mixins in values
     # note: hex color values have precedence
     - match: (?=[.#](?:-|(?!{{hex_colors}})){{nmstart}})
-      push: less-selector-body
+      push: less-mixin-value-body
 
-  less-selector-body:
-    - meta_scope: meta.selector.less
-    - include: comments
+  less-mixin-value-body:
+    - meta_include_prototype: false
+    - meta_scope: meta.mixin.less
+    - include: less-mixin-value-arguments
     - include: attribute-selectors
     - include: selector-classes
     - include: selector-ids
-    - include: less-groups
-    - include: else-pop
+    - match: (?!\s*[.#(\[])
+      pop: 1
+
+  less-mixin-value-arguments:
+    - match: \(
+      scope: punctuation.section.group.begin.less
+      push: less-mixin-value-arguments-list-body
+
+  less-mixin-value-arguments-list-body:
+    - clear_scopes: 1
+    - meta_scope: meta.mixin.arguments.less meta.group.less
+    - include: less-group-body
 
 ###[ LESS SELECTORS / GUARDS ]#################################################
 

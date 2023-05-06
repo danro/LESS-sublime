@@ -127,14 +127,14 @@
 //^^^^^^^ meta.declaration.identifier.less variable.other.less
 //       ^ meta.declaration.less punctuation.separator.key-value.css
 //        ^^^^^^^^^^ meta.declaration.value.less
-//         ^^^^^^^^^ meta.selector.less entity.other.attribute-name.class.css
+//         ^^^^^^^^^ meta.mixin.less entity.other.attribute-name.class.css
 
 @variable: #g28bcf;
 // <- meta.declaration.identifier.less variable.other.less punctuation.definition.variable.less
 //^^^^^^^ meta.declaration.identifier.less variable.other.less
 //       ^ meta.declaration.less punctuation.separator.key-value.css
 //        ^ meta.declaration.value.less - meta.selector - entity
-//         ^^^^^^^ meta.declaration.value.less meta.selector.less entity.other.attribute-name.id.css
+//         ^^^^^^^ meta.declaration.value.less meta.mixin.less entity.other.attribute-name.id.css
 
 @link-color: #428bca; // sea blue
 // <- meta.declaration.identifier.less variable.other.less punctuation.definition.variable.less
@@ -840,9 +840,9 @@ custom-@{element}-selector {}
 //                      ^ punctuation.section.brackets.end.css
 
   color: #library.colors[primary];
-//      ^ meta.property-list.css meta.block.css meta.property-value.css - meta.selector
-//       ^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.property-value.css meta.selector.less - meta.attribute-selector
-//                      ^^^^^^^^^ meta.property-list.css meta.block.css meta.property-value.css meta.selector.less meta.attribute-selector.css meta.brackets.css
+//      ^ meta.property-list.css meta.block.css meta.property-value.css - meta.mixin
+//       ^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.property-value.css meta.mixin.less - meta.attribute-selector
+//                      ^^^^^^^^^ meta.property-list.css meta.block.css meta.property-value.css meta.mixin.less meta.attribute-selector.css meta.brackets.css
 //       ^ punctuation.definition.entity.css
 //       ^^^^^^^^ entity.other.attribute-name.id.css
 //               ^ punctuation.definition.entity.css
@@ -1446,15 +1446,15 @@ button {
 div {
   // call a mixin and look up its "@result" value
   padding: .average(16px, 50px)[@result];
-//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css meta.selector.less
-//         ^^^^^^^^ entity.other.attribute-name.class.css
-//                 ^^^^^^^^^^^^ meta.group.less
+//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css
+//         ^^^^^^^^ meta.mixin.less entity.other.attribute-name.class.css
+//                 ^^^^^^^^^^^^ meta.mixin.arguments.less meta.group.less
+//                             ^^^^^^^^^ meta.mixin.less meta.attribute-selector.css meta.brackets.css
 //                 ^ punctuation.section.group.begin.less
 //                  ^^^^ meta.number.integer.decimal.css
 //                      ^ punctuation.separator.sequence.css
 //                        ^^^^ meta.number.integer.decimal.css
 //                            ^ punctuation.section.group.end.less
-//                             ^^^^^^^^^ meta.attribute-selector.css meta.brackets.css
 //                             ^ punctuation.section.brackets.begin.css
 //                              ^^^^^^^ variable.other.less
 //                                     ^ punctuation.section.brackets.end.css
@@ -1571,7 +1571,8 @@ div {
 //      ^^^^^^ meta.declaration.identifier.less variable.other.less
 //            ^ meta.declaration.less punctuation.separator.key-value.css
 //             ^ meta.declaration.value.less - meta.selector
-//              ^^^^^^^^^^^^^^^^ meta.declaration.value.less meta.selector.less
+//              ^^^^^^^^^^^^^^ meta.declaration.value.less meta.mixin.less
+//                            ^^ meta.mixin.arguments.less meta.group.less
 //                              ^ - meta.declaration
 //      ^ punctuation.definition.variable.less
 //      ^^^^^^ variable.other.less
@@ -1585,7 +1586,8 @@ div {
 //      ^^^^^^ meta.declaration.identifier.less variable.other.less
 //            ^ meta.declaration.less punctuation.separator.key-value.css
 //             ^ meta.declaration.value.less - meta.selector
-//              ^^^^^^^^^^^^^^^^ meta.declaration.value.less meta.selector.less
+//              ^^^^^^^^^^^^^^ meta.declaration.value.less meta.mixin.less
+//                            ^^ meta.mixin.arguments.less meta.group.less
 //                              ^ - meta.declaration
 //      ^ punctuation.definition.variable.less
 //      ^^^^^^ variable.other.less
@@ -1599,7 +1601,8 @@ div {
 //      ^^^^^^ meta.declaration.identifier.less variable.other.less
 //            ^ meta.declaration.less punctuation.separator.key-value.css
 //             ^ meta.declaration.value.less - meta.selector
-//              ^^^^^^^^^^^^^^^^ meta.declaration.value.less meta.selector.less
+//              ^^^^^^^^^^^^^^ meta.declaration.value.less meta.mixin.less
+//                            ^^ meta.mixin.arguments.less meta.group.less
 //                              ^ - meta.declaration
 //      ^ punctuation.definition.variable.less
 //      ^^^^^^ variable.other.less
@@ -1620,21 +1623,24 @@ div {
 //  ^^^^^^^ meta.declaration.identifier.less variable.other.less
 //         ^ meta.declaration.less punctuation.separator.key-value.css
 //          ^ meta.declaration.value.less - meta.selector
-//           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.declaration.value.less meta.selector.less
+//           ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.declaration.value.less meta.mixin.less
+//                                    ^^^^^^ meta.mixin.arguments.less meta.group.less
 //                                          ^ - meta.declaration
 
     @colors: .theme.dark.navbar#colors(dark);
 //  ^^^^^^^ meta.declaration.identifier.less variable.other.less
 //         ^ meta.declaration.less punctuation.separator.key-value.css
 //          ^ meta.declaration.value.less - meta.selector
-//           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.declaration.value.less meta.selector.less
+//           ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.declaration.value.less meta.mixin.less
+//                                    ^^^^^^ meta.mixin.arguments.less meta.group.less
 //                                          ^ - meta.declaration
 
     @colors: #theme.dark.navbar#colors(dark);
 //  ^^^^^^^ meta.declaration.identifier.less variable.other.less
 //         ^ meta.declaration.less punctuation.separator.key-value.css
 //          ^ meta.declaration.value.less - meta.selector
-//           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.declaration.value.less meta.selector.less
+//           ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.declaration.value.less meta.mixin.less
+//                                    ^^^^^^ meta.mixin.arguments.less meta.group.less
 //                                          ^ - meta.declaration
 
     background: @colors[primary];
@@ -2267,7 +2273,7 @@ header {
 //         ^^^^ meta.function-call.identifier.css support.function.color.css
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.css meta.group.css
 //             ^ punctuation.section.group.begin.css
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.less
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.mixin.less
 //              ^^^^^^^^^^ entity.other.attribute-name.id.css
 //                        ^^^^^ entity.other.attribute-name.class.css
 //                             ^^^^^^^^^^^^^^^^ meta.attribute-selector.css meta.brackets.css
@@ -2641,8 +2647,8 @@ header {
     test: url(#ns.map[urlprop]);
 //        ^^^ meta.function-call.identifier.css support.function.url.css
 //           ^ meta.function-call.arguments.css meta.group.css punctuation.section.group.begin.css
-//            ^^^^^^^ meta.function-call.arguments.css meta.group.css meta.selector.less
-//                   ^^^^^^^^^ meta.function-call.arguments.css meta.group.css meta.selector.less meta.attribute-selector.css meta.brackets.css
+//            ^^^^^^^ meta.function-call.arguments.css meta.group.css meta.mixin.less
+//                   ^^^^^^^^^ meta.function-call.arguments.css meta.group.css meta.mixin.less meta.attribute-selector.css meta.brackets.css
 //                            ^ meta.function-call.arguments.css meta.group.css punctuation.section.group.end.css
 
     test: var(@var);
