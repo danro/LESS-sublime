@@ -3,10 +3,11 @@
 <dict>
 	<key>scope</key>
 	<string>
-		source.less meta.selector.css entity.other.attribute-name.class - punctuation.definition.entity,
-		source.less meta.selector.css entity.other.attribute-name.id - punctuation.definition.entity,
-		source.less entity.other.custom-property,
-		source.less meta.declaration.identifier variable.other - punctuation.definition.variable
+		source.less meta.declaration.identifier variable.other - source.less variable.other punctuation.definition.variable,
+		source.less meta.selector.parameters.css variable.parameter - source.less variable.parameter punctuation.definition.variable,
+		source.less meta.selector.css entity.other.attribute-name.class - source.less entity.other.attribute-name.class punctuation.definition.entity,
+		source.less meta.selector.css entity.other.attribute-name.id - source.less entity.other.attribute-name.id punctuation.definition.entity,
+		source.less entity.other.custom-property
 	</string>
 	<key>settings</key>
 	<dict>

@@ -4,7 +4,9 @@
 	<key>scope</key>
 	<string>
 		source.less meta.at-rule.import meta.function-call.arguments entity.other.layer,
-		source.less variable.other - meta.declaration.identifier - punctuation.definition.variable
+		source.less meta.mixin.less entity.other.attribute-name.class - source.less entity.other.attribute-name.class punctuation.definition.entity,
+		source.less meta.mixin.less entity.other.attribute-name.id - source.less entity.other.attribute-name.id punctuation.definition.entity,
+		source.less variable.other - source.less variable.other punctuation.definition.variable - meta.declaration.identifier
 	</string>
 	<key>settings</key>
 	<dict>
