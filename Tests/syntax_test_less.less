@@ -1679,18 +1679,18 @@ header {
     background-color: blue;
 
     #hover({
-//         ^^ meta.property-list.css meta.block.css meta.selector.css meta.group.less meta.property-list.css meta.block.css
+//         ^^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less meta.property-list.css meta.block.css
 //         ^ punctuation.section.block.begin.css
         .site-header-info-extra-tooltip {
             opacity: 1;
-//         ^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.selector.css meta.group.less meta.property-list.css meta.block.css meta.property-list.css meta.block.css
+//         ^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less meta.property-list.css meta.block.css meta.property-list.css meta.block.css
 //          ^^^^^^^ meta.property-name.css support.type.property-name.css
 //                 ^ punctuation.separator.key-value.css
 //                  ^^ meta.property-value.css
 //                    ^ punctuation.terminator.rule.css
 
             #transition(~'opacity @{duration-short} @{ease}')
-//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.selector.css meta.group.less meta.property-list.css meta.block.css meta.property-list.css meta.block.css
+//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less meta.property-list.css meta.block.css meta.property-list.css meta.block.css
 //          ^^^^^^^^^^^ meta.selector.css entity.other.attribute-name.id.css
 //                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css meta.group.less
 //                     ^ punctuation.section.group.begin.less
@@ -1702,34 +1702,37 @@ header {
 //                                                  ^^^^^^^ meta.string.css meta.interpolation.less - string
 //                                                         ^ meta.string.css string.quoted.single.css punctuation.definition.string.end.css
         }
-//     ^^ meta.property-list.css meta.block.css meta.selector.css meta.group.less meta.property-list.css meta.block.css meta.property-list.css meta.block.css
+//     ^^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less meta.property-list.css meta.block.css meta.property-list.css meta.block.css
 //      ^ punctuation.section.block.end.css
-//       ^ meta.property-list.css meta.block.css meta.selector.css meta.group.less meta.property-list.css meta.block.css
+//       ^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less meta.property-list.css meta.block.css
 
         .site-header-info-extra-tooltip {
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css entity.other.attribute-name.class.css
             opacity: 1;
-//         ^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.selector.css meta.group.less meta.property-list.css meta.block.css meta.property-list.css meta.block.css
+//         ^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less meta.property-list.css meta.block.css meta.property-list.css meta.block.css
             #transition(~'opacity @{duration-short} @{ease}')
+//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less meta.property-list.css meta.block.css meta.property-list.css meta.block.css
 //          ^^^^^^^^^^^ meta.selector.css entity.other.attribute-name.id.css
 //                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css meta.group.less
 
             .site-header-info-extra-tooltip {
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css entity.other.attribute-name.class.css
                 opacity: 1;
-//             ^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.selector.css meta.group.less meta.property-list.css meta.block.css meta.property-list.css meta.block.css meta.property-list.css meta.block.css
+//             ^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less meta.property-list.css meta.block.css meta.property-list.css meta.block.css meta.property-list.css meta.block.css
                 #transition(~'opacity @{duration-short} @{ease}')
+//             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less meta.property-list.css meta.block.css meta.property-list.css meta.block.css meta.property-list.css meta.block.css
 //              ^^^^^^^^^^^ meta.selector.css entity.other.attribute-name.id.css
 //                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css meta.group.less
             }
         }
-    })
+    });
 
     .desktop-and-old-ie({
-//  ^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.selector.css entity.other.attribute-name.class.css
-//                     ^ meta.property-list.css meta.block.css meta.selector.css meta.group.less punctuation.section.group.begin.less
-//                      ^ meta.property-list.css meta.block.css meta.selector.css meta.group.less meta.property-list.css meta.block.css punctuation.section.block.begin.css
+//  ^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.mixin.less entity.other.attribute-name.class.css
+//                     ^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less punctuation.section.group.begin.less
+//                      ^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less meta.property-list.css meta.block.css punctuation.section.block.begin.css
         background-color: red(color);
+//     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less meta.property-list.css meta.block.css
 //      ^^^^^^^^^^^^^^^^ meta.property-name.css support.type.property-name.css
 //                      ^ punctuation.separator.key-value.css
 //                       ^  meta.property-value.css - meta.function-call
@@ -1737,15 +1740,16 @@ header {
 //                           ^^^^^^^ meta.function-call.arguments.less meta.group.less
 
         width: @variable + @another-variable;
+//     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less meta.property-list.css meta.block.css
 //            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css
 //             ^^^^^^^^^ variable.other.less
 //                       ^ keyword.operator.arithmetic.less
 //                         ^^^^^^^^^^^^^^^^^ variable.other.less
 //                                          ^ punctuation.terminator.rule.css
     });
-//  ^ punctuation.section.block.end.css
-//   ^ punctuation.section.group.end.less
-//    ^ punctuation.terminator.rule.css
+//  ^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less meta.property-list.css meta.block.css punctuation.section.block.end.css
+//   ^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less punctuation.section.group.end.less
+//    ^ meta.property-list.css meta.block.css punctuation.terminator.rule.css
 }
 // <- meta.property-list.css meta.block.css punctuation.section.block.end.css
 

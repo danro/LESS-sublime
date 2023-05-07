@@ -179,11 +179,13 @@ contexts:
   less-mixin-arguments-list-body:
     - clear_scopes: 1
     - meta_scope: meta.mixin.arguments.less meta.group.less
+    - include: less-group-end
     - include: less-parameter-separators
     - include: less-mixin-arguments
-    - include: less-group-body
+    - include: less-values
 
   less-mixin-arguments:
+    # named arguments must be followed by colon
     - match: ((@){{ident}})(\s*(:))
       captures:
         1: variable.parameter.less
@@ -600,8 +602,9 @@ contexts:
   less-mixin-value-arguments-list-body:
     - clear_scopes: 1
     - meta_scope: meta.mixin.arguments.less meta.group.less
+    - include: less-group-end
     - include: less-parameter-separators
-    - include: less-group-body
+    - include: less-values
 
   less-mixin-item-access:
     - match: \[
@@ -742,8 +745,7 @@ contexts:
   less-global-functions-arguments-list-content:
     - meta_content_scope: meta.function-call.arguments.less meta.group.less
     - include: less-function-arguments-list-end
-    - include: property-lists
-    - include: values
+    - include: less-values
 
   less-format-functions:
     # https://lesscss.org/functions/#string-functions--format
@@ -1015,6 +1017,10 @@ contexts:
         3: variable.other.less
         4: punctuation.section.interpolation.end.less
       push: clear-pop
+
+  less-values:
+    - include: property-lists
+    - include: values
 
   less-variables:
     - match: (\$){{ident}}
