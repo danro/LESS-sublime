@@ -1,0 +1,45 @@
+name: CI Syntax Tests
+
+on:
+  push:
+    push:
+      - '**'
+    paths:
+      - '.github/workflows/ci-syntax-tests.yml'
+      - '**.sublime-syntax'
+      - '**/syntax_test_*'
+      - '**.tmPreferences'
+  pull_request:
+    branches:
+      - '**'
+    paths:
+      - '.github/workflows/ci-syntax-tests.yml'
+      - '**.sublime-syntax'
+      - '**/syntax_test_*'
+      - '**.tmPreferences'
+  workflow_dispatch:
+
+jobs:
+  syntax_tests:
+    name: Sublime Text ${{ matrix.build }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15   # default is 6 hours!
+    strategy:
+      matrix:
+        include:
+          - build: 4107   # stable ST build
+            default_packages: v4107
+          - build: 4126   # stable ST build
+            default_packages: v4126
+          - build: 4143   # stable ST build
+            default_packages: v4143
+          - build: latest # latest available ST build
+            default_packages: master
+    steps:
+      - name: Checkout ${{ env.package_name }}
+        uses: actions/checkout@v3
+      - name: Run Syntax Tests for Sublime Text ${{ matrix.build }}
+        uses: SublimeText/syntax-test-action@v2
+        with:
+          build: ${{ matrix.build }}
+          default_packages: ${{ matrix.default_packages }}
