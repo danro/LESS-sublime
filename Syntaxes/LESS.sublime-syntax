@@ -691,8 +691,8 @@ contexts:
   less-parameter-separators:
     - match: ':'
       scope: punctuation.separator.key-value.css
-    - match: ;
-      scope: punctuation.separator.parameter.less
+    - match: '[,;]'
+      scope: punctuation.separator.sequence.less
 
 ###[ LESS GROUPS ]#############################################################
 
