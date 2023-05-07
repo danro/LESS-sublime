@@ -151,10 +151,9 @@ contexts:
         - selector-body
 
   maybe-property:
+    - include: comments
+    - include: property-end
     - include: property-identifiers
-    # a property's value is followed/terminated by one of ; ) }
-    - match: (?=[;)}]|{{at_rules}})
-      pop: 1
     # otherwise it is part of a selector
     - match: ''
       fail: property-or-selector
@@ -162,14 +161,19 @@ contexts:
   maybe-property-mixin:
     - meta_include_prototype: false
     - meta_scope: meta.mixin.less
+    - include: comments
+    - include: property-end
     - include: less-mixin-arguments-lists
     - include: less-mixin-item-access
     - include: selector-classes
     - include: selector-ids
-    - match: (?=\s*[;}])
-      pop: 1
     - match: (?=\S)
       fail: property-or-selector
+
+  property-end:
+    # property mixins or values are followed/terminated by one of ; ) }
+    - match: (?=[;)}]|{{at_rules}})
+      pop: 1
 
 ###[ CSS SELECTORS ]############################################################
 

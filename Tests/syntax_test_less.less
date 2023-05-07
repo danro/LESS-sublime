@@ -1757,8 +1757,8 @@ header {
 
             #transition(~'opacity @{duration-short} @{ease}')
 //         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less meta.property-list.css meta.block.css meta.property-list.css meta.block.css
-//          ^^^^^^^^^^^ meta.selector.css entity.other.attribute-name.id.css
-//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.parameters.css meta.group.less
+//          ^^^^^^^^^^^ meta.mixin.less entity.other.attribute-name.id.css
+//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.mixin.arguments.less meta.group.less meta.mixin.arguments.less meta.group.less
 //                     ^ punctuation.section.group.begin.less
 //                      ^ keyword.operator.escape.less
 //                       ^^^^^^^^^ meta.string.css string.quoted.single.css - meta.interpolation
@@ -1787,8 +1787,8 @@ header {
 //             ^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less meta.property-list.css meta.block.css meta.property-list.css meta.block.css meta.property-list.css meta.block.css
                 #transition(~'opacity @{duration-short} @{ease}')
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less meta.property-list.css meta.block.css meta.property-list.css meta.block.css meta.property-list.css meta.block.css
-//              ^^^^^^^^^^^ meta.selector.css entity.other.attribute-name.id.css
-//                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.parameters.css meta.group.less
+//              ^^^^^^^^^^^ meta.mixin.less entity.other.attribute-name.id.css
+//                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.mixin.arguments.less meta.group.less meta.mixin.arguments.less meta.group.less
             }
         }
     });
@@ -2597,6 +2597,21 @@ header {
 //    ^^^ meta.property-name.css support.type.property-name.css
 //        ^ punctuation.separator.key-value.css
 //         ^^^^^^  meta.property-value.css
+}
+
+.mixins-vs-selectors {
+
+    #library.color()
+//  ^^^^^^^^^^^^^^ meta.mixin.less
+//                ^^ meta.mixin.arguments.less meta.group.less
+
+    @media only screen {}
+//  ^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.media.css
+//  ^^^^^^ keyword.control.directive.css
+//         ^^^^ keyword.operator.logical.css
+//              ^^^^^^ support.constant.media.css
+//                     ^ punctuation.section.block.begin.css
+//                      ^ punctuation.section.block.end.css
 }
 
 .properties-vs-selector-tests {
