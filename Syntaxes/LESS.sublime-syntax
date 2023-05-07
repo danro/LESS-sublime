@@ -171,28 +171,6 @@ contexts:
     - match: (?=\S)
       fail: property-or-selector
 
-  less-mixin-arguments-lists:
-    - match: \(
-      scope: punctuation.section.group.begin.less
-      push: less-mixin-arguments-list-body
-
-  less-mixin-arguments-list-body:
-    - clear_scopes: 1
-    - meta_scope: meta.mixin.arguments.less meta.group.less
-    - include: less-group-end
-    - include: less-parameter-separators
-    - include: less-mixin-arguments
-    - include: less-values
-
-  less-mixin-arguments:
-    # named arguments must be followed by colon
-    - match: ((@){{ident}})(\s*(:))
-      captures:
-        1: variable.parameter.less
-        2: punctuation.definition.variable.less
-        3: meta.declaration.less
-        4: punctuation.separator.key-value.less
-
 ###[ CSS SELECTORS ]############################################################
 
   selector-body:
@@ -587,24 +565,33 @@ contexts:
   less-mixin-value-body:
     - meta_include_prototype: false
     - meta_scope: meta.mixin.less
-    - include: less-mixin-value-arguments-lists
+    - include: less-mixin-arguments-lists
     - include: less-mixin-item-access
     - include: selector-classes
     - include: selector-ids
     - match: (?!\s*[.#(\[])
       pop: 1
 
-  less-mixin-value-arguments-lists:
+  less-mixin-arguments-lists:
     - match: \(
       scope: punctuation.section.group.begin.less
-      push: less-mixin-value-arguments-list-body
+      push: less-mixin-arguments-list-body
 
-  less-mixin-value-arguments-list-body:
+  less-mixin-arguments-list-body:
     - clear_scopes: 1
     - meta_scope: meta.mixin.arguments.less meta.group.less
     - include: less-group-end
     - include: less-parameter-separators
+    - include: less-mixin-arguments
     - include: less-values
+
+  less-mixin-arguments:
+    # named arguments must be followed by colon
+    - match: ((@){{ident}})\s*(:)
+      captures:
+        1: variable.parameter.less
+        2: punctuation.definition.variable.less
+        3: punctuation.separator.key-value.less
 
   less-mixin-item-access:
     - match: \[

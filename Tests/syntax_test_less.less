@@ -1471,6 +1471,24 @@ div {
 //                             ^ punctuation.section.brackets.begin.less
 //                              ^^^^^^^ variable.other.less
 //                                     ^ punctuation.section.brackets.end.less
+
+  padding: .average(@x: 16px; @y: 50px)[@result];
+//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-value.css
+//         ^^^^^^^^ meta.mixin.less entity.other.attribute-name.class.css
+//                 ^^^^^^^^^^^^^^^^^^^^ meta.mixin.arguments.less meta.group.less
+//                                     ^^^^^^^^^ meta.mixin.item-access.less meta.brackets.less
+//                 ^ punctuation.section.group.begin.less
+//                  ^^ variable.parameter.less
+//                    ^ punctuation.separator.key-value.less
+//                      ^^^^ meta.number.integer.decimal.css
+//                          ^ punctuation.separator.sequence.less
+//                            ^^ variable.parameter.less
+//                              ^ punctuation.separator.key-value.less
+//                                ^^^^ meta.number.integer.decimal.css
+//                                    ^ punctuation.section.group.end.less
+//                                     ^ punctuation.section.brackets.begin.less
+//                                      ^^^^^^^ variable.other.less
+//                                             ^ punctuation.section.brackets.end.less
 }
 
 //=============================================================================
