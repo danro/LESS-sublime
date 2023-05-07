@@ -180,7 +180,16 @@ contexts:
     - clear_scopes: 1
     - meta_scope: meta.mixin.arguments.less meta.group.less
     - include: less-parameter-separators
+    - include: less-mixin-arguments
     - include: less-group-body
+
+  less-mixin-arguments:
+    - match: ((@){{ident}})(\s*(:))
+      captures:
+        1: variable.parameter.less
+        2: punctuation.definition.variable.less
+        3: meta.declaration.less
+        4: punctuation.separator.key-value.css
 
 ###[ CSS SELECTORS ]############################################################
 
