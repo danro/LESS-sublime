@@ -479,6 +479,10 @@ contexts:
     - include: less-operators
     - include: less-variables
 
+  less-values:
+    - include: property-lists
+    - include: values
+
 ###[ LESS COMMENTS ]###########################################################
 
   less-line-comments:
@@ -1015,10 +1019,6 @@ contexts:
         3: variable.other.less
         4: punctuation.section.interpolation.end.less
       push: clear-pop
-
-  less-values:
-    - include: property-lists
-    - include: values
 
   less-variables:
     - match: (\$){{ident}}
