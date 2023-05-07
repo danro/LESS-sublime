@@ -1124,7 +1124,7 @@ pre:hover:extend(div pre), .some-class:extend(div pre) {}
 .mixin() {
 // <- meta.selector.css entity.other.attribute-name.class.css punctuation.definition.entity.css
 //^^^^ meta.selector.css entity.other.attribute-name.class.css
-//    ^^ meta.selector.css meta.group.less
+//    ^^ meta.selector.parameters.css meta.group.less
 //      ^ meta.selector.css - meta.function-call
   box-shadow+: inset 0 0 10px #555;
 //^^^^^^^^^^ meta.property-name.css
@@ -1240,7 +1240,7 @@ button {
 #outer() { .inner { color: red; } }
 // <- meta.selector.css entity.other.attribute-name.id.css punctuation.definition.entity.css
 //^^^^ meta.selector.css - meta.group
-//    ^^ meta.selector.css meta.group.less
+//    ^^ meta.selector.parameters.css meta.group.less
 //      ^ meta.selector.css - meta.group
 //^^^^ entity.other.attribute-name.id.css
 
@@ -1275,7 +1275,7 @@ button {
 .c { #outer > .inner(); } // deprecated
 // ^^ meta.property-list.css meta.block.css - meta.selector
 //   ^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.selector.css - meta.group
-//                  ^^ meta.property-list.css meta.block.css meta.selector.css meta.group.less
+//                  ^^ meta.property-list.css meta.block.css meta.selector.parameters.css meta.group.less
 //                    ^^^ meta.property-list.css meta.block.css - meta.selector
 // ^ punctuation.section.block.begin.css
 //   ^^^^^^ entity.other.attribute-name.id.css
@@ -1307,14 +1307,16 @@ button {
 
 #namespace { .mixin() when (@mode = huge) {} }
 //         ^^ meta.property-list.css meta.block.css - meta.selector
-//           ^^^^^^^^^ meta.property-list.css meta.block.css meta.selector.css - meta.guard
+//           ^^^^^^ meta.property-list.css meta.block.css meta.selector.css - meta.guard
+//                 ^^ meta.property-list.css meta.block.css meta.selector.parameters.css - meta.guard
+//                   ^ meta.property-list.css meta.block.css meta.selector.css - meta.guard
 //                    ^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.selector.css meta.guard.less
 
 #sp_1 when (default()) {
   #sp_2 when (default()) {
     .mixin() when not(default()) {}
 // ^ meta.property-list.css meta.block.css meta.property-list.css meta.block.css - meta.selector
-//  ^^^^^^^^^ meta.property-list.css meta.block.css meta.property-list.css meta.block.css meta.selector.css - meta.guard
+//  ^^^^^^^^^ meta.property-list.css meta.block.css meta.property-list.css meta.block.css meta.selector - meta.guard
 //           ^^^^^^^^ meta.property-list.css meta.block.css meta.property-list.css meta.block.css meta.selector.css meta.guard.less - meta.group
 //                   ^^^^^^^^^^^ meta.property-list.css meta.block.css meta.property-list.css meta.block.css meta.selector.css meta.guard.less meta.group.less
 //                              ^ meta.property-list.css meta.block.css meta.property-list.css meta.block.css meta.selector.css meta.guard.less - meta.group
@@ -1334,10 +1336,11 @@ button {
 
 .important {
   .foo() !important;
-//^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.selector.css
-//^^^^ entity.other.attribute-name.class.css
-//    ^^ meta.group.less
-//       ^^^^^^^^^^ keyword.other.important.css
+//^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css
+//^^^^ meta.selector.css entity.other.attribute-name.class.css
+//    ^^ meta.selector.parameters.css meta.group.less
+//      ^ meta.selector.css - keyword
+//       ^^^^^^^^^^ meta.selector.css keyword.other.important.css
 }
 
 //=============================================================================
@@ -1354,10 +1357,10 @@ button {
 .border-radius(@radius) {
 // <- meta.selector.css entity.other.attribute-name.class.css punctuation.definition.entity.css
 //^^^^^^^^^^^^ meta.selector.css - meta.group
-//            ^^^^^^^^^ meta.selector.css meta.group.less
+//            ^^^^^^^^^ meta.selector.parameters.css meta.group.less
 //                     ^ meta.selector.css - meta.group
 //            ^ punctuation.section.group.begin.less
-//             ^^^^^^^ variable.other.less
+//             ^^^^^^^ variable.parameter.less
 //                    ^ punctuation.section.group.end.less
   border-radius: @radius;
 //               ^^^^^^^ meta.property-list.css meta.block.css meta.property-value.css variable.other.less
@@ -1366,11 +1369,11 @@ button {
 .border-radius(@radius: 5px) {
 // <- meta.selector.css entity.other.attribute-name.class.css punctuation.definition.entity.css
 //^^^^^^^^^^^^ meta.selector.css - meta.group
-//            ^^^^^^^^^^^^^^ meta.selector.css meta.group.less
+//            ^^^^^^^^^^^^^^ meta.selector.parameters.css meta.group.less
 //                          ^ meta.selector.css - meta.group
 //            ^ punctuation.section.group.begin.less
-//             ^^^^^^^ variable.other.less
-//                    ^ punctuation.separator.key-value.css
+//             ^^^^^^^ variable.parameter.less
+//                    ^ punctuation.separator.key-value.less
 //                      ^^^ meta.number.integer.decimal.css
 //                         ^ punctuation.section.group.end.less
   border-radius: @radius;
@@ -1379,13 +1382,13 @@ button {
 
 .border(@width; @style; @color) {
 //^^^^^ meta.selector.css - meta.group
-//     ^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css meta.group.less
+//     ^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.parameters.css meta.group.less
 //     ^ punctuation.section.group.begin.less
-//      ^^^^^^ variable.other.less
+//      ^^^^^^ variable.parameter.less
 //            ^ punctuation.separator.sequence.less
-//              ^^^^^^ variable.other.less
+//              ^^^^^^ variable.parameter.less
 //                    ^ punctuation.separator.sequence.less
-//                      ^^^^^^ variable.other.less
+//                      ^^^^^^ variable.parameter.less
 //                            ^ punctuation.section.group.end.less
     border: @width @style @color;
 //         ^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.property-value.css
@@ -1413,13 +1416,13 @@ button {
 //         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.mixin.arguments.less meta.group.less
 //         ^ punctuation.section.group.begin.less
 //          ^^^^^^ variable.parameter.less
-//                ^ punctuation.separator.key-value.css
+//                ^ punctuation.separator.key-value.less
 //                     ^ punctuation.separator.sequence.less
 //                            ^^^^^^ variable.parameter.less
-//                                  ^ punctuation.separator.key-value.css
+//                                  ^ punctuation.separator.key-value.less
 //                                          ^ punctuation.separator.sequence.less
 //                                            ^^^^^^ variable.parameter.less
-//                                                  ^ punctuation.separator.key-value.css
+//                                                  ^ punctuation.separator.key-value.less
 //                                                    ^^^^ variable.other.less
 //                                                        ^ punctuation.section.group.end.less
 
@@ -1476,27 +1479,70 @@ div {
 //=============================================================================
 
 .mixin(@a) when (lightness(@a) >= 50%) {}
-// ^^^^^^^^ meta.selector.css - meta.guard
-//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css meta.guard.less
-//               ^^^^^^^^^ meta.function-call.identifier.less support.function.less
-//                        ^^^^ meta.function-call.arguments.less meta.group.less
+// ^^^ meta.selector.css - meta.guard
+//    ^^^^ meta.selector.parameters.css meta.group.less - meta.guard
+//        ^ meta.selector.css - meta.guard
+//         ^^^^^ meta.selector.css meta.guard.less - meta.group
+//              ^ meta.selector.css meta.guard.less meta.group.less - meta.function-call
+//               ^^^^^^^^^ meta.selector.css meta.guard.less meta.group.less meta.function-call.identifier.less
+//                        ^^^^ meta.selector.css meta.guard.less meta.group.less meta.function-call.arguments.less meta.group.less
+//                            ^^^^^^^^ meta.selector.css meta.guard.less meta.group.less - meta.function-call
+//                                    ^ meta.selector.css meta.guard.less - meta.group
+//^^^^ entity.other.attribute-name.class.css
+//    ^ punctuation.section.group.begin.less
+//     ^^ variable.parameter.less
+//       ^ punctuation.section.group.end.less
+//         ^^^^ keyword.control.conditional.less
+//              ^ punctuation.section.group.begin.less
+//               ^^^^^^^^^ support.function.less
+//                        ^ punctuation.section.group.begin.less
+//                         ^^ variable.other.less
+//                           ^ punctuation.section.group.end.less
 //                             ^^ keyword.operator.comparison.less
-//                                ^^^ meta.number.integer.decimal.css
+//                                ^^^ constant.numeric
+//                                   ^ punctuation.section.group.end.less
+//                                     ^ punctuation.section.block.begin.css
+//                                      ^ punctuation.section.block.end.css
 
 .mixin(@a; @b: 0) when (isnumber(@b)) {}
-// ^^^^^^^^^^^^^^^ meta.selector.css - meta.guard
-//                ^^^^^^^^^^^^^^^^^^^^ meta.selector.css meta.guard.less
-//                      ^^^^^^^^ meta.function-call.identifier.less support.function.less
-//                              ^^^^ meta.function-call.arguments.less meta.group.less
+// ^^^ meta.selector.css - meta.guard
+//    ^^^^^^^^^^^ meta.selector.parameters.css meta.group.less - meta.guard
+//                ^^^^^ meta.selector.css meta.guard.less - meta.group
+//                     ^ meta.selector.css meta.guard.less meta.group.less - meta.function-call
+//                      ^^^^^^^^ meta.selector.css meta.guard.less meta.group.less meta.function-call.identifier.less
+//                              ^^^^ meta.selector.css meta.guard.less meta.group.less meta.function-call.arguments.less meta.group.less
+//                                  ^ meta.selector.css meta.guard.less meta.group.less - meta.function-call
+//                                   ^ meta.selector.css meta.guard.less - meta.group
+//^^^^ entity.other.attribute-name.class.css
+//    ^ punctuation.section.group.begin.less
+//     ^^ variable.parameter.less
+//       ^ punctuation.separator.sequence.less
+//         ^^ variable.parameter.less
+//           ^ punctuation.separator.key-value.less
+//             ^ meta.number.integer.decimal.css constant.numeric.value.css
+//              ^ punctuation.section.group.end.less
+//               ^ meta.selector.css - meta.guard
+//                ^^^^ keyword.control.conditional.less
+//                     ^ punctuation.section.group.begin.less
+//                      ^^^^^^^^ support.function.less
+//                              ^ punctuation.section.group.begin.less
+//                               ^^ variable.other.less
+//                                 ^^ punctuation.section.group.end.less
+//                                    ^ punctuation.section.block.begin.css
+//                                     ^ punctuation.section.block.end.css
 
 .mixin(@a; @b: black) when (iscolor(@b)) {}
-// ^^^^^^^^^^^^^^^^^^^ meta.selector.css - meta.guard
+// ^^^ meta.selector.css - meta.guard
+//    ^^^^^^^^^^^^^^^ meta.selector.parameters.css meta.group.less - meta.guard
+//                   ^ meta.selector.css - meta.guard
 //                    ^^^^^^^^^^^^^^^^^^^ meta.selector.css meta.guard.less
 //                          ^^^^^^^ meta.function-call.identifier.less support.function.less
 //                                 ^^^^ meta.function-call.arguments.less meta.group.less
 
 .mixin(@a; @b: black) when (iscolor(@b)) or (@a = true) {}
-// ^^^^^^^^^^^^^^^^^^^ meta.selector.css - meta.guard
+// ^^^ meta.selector.css - meta.guard
+//    ^^^^^^^^^^^^^^^ meta.selector.parameters.css meta.group.less - meta.guard
+//                   ^ meta.selector.css - meta.guard
 //                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css meta.guard.less
 //                         ^^^^^^^^^^^^^ meta.group.less
 //                          ^^^^^^^ meta.function-call.identifier.less support.function.less
@@ -1507,7 +1553,9 @@ div {
 
 .mixin(@a; @b: black)
 // <- meta.selector.css entity.other.attribute-name.class.css punctuation.definition.entity.css
-//^^^^^^^^^^^^^^^^^^^^ meta.selector.css - meta.guard
+// ^^^ meta.selector.css - meta.guard
+//    ^^^^^^^^^^^^^^^ meta.selector.parameters.css meta.group.less - meta.guard
+//                   ^ meta.selector.css - meta.guard
 
     when (
 // ^ meta.selector.css - meta.guard
@@ -1692,7 +1740,7 @@ header {
             #transition(~'opacity @{duration-short} @{ease}')
 //         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less meta.property-list.css meta.block.css meta.property-list.css meta.block.css
 //          ^^^^^^^^^^^ meta.selector.css entity.other.attribute-name.id.css
-//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css meta.group.less
+//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.parameters.css meta.group.less
 //                     ^ punctuation.section.group.begin.less
 //                      ^ keyword.operator.escape.less
 //                       ^^^^^^^^^ meta.string.css string.quoted.single.css - meta.interpolation
@@ -1713,7 +1761,7 @@ header {
             #transition(~'opacity @{duration-short} @{ease}')
 //         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less meta.property-list.css meta.block.css meta.property-list.css meta.block.css
 //          ^^^^^^^^^^^ meta.selector.css entity.other.attribute-name.id.css
-//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css meta.group.less
+//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.parameters.css meta.group.less
 
             .site-header-info-extra-tooltip {
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css entity.other.attribute-name.class.css
@@ -1722,7 +1770,7 @@ header {
                 #transition(~'opacity @{duration-short} @{ease}')
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.mixin.arguments.less meta.group.less meta.property-list.css meta.block.css meta.property-list.css meta.block.css meta.property-list.css meta.block.css
 //              ^^^^^^^^^^^ meta.selector.css entity.other.attribute-name.id.css
-//                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css meta.group.less
+//                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.parameters.css meta.group.less
             }
         }
     });
@@ -1761,7 +1809,7 @@ header {
 //                 ^^ meta.declaration.value.less meta.property-list.css meta.block.css
 //                 ^ punctuation.section.block.begin.css
     .mixin() {
-//  ^^^^^^^^^ meta.declaration.value.less meta.property-list.css meta.block.css meta.selector.css
+//  ^^^^^^^^^ meta.declaration.value.less meta.property-list.css meta.block.css meta.selector
 //           ^^ meta.declaration.value.less meta.property-list.css meta.block.css meta.property-list.css meta.block.css
 
         font-family: "Algerian";

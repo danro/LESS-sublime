@@ -2,7 +2,7 @@
 <plist version="1.0">
 <dict>
 	<key>scope</key>
-	<string>source.less meta.selector.css</string>
+	<string>source.less meta.selector</string>
 	<key>settings</key>
 	<dict>
 		<key>showInSymbolList</key>

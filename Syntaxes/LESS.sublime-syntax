@@ -191,7 +191,7 @@ contexts:
         1: variable.parameter.less
         2: punctuation.definition.variable.less
         3: meta.declaration.less
-        4: punctuation.separator.key-value.css
+        4: punctuation.separator.key-value.less
 
 ###[ CSS SELECTORS ]############################################################
 
@@ -680,20 +680,27 @@ contexts:
       push: less-selector-parameter-list-body
 
   less-selector-parameter-list-body:
-    - meta_scope: meta.group.less
+    - clear_scopes: 1
+    - meta_scope: meta.selector.parameters.css meta.group.less
     - include: less-group-end
-    - include: comments
-    - include: less-selector-parameter-list-content
-
-  less-selector-parameter-list-content:
     - include: less-parameter-separators
+    - include: less-selector-parameters
     - include: less-variadic-operators
-    - include: property-lists
-    - include: values
+    - include: less-values
+
+  less-selector-parameters:
+    - match: (@)(arguments|rest){{break}}
+      scope: variable.language.mixin.less
+      captures:
+        1: punctuation.definition.variable.less
+    - match: (@){{ident}}(?=\s*[,:;)])
+      scope: variable.parameter.less
+      captures:
+        1: punctuation.definition.variable.less
 
   less-parameter-separators:
     - match: ':'
-      scope: punctuation.separator.key-value.css
+      scope: punctuation.separator.key-value.less
     - match: '[,;]'
       scope: punctuation.separator.sequence.less
 
