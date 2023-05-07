@@ -179,8 +179,7 @@ contexts:
   less-mixin-arguments-list-body:
     - clear_scopes: 1
     - meta_scope: meta.mixin.arguments.less meta.group.less
-    - match: (?=;)  # looks like a paramethrized mixin declaration
-      fail: property-or-selector
+    - include: less-parameter-separators
     - include: less-group-body
 
 ###[ CSS SELECTORS ]############################################################
@@ -592,6 +591,7 @@ contexts:
   less-mixin-value-arguments-list-body:
     - clear_scopes: 1
     - meta_scope: meta.mixin.arguments.less meta.group.less
+    - include: less-parameter-separators
     - include: less-group-body
 
   less-mixin-item-access:

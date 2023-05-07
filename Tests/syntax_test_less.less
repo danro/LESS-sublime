@@ -1399,8 +1399,8 @@ button {
     // positional arguments
 
     .border(5px; /**/ dashed; red);
-//  ^^^^^^^ meta.selector.css - meta.group
-//         ^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css meta.group.less
+//  ^^^^^^^ meta.mixin.less entity.other.attribute-name.class.css
+//         ^^^^^^^^^^^^^^^^^^^^^^^ meta.mixin.arguments.less meta.group.less
 //         ^ punctuation.section.group.begin.less
 //             ^ punctuation.separator.parameter.less
 //                          ^ punctuation.separator.parameter.less
@@ -1409,8 +1409,8 @@ button {
     // named arguments
 
     .border(@width: 5px; /**/ @style: dashed; @color: @red);
-//  ^^^^^^^ meta.selector.css - meta.group
-//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.selector.css meta.group.less
+//  ^^^^^^^ meta.mixin.less entity.other.attribute-name.class.css
+//         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.mixin.arguments.less meta.group.less
 //         ^ punctuation.section.group.begin.less
 //                ^ punctuation.separator.key-value.css
 //                     ^ punctuation.separator.parameter.less
