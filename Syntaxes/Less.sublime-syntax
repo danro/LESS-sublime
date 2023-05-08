@@ -1,7 +1,7 @@
 %YAML 1.2
 ---
 # https://lesscss.org
-name: LESS
+name: Less
 scope: source.less
 version: 2
 
@@ -23,7 +23,7 @@ variables:
 
   property_or_selector_begin: (?={{selector_start}}|[-&]|{{ident_start}})
 
-  # LESS variables
+  # Less variables
 
   at_rules: |-
     @(?xi: charset | counter-style | custom-media | document | font-face | import
