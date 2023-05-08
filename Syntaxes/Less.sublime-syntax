@@ -5,7 +5,7 @@ name: Less
 scope: source.less
 version: 2
 
-extends: CSS (for LESS).sublime-syntax
+extends: CSS (for Less).sublime-syntax
 
 file_extensions:
   - less
