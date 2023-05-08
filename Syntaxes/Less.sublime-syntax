@@ -275,7 +275,7 @@ contexts:
   value-prototype:
     - meta_prepend: true
     # CSS terminates values if `@` is found, LESS can't do that due to variables
-    # Hence terminate valeus at least, if known at-rules are found, which can't
+    # Hence terminate values at least, if known at-rules are found, which can't
     # be variables.
     - match: (?={{at_rules}})
       pop: 1
