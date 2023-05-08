@@ -24,6 +24,8 @@ jobs:
     name: Sublime Text ${{ matrix.build }}
     runs-on: ubuntu-latest
     timeout-minutes: 15   # default is 6 hours!
+    env:
+      package_name: LESS  # install name as specified at packagecontrol.io
     strategy:
       matrix:
         include:
@@ -39,9 +41,11 @@ jobs:
       - name: Checkout ${{ env.package_name }}
         uses: actions/checkout@v3
         with:
-          path: LESS
+          path: ${{ env.package_name }}
       - name: Run Syntax Tests for Sublime Text ${{ matrix.build }}
         uses: SublimeText/syntax-test-action@v2
         with:
           build: ${{ matrix.build }}
           default_packages: ${{ matrix.default_packages }}
+          package_name: ${{ env.package_name }}
+          package_root: ${{ env.package_name }}
