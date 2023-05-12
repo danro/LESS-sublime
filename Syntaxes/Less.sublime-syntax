@@ -610,6 +610,7 @@ contexts:
     - clear_scopes: 1
     - meta_scope: meta.mixin.item-access.less meta.brackets.less
     - include: less-mixin-item-access-end
+    - include: terminator-pop
     - include: less-expressions
     - include: less-properties
 
